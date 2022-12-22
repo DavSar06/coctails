@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d("onCreate: boz", String.valueOf(LOG));
 
+        Log.d("onCreate: OH MY", String.valueOf(LOG));
     }
 }
