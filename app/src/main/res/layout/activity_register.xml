@@ -104,6 +104,25 @@
             android:drawablePadding="@dimen/_12sdp"
             android:textColor="@color/white"
             android:textSize="@dimen/_15sdp" />
+
+        <CheckBox
+            android:id="@+id/round"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_40sdp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginVertical="@dimen/_10sdp"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingEnd="@dimen/_12sdp"
+            android:button="@null"
+            android:buttonTint="@color/white"
+            android:textSize="@dimen/_15sdp"
+            android:background="@drawable/borders_for_edittext"
+            android:drawablePadding="@dimen/_12sdp"
+            android:drawableRight="@drawable/custom_round_checkbox"
+            android:text="Are you older 18"
+            android:textColor="@color/white"/>
+
     </LinearLayout>
 
 
@@ -142,6 +161,8 @@
             android:textSize="@dimen/_15sdp"
             android:textStyle="bold"
             />
+
+
 
     </LinearLayout>
 </LinearLayout>
