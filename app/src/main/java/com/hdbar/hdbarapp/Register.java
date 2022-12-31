@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 public class Register extends AppCompatActivity {
 
-    private EditText register_username = (EditText) findViewById(R.id.register_usename);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
