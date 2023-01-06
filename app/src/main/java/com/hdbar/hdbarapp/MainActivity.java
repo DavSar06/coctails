@@ -6,15 +6,16 @@ import androidx.appcompat.app.AppCompatDelegate;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.hdbar.hdbarapp.databinding.ActivityMainBinding;
+import com.hdbar.hdbarapp.utilities.PreferenceManager;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    TextView registertextview;
+    private PreferenceManager preferenceManager;
+    TextView registerTextView;
 
 
 
@@ -22,15 +23,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
+        preferenceManager = new PreferenceManager(getApplicationContext());
         setContentView(binding.getRoot());
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        registertextview = (TextView) findViewById(R.id.register_main);
+        registerTextView = binding.registerMain;
 
-        registertextview.setOnClickListener(new View.OnClickListener() {
+        registerTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchActivityes();
+                switchActivities();
             }
         });
 
@@ -39,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void switchActivityes(){
-        Intent intent = new Intent(this, Register.class);
+    private void switchActivities(){
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
 ;
     }
