@@ -22,14 +22,29 @@
         android:layout_marginHorizontal="@dimen/_40sdp"
         android:layout_marginBottom="@dimen/_40sdp">
 
-        <ImageView
-            android:id="@+id/register_icon_choose"
-            android:layout_width="@dimen/_150sdp"
-            android:layout_height="@dimen/_150sdp"
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_20sdp"
-            android:layout_gravity="center"
-            android:layout_weight="0"
-            android:src="@drawable/iconforproject" />
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/register_icon_choose_icon_to_change"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_150sdp"
+                android:layout_weight="0"
+                android:src="@drawable/iconforproject" />
+
+            <ImageView
+                android:id="@+id/register_icon_choose"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_150sdp"
+                android:layout_weight="0"
+                android:src="@drawable/edit_pencele" />
+
+        </RelativeLayout>
+
 
         <EditText
             android:id="@+id/register_usename"
