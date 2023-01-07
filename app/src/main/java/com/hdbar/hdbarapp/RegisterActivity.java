@@ -3,6 +3,7 @@ package com.hdbar.hdbarapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.hdbar.hdbarapp.databinding.ActivityRegisterBinding;
@@ -20,6 +21,10 @@ public class RegisterActivity extends AppCompatActivity {
         preferenceManager = new PreferenceManager(getApplicationContext());
         setContentView(binding.getRoot());
 
+        setListeners();
+    }
 
+    public void setListeners(){
+        binding.registerIconChooseIconToChange.setOnClickListener(v->startActivity(new Intent(getApplicationContext(),ChooseImageActivity.class)));
     }
 }

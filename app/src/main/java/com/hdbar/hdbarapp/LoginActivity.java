@@ -36,9 +36,6 @@ public class LoginActivity extends AppCompatActivity {
                 switchActivities();
             }
         });
-
-        startActivity(new Intent(this,MainActivity.class));
-        finish();
     }
 
 
@@ -46,7 +43,6 @@ public class LoginActivity extends AppCompatActivity {
     private void switchActivities(){
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
-;
     }
 
 }

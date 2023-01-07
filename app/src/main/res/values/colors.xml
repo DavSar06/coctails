@@ -16,4 +16,5 @@
     <color name="bold_text_color">#050507</color>
     <color name="light_black">#1B1B1B</color>
     <color name="error">#FF9800</color>
+    <color name="border">#FF9800</color>
 </resources>
