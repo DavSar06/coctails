@@ -1,137 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/backgrownd_color"
-    android:gravity="center"
+    android:background="@drawable/background_color"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/hellowpicture"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:layout_weight="150"
-        android:src="@drawable/iconforproject"
-        android:layout_marginHorizontal="@dimen/_50sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:text="Hello World!" />
-
-    <TextView
-        android:id="@+id/Logintext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/_5sdp"
-        android:text="Login"
-        android:layout_weight="30"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="@dimen/_40ssp"/>
-
-
-    <EditText
-        android:id="@+id/Login"
+    <FrameLayout
+        android:id="@+id/navbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="50dp"
-        android:layout_marginVertical="5dp"
-        android:paddingHorizontal="15dp"
-        android:layout_weight="40"
-        android:textSize="16sp"
-        android:maxLines="1"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/white"
-        android:background="@drawable/borders_for_edittext"
-        android:paddingStart="@dimen/_6sdp"
-        android:drawablePadding="@dimen/_6sdp"
-        android:drawableStart="@drawable/user_icon"
-        android:textColorHint="@color/white"
-        android:maxLength="30"/>
+        android:layout_height="@dimen/_60sdp"
+        android:background="@drawable/background_navbar"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/Password"
+    </FrameLayout>
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="50dp"
-        android:layout_marginVertical="5dp"
-        android:paddingHorizontal="10dp"
-        android:maxLines="1"
-        android:hint="password"
-        android:textColor="@color/white"
-        android:layout_weight="40"
-        android:inputType="textPassword"
-        android:paddingStart="@dimen/_6sdp"
-        android:drawablePadding="@dimen/_6sdp"
-        android:textColorHint="@color/white"
-        android:drawableStart="@drawable/ic_baseline_lock_24"
-        android:background="@drawable/borders_for_edittext"
-        android:textSize="16sp"
-        android:maxLength="30"/>
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_16sdp"
+        app:layout_constraintTop_toBottomOf="@id/navbar"
+        app:layout_constraintBottom_toTopOf="@id/bottomBar">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cocktailsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            android:padding="@dimen/_10sdp"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-    <TextView
-        android:id="@+id/ForgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="3dp"
-        android:layout_weight="20"
-        android:gravity="center"
-        android:text="Forgot Password ?"
-        android:textSize="17sp"
-        android:textStyle="normal"
-        android:textColor="@color/white"
-        />
-
-    <TextView
-        android:id="@+id/Loginbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_60sdp"
-        android:layout_weight="45"
-        android:background="@drawable/circle"
-        android:gravity="center"
-        android:text="Login"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_20sdp"
-        android:textStyle="bold"
-        />
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="top"
-        android:layout_marginTop="20dp"
-        android:layout_weight="50">
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_gravity="center"/>
 
         <TextView
-            android:id="@+id/DontHaveAccount"
-            android:layout_width="wrap_content"
+            android:id="@+id/textErrorMessage"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dont Have Account"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:layout_marginEnd="@dimen/_24sdp"
             android:gravity="center"
-            android:padding="3dp"
-            android:textStyle="normal"
-            android:textSize="13sp"
-            android:textColor="@color/white"
-            />
+            android:textColor="@color/error"
+            android:textSize="@dimen/_12ssp"
+            android:visibility="gone"/>
 
-        <TextView
-            android:id="@+id/register_main"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="3dp"
-            android:text="Register"
-            android:textStyle="bold"
-            android:textSize="13sp"
-            android:layout_toRightOf="@+id/DontHaveAccount"
-            android:textColor="@color/red"
-            />
+    </FrameLayout>
 
-    </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@drawable/background_navbar"
+        app:layout_constraintBottom_toBottomOf="parent">
 
+    </FrameLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

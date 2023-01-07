@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_85sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/_8sdp"
+    android:orientation="vertical"
+    android:background="@color/background_color_dark"
+    android:layout_marginHorizontal="@dimen/_5sdp"
+    android:layout_height="@dimen/_130sdp">
+    <ImageView
+        android:id="@+id/cocktailImage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_75sdp"
+        android:background="@color/white"
+        android:layout_marginBottom="@dimen/_5sdp"/>
+    <TextView
+        android:id="@+id/cocktailName"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
+        android:layout_height="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_3sdp"/>
+    <TextView
+        android:id="@+id/cocktailRating"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
+        android:layout_height="@dimen/_15sdp"/>
+
+</LinearLayout>
