@@ -43,8 +43,8 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         inputEmail=findViewById(R.id.register_email);
-        inputPassword=findViewById(R.id.register_email);
-        inputConformPassword=findViewById(R.id.register_email);
+        inputPassword=findViewById(R.id.register_password);
+        inputConformPassword=findViewById(R.id.register_password_confirm);
         confirmButton=findViewById(R.id.register_confirm);
         progressDialog = new ProgressDialog(RegisterActivity.this);
         mAuth=FirebaseAuth.getInstance();

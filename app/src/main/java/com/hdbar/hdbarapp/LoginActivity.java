@@ -80,7 +80,9 @@ public class LoginActivity extends AppCompatActivity {
 
         if(!email.matches(emailPattern)){
             inputEmail.setError("Enter Conntext Email");
-        }else if(password.isEmpty() || password.length()<6){
+        }else if(password.trim().isEmpty()){
+            inputEmail.setError("Enter Proper Password");
+        }else if(password.length()<6){
             inputEmail.setError("Enter Proper Password");
         }else{
             //can be a problem with progress dialog
