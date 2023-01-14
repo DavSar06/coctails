@@ -23,14 +23,14 @@ public class CocktailsAdapter extends RecyclerView.Adapter<CocktailsAdapter.RowV
 
     private List<List<Cocktail>> cocktails;
     private CocktailListener cocktailListener;
-    private final Integer size = 3;
+    private final Integer size = 2;
     private Integer k = 0;
 
     public CocktailsAdapter(List<Cocktail> cocktails,CocktailListener cocktailListener) {
         this.cocktailListener = cocktailListener;
         this.cocktails = new LinkedList<>();
         int k=-1;
-        int size = 3;
+        //int size = 3;
         List<Cocktail> temp = new LinkedList<>();
         for(int i=0;i<cocktails.size();i++){
             if(i%size==0){
