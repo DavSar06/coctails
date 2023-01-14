@@ -1,5 +1,6 @@
 package com.hdbar.hdbarapp.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hdbar.hdbarapp.CocktailPageActivity;
 import com.hdbar.hdbarapp.databinding.ItemCocktailsRowBinding;
 import com.hdbar.hdbarapp.databinding.ItemContainerCocktailBinding;
 import com.hdbar.hdbarapp.listeners.CocktailListener;
@@ -20,10 +22,12 @@ import java.util.List;
 public class CocktailsAdapter extends RecyclerView.Adapter<CocktailsAdapter.RowViewHolder> {
 
     private List<List<Cocktail>> cocktails;
+    private CocktailListener cocktailListener;
     private final Integer size = 3;
     private Integer k = 0;
 
-    public CocktailsAdapter(List<Cocktail> cocktails) {
+    public CocktailsAdapter(List<Cocktail> cocktails,CocktailListener cocktailListener) {
+        this.cocktailListener = cocktailListener;
         this.cocktails = new LinkedList<>();
         int k=-1;
         int size = 3;
@@ -72,12 +76,7 @@ public class CocktailsAdapter extends RecyclerView.Adapter<CocktailsAdapter.RowV
         }
 
         void setRowData(List<Cocktail> cocktails){
-            binding.rowRecyclerView.setAdapter(new RowAdapter(cocktails, new CocktailListener() {
-                @Override
-                public void onCocktailClicked(Cocktail cocktail) {
-                    Toast.makeText(itemView.getContext(), "Hello "+cocktail.id, Toast.LENGTH_SHORT).show();
-                }
-            }));
+            binding.rowRecyclerView.setAdapter(new RowAdapter(cocktails, cocktailListener));
             binding.rowRecyclerView.setVisibility(View.VISIBLE);
         }
     }
