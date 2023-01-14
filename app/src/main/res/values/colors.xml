@@ -10,8 +10,11 @@
     <color name="grey_white">#CAC3C3</color>
     <color name="grey">#A6A6A6</color>
     <color name="red">#ed0b0e</color>
-    <color name="backgrownd_color">#252527</color>
+    <color name="background_color">#252527</color>
+    <color name="background_color_dark">#161617</color>
     <color name="pass_log_color">#bbb8b5</color>
     <color name="bold_text_color">#050507</color>
     <color name="light_black">#1B1B1B</color>
+    <color name="error">#FF9800</color>
+    <color name="border">#FF9800</color>
 </resources>
