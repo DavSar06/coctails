@@ -81,9 +81,9 @@ public class LoginActivity extends AppCompatActivity {
         if(!email.matches(emailPattern)){
             inputEmail.setError("Enter Conntext Email");
         }else if(password.trim().isEmpty()){
-            inputEmail.setError("Enter Proper Password");
+            inputEmail.setError("Enter Proper Password"); // input password poxel
         }else if(password.length()<6){
-            inputEmail.setError("Enter Proper Password");
+            inputEmail.setError("Enter Proper Password"); // input password poxel
         }else{
             //can be a problem with progress dialog
             progressDialog.setMessage("Pleas Wait For Login...");
@@ -107,8 +107,8 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
             });
-            }
         }
+    }
 
     private void sendUserToNextActivity() {
         Intent intent = new Intent(this, MainActivity.class);

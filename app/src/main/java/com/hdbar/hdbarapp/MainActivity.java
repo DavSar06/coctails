@@ -54,4 +54,6 @@ public class MainActivity extends AppCompatActivity {
         binding.cocktailsRecyclerView.setVisibility(View.VISIBLE);
         binding.progressBar.setVisibility(View.INVISIBLE);
     }
+
+
 }
