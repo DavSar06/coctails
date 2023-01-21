@@ -10,6 +10,8 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.hdbar.hdbarapp.adapters.CocktailsAdapter;
 import com.hdbar.hdbarapp.databinding.ActivityMainBinding;
 import com.hdbar.hdbarapp.listeners.CocktailListener;
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
+        listeners();
 
         cocktails = new LinkedList<>();
 
@@ -69,7 +71,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //For log out
+    private void listeners(){
+        binding.logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                firebaseAuth.signOut();
+                preferenceManager.clear();
+                Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+    }
 
 
 }
