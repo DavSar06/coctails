@@ -116,5 +116,6 @@ public class RegisterActivity extends AppCompatActivity {
             InputMethodManager inm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
         });
+        binding.registerCancel.setOnClickListener(v->finish());
     }
 }
