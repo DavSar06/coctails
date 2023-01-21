@@ -6,4 +6,10 @@ public class Constants {
     public static final String KEY_USERNAME = "username";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_USER_IMAGE = "userImage";
+    public static final String KEY_COLLECTION_COCKTAILS = "cocktails";
+    public static final String KEY_COCKTAIL_NAME = "name";
+    public static final String KEY_COCKTAIL_RECIPE = "recipe";
+    public static final String KEY_COCKTAIL_IMAGE = "image";
+    public static final String KEY_COCKTAIL_VIDEO = "video";
+    public static final String KEY_COCKTAIL_ID = "cocktailId";
 }

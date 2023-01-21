@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onCocktailClicked(Cocktail cocktail) {
             Intent intent = new Intent(binding.getRoot().getContext(), CocktailPageActivity.class);
-            intent.putExtra("cocktailId",cocktail.id);
+            intent.putExtra(Constants.KEY_COCKTAIL_ID,cocktail.id);
             startActivity(intent);
             finish();
         }
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         cocktails = new LinkedList<>();
 
         for(int i=0;i<100;i++){
-            Cocktail a = new Cocktail("id"+i,"Test","123",1);
+            Cocktail a = new Cocktail("id"+i,"Test","pamidorov dzvacex","123",1);
             cocktails.add(a);
         }
 
@@ -85,6 +85,10 @@ public class MainActivity extends AppCompatActivity {
         binding.getRoot().setOnClickListener(v->{
             InputMethodManager inm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+        });
+        binding.create.setOnClickListener(v->{
+            Intent intent = new Intent(getApplicationContext(),CreateCocktailActivity.class);
+            startActivity(intent);
         });
     }
 }

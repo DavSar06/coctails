@@ -1,20 +1,35 @@
 package com.hdbar.hdbarapp.activities;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.ActivityCocktailPageBinding;
 import com.hdbar.hdbarapp.databinding.ActivityCreateCocktailBinding;
+import com.hdbar.hdbarapp.utilities.Constants;
 import com.hdbar.hdbarapp.utilities.PreferenceManager;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.HashMap;
 
 public class CreateCocktailActivity extends AppCompatActivity {
 
@@ -28,6 +43,7 @@ public class CreateCocktailActivity extends AppCompatActivity {
     private EditText cocktailName;
     private EditText cocktailRecipe;
     private Integer SELECT_PICTURE = 200;
+    private String encodedImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,25 +69,61 @@ public class CreateCocktailActivity extends AppCompatActivity {
             inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
         });
         binding.cocktailImage.setOnClickListener(v->chooseImage());
+        binding.publishRecipe.setOnClickListener(v->publish());
+        binding.imageBack.setOnClickListener(v->finish());
+    }
+
+    private void publish(){
+        if(!cocktailName.getText().toString().isEmpty() && !cocktailRecipe.getText().toString().isEmpty() && !encodedImage.isEmpty()){
+            FirebaseFirestore database = FirebaseFirestore.getInstance();
+            HashMap<String,Object> cocktail = new HashMap<>();
+            cocktail.put(Constants.KEY_COCKTAIL_NAME,cocktailName.getText().toString());
+            cocktail.put(Constants.KEY_COCKTAIL_RECIPE,cocktailRecipe.getText().toString());
+            cocktail.put(Constants.KEY_COCKTAIL_IMAGE,encodedImage);
+            cocktail.put(Constants.KEY_COCKTAIL_VIDEO,null);
+            database.collection(Constants.KEY_COLLECTION_COCKTAILS)
+                    .add(cocktail)
+                    .addOnSuccessListener(documentReference -> {
+                        Intent i = new Intent(getApplicationContext(),CocktailPageActivity.class);
+                        i.putExtra(Constants.KEY_COCKTAIL_ID,documentReference.getId());
+                        startActivity(i);
+                        finish();
+                    }).addOnFailureListener(exception -> {
+                        Log.d("FCM",exception.getMessage());
+                    });;
+        }
     }
 
     private void chooseImage(){
-        Intent i = new Intent();
-        i.setType("image/*");
-        i.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        pickImage.launch(intent);
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    private String encodeImage(Bitmap bitmap){
+        int previewWidth = 150;
+        int previewHeight = bitmap.getHeight() * previewWidth / bitmap.getWidth();
+        Bitmap previewBitmap = Bitmap.createScaledBitmap(bitmap, previewWidth, previewHeight, false);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        previewBitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+        byte[] bytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(bytes, Base64.DEFAULT);
+    }
 
-        if (resultCode == RESULT_OK) {
-            if (requestCode == SELECT_PICTURE) {
-                Uri selectedImageUri = data.getData();
-                if (null != selectedImageUri) {
-                    cocktailImage.setImageURI(selectedImageUri);
+    private final ActivityResultLauncher<Intent> pickImage = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        if(result.getResultCode() == RESULT_OK){
+            if(result.getData() != null){
+                Uri imageUri = result.getData().getData();
+                try {
+                    InputStream inputStream = getContentResolver().openInputStream(imageUri);
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                    binding.cocktailImage.setImageBitmap(bitmap);
+                    binding.imageChooseText.setVisibility(View.GONE);
+                    encodedImage = encodeImage(bitmap);
+                }catch(FileNotFoundException e){
+                    e.printStackTrace();
                 }
             }
         }
-    }
+    });
 }
