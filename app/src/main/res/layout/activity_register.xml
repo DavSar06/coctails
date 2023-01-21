@@ -50,7 +50,7 @@
 
 
             <EditText
-                android:id="@+id/register_usename"
+                android:id="@+id/register_username"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginVertical="@dimen/_10sdp"
@@ -124,7 +124,7 @@
                 android:textSize="@dimen/_15sdp" />
 
             <CheckBox
-                android:id="@+id/round"
+                android:id="@+id/are_you_older_18"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginVertical="@dimen/_10sdp"

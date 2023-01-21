@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Checkable;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,10 +27,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     private ActivityRegisterBinding binding;
     private PreferenceManager preferenceManager;
-    private EditText inputEmail,inputPassword,inputConformPassword;
+    private EditText inputName,inputEmail,inputPassword,inputConformPassword;
     private TextView confirmButton;
+    private Checkable areYouOlder18;
     private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private ProgressDialog progressDialog;
+
 
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
@@ -42,10 +45,17 @@ public class RegisterActivity extends AppCompatActivity {
         preferenceManager = new PreferenceManager(getApplicationContext());
         setContentView(binding.getRoot());
 
+        //---binding's-------------------------
+
         inputEmail=findViewById(R.id.register_email);
         inputPassword=findViewById(R.id.register_password);
         inputConformPassword=findViewById(R.id.register_password_confirm);
         confirmButton=findViewById(R.id.register_confirm);
+        areYouOlder18=binding.areYouOlder18;
+        inputName=findViewById(R.id.register_username);
+
+        //--------------------------------------
+
         progressDialog = new ProgressDialog(RegisterActivity.this);
         mAuth=FirebaseAuth.getInstance();
         mUser=mAuth.getCurrentUser();
@@ -65,6 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
         String email = inputEmail.getText().toString();
         String password = inputPassword.getText().toString();
         String passwordConfirm = inputConformPassword.getText().toString();
+        String name = inputName.getText().toString();
 
         if(!email.matches(emailPattern)){
             inputEmail.setError("Enter Conntext Email");
@@ -83,6 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if (task.isSuccessful()){
                         progressDialog.dismiss();
                         sendUserToNextActivity();
+
                         Toast.makeText(RegisterActivity.this,"Registration Successful",Toast.LENGTH_SHORT).show();
                     }
                     else {
