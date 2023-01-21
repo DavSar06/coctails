@@ -18,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.hdbar.hdbarapp.R;
@@ -74,13 +75,14 @@ public class CreateCocktailActivity extends AppCompatActivity {
     }
 
     private void publish(){
-        if(!cocktailName.getText().toString().isEmpty() && !cocktailRecipe.getText().toString().isEmpty() && !encodedImage.isEmpty()){
+        if(!cocktailName.getText().toString().isEmpty() && !cocktailRecipe.getText().toString().isEmpty() && encodedImage != null){
             FirebaseFirestore database = FirebaseFirestore.getInstance();
             HashMap<String,Object> cocktail = new HashMap<>();
             cocktail.put(Constants.KEY_COCKTAIL_NAME,cocktailName.getText().toString());
             cocktail.put(Constants.KEY_COCKTAIL_RECIPE,cocktailRecipe.getText().toString());
             cocktail.put(Constants.KEY_COCKTAIL_IMAGE,encodedImage);
             cocktail.put(Constants.KEY_COCKTAIL_VIDEO,null);
+            cocktail.put(Constants.KEY_COCKTAIL_RATING,"0");
             database.collection(Constants.KEY_COLLECTION_COCKTAILS)
                     .add(cocktail)
                     .addOnSuccessListener(documentReference -> {
@@ -91,6 +93,8 @@ public class CreateCocktailActivity extends AppCompatActivity {
                     }).addOnFailureListener(exception -> {
                         Log.d("FCM",exception.getMessage());
                     });;
+        }else {
+            //Avelacnel dzent aveli konkret default nkar
         }
     }
 
