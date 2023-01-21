@@ -14,6 +14,8 @@ import com.hdbar.hdbarapp.adapters.CocktailsAdapter;
 import com.hdbar.hdbarapp.databinding.ActivityMainBinding;
 import com.hdbar.hdbarapp.listeners.CocktailListener;
 import com.hdbar.hdbarapp.models.Cocktail;
+import com.hdbar.hdbarapp.utilities.Constants;
+import com.hdbar.hdbarapp.utilities.PreferenceManager;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -21,6 +23,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+
+    private PreferenceManager preferenceManager;
 /*
     private List<Cocktail> cocktails;
 
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*setContentView(R.layout.activity_main);*/
+        preferenceManager = new PreferenceManager(getApplicationContext());
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 /*
@@ -54,12 +58,10 @@ public class MainActivity extends AppCompatActivity {
             Cocktail a = new Cocktail("id"+i,"Test","123",1);
             cocktails.add(a);
         }*/
-/*
-        SharedPreferences preferences = getSharedPreferences("MyPrefs",MODE_PRIVATE);
 
-        String userName = preferences.getString("username","");
-        String userEmail = preferences.getString("useremail","");
-        String userPhotoUrl = preferences.getString("userphoto","");*/
+        String userName = preferenceManager.getString(Constants.KEY_USERNAME);
+        String userEmail = preferenceManager.getString(Constants.KEY_EMAIL);
+        String userPhotoUrl = preferenceManager.getString(Constants.KEY_USER_IMAGE);
 
     }
 
