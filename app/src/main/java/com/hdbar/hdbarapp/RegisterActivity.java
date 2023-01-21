@@ -47,12 +47,12 @@ public class RegisterActivity extends AppCompatActivity {
 
         //---binding's-------------------------
 
-        inputEmail=findViewById(R.id.register_email);
-        inputPassword=findViewById(R.id.register_password);
-        inputConformPassword=findViewById(R.id.register_password_confirm);
-        confirmButton=findViewById(R.id.register_confirm);
+        inputEmail=binding.registerEmail;
+        inputPassword=binding.registerPassword;
+        inputConformPassword=binding.registerPasswordConfirm;
+        confirmButton=binding.registerConfirm;
         areYouOlder18=binding.areYouOlder18;
-        inputName=findViewById(R.id.register_username);
+        inputName=binding.registerUsername;
 
         //--------------------------------------
 

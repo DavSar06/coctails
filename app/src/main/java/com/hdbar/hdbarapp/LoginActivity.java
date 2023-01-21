@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
         listeners();
         //----------------------------------------
     }
-/*
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
         if(user != null){
             startActivity(new Intent(LoginActivity.this,MainActivity.class));
         }
-    }*/
+    }
 
     private void  requestGoogleSignIn(){
 
