@@ -6,22 +6,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background_color"
+    android:paddingHorizontal="@dimen/_40sdp"
+    android:paddingVertical="@dimen/_10sdp"
     android:gravity=""
     tools:context=".RegisterActivity">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
-
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_40sdp"
-            android:layout_marginBottom="@dimen/_20sdp">
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_10sdp">
 
             <ImageView
                 android:id="@+id/register_icon_choose_icon_to_change"
@@ -43,8 +38,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_40sdp"
-            android:layout_marginBottom="@dimen/_40sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
             android:gravity="top"
             android:orientation="vertical">
 
@@ -125,7 +119,7 @@
 
             <CheckBox
                 android:id="@+id/are_you_older_18"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginVertical="@dimen/_10sdp"
                 android:background="@drawable/borders_for_edittext"
@@ -152,10 +146,10 @@
 
             <TextView
                 android:id="@+id/register_cancel"
-                android:layout_width="@dimen/_125sdp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="@dimen/_40sdp"
-                android:layout_marginHorizontal="@dimen/_15sdp"
-                android:layout_weight="0"
+                android:layout_marginRight="@dimen/_8sdp"
                 android:background="@drawable/circle"
                 android:backgroundTint="@color/grey"
                 android:gravity="center"
@@ -167,18 +161,15 @@
 
             <TextView
                 android:id="@+id/register_confirm"
-                android:layout_width="@dimen/_125sdp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="@dimen/_40sdp"
-                android:layout_marginHorizontal="@dimen/_15sdp"
-                android:layout_weight="0"
+                android:layout_marginLeft="@dimen/_8sdp"
                 android:background="@drawable/circle"
                 android:gravity="center"
                 android:text="Confirm"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold" />
-
-
         </LinearLayout>
-    </LinearLayout>
 </LinearLayout>

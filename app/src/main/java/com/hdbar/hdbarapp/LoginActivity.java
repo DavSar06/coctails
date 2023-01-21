@@ -29,6 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.hdbar.hdbarapp.databinding.ActivityLoginBinding;
+import com.hdbar.hdbarapp.utilities.Constants;
 import com.hdbar.hdbarapp.utilities.PreferenceManager;
 
 public class LoginActivity extends AppCompatActivity {
@@ -139,13 +140,10 @@ public class LoginActivity extends AppCompatActivity {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account.getIdToken());
 
-                SharedPreferences.Editor editor = getApplicationContext()
-                        .getSharedPreferences("MyPrefs", MODE_PRIVATE)
-                        .edit();
-                editor.putString("username",account.getDisplayName());
-                editor.putString("usermail", account.getEmail());
-                editor.putString("userPhoto", account.getPhotoUrl().toString());
-                editor.apply();
+                preferenceManager.putString(Constants.KEY_USERNAME,account.getDisplayName());
+                preferenceManager.putString(Constants.KEY_EMAIL,account.getEmail());
+                preferenceManager.putString(Constants.KEY_USER_IMAGE,account.getPhotoUrl().toString());
+
 
                 Toast.makeText(LoginActivity.this,"Sign in Complete ", Toast.LENGTH_SHORT).show();
             }catch (ApiException e){
