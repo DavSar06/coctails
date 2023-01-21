@@ -15,6 +15,13 @@
         android:theme="@style/Theme.HDBarApplication"
         tools:targetApi="31">
         <activity
+            android:name=".CreateCocktailActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".GoogleSignInActivity"
             android:exported="false">
             <meta-data

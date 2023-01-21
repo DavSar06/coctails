@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         listeners();
     }
 
-    public void init(){
+    private void init(){
         preferenceManager = new PreferenceManager(getApplicationContext());
         inputEmail=binding.Login;
         inputPassword=binding.Password;

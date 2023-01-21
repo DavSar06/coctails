@@ -44,10 +44,10 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         init();
-        setListeners();
+        listeners();
     }
 
-    public void init(){
+    private void init(){
         preferenceManager = new PreferenceManager(getApplicationContext());
         inputEmail=binding.registerEmail;
         inputPassword=binding.registerPassword;
@@ -104,7 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    public void setListeners(){
+    private void listeners(){
         binding.registerIconChooseIconToChange.setOnClickListener(v->startActivity(new Intent(getApplicationContext(),ChooseImageActivity.class)));
         binding.registerConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
