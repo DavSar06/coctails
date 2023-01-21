@@ -5,16 +5,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.hdbar.hdbarapp.adapters.CocktailsAdapter;
 import com.hdbar.hdbarapp.databinding.ActivityMainBinding;
 import com.hdbar.hdbarapp.listeners.CocktailListener;
 import com.hdbar.hdbarapp.models.Cocktail;
 import com.hdbar.hdbarapp.utilities.Constants;
 import com.hdbar.hdbarapp.utilities.PreferenceManager;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -26,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
     private PreferenceManager preferenceManager;
 
     private List<Cocktail> cocktails;
-
-    private List<List<Cocktail>> Cocktails = new LinkedList<>();
 
     private String userName;
     private String userEmail;
@@ -50,21 +57,31 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         cocktails = new LinkedList<>();
-
-        for(int i=0;i<100;i++){
-            Cocktail a = new Cocktail("id"+i,"Test","pamidorov dzvacex","123",1);
-            cocktails.add(a);
-        }
-
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        database.collection(Constants.KEY_COLLECTION_COCKTAILS)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Cocktail a = new Cocktail(document.getId(),document.get(Constants.KEY_COCKTAIL_NAME).toString(),document.get(Constants.KEY_COCKTAIL_RECIPE).toString(),document.get(Constants.KEY_COCKTAIL_IMAGE).toString(),document.get(Constants.KEY_COCKTAIL_RATING).toString());
+                                cocktails.add(a);
+                            }
+                            binding.cocktailsRecyclerView.setAdapter(new CocktailsAdapter(cocktails,cocktailListener));
+                            binding.cocktailsRecyclerView.setVisibility(View.VISIBLE);
+                            binding.progressBar.setVisibility(View.INVISIBLE);
+                        } else {
+                            Log.d("FCM", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
         init();
         listeners();
     }
 
     private void init(){
         preferenceManager = new PreferenceManager(getApplicationContext());
-        binding.cocktailsRecyclerView.setAdapter(new CocktailsAdapter(cocktails,cocktailListener));
-        binding.cocktailsRecyclerView.setVisibility(View.VISIBLE);
-        binding.progressBar.setVisibility(View.INVISIBLE);
         userName = preferenceManager.getString(Constants.KEY_USERNAME);
         userEmail = preferenceManager.getString(Constants.KEY_EMAIL);
         userImage = preferenceManager.getString(Constants.KEY_USER_IMAGE);

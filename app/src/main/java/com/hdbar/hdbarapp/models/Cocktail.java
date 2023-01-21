@@ -5,9 +5,9 @@ public class Cocktail {
     public String name;
     public String recipe;
     public String image;
-    public Integer rating;
+    public String rating;
 
-    public Cocktail(String id, String name, String recipe, String image, Integer rating) {
+    public Cocktail(String id, String name, String recipe, String image, String rating) {
         this.id = id;
         this.name = name;
         this.recipe = recipe;

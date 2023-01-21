@@ -55,7 +55,7 @@ public class RowAdapter extends RecyclerView.Adapter<RowAdapter.CocktailViewHold
         void setCocktailData(Cocktail cocktail){
             binding.cocktailName.setText(cocktail.name);
             binding.cocktailRating.setText(cocktail.rating+"");
-//            binding.cocktailImage.setImageBitmap(getCocktailImage(cocktail.image));
+            binding.cocktailImage.setImageBitmap(getCocktailImage(cocktail.image));
             binding.getRoot().setOnClickListener(v -> listener.onCocktailClicked(cocktail));
         }
     }

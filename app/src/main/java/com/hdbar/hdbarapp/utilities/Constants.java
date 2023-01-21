@@ -12,4 +12,5 @@ public class Constants {
     public static final String KEY_COCKTAIL_IMAGE = "image";
     public static final String KEY_COCKTAIL_VIDEO = "video";
     public static final String KEY_COCKTAIL_ID = "cocktailId";
+    public static final String KEY_COCKTAIL_RATING = "rating";
 }
