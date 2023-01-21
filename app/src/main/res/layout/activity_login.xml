@@ -193,7 +193,7 @@
             android:textStyle="bold"
             android:textSize="13sp"
             android:layout_toRightOf="@+id/DontHaveAccount"
-            android:textColor="@color/red"
+            android:textColor="@color/mainRed"
             />
 
     </RelativeLayout>
