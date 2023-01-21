@@ -1,16 +1,15 @@
-package com.hdbar.hdbarapp;
+package com.hdbar.hdbarapp.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +27,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.ActivityLoginBinding;
 import com.hdbar.hdbarapp.utilities.Constants;
 import com.hdbar.hdbarapp.utilities.PreferenceManager;
@@ -58,12 +58,15 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
-        preferenceManager = new PreferenceManager(getApplicationContext());
         setContentView(binding.getRoot());
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        //---binding's-------------------------
+        init();
+        listeners();
+    }
 
+    private void init(){
+        preferenceManager = new PreferenceManager(getApplicationContext());
         inputEmail=binding.Login;
         inputPassword=binding.Password;
         buttonLogin=binding.Loginbtn;
@@ -72,19 +75,9 @@ public class LoginActivity extends AppCompatActivity {
         btnGoogle=binding.google;
         btnTwitter=binding.twitter;
         registerTextView = binding.registerMain;
-
-        //--------------------------------------
-
-
-
         progressDialog = new ProgressDialog(LoginActivity.this);
         mAuth= FirebaseAuth.getInstance();
         mUser=mAuth.getCurrentUser();
-
-
-        //--------------On Clicks----------------
-        listeners();
-        //----------------------------------------
     }
 
     @Override
@@ -103,9 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
 
-
         mGoogleSignInClient = GoogleSignIn.getClient(LoginActivity.this,gso);
-
 
     }
 
@@ -125,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(LoginActivity.this,"Authrntication Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,"Authentication Failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -148,7 +139,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this,"Sign in Complete ", Toast.LENGTH_SHORT).show();
             }catch (ApiException e){
 
-                Toast.makeText(LoginActivity.this,"Authrntication Failed Poblems with "  + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this,"Authentication Failed Poblems with "  + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -158,13 +149,13 @@ public class LoginActivity extends AppCompatActivity {
         startActivityForResult(signInIntent,RC_SIGN_IN);
     }
 
-    private void perforLogin() {
+    private void performLogin() {
 
         String email = inputEmail.getText().toString();
         String password = inputPassword.getText().toString();
 
         if(!email.matches(emailPattern)){
-            inputEmail.setError("Enter Conntext Email");
+            inputEmail.setError("Enter Context Email");
         }else if(password.trim().isEmpty()){
             inputEmail.setError("Enter Proper Password"); // input password poxel
         }else if(password.length()<6){
@@ -218,7 +209,7 @@ public class LoginActivity extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                perforLogin();
+                performLogin();
             }
         });
 
@@ -228,7 +219,10 @@ public class LoginActivity extends AppCompatActivity {
                 signIn();
             }
         });
-
+        binding.getRoot().setOnClickListener(v->{
+            InputMethodManager inm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+        });
         requestGoogleSignIn();
     }
 }

@@ -1,14 +1,14 @@
-package com.hdbar.hdbarapp;
+package com.hdbar.hdbarapp.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Checkable;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,43 +41,33 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
-        preferenceManager = new PreferenceManager(getApplicationContext());
         setContentView(binding.getRoot());
 
-        //---binding's-------------------------
+        init();
+        listeners();
+    }
 
+    private void init(){
+        preferenceManager = new PreferenceManager(getApplicationContext());
         inputEmail=binding.registerEmail;
         inputPassword=binding.registerPassword;
         inputConformPassword=binding.registerPasswordConfirm;
         confirmButton=binding.registerConfirm;
         areYouOlder18=binding.areYouOlder18;
         inputName=binding.registerUsername;
-
-        //--------------------------------------
-
         progressDialog = new ProgressDialog(RegisterActivity.this);
         mAuth=FirebaseAuth.getInstance();
         mUser=mAuth.getCurrentUser();
-
-        confirmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PerforAuth();
-            }
-        });
-
-
-        setListeners();
     }
 
-    private void PerforAuth() {
+    private void PerformAuth() {
         String email = inputEmail.getText().toString();
         String password = inputPassword.getText().toString();
         String passwordConfirm = inputConformPassword.getText().toString();
         String name = inputName.getText().toString();
 
         if(!email.matches(emailPattern)){
-            inputEmail.setError("Enter Conntext Email");
+            inputEmail.setError("Enter Context Email");
         }else if(password.isEmpty() || password.length()<6){
             inputEmail.setError("Enter Proper Password");// input password poxel
         }else if(!password.equals(passwordConfirm)){
@@ -115,7 +104,18 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    public void setListeners(){
+    private void listeners(){
         binding.registerIconChooseIconToChange.setOnClickListener(v->startActivity(new Intent(getApplicationContext(),ChooseImageActivity.class)));
+        binding.registerConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PerformAuth();
+            }
+        });
+        binding.getRoot().setOnClickListener(v->{
+            InputMethodManager inm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+        });
+        binding.registerCancel.setOnClickListener(v->finish());
     }
 }

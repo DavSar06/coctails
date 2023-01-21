@@ -1,4 +1,4 @@
-package com.hdbar.hdbarapp;
+package com.hdbar.hdbarapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
