@@ -1,17 +1,14 @@
-package com.hdbar.hdbarapp;
+package com.hdbar.hdbarapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.hdbar.hdbarapp.adapters.CocktailsAdapter;
 import com.hdbar.hdbarapp.databinding.ActivityMainBinding;
 import com.hdbar.hdbarapp.listeners.CocktailListener;
@@ -32,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
 
     private List<List<Cocktail>> Cocktails = new LinkedList<>();
 
+    private String userName;
+    private String userEmail;
+    private String userImage;
+
     private final CocktailListener cocktailListener = new CocktailListener() {
         @Override
         public void onCocktailClicked(Cocktail cocktail) {
@@ -45,11 +46,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        preferenceManager = new PreferenceManager(getApplicationContext());
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        listeners();
 
         cocktails = new LinkedList<>();
 
@@ -58,18 +56,19 @@ public class MainActivity extends AppCompatActivity {
             cocktails.add(a);
         }
 
+        init();
+        listeners();
+    }
+
+    private void init(){
+        preferenceManager = new PreferenceManager(getApplicationContext());
         binding.cocktailsRecyclerView.setAdapter(new CocktailsAdapter(cocktails,cocktailListener));
         binding.cocktailsRecyclerView.setVisibility(View.VISIBLE);
         binding.progressBar.setVisibility(View.INVISIBLE);
-
-
-
-        String userName = preferenceManager.getString(Constants.KEY_USERNAME);
-        String userEmail = preferenceManager.getString(Constants.KEY_EMAIL);
-        String userPhotoUrl = preferenceManager.getString(Constants.KEY_USER_IMAGE);
-
+        userName = preferenceManager.getString(Constants.KEY_USERNAME);
+        userEmail = preferenceManager.getString(Constants.KEY_EMAIL);
+        userImage = preferenceManager.getString(Constants.KEY_USER_IMAGE);
     }
-
 
     private void listeners(){
         binding.logout.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +82,9 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+        binding.getRoot().setOnClickListener(v->{
+            InputMethodManager inm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+        });
     }
-
-
 }

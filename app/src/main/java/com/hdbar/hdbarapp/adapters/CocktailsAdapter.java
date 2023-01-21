@@ -1,21 +1,16 @@
 package com.hdbar.hdbarapp.adapters;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hdbar.hdbarapp.CocktailPageActivity;
 import com.hdbar.hdbarapp.databinding.ItemCocktailsRowBinding;
-import com.hdbar.hdbarapp.databinding.ItemContainerCocktailBinding;
 import com.hdbar.hdbarapp.listeners.CocktailListener;
 import com.hdbar.hdbarapp.models.Cocktail;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 

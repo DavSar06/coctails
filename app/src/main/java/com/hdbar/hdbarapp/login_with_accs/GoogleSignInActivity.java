@@ -1,17 +1,12 @@
 package com.hdbar.hdbarapp.login_with_accs;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
-import com.google.android.gms.auth.api.identity.SignInCredential;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.hdbar.hdbarapp.LoginActivity;
+import com.hdbar.hdbarapp.activities.LoginActivity;
 import com.hdbar.hdbarapp.R;
 
 public class GoogleSignInActivity extends LoginActivity {

@@ -8,8 +8,10 @@
     android:background="@color/background_color"
     android:paddingHorizontal="@dimen/_40sdp"
     android:paddingVertical="@dimen/_10sdp"
-    android:gravity=""
-    tools:context=".RegisterActivity">
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".activities.RegisterActivity">
 
         <RelativeLayout
             android:layout_width="wrap_content"
