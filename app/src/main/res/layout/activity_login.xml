@@ -155,16 +155,15 @@
             android:src="@drawable/githubicon"
             android:layout_marginHorizontal="@dimen/_5sdp" />
 
-        <ImageView
-            android:id="@+id/facebook"
+<!--        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
-            android:padding="@dimen/_5sdp"
+            android:gravity="center"
             android:src="@drawable/facebooklogo"
-            android:layout_marginHorizontal="@dimen/_5sdp"/>
+            android:layout_marginHorizontal="@dimen/_5sdp"/>-->
 
     </LinearLayout>
-
 
     <RelativeLayout
         android:layout_width="wrap_content"
