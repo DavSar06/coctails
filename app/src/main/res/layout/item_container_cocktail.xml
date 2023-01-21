@@ -11,6 +11,7 @@
         android:id="@+id/cocktailImage"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_75sdp"
+        android:scaleType="centerCrop"
         android:background="@color/white"
         android:layout_marginBottom="@dimen/_5sdp"/>
     <TextView

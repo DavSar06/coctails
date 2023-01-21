@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.hdbar.hdbarapp.databinding.ActivityCocktailPageBinding;
+import com.hdbar.hdbarapp.utilities.Constants;
 
 public class CocktailPageActivity extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class CocktailPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityCocktailPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        cocktailId = getIntent().getStringExtra("cocktailId");
+        cocktailId = getIntent().getStringExtra(Constants.KEY_COCKTAIL_ID);
         Toast.makeText(getApplicationContext(), cocktailId, Toast.LENGTH_SHORT).show();
     }
 }

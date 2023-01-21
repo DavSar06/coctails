@@ -18,7 +18,7 @@ public class CocktailsAdapter extends RecyclerView.Adapter<CocktailsAdapter.RowV
 
     private List<List<Cocktail>> cocktails;
     private CocktailListener cocktailListener;
-    private final Integer size = 2;
+    private final Integer size = 3;
     private Integer k = 0;
 
     public CocktailsAdapter(List<Cocktail> cocktails,CocktailListener cocktailListener) {
