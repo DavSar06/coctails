@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.ActivityCocktailPageBinding;
@@ -82,7 +83,8 @@ public class CreateCocktailActivity extends AppCompatActivity {
             cocktail.put(Constants.KEY_COCKTAIL_RECIPE,cocktailRecipe.getText().toString());
             cocktail.put(Constants.KEY_COCKTAIL_IMAGE,encodedImage);
             cocktail.put(Constants.KEY_COCKTAIL_VIDEO,null);
-            cocktail.put(Constants.KEY_COCKTAIL_RATING,"0");
+            cocktail.put(Constants.KEY_COCKTAIL_RATING,new Integer(0));
+            cocktail.put(Constants.KEY_COCKTAIL_CREATOR_ID, FirebaseAuth.getInstance().getCurrentUser().getUid());
             database.collection(Constants.KEY_COLLECTION_COCKTAILS)
                     .add(cocktail)
                     .addOnSuccessListener(documentReference -> {
