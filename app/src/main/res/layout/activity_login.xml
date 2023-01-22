@@ -12,25 +12,17 @@
     android:gravity="center"
     tools:context=".activities.LoginActivity">
 
-    <ImageView
-        android:id="@+id/hellowpicture"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_150sdp"
-        android:layout_weight="150"
-        android:src="@drawable/iconforproject"
-        android:layout_marginHorizontal="@dimen/_50sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:text="Hello World!" />
-
     <TextView
         android:id="@+id/Logintext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:text="Login"
         android:layout_weight="30"
         android:textColor="@color/white"
         android:textStyle="bold"
+        android:fontFamily="@font/metropolislight"
         android:textSize="@dimen/_40ssp"/>
 
 
@@ -38,17 +30,19 @@
         android:id="@+id/Login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="50dp"
-        android:layout_marginVertical="5dp"
-        android:paddingHorizontal="15dp"
-        android:layout_weight="40"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:paddingHorizontal="@dimen/_15sdp"
+        android:layout_weight="25"
         android:textSize="16sp"
         android:maxLines="1"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:textColor="@color/white"
         android:background="@drawable/borders_for_edittext"
-        android:paddingStart="@dimen/_6sdp"
+        android:paddingStart="@dimen/_10sdp"
+        android:fontFamily="@font/metropolislight"
         android:drawablePadding="@dimen/_6sdp"
         android:drawableStart="@drawable/user_icon"
         android:textColorHint="@color/white"
@@ -58,15 +52,17 @@
         android:id="@+id/Password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="50dp"
-        android:layout_marginVertical="5dp"
-        android:paddingHorizontal="10dp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_25sdp"
+        android:paddingHorizontal="@dimen/_15sdp"
         android:maxLines="1"
         android:hint="password"
         android:textColor="@color/white"
-        android:layout_weight="40"
+        android:fontFamily="@font/metropolislight"
+        android:layout_weight="25"
         android:inputType="textPassword"
-        android:paddingStart="@dimen/_6sdp"
+        android:paddingStart="@dimen/_10sdp"
         android:drawablePadding="@dimen/_6sdp"
         android:textColorHint="@color/white"
         android:drawableStart="@drawable/ic_baseline_lock_24"
@@ -78,9 +74,10 @@
         android:id="@+id/Loginbtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_35sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:layout_weight="45"
+        android:layout_marginBottom="@dimen/_25sdp"
+        android:layout_weight="20"
         android:background="@drawable/circle"
         android:gravity="center"
         android:text="Login"
@@ -91,23 +88,11 @@
 
 
     <TextView
-        android:id="@+id/ForgotPassword"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="20"
         android:layout_marginTop="@dimen/_5sdp"
-        android:gravity="right|center"
-        android:paddingRight="@dimen/_40sdp"
-        android:text="Forgot Password ?"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_12ssp"
-        android:textStyle="normal" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/_5sdp"
-        android:layout_weight="20"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:gravity="center"
         android:text="---------------------------- or ----------------------------"
         android:textSize="20sp"
@@ -155,6 +140,14 @@
             android:src="@drawable/githubicon"
             android:layout_marginHorizontal="@dimen/_5sdp" />
 
+        <ImageView
+            android:id="@+id/facebook"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/facebooklogo"
+            android:layout_marginHorizontal="@dimen/_5sdp" />
+
 <!--        <com.facebook.login.widget.LoginButton
             android:id="@+id/login_button"
             android:layout_width="@dimen/_40sdp"
@@ -166,38 +159,55 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="top"
-        android:layout_marginTop="20dp"
-        android:layout_weight="50">
+        android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_weight="0">
 
         <TextView
             android:id="@+id/DontHaveAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dont Have Account"
             android:gravity="center"
-            android:padding="3dp"
-            android:textStyle="normal"
-            android:textSize="13sp"
+            android:padding="@dimen/_3sdp"
+            android:text="Dont Have Account ?"
+            android:fontFamily="@font/metropolislight"
             android:textColor="@color/white"
-            />
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="normal" />
 
         <TextView
             android:id="@+id/register_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="3dp"
+            android:padding="@dimen/_3sdp"
             android:text="Register"
             android:textStyle="bold"
-            android:textSize="13sp"
+            android:fontFamily="@font/metropolislight"
+            android:textSize="@dimen/_13ssp"
             android:layout_toRightOf="@+id/DontHaveAccount"
             android:textColor="@color/mainRed"
             />
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/ForgotPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_70sdp"
+        android:layout_weight="20"
+        android:width="@dimen/_50sdp"
+        android:fontFamily="@font/metropolislight"
+        android:gravity="center"
+        android:text="Forgot Password ?"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal" />
 
 
 </LinearLayout>
