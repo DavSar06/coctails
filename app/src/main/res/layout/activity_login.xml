@@ -10,13 +10,14 @@
     android:focusableInTouchMode="true"
     android:background="@color/background_color"
     android:gravity="center"
+    android:layout_gravity="center"
     tools:context=".activities.LoginActivity">
 
     <TextView
         android:id="@+id/Logintext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_40sdp"
         android:layout_marginBottom="@dimen/_10sdp"
         android:text="Login"
         android:layout_weight="30"
@@ -28,6 +29,7 @@
 
     <EditText
         android:id="@+id/Login"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_20sdp"
@@ -43,6 +45,7 @@
         android:background="@drawable/borders_for_edittext"
         android:paddingStart="@dimen/_10sdp"
         android:fontFamily="@font/metropolislight"
+        android:backgroundTint="@color/background_color_light"
         android:drawablePadding="@dimen/_6sdp"
         android:drawableStart="@drawable/user_icon"
         android:textColorHint="@color/white"
@@ -58,6 +61,7 @@
         android:paddingHorizontal="@dimen/_15sdp"
         android:maxLines="1"
         android:hint="password"
+        android:backgroundTint="@color/background_color_light"
         android:textColor="@color/white"
         android:fontFamily="@font/metropolislight"
         android:layout_weight="25"
@@ -164,7 +168,7 @@
         android:gravity="center_horizontal"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_10sdp"
-        android:layout_weight="0">
+        android:layout_weight="25">
 
         <TextView
             android:id="@+id/DontHaveAccount"
@@ -199,11 +203,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_70sdp"
-        android:layout_weight="20"
-        android:width="@dimen/_50sdp"
+        android:layout_weight="30"
+        android:width="@dimen/_100sdp"
         android:fontFamily="@font/metropolislight"
-        android:gravity="center"
+        android:gravity="top|center"
         android:text="Forgot Password ?"
         android:textColor="@color/white"
         android:textSize="@dimen/_12ssp"

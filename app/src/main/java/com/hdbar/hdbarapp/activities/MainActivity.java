@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.adapters.CocktailsAdapter;
 import com.hdbar.hdbarapp.databinding.ActivityMainBinding;
 import com.hdbar.hdbarapp.listeners.CocktailListener;
@@ -87,25 +89,16 @@ public class MainActivity extends AppCompatActivity {
         userImage = preferenceManager.getString(Constants.KEY_USER_IMAGE);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.bottom_nav_menu,menu);
+        return true;
+    }
+
     private void listeners(){
-        binding.logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-                firebaseAuth.signOut();
-                preferenceManager.clear();
-                Intent i = new Intent(getApplicationContext(),LoginActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
         binding.getRoot().setOnClickListener(v->{
             InputMethodManager inm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
-        });
-        binding.create.setOnClickListener(v->{
-            Intent intent = new Intent(getApplicationContext(),CreateCocktailActivity.class);
-            startActivity(intent);
         });
     }
 }

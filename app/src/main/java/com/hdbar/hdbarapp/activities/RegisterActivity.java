@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.ActivityRegisterBinding;
 import com.hdbar.hdbarapp.utilities.PreferenceManager;
 
@@ -97,6 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+
     private void sendUserToNextActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -105,7 +107,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void listeners(){
-        binding.registerIconChooseIconToChange.setOnClickListener(v->startActivity(new Intent(getApplicationContext(),ChooseImageActivity.class)));
+        // texapoxel settings binding.registerIconChooseIconToChange.setOnClickListener(v->startActivity(new Intent(getApplicationContext(),ChooseImageActivity.class)));
         binding.registerConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

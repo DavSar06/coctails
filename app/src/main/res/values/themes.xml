@@ -12,5 +12,12 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <item name="android:itemBackground">@color/background_color</item>
+        <item name="android:itemTextAppearance">@style/CustomTextMenu</item>
+    </style>
+    
+    <style name="CustomTextMenu" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
+        <item name="android:textColor" >@color/grey_white</item>
     </style>
 </resources>
