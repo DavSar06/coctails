@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:title="Home"
         android:icon="@drawable/ic_baseline_home_24"
         android:id="@+id/home"
-        />
-    <item android:title="Don't Know"
-        android:icon="@drawable/user_icon"
-        android:id="@+id/toChange"
+        android:enabled="true"
+        app:showAsAction="always"
         />
     <item android:title="Cutom"
-        android:icon="@drawable/ic_baseline_search_24"
+        android:icon="@drawable/ic_baseline_add_24"
         android:id="@+id/custom"
+        android:enabled="true"
+        app:showAsAction="always"
+        />
+    <item android:title="Favorite"
+        android:icon="@drawable/ic_baseline_star_outline_24"
+        android:id="@+id/toChange"
+        android:enabled="true"
+        app:showAsAction="always"
         />
     <item android:title="Settings"
         android:icon="@drawable/ic_baseline_settings_24"
         android:id="@+id/settings"
+        android:enabled="true"
+        app:showAsAction="always"
+
         />
+
 
 </menu>

@@ -14,4 +14,7 @@
     <style name="MyActionBarTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textColor">@color/black</item>
     </style>
+
+
+    <dimen android:name="design_bottom_navigation_height" tools:override="true">20dp</dimen>
 </resources>

@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,16 +54,29 @@ public class CreateCocktailActivity extends AppCompatActivity {
         binding = ActivityCreateCocktailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
+
         init();
         listeners();
+
+        LinearLayout layout = (LinearLayout) findViewById(R.id.linear);
+        for (int i = 0; i < 10; i++) {
+            ImageView imageView = new ImageView(this);
+            imageView.setId(i);
+            imageView.setPadding(2, 2, 2, 2);
+            imageView.setImageBitmap(BitmapFactory.decodeResource(
+                    getResources(), R.drawable.ic_launcher_background));
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            layout.addView(imageView);
+        }
     }
 
     private void init(){
         preferenceManager = new PreferenceManager(getApplicationContext());
         cocktailName = binding.cocktailName;
         cocktailRecipe = binding.cocktailRecipe;
-        cocktailImage = binding.cocktailImage;
-        imageChooseText = binding.imageChooseText;
+        //cocktailImage = binding.cocktailImage;
+        //imageChooseText = binding.imageChooseText;
     }
 
     private void listeners(){
@@ -70,9 +84,9 @@ public class CreateCocktailActivity extends AppCompatActivity {
             InputMethodManager inm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
         });
-        binding.cocktailImage.setOnClickListener(v->chooseImage());
+        //binding.cocktailImage.setOnClickListener(v->chooseImage());
         binding.publishRecipe.setOnClickListener(v->publish());
-        binding.imageBack.setOnClickListener(v->finish());
+        //binding.imageBack.setOnClickListener(v->finish());
     }
 
     private void publish(){
@@ -123,8 +137,8 @@ public class CreateCocktailActivity extends AppCompatActivity {
                 try {
                     InputStream inputStream = getContentResolver().openInputStream(imageUri);
                     Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    binding.cocktailImage.setImageBitmap(bitmap);
-                    binding.imageChooseText.setVisibility(View.GONE);
+                    //binding.cocktailImage.setImageBitmap(bitmap);
+                    //binding.imageChooseText.setVisibility(View.GONE);
                     encodedImage = encodeImage(bitmap);
                 }catch(FileNotFoundException e){
                     e.printStackTrace();
