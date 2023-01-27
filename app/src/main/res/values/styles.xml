@@ -15,6 +15,12 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="ImageView.Circle" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
 
-    <dimen android:name="design_bottom_navigation_height" tools:override="true">20dp</dimen>
+    <style name="ImageView.Circle.Rectangle" parent="">
+        <item name="cornerSize">25%</item>
+    </style>
+
 </resources>

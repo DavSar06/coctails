@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background_color"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    tools:context=".activities.SettingsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <FrameLayout
+        android:id="@+id/navbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_gravity="top"
+        android:background="@color/background_color_light"
+        tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Settings"
+            android:textSize="@dimen/_35ssp"
+            android:fontFamily="@font/metropolislight"
+            android:gravity="center"
+            android:textColor="@color/white"/>
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="@dimen/_110sdp"
+                android:layout_height="@dimen/_110sdp"
+                android:background="@drawable/download"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_gravity="center"
+                app:shapeAppearanceOverlay="@style/ImageView.Circle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Nickname"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_20ssp"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="your mail@gmail.com"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/borders_for_edittext"
+                android:backgroundTint="@color/red"
+                android:fontFamily="@font/metropolisbold"
+                android:paddingHorizontal="@dimen/_15sdp"
+                android:paddingVertical="@dimen/_7sdp"
+                android:textSize="@dimen/_15sdp"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:text="Edit Profile"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:paddingVertical="@dimen/_15ssp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:background="@drawable/borders_for_settingsd"
+                android:orientation="vertical"
+                android:backgroundTint="@color/background_color_light">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/settings_images1"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:background="@drawable/settings_bell"
+                        android:layout_centerVertical="true"
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle"/>
+
+                    <TextView
+                        android:id="@+id/settings_text1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_12sdp"
+                        android:gravity="left"
+                        android:fontFamily="@font/garutemedium"
+                        android:layout_toRightOf="@+id/settings_images1"
+                        android:text="Notifications"
+                        android:layout_centerVertical="true"
+                        android:textSize="@dimen/_18sdp"
+                        android:textColor="@color/white"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/settings_notifications_switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        app:track="@drawable/track"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:thumb="@drawable/thumb"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/settings_images2"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:background="@drawable/languege_setting"
+                        android:layout_centerVertical="true"
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle"/>
+
+                    <TextView
+                        android:id="@+id/settings_text2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_12sdp"
+                        android:gravity="left"
+                        android:fontFamily="@font/garutemedium"
+                        android:layout_toRightOf="@+id/settings_images2"
+                        android:text="Languages"
+                        android:layout_centerVertical="true"
+                        android:textSize="@dimen/_18sdp"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/settings_languages_btn2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:background="@drawable/ic_baseline_arrow_forward" />
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:paddingVertical="@dimen/_15ssp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:background="@drawable/borders_for_settingsd"
+                android:orientation="vertical"
+                android:backgroundTint="@color/background_color_light">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/settings_images3"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:background="@drawable/aboutus_settings"
+                        android:layout_centerVertical="true"
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle"/>
+
+                    <TextView
+                        android:id="@+id/settings_text3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_12sdp"
+                        android:gravity="left"
+                        android:fontFamily="@font/garutemedium"
+                        android:layout_toRightOf="@+id/settings_images3"
+                        android:text="About us"
+                        android:layout_centerVertical="true"
+                        android:textSize="@dimen/_18sdp"
+                        android:textColor="@color/white"/>
+
+
+                    <TextView
+                        android:id="@+id/settings_languages_btn3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:background="@drawable/ic_baseline_arrow_forward" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/settings_images4"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:background="@drawable/faq_settings"
+                        android:layout_centerVertical="true"
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle"/>
+
+                    <TextView
+                        android:id="@+id/settings_text4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_12sdp"
+                        android:gravity="left"
+                        android:fontFamily="@font/garutemedium"
+                        android:layout_toRightOf="@+id/settings_images4"
+                        android:text="FAQ's"
+                        android:layout_centerVertical="true"
+                        android:textSize="@dimen/_18sdp"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/settings_languages_btn4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:background="@drawable/ic_baseline_arrow_forward" />
+
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

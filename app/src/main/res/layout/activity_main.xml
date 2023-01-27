@@ -7,7 +7,6 @@
     android:clickable="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:background="@drawable/background_color"
     tools:context=".activities.MainActivity"
     android:orientation="vertical">
 
@@ -47,12 +46,21 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginVertical="@dimen/_16sdp"
-        android:layout_weight="400"
-        app:layout_constraintBottom_toTopOf="@id/bottomBar"
-        app:layout_constraintTop_toBottomOf="@id/navbar"
-        app:layout_constraintVertical_bias="0.333"
-        tools:layout_editor_absoluteX="0dp">
+        android:background="@color/grey_white"
+        android:layout_weight="400">
+
+        <TextView
+            android:id="@+id/press"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="press"
+            android:textSize="@dimen/_55sdp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="@color/red"/>
+
+
+        <!--
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cocktailsRecyclerView"
@@ -82,6 +90,7 @@
             android:textColor="@color/error"
             android:textSize="@dimen/_12ssp"
             android:visibility="gone" />
+-->
 
     </FrameLayout>
 
@@ -89,7 +98,7 @@
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_60sdp"
-        android:layout_weight="1"
+        android:layout_weight="3"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -97,6 +106,7 @@
 
         <!--ERROR bottomnavigationview space between icon and text-->
         <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:menu="@menu/bottom_nav_menu"

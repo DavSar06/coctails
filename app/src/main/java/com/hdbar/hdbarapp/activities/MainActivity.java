@@ -1,6 +1,9 @@
 package com.hdbar.hdbarapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,6 +24,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.adapters.CocktailsAdapter;
 import com.hdbar.hdbarapp.databinding.ActivityMainBinding;
+import com.hdbar.hdbarapp.databinding.FragmentSettingsBinding;
 import com.hdbar.hdbarapp.listeners.CocktailListener;
 import com.hdbar.hdbarapp.models.Cocktail;
 import com.hdbar.hdbarapp.utilities.Constants;
@@ -41,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private String userName;
     private String userEmail;
     private String userImage;
-
+/*
     private final CocktailListener cocktailListener = new CocktailListener() {
         @Override
         public void onCocktailClicked(Cocktail cocktail) {
@@ -50,14 +55,14 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-    };
+    };*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+/*
         cocktails = new LinkedList<>();
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         database.collection(Constants.KEY_COLLECTION_COCKTAILS)
@@ -77,10 +82,47 @@ public class MainActivity extends AppCompatActivity {
                             Log.d("FCM", "Error getting documents: ", task.getException());
                         }
                     }
-                });
+                });*/
         init();
         listeners();
 
+        replaceFragment(new HomeFragment());
+        bottomNavigationBar();
+
+    }
+    private void bottomNavigationBar(){
+
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+
+            switch (item.getItemId()){
+                case R.id.home:
+                    replaceFragment(new HomeFragment());
+                    Log.d("In","1");
+                    break;
+                case R.id.custom:
+                        replaceFragment(new CreateCocktailFragment());
+                    Log.d("In","2");
+                    break;
+                case R.id.favorite:
+                    replaceFragment(new FavoriteFragment());
+                    Log.d("In","3");
+                    break;
+                case  R.id.settings:
+                    replaceFragment(new SettingsFragment());
+                    Log.d("In","4");
+                    break;
+            }
+
+            return true;
+        });
+    }
+
+
+    private void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.bottomBar,fragment);
+        fragmentTransaction.commit();
 
     }
 

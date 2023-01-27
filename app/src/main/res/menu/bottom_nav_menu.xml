@@ -16,7 +16,7 @@
         />
     <item android:title="Favorite"
         android:icon="@drawable/ic_baseline_star_outline_24"
-        android:id="@+id/toChange"
+        android:id="@+id/favorite"
         android:enabled="true"
         app:showAsAction="always"
         />
