@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:focusableInTouchMode="true"
     android:background="@drawable/background_color"
-    tools:context=".activities.CreateCocktailActivity"
+    tools:context=".activities.MainActivity"
     tools:ignore="HardcodedText">
 
 
@@ -76,7 +76,7 @@
                     </LinearLayout>
 
                 </HorizontalScrollView>
-                <!--
+
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/cocktailImage"
                     android:layout_width="match_parent"
@@ -93,7 +93,7 @@
                     android:layout_height="match_parent"
                     android:textColor="@color/black"
                     android:gravity="center"
-                    android:text="Click to choose image"/>-->
+                    android:text="Click to choose image"/>
             </FrameLayout>
 
         </LinearLayout>
