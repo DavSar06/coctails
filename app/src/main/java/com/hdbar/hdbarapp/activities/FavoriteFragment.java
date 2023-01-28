@@ -1,14 +1,37 @@
 package com.hdbar.hdbarapp.activities;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.hdbar.hdbarapp.R;
+import com.hdbar.hdbarapp.adapters.CocktailsAdapter;
+import com.hdbar.hdbarapp.adapters.CocktailsSingleAdapter;
+import com.hdbar.hdbarapp.databinding.FragmentFavoriteBinding;
+import com.hdbar.hdbarapp.listeners.CocktailListener;
+import com.hdbar.hdbarapp.models.Cocktail;
+import com.hdbar.hdbarapp.utilities.Constants;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,50 +40,98 @@ import com.hdbar.hdbarapp.R;
  */
 public class FavoriteFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private FragmentFavoriteBinding binding;
+    private List<Cocktail> cocktails;
+    private FirebaseFirestore database;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private final CocktailListener cocktailListener = new CocktailListener() {
+        @Override
+        public void onCocktailClicked(Cocktail cocktail) {
+            Intent intent = new Intent(binding.getRoot().getContext(), CocktailPageActivity.class);
+            intent.putExtra(Constants.KEY_COCKTAIL_ID, cocktail.id);
+            startActivity(intent);
+        }
+    };
 
     public FavoriteFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FavoriteFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FavoriteFragment newInstance(String param1, String param2) {
+    public static FavoriteFragment newInstance() {
         FavoriteFragment fragment = new FavoriteFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        init();
+        listeners();
+
+        changeAdapter(0);
+    }
+
+    private void init(){
+        database = FirebaseFirestore.getInstance();
+        binding = FragmentFavoriteBinding.inflate(getLayoutInflater());
+        cocktails = new LinkedList<>();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorite, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return binding.getRoot();
+    }
+
+    private void listeners(){
+        binding.getRoot().setOnClickListener(v->{
+            InputMethodManager inm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
+        });
+        binding.rowDouble.setOnClickListener(v->{
+            binding.rowSingle.setColorFilter(ContextCompat.getColor(getActivity(), R.color.background_color_light), android.graphics.PorterDuff.Mode.SRC_IN);
+            binding.rowDouble.setColorFilter(ContextCompat.getColor(getActivity(), R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
+            binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
+            binding.progressBar.setVisibility(View.VISIBLE);
+            changeAdapter(0);
+        });
+        binding.rowSingle.setOnClickListener(v->{
+            binding.rowSingle.setColorFilter(ContextCompat.getColor(getActivity(), R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
+            binding.rowDouble.setColorFilter(ContextCompat.getColor(getActivity(), R.color.background_color_light), android.graphics.PorterDuff.Mode.SRC_IN);
+            binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
+            binding.progressBar.setVisibility(View.VISIBLE);
+            changeAdapter(1);
+        });
+    }
+
+    private void changeAdapter(Integer k){
+        database.collection(Constants.KEY_COLLECTION_COCKTAILS)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String cocktailName = document.getString(Constants.KEY_COCKTAIL_NAME);
+                                String creator = document.getString(Constants.KEY_COCKTAIL_CREATOR_NAME);
+                                String recipe = document.get(Constants.KEY_COCKTAIL_RECIPE).toString();
+                                String image = document.get(Constants.KEY_COCKTAIL_IMAGE).toString();
+                                String rating = document.get(Constants.KEY_COCKTAIL_RATING).toString();
+                                Cocktail a = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator);
+                                cocktails.add(a);
+                            }
+                            if(k==0){
+                                CocktailsAdapter adapter = new CocktailsAdapter(cocktails,cocktailListener);
+                                binding.cocktailsRecyclerView.setAdapter(adapter);
+                            }else{
+                                CocktailsSingleAdapter adapter = new CocktailsSingleAdapter(cocktails,cocktailListener);
+                                binding.cocktailsRecyclerView.setAdapter(adapter);
+                            }
+                            binding.cocktailsRecyclerView.setVisibility(View.VISIBLE);
+                            binding.progressBar.setVisibility(View.INVISIBLE);
+                        } else {
+                            Log.d("FCM", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
     }
 }

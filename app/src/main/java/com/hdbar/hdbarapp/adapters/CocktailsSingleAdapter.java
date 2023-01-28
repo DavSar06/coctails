@@ -9,19 +9,19 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hdbar.hdbarapp.databinding.ItemCocktailsRowBinding;
 import com.hdbar.hdbarapp.databinding.ItemContainerCocktailBinding;
+import com.hdbar.hdbarapp.databinding.ItemSingleCocktailBinding;
 import com.hdbar.hdbarapp.listeners.CocktailListener;
 import com.hdbar.hdbarapp.models.Cocktail;
 
 import java.util.List;
 
-public class RowAdapter extends RecyclerView.Adapter<RowAdapter.CocktailViewHolder>{
+public class CocktailsSingleAdapter extends RecyclerView.Adapter<CocktailsSingleAdapter.CocktailViewHolder>{
 
     private final List<Cocktail> cocktails;
     private final CocktailListener listener;
 
-    public RowAdapter(List<Cocktail> cocktails, CocktailListener listener) {
+    public CocktailsSingleAdapter(List<Cocktail> cocktails, CocktailListener listener) {
         this.cocktails = cocktails;
         this.listener = listener;
     }
@@ -29,8 +29,8 @@ public class RowAdapter extends RecyclerView.Adapter<RowAdapter.CocktailViewHold
     @NonNull
     @Override
     public CocktailViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemContainerCocktailBinding itemContainerCocktailBinding = ItemContainerCocktailBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
-        return new CocktailViewHolder(itemContainerCocktailBinding);
+        ItemSingleCocktailBinding itemSingleCocktailBinding = ItemSingleCocktailBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
+        return new CocktailViewHolder(itemSingleCocktailBinding);
     }
 
     @Override
@@ -45,11 +45,11 @@ public class RowAdapter extends RecyclerView.Adapter<RowAdapter.CocktailViewHold
 
     class CocktailViewHolder extends RecyclerView.ViewHolder {
 
-        ItemContainerCocktailBinding binding;
+        ItemSingleCocktailBinding binding;
 
-        CocktailViewHolder(ItemContainerCocktailBinding itemContainerCocktailBinding) {
-            super(itemContainerCocktailBinding.getRoot());
-            binding = itemContainerCocktailBinding;
+        CocktailViewHolder(ItemSingleCocktailBinding itemSingleCocktailBinding) {
+            super(itemSingleCocktailBinding.getRoot());
+            binding = itemSingleCocktailBinding;
         }
 
         void setCocktailData(Cocktail cocktail){

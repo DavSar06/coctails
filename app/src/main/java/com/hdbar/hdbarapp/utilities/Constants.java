@@ -14,4 +14,5 @@ public class Constants {
     public static final String KEY_COCKTAIL_ID = "cocktailId";
     public static final String KEY_COCKTAIL_RATING = "rating";
     public static final String KEY_COCKTAIL_CREATOR_ID = "creatorId";
+    public static final String KEY_COCKTAIL_CREATOR_NAME = "creatorName";
 }
