@@ -42,50 +42,18 @@ public class MainActivity extends AppCompatActivity {
 
     private PreferenceManager preferenceManager;
 
-    private List<Cocktail> cocktails;
-
     private String userName;
     private String userEmail;
     private String userImage;
 
     private FrameLayout fragmentContainer;
-/*
-    private final CocktailListener cocktailListener = new CocktailListener() {
-        @Override
-        public void onCocktailClicked(Cocktail cocktail) {
-            Intent intent = new Intent(binding.getRoot().getContext(), CocktailPageActivity.class);
-            intent.putExtra(Constants.KEY_COCKTAIL_ID,cocktail.id);
-            startActivity(intent);
-            finish();
-        }
-    };*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-/*
-        cocktails = new LinkedList<>();
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
-        database.collection(Constants.KEY_COLLECTION_COCKTAILS)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Cocktail a = new Cocktail(document.getId(),document.get(Constants.KEY_COCKTAIL_NAME).toString(),document.get(Constants.KEY_COCKTAIL_RECIPE).toString(),document.get(Constants.KEY_COCKTAIL_IMAGE).toString(),document.get(Constants.KEY_COCKTAIL_RATING).toString());
-                                cocktails.add(a);
-                            }
-                            binding.cocktailsRecyclerView.setAdapter(new CocktailsAdapter(cocktails,cocktailListener));
-                            binding.cocktailsRecyclerView.setVisibility(View.VISIBLE);
-                            binding.progressBar.setVisibility(View.INVISIBLE);
-                        } else {
-                            Log.d("FCM", "Error getting documents: ", task.getException());
-                        }
-                    }
-                });*/
+
         init();
         listeners();
 
