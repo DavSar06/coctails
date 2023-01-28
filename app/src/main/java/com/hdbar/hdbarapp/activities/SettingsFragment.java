@@ -2,13 +2,22 @@ package com.hdbar.hdbarapp.activities;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hdbar.hdbarapp.R;
+import com.hdbar.hdbarapp.databinding.ActivityMainBinding;
+import com.hdbar.hdbarapp.databinding.FragmentSettingsBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +34,16 @@ public class SettingsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private EditText search;
+    private RelativeLayout account,languages,privacyAndSecurity,helpAndSupport,aboutUs,logOut;
+    private SwitchCompat notifications;
+    private boolean isNormal = true;
+    private FragmentSettingsBinding binding;
+
+
+
+
+
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -51,10 +70,17 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = FragmentSettingsBinding.inflate(getLayoutInflater());
+
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        init();
+        onClick();
+
+
     }
 
 
@@ -63,6 +89,77 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        return binding.getRoot();
+    }
+
+    private void init(){
+        search = binding.settingsSearch;
+        account = binding.accountSettingsBtn;
+        languages = binding.languagesSettingsBtn;
+        privacyAndSecurity = binding.privacySettingsBtn;
+        helpAndSupport = binding.helpSettingsBtn;
+        aboutUs = binding.aboutusSettingsBtn;
+        logOut = binding.logoutBtn;
+        notifications = binding.settingsNotificationsSwitch;
+    }
+
+    private void  onClick(){
+
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("In", "ok");
+            }
+        });
+
+        languages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("In", "ok");
+            }
+        });
+
+        privacyAndSecurity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("In", "ok");
+            }
+        });
+
+        helpAndSupport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("In", "ok");
+            }
+        });
+
+        aboutUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("In", "ok");
+            }
+        });
+
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+
+        notifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+
+                if (isNormal)
+                    Log.d("In", "true");
+                else
+                    Log.d("In", "false");
+
+
+                isNormal = !isNormal;
+            }
+        });
+
     }
 }

@@ -10,34 +10,7 @@
     tools:context=".activities.SettingsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
-    <FrameLayout
-        android:id="@+id/navbar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_90sdp"
-        android:layout_gravity="top"
-        android:background="@color/background_color">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/_30sdp"
-                android:fontFamily="@font/metropolislight"
-                android:gravity="center"
-                android:text="Settings"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_30ssp" />
-
-
-
-        </LinearLayout>
-
-    </FrameLayout>
+<!--if you have time change animation https://stackoverflow.com/questions/40758635/ios-like-over-scroll-effect-on-android-->
 
     <ScrollView
         android:layout_width="match_parent"
@@ -46,10 +19,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/search"
+                android:id="@+id/settings_search"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_gravity="center"
@@ -129,18 +103,18 @@
                         android:id="@+id/settings_images1"
                         android:layout_width="@dimen/_30sdp"
                         android:layout_height="@dimen/_30sdp"
-                        android:background="@drawable/accout_settings"
                         android:layout_centerVertical="true"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle"/>
+                        android:background="@drawable/accout_settings"
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle" />
 
                     <TextView
                         android:id="@+id/settings_text1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/_12sdp"
                         android:layout_toRightOf="@+id/settings_images1"
                         android:fontFamily="@font/montserratmedium"
-                        android:layout_centerVertical="true"
                         android:text="Account"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_15sdp" />
@@ -205,15 +179,16 @@
                         android:textSize="@dimen/_15sdp"
                         android:textColor="@color/white"/>
 
-                    <TextView
-                        android:id="@+id/settings_languages_btn2"
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/settings_notifications_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checked="false"
+                        app:track="@drawable/track"
+                        android:thumb="@drawable/thumb"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginEnd="6dp"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:background="@drawable/ic_baseline_arrow_forward" />
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 
                 </RelativeLayout>
@@ -356,7 +331,7 @@
                     android:background="@color/white_transparency" />
 
                 <RelativeLayout
-                    android:id="@+id/AboutUs_settings_btn"
+                    android:id="@+id/aboutus_settings_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_15sdp"
