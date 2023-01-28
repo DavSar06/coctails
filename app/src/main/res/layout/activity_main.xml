@@ -44,22 +44,11 @@
 
 
     <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/grey_white"
         android:layout_weight="400">
-
-        <TextView
-            android:id="@+id/press"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="press"
-            android:textSize="@dimen/_55sdp"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:background="@color/red"/>
-
-
         <!--
 
         <androidx.recyclerview.widget.RecyclerView
@@ -91,7 +80,6 @@
             android:textSize="@dimen/_12ssp"
             android:visibility="gone" />
 -->
-
     </FrameLayout>
 
     <LinearLayout

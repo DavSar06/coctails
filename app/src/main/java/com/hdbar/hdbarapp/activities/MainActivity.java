@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     private String userName;
     private String userEmail;
     private String userImage;
+
+    private FrameLayout fragmentContainer;
 /*
     private final CocktailListener cocktailListener = new CocktailListener() {
         @Override
@@ -100,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("In","1");
                     break;
                 case R.id.custom:
-                        replaceFragment(new CreateCocktailFragment());
+                    replaceFragment(new CreateCocktailFragment());
                     Log.d("In","2");
                     break;
                 case R.id.favorite:
@@ -121,9 +124,7 @@ public class MainActivity extends AppCompatActivity {
     private void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.bottomBar,fragment);
-        fragmentTransaction.commit();
-
+        fragmentTransaction.replace(R.id.fragment_container,fragment).commit();
     }
 
     private void init(){
@@ -131,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
         userName = preferenceManager.getString(Constants.KEY_USERNAME);
         userEmail = preferenceManager.getString(Constants.KEY_EMAIL);
         userImage = preferenceManager.getString(Constants.KEY_USER_IMAGE);
+        fragmentContainer = binding.fragmentContainer;
     }
 
     @Override
