@@ -1,10 +1,7 @@
 package com.hdbar.hdbarapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +9,10 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.hdbar.hdbarapp.R;
-import com.hdbar.hdbarapp.databinding.ActivityMainBinding;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.Fragment;
+
 import com.hdbar.hdbarapp.databinding.FragmentSettingsBinding;
 
 /**
@@ -108,7 +104,8 @@ public class SettingsFragment extends Fragment {
         account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("In", "ok");
+                Intent intent = new Intent(getActivity(), MainActivity2.class);
+                startActivity(intent);
             }
         });
 
