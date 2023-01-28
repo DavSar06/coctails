@@ -281,7 +281,8 @@ public class LoginActivity extends AppCompatActivity {
     private void switchActivities(){
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_left);
+        overridePendingTransition(R.anim.right_to_left_in, R.anim.right_to_left_out);
+        finish();
         Toast.makeText(LoginActivity.this,"OK",Toast.LENGTH_SHORT).show();
 
 
