@@ -11,6 +11,14 @@
     android:orientation="vertical">
 
     <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="303">
+
+
+
+    <FrameLayout
         android:id="@+id/navbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_60sdp"
@@ -44,7 +52,6 @@
 
 
     <FrameLayout
-        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/grey_white"
@@ -81,7 +88,7 @@
             android:visibility="gone" />
 -->
     </FrameLayout>
-
+</FrameLayout>
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
