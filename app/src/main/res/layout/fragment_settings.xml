@@ -81,7 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
-                android:paddingVertical="@dimen/_15ssp"
+                android:paddingVertical="@dimen/_15sdp"
                 android:paddingHorizontal="@dimen/_10sdp"
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:background="@drawable/borders_for_settingsd"

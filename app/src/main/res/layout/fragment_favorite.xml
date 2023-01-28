@@ -1,16 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
+    android:background="@color/background_color"
+    android:gravity="center"
+    android:paddingHorizontal="@dimen/_10sdp"
+    android:paddingVertical="@dimen/_15sdp"
     tools:context=".activities.FavoriteFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <FrameLayout
+        android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="@dimen/_60sdp"
+        android:layout_weight="3"
+        android:layout_gravity="top"
+        android:background="@color/background_color_light">
 
-</FrameLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Favourite Cocktails"
+            android:textColor="@color/white"
+            android:fontFamily="@font/metropolislight"
+            android:textSize="@dimen/_20ssp"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+</LinearLayout>
