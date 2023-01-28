@@ -1,14 +1,41 @@
 package com.hdbar.hdbarapp.activities;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.hdbar.hdbarapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.hdbar.hdbarapp.databinding.FragmentCreateCocktailBinding;
+import com.hdbar.hdbarapp.utilities.Constants;
+import com.hdbar.hdbarapp.utilities.PreferenceManager;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,52 +44,124 @@ import com.hdbar.hdbarapp.R;
  */
 public class CreateCocktailFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private FragmentCreateCocktailBinding binding;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private PreferenceManager preferenceManager;
+
+    private ImageView cocktailImage;
+    private TextView pickImageButton;
+    private TextView imageChooseText;
+    private EditText cocktailName;
+    private EditText cocktailRecipe;
+    private Integer SELECT_PICTURE = 200;
+    private String encodedImage;
+
 
     public CreateCocktailFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CreateCocktailFragment.
-     */
+
     // TODO: Rename and change types and number of parameters
-    public static CreateCocktailFragment newInstance(String param1, String param2) {
+    public static CreateCocktailFragment newInstance() {
         CreateCocktailFragment fragment = new CreateCocktailFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        binding = FragmentCreateCocktailBinding.inflate(getLayoutInflater());
 
-
+        init();
+        listeners();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_cocktail, container, false);
+
+        return binding.getRoot();
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    private void listeners(){
+        binding.getRoot().setOnClickListener(v->{
+            InputMethodManager inm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+        });
+        binding.cocktailImage.setOnClickListener(v->{
+            chooseImage();
+        });
+        binding.publishRecipe.setOnClickListener(v->publish());
+    }
+
+    private void init(){
+        preferenceManager = new PreferenceManager(getActivity());
+        cocktailName = binding.cocktailName;
+        cocktailRecipe = binding.cocktailRecipe;
+        cocktailImage = binding.cocktailImage;
+        imageChooseText = binding.imageChooseText;
+    }
+
+    private void publish(){
+        if(!cocktailName.getText().toString().isEmpty() && !cocktailRecipe.getText().toString().isEmpty() && encodedImage != null){
+            FirebaseFirestore database = FirebaseFirestore.getInstance();
+            HashMap<String,Object> cocktail = new HashMap<>();
+            cocktail.put(Constants.KEY_COCKTAIL_NAME,cocktailName.getText().toString());
+            cocktail.put(Constants.KEY_COCKTAIL_RECIPE,cocktailRecipe.getText().toString());
+            cocktail.put(Constants.KEY_COCKTAIL_IMAGE,encodedImage);
+            cocktail.put(Constants.KEY_COCKTAIL_VIDEO,null);
+            cocktail.put(Constants.KEY_COCKTAIL_RATING,new Integer(0));
+            cocktail.put(Constants.KEY_COCKTAIL_CREATOR_ID, FirebaseAuth.getInstance().getCurrentUser().getUid());
+            database.collection(Constants.KEY_COLLECTION_COCKTAILS)
+                    .add(cocktail)
+                    .addOnSuccessListener(documentReference -> {
+                        Intent i = new Intent(getActivity(),CocktailPageActivity.class);
+                        i.putExtra(Constants.KEY_COCKTAIL_ID,documentReference.getId());
+                        startActivity(i);
+                    }).addOnFailureListener(exception -> {
+                        Log.d("FCM",exception.getMessage());
+                    });;
+        }else {
+            //Avelacnel dzent aveli konkret default nkar
+        }
+    }
+
+    private void chooseImage(){
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        pickImage.launch(intent);
+    }
+
+    private String encodeImage(Bitmap bitmap){
+        int previewWidth = 150;
+        int previewHeight = bitmap.getHeight() * previewWidth / bitmap.getWidth();
+        Bitmap previewBitmap = Bitmap.createScaledBitmap(bitmap, previewWidth, previewHeight, false);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        previewBitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+        byte[] bytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(bytes, Base64.DEFAULT);
+    }
+
+    private final ActivityResultLauncher<Intent> pickImage = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        if(result.getResultCode() == RESULT_OK){
+            if(result.getData() != null){
+                Uri imageUri = result.getData().getData();
+                try {
+                    InputStream inputStream = getActivity().getContentResolver().openInputStream(imageUri);
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                    binding.cocktailImage.setImageBitmap(bitmap);
+                    binding.imageChooseText.setVisibility(View.GONE);
+                    encodedImage = encodeImage(bitmap);
+                }catch(FileNotFoundException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+    });
 }
