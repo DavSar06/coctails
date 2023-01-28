@@ -50,6 +50,7 @@ public class FavoriteFragment extends Fragment {
             Intent intent = new Intent(binding.getRoot().getContext(), CocktailPageActivity.class);
             intent.putExtra(Constants.KEY_COCKTAIL_ID, cocktail.id);
             startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         }
     };
 
@@ -110,6 +111,7 @@ public class FavoriteFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            cocktails = new LinkedList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String cocktailName = document.getString(Constants.KEY_COCKTAIL_NAME);
                                 String creator = document.getString(Constants.KEY_COCKTAIL_CREATOR_NAME);
@@ -119,15 +121,22 @@ public class FavoriteFragment extends Fragment {
                                 Cocktail a = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator);
                                 cocktails.add(a);
                             }
-                            if(k==0){
-                                CocktailsAdapter adapter = new CocktailsAdapter(cocktails,cocktailListener);
-                                binding.cocktailsRecyclerView.setAdapter(adapter);
-                            }else{
-                                CocktailsSingleAdapter adapter = new CocktailsSingleAdapter(cocktails,cocktailListener);
-                                binding.cocktailsRecyclerView.setAdapter(adapter);
+                            if(cocktails.size()==0){
+                                binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
+                                binding.progressBar.setVisibility(View.INVISIBLE);
+                                binding.textErrorMessage.setVisibility(View.VISIBLE);
+                            }else {
+                                if(k==0){
+                                    CocktailsAdapter adapter = new CocktailsAdapter(cocktails,cocktailListener);
+                                    binding.cocktailsRecyclerView.setAdapter(adapter);
+                                }else{
+                                    CocktailsSingleAdapter adapter = new CocktailsSingleAdapter(cocktails,cocktailListener);
+                                    binding.cocktailsRecyclerView.setAdapter(adapter);
+                                }
+                                binding.cocktailsRecyclerView.setVisibility(View.VISIBLE);
+                                binding.progressBar.setVisibility(View.INVISIBLE);
+                                binding.textErrorMessage.setVisibility(View.INVISIBLE);
                             }
-                            binding.cocktailsRecyclerView.setVisibility(View.VISIBLE);
-                            binding.progressBar.setVisibility(View.INVISIBLE);
                         } else {
                             Log.d("FCM", "Error getting documents: ", task.getException());
                         }
