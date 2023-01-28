@@ -21,7 +21,7 @@
     <FrameLayout
         android:id="@+id/navbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_60sdp"
+        android:layout_height="@dimen/_50sdp"
         android:layout_weight="3"
         android:background="@color/background_color_light"
         app:layout_constraintTop_toTopOf="parent"
@@ -33,7 +33,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginHorizontal="@dimen/_20sdp"
-            android:layout_marginVertical="@dimen/_10sdp"
+            android:layout_marginVertical="@dimen/_7sdp"
             android:layout_weight="25"
             android:background="@drawable/borders_for_search_bar"
             android:drawableStart="@drawable/ic_baseline_search_24"

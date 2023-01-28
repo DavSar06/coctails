@@ -14,16 +14,17 @@
     <FrameLayout
         android:id="@+id/navbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_60sdp"
+        android:layout_height="@dimen/_50sdp"
         android:layout_gravity="top"
-        android:background="@color/background_color_light"
+        android:background="@color/background_color"
+        android:layout_marginBottom="@dimen/_20sdp"
         tools:layout_editor_absoluteX="0dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Settings"
-            android:textSize="@dimen/_35ssp"
+            android:textSize="@dimen/_25ssp"
             android:fontFamily="@font/metropolislight"
             android:gravity="center"
             android:textColor="@color/white"/>
