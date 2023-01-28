@@ -14,6 +14,11 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
 import com.hdbar.hdbarapp.databinding.FragmentSettingsBinding;
+import com.hdbar.hdbarapp.settings.AboutUsActivity;
+import com.hdbar.hdbarapp.settings.AccountActivity;
+import com.hdbar.hdbarapp.settings.HelpAndSupportActivity;
+import com.hdbar.hdbarapp.settings.LanguagesActivity;
+import com.hdbar.hdbarapp.settings.PrivacyAndSecurityActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -104,7 +109,7 @@ public class SettingsFragment extends Fragment {
         account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MainActivity2.class);
+                Intent intent = new Intent(getActivity(), AccountActivity.class);
                 startActivity(intent);
             }
         });
@@ -112,28 +117,32 @@ public class SettingsFragment extends Fragment {
         languages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("In", "ok");
+                Intent intent = new Intent(getActivity(), LanguagesActivity.class);
+                startActivity(intent);
             }
         });
 
         privacyAndSecurity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("In", "ok");
+                Intent intent = new Intent(getActivity(), PrivacyAndSecurityActivity.class);
+                startActivity(intent);
             }
         });
 
         helpAndSupport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("In", "ok");
+                Intent intent = new Intent(getActivity(), HelpAndSupportActivity.class);
+                startActivity(intent);
             }
         });
 
         aboutUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("In", "ok");
+                Intent intent = new Intent(getActivity(), AboutUsActivity.class);
+                startActivity(intent);
             }
         });
 

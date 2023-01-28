@@ -18,28 +18,35 @@
         android:theme="@style/Theme.HDBarApplication"
         tools:targetApi="31">
         <activity
-            android:name=".activities.MainActivity2"
+            android:name=".settings.AboutUsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".PrivacyAndSecurityActivity"
+            android:name=".settings.HelpAndSupportActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".LanguagesActivity"
+            android:name=".settings.PrivacyAndSecurityActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AccountActivity"
+            android:name=".settings.LanguagesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".settings.AccountActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
