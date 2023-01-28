@@ -4,6 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:background="@color/background_color"
     tools:context=".activities.CocktailPageActivity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageBack"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginLeft="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:padding="@dimen/_5sdp"
+        android:src="@drawable/ic_back"
+        android:tint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/cocktailName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/imageBack"
+        app:layout_constraintTop_toTopOf="@id/imageBack"
+        android:text="CocktailName"
+        android:textAlignment="center"
+        android:textSize="@dimen/_20ssp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/imageBack"
+        app:layout_constraintRight_toLeftOf="@id/topHolder"
+        />
+
+    <View
+        android:id="@+id/topHolder"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:layout_marginRight="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:padding="@dimen/_5sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="@dimen/_20sdp"
+        app:layout_constraintTop_toBottomOf="@id/cocktailName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/cocktailAuthor"
+            android:layout_width="match_parent"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp"
+            android:layout_marginVertical="@dimen/_10sdp"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/cocktailImage"
+            android:maxWidth="@dimen/_300sdp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:scaleType="centerCrop"
+            style="@style/ImageView.Circle.Rectangle"
+            android:layout_marginBottom="@dimen/_15sdp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recipe"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_17ssp"
+            android:layout_marginVertical="@dimen/_5sdp"/>
+
+        <TextView
+            android:id="@+id/cocktailRecipe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:breakStrategy="high_quality"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

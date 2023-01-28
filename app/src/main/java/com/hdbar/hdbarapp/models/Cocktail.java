@@ -8,6 +8,10 @@ public class Cocktail {
     public String rating;
     public String creator;
 
+    public Cocktail(){
+
+    }
+
     public Cocktail(String id, String name, String recipe, String image, String rating,String creator) {
         this.id = id;
         this.name = name;
