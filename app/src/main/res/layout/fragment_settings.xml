@@ -14,20 +14,29 @@
     <FrameLayout
         android:id="@+id/navbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_height="@dimen/_90sdp"
         android:layout_gravity="top"
-        android:background="@color/background_color"
-        android:layout_marginBottom="@dimen/_20sdp"
-        tools:layout_editor_absoluteX="0dp">
+        android:background="@color/background_color">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Settings"
-            android:textSize="@dimen/_25ssp"
-            android:fontFamily="@font/metropolislight"
-            android:gravity="center"
-            android:textColor="@color/white"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:fontFamily="@font/metropolislight"
+                android:gravity="center"
+                android:text="Settings"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_30ssp" />
+
+
+
+        </LinearLayout>
+
     </FrameLayout>
 
     <ScrollView
@@ -39,7 +48,27 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.google.android.material.imageview.ShapeableImageView
+            <EditText
+                android:id="@+id/search"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginVertical="@dimen/_7sdp"
+                android:background="@drawable/borders_for_search_bar"
+                android:backgroundTint="@color/background_color_light"
+                android:drawableStart="@drawable/ic_baseline_search_24"
+                android:drawablePadding="@dimen/_6sdp"
+                android:fontFamily="@font/metropolislight"
+                android:hint="Search"
+                android:inputType="textUri"
+                android:maxLength="25"
+                android:maxLines="1"
+                android:paddingStart="@dimen/_12sdp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="16sp" />
+            <!--<com.google.android.material.imageview.ShapeableImageView
                 android:layout_width="@dimen/_110sdp"
                 android:layout_height="@dimen/_110sdp"
                 android:background="@drawable/download"
@@ -77,28 +106,30 @@
                 android:textColor="@color/white"
                 android:layout_gravity="center"
                 android:text="Edit Profile"/>
-
+-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:paddingVertical="@dimen/_15sdp"
                 android:paddingHorizontal="@dimen/_10sdp"
                 android:layout_marginHorizontal="@dimen/_15sdp"
-                android:background="@drawable/borders_for_settingsd"
                 android:orientation="vertical"
                 android:backgroundTint="@color/background_color_light">
 
 
                 <RelativeLayout
+                    android:id="@+id/account_settings_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_15sdp">
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/settings_images1"
                         android:layout_width="@dimen/_35sdp"
                         android:layout_height="@dimen/_35sdp"
-                        android:background="@drawable/settings_bell"
+                        android:background="@drawable/accout_settings"
                         android:layout_centerVertical="true"
                         app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle"/>
 
@@ -107,15 +138,26 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_12sdp"
-                        android:gravity="left"
-                        android:fontFamily="@font/garutemedium"
                         android:layout_toRightOf="@+id/settings_images1"
-                        android:text="Notifications"
+                        android:fontFamily="@font/montserratmedium"
                         android:layout_centerVertical="true"
-                        android:textSize="@dimen/_18sdp"
-                        android:textColor="@color/white"/>
+                        android:text="Account"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_16sdp" />
 
-                    <androidx.appcompat.widget.SwitchCompat
+                    <TextView
+                        android:id="@+id/settings_languages_btn1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="6dp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:background="@drawable/ic_baseline_arrow_forward" />
+
+
+                    <!--Custom Switch-->
+                    <!--<androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/settings_notifications_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -125,21 +167,28 @@
                         android:thumb="@drawable/thumb"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />-->
 
 
                 </RelativeLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/white_transparency" />
+
                 <RelativeLayout
+                    android:id="@+id/notifications_settings_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp">
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_15sdp">
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/settings_images2"
                         android:layout_width="@dimen/_35sdp"
                         android:layout_height="@dimen/_35sdp"
-                        android:background="@drawable/languege_setting"
+                        android:background="@drawable/notificatoin_settings"
                         android:layout_centerVertical="true"
                         app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle"/>
 
@@ -149,50 +198,43 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_12sdp"
                         android:gravity="left"
-                        android:fontFamily="@font/garutemedium"
+                        android:fontFamily="@font/montserratmedium"
                         android:layout_toRightOf="@+id/settings_images2"
-                        android:text="Languages"
+                        android:text="Notifications"
                         android:layout_centerVertical="true"
-                        android:textSize="@dimen/_18sdp"
+                        android:textSize="@dimen/_16sdp"
                         android:textColor="@color/white"/>
 
                     <TextView
                         android:id="@+id/settings_languages_btn2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="6dp"
                         android:layout_marginRight="@dimen/_5sdp"
                         android:background="@drawable/ic_baseline_arrow_forward" />
 
 
                 </RelativeLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:paddingVertical="@dimen/_15ssp"
-                android:paddingHorizontal="@dimen/_10sdp"
-                android:layout_marginHorizontal="@dimen/_15sdp"
-                android:background="@drawable/borders_for_settingsd"
-                android:orientation="vertical"
-                android:backgroundTint="@color/background_color_light">
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/white_transparency" />
 
                 <RelativeLayout
+                    android:id="@+id/languages_settings_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_15sdp">
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/settings_images3"
                         android:layout_width="@dimen/_35sdp"
                         android:layout_height="@dimen/_35sdp"
-                        android:background="@drawable/aboutus_settings"
-                        android:layout_centerVertical="true"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle"/>
+                        android:background="@drawable/langueges_settings"
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle" />
 
                     <TextView
                         android:id="@+id/settings_text3"
@@ -200,36 +242,41 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_12sdp"
                         android:gravity="left"
-                        android:fontFamily="@font/garutemedium"
+                        android:fontFamily="@font/montserratmedium"
                         android:layout_toRightOf="@+id/settings_images3"
-                        android:text="About us"
+                        android:text="Languages"
                         android:layout_centerVertical="true"
-                        android:textSize="@dimen/_18sdp"
+                        android:textSize="@dimen/_16sdp"
                         android:textColor="@color/white"/>
-
 
                     <TextView
                         android:id="@+id/settings_languages_btn3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_marginRight="@dimen/_5sdp"
                         android:background="@drawable/ic_baseline_arrow_forward" />
 
 
                 </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/white_transparency" />
 
                 <RelativeLayout
+                    android:id="@+id/privacy_settings_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp">
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_15sdp">
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/settings_images4"
                         android:layout_width="@dimen/_35sdp"
                         android:layout_height="@dimen/_35sdp"
-                        android:background="@drawable/faq_settings"
+                        android:background="@drawable/secutity_settings"
                         android:layout_centerVertical="true"
                         app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle"/>
 
@@ -239,15 +286,105 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_12sdp"
                         android:gravity="left"
-                        android:fontFamily="@font/garutemedium"
+                        android:fontFamily="@font/montserratmedium"
                         android:layout_toRightOf="@+id/settings_images4"
-                        android:text="FAQ's"
+                        android:text="Privacy and Security"
                         android:layout_centerVertical="true"
-                        android:textSize="@dimen/_18sdp"
+                        android:textSize="@dimen/_16sdp"
                         android:textColor="@color/white"/>
 
                     <TextView
                         android:id="@+id/settings_languages_btn4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:background="@drawable/ic_baseline_arrow_forward" />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/white_transparency" />
+
+                <RelativeLayout
+                    android:id="@+id/help_settings_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_15sdp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/settings_images5"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:background="@drawable/helpandquestions_settings"
+                        android:layout_centerVertical="true"
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle"/>
+
+                    <TextView
+                        android:id="@+id/settings_text5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_12sdp"
+                        android:gravity="left"
+                        android:fontFamily="@font/montserratmedium"
+                        android:layout_toRightOf="@+id/settings_images5"
+                        android:text="Help and Support"
+                        android:layout_centerVertical="true"
+                        android:textSize="@dimen/_16sdp"
+                        android:textColor="@color/white"/>
+
+                    <TextView
+                        android:id="@+id/settings_languages_btn5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:background="@drawable/ic_baseline_arrow_forward" />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/white_transparency" />
+
+                <RelativeLayout
+                    android:id="@+id/AboutUs_settings_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_15sdp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/settings_images6"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/aboutus_settings"
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle" />
+
+                    <TextView
+                        android:id="@+id/settings_text6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/_12sdp"
+                        android:layout_toRightOf="@+id/settings_images6"
+                        android:fontFamily="@font/montserratmedium"
+                        android:gravity="left"
+                        android:text="About Us"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_16sdp" />
+
+                    <TextView
+                        android:id="@+id/settings_languages_btn6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -256,10 +393,46 @@
                         android:background="@drawable/ic_baseline_arrow_forward" />
 
 
-
                 </RelativeLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/white_transparency" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:id="@+id/logout_btn">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/settings_images7"
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/logout_settings"
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle" />
+
+                    <TextView
+                        android:id="@+id/settings_text7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_12sdp"
+                        android:layout_toRightOf="@+id/settings_images7"
+                        android:fontFamily="@font/montserratmedium"
+                        android:gravity="left"
+                        android:layout_centerVertical="true"
+                        android:text="Logout"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/_16sdp" />
+
+
+<!--change animation of end slideing-->
+                </RelativeLayout>
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
