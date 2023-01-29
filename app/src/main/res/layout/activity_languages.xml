@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_color"
+    tools:context=".settings.AboutUsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/back_about_us"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/ic_baseline_arrow_back_24"
+            android:gravity="top|left"
+            android:layout_margin="@dimen/_15sdp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:fontFamily="@font/garute"
+            android:text="Languages"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_22ssp" />
+
+    </RelativeLayout>
+
+
+    <EditText
+        android:id="@+id/settings_search"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginVertical="@dimen/_15sdp"
+        android:background="@drawable/borders_for_search_bar"
+        android:backgroundTint="@color/background_color_light"
+        android:drawableStart="@drawable/ic_baseline_search_24"
+        android:drawablePadding="@dimen/_6sdp"
+        android:fontFamily="@font/metropolislight"
+        android:hint="Search"
+        android:inputType="textUri"
+        android:maxLength="25"
+        android:maxLines="1"
+        android:paddingStart="@dimen/_12sdp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="16sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_25sdp">
+
+            <RelativeLayout
+                android:id="@+id/language_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="English (United States)"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_20sdp"/>
+
+                <ImageView
+                    android:id="@+id/language_name_true"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:background="@drawable/ic_baseline_done_24"
+                    android:backgroundTint="@color/green"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_5sdp"/>
+
+
+            </RelativeLayout>
+            <TextView
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/green_dark"
+                android:layout_gravity="center"
+                android:textSize="@dimen/_12ssp"
+                android:layout_marginHorizontal="@dimen/_18sdp"
+                android:fontFamily="@font/metropolisbold"
+                android:text="All languages"/>
+
+
+            <RelativeLayout
+                android:id="@+id/language_name2"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Russian"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_20sdp"/>
+
+                <ImageView
+                    android:id="@+id/language_name_true2"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:background="@drawable/ic_baseline_done_24"
+                    android:backgroundTint="@color/green"
+                    android:visibility="invisible"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_5sdp"/>
+
+
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginVertical="@dimen/_15sdp"
+                android:layout_height="2dp"
+                android:background="@color/white_transparency" />
+
+            <RelativeLayout
+                android:id="@+id/language_name4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Indian"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_20sdp"/>
+
+                <ImageView
+                    android:id="@+id/language_name_true3"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:background="@drawable/ic_baseline_done_24"
+                    android:visibility="invisible"
+                    android:backgroundTint="@color/green"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_5sdp"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginVertical="@dimen/_15sdp"
+                android:layout_height="2dp"
+                android:background="@color/white_transparency" />
+
+            <RelativeLayout
+                android:id="@+id/language_name3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chineik"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_20sdp"/>
+
+                <ImageView
+                    android:id="@+id/language_name_true4"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:visibility="invisible"
+                    android:background="@drawable/ic_baseline_done_24"
+                    android:backgroundTint="@color/green"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_5sdp"/>
+
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
