@@ -13,6 +13,8 @@ import android.widget.RelativeLayout;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.FragmentSettingsBinding;
 import com.hdbar.hdbarapp.settings.AboutUsActivity;
 import com.hdbar.hdbarapp.settings.AccountActivity;
@@ -140,6 +142,11 @@ public class SettingsFragment extends Fragment {
         logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent i = new Intent(getActivity(),LoginActivity.class);
+                startActivity(i);
+                getActivity().finish();
+                getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }
         });
 
