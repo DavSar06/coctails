@@ -13,6 +13,8 @@ import android.widget.RelativeLayout;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.FragmentSettingsBinding;
 import com.hdbar.hdbarapp.settings.AboutUsActivity;
 import com.hdbar.hdbarapp.settings.AccountActivity;
@@ -50,15 +52,6 @@ public class SettingsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SettingsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static SettingsFragment newInstance(String param1, String param2) {
         SettingsFragment fragment = new SettingsFragment();
         Bundle args = new Bundle();
@@ -149,6 +142,11 @@ public class SettingsFragment extends Fragment {
         logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent i = new Intent(getActivity(),LoginActivity.class);
+                startActivity(i);
+                getActivity().finish();
+                getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }
         });
 
