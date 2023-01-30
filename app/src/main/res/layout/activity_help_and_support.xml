@@ -30,7 +30,7 @@
             android:fontFamily="@font/garute"
             android:text="Help and Support"
             android:textColor="@color/white"
-            android:textSize="@dimen/_22ssp" />
+            android:textSize="@dimen/_20ssp" />
     </RelativeLayout>
 
 
@@ -48,7 +48,7 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:layout_gravity="center"
-        android:textSize="@dimen/_17ssp"
+        android:textSize="@dimen/_16ssp"
         android:layout_marginHorizontal="@dimen/_18sdp"
         android:fontFamily="@font/metropolisbold"
         android:text="How can we help you ?"/>

@@ -18,7 +18,7 @@ import com.hdbar.hdbarapp.settings.AboutUsActivity;
 import com.hdbar.hdbarapp.settings.AccountActivity;
 import com.hdbar.hdbarapp.settings.HelpAndSupportActivity;
 import com.hdbar.hdbarapp.settings.LanguagesActivity;
-import com.hdbar.hdbarapp.settings.PrivacyAndSecurityActivity;
+import com.hdbar.hdbarapp.settings.PrivacyPolicyActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -125,7 +125,7 @@ public class SettingsFragment extends Fragment {
         privacyAndSecurity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), PrivacyAndSecurityActivity.class);
+                Intent intent = new Intent(getActivity(), PrivacyPolicyActivity.class);
                 startActivity(intent);
             }
         });

@@ -32,7 +32,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".settings.PrivacyAndSecurityActivity"
+            android:name=".settings.PrivacyPolicyActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

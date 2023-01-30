@@ -7,13 +7,13 @@ import android.widget.TextView;
 
 import com.hdbar.hdbarapp.R;
 
-public class PrivacyAndSecurityActivity extends AppCompatActivity {
+public class PrivacyPolicyActivity extends AppCompatActivity {
 
     private TextView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_privacy_and_security);
+        setContentView(R.layout.activity_privacy_policy);
     }
 }

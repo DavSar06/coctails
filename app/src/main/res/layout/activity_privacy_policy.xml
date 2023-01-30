@@ -18,9 +18,12 @@
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"
             android:layout_alignParentLeft="true"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
             android:background="@drawable/ic_baseline_arrow_back_24"
-            android:gravity="top|left"
-            android:layout_margin="@dimen/_15sdp"/>
+            android:gravity="top|left" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -28,10 +31,28 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:fontFamily="@font/garute"
-            android:text="Languages"
+            android:text="Privacy policy"
             android:textColor="@color/white"
             android:textSize="@dimen/_20ssp" />
 
     </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_25sdp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_14sdp"
+                android:text="Text policy and some other things chgitem inch grem"
+                android:textColor="@color/white"/>
+
+
+        </LinearLayout>
 
 </LinearLayout>
