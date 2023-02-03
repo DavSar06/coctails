@@ -21,7 +21,6 @@ public class AboutUsActivity extends AppCompatActivity {
 
     private ActivityAboutUsBinding binding;
     private TextView back;
-    public static MainActivity mainActivity;
 
 
     @Override

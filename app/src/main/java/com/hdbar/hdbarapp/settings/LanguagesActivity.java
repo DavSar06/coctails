@@ -15,7 +15,6 @@ public class LanguagesActivity extends AppCompatActivity {
 
     private ActivityLanguagesBinding binding;
     private TextView back;
-    public static MainActivity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

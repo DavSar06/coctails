@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -19,6 +21,7 @@ public class CocktailPageActivity extends AppCompatActivity {
     private ActivityCocktailPageBinding binding;
     private String cocktailId;
     private Cocktail cocktail;
+    private RatingBar simple_rating;
     private FirebaseFirestore database;
 
     @Override
@@ -29,11 +32,21 @@ public class CocktailPageActivity extends AppCompatActivity {
 
         init();
         listeners();
+
+        simple_rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                float numberOfStars = simple_rating.getRating();
+                Log.d("In", String.valueOf(numberOfStars));
+            }
+        });
+
     }
 
     private void init(){
         cocktailId = getIntent().getStringExtra(Constants.KEY_COCKTAIL_ID);
         database = FirebaseFirestore.getInstance();
+        simple_rating = binding.ratingBar;
         database.collection(Constants.KEY_COLLECTION_COCKTAILS)
                 .document(cocktailId)
                 .get()

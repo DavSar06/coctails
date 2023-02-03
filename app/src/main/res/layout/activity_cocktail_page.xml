@@ -78,6 +78,28 @@
             style="@style/ImageView.Circle.Rectangle"
             android:layout_marginBottom="@dimen/_15sdp"/>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:id="@+id/rating_system_settings">
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/rating_bar"
+                android:stepSize="0.5"
+                android:numStars="5"
+                />
+
+
+
+
+            <!--change animation of end slideing-->
+        </RelativeLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

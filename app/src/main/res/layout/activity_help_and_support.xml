@@ -73,6 +73,7 @@
 
 
         <TextView
+            android:id="@+id/chat_to_us_help_and_support"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_100sdp"
             android:layout_marginHorizontal="@dimen/_25sdp"
@@ -81,6 +82,7 @@
             android:layout_gravity="center" />
 
         <TextView
+            android:id="@+id/email_help_and_support"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_100sdp"
             android:background="@drawable/email_us_about_us_1"

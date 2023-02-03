@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 
 import androidx.appcompat.widget.SwitchCompat;
@@ -20,6 +23,7 @@ import com.hdbar.hdbarapp.settings.AboutUsActivity;
 import com.hdbar.hdbarapp.settings.AccountActivity;
 import com.hdbar.hdbarapp.settings.HelpAndSupportActivity;
 import com.hdbar.hdbarapp.settings.LanguagesActivity;
+import com.hdbar.hdbarapp.settings.PaymentActivity;
 import com.hdbar.hdbarapp.settings.PrivacyPolicyActivity;
 
 /**
@@ -38,7 +42,7 @@ public class SettingsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private EditText search;
-    private RelativeLayout account,languages,privacyAndSecurity,helpAndSupport,aboutUs,logOut;
+    private RelativeLayout account,languages,privacyAndSecurity,helpAndSupport,aboutUs,logOut, payment;
     private SwitchCompat notifications;
     private boolean isNormal = true;
     private FragmentSettingsBinding binding;
@@ -74,7 +78,6 @@ public class SettingsFragment extends Fragment {
         init();
         onClick();
 
-
     }
 
 
@@ -91,19 +94,22 @@ public class SettingsFragment extends Fragment {
         account = binding.accountSettingsBtn;
         languages = binding.languagesSettingsBtn;
         privacyAndSecurity = binding.privacySettingsBtn;
-        helpAndSupport = binding.helpSettingsBtn;
+        helpAndSupport = binding.helpAndSupportBtn;
         aboutUs = binding.aboutusSettingsBtn;
+        payment = binding.paymentBtn;
         logOut = binding.logoutBtn;
         notifications = binding.settingsNotificationsSwitch;
     }
 
     private void  onClick(){
 
+
         account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AccountActivity.class);
                 startActivity(intent);
+                //getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }
         });
 
@@ -112,6 +118,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), LanguagesActivity.class);
                 startActivity(intent);
+                //getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }
         });
 
@@ -120,6 +127,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), PrivacyPolicyActivity.class);
                 startActivity(intent);
+                //getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }
         });
 
@@ -128,6 +136,16 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), HelpAndSupportActivity.class);
                 startActivity(intent);
+                //getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+            }
+        });
+
+        payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), PaymentActivity.class);
+                startActivity(intent);
+                //getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }
         });
 
@@ -136,6 +154,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AboutUsActivity.class);
                 startActivity(intent);
+                //getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }
         });
 

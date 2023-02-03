@@ -28,10 +28,81 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:fontFamily="@font/garute"
-            android:text="Languages"
+            android:text="Account"
             android:textColor="@color/white"
             android:textSize="@dimen/_20ssp" />
 
     </RelativeLayout>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/_10sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/icon_account_to_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true">
+
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:background="@drawable/profile_icon_type"
+                    android:layout_centerHorizontal="true"
+                    app:shapeAppearanceOverlay="@style/ImageView.Circle.LowRoll"/>
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_centerHorizontal="true"
+                    app:shapeAppearanceOverlay="@style/ImageView.Circle.LowRoll"/>
+
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/nickname_edittext"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_15sdp"
+                android:paddingVertical="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/_14ssp"
+                android:layout_below="@+id/icon_account_to_change"
+                android:maxLines="1"
+                android:hint="Profile Name"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/white"
+                android:background="@drawable/borders_for_edittext"
+                android:backgroundTint="@color/background_color_light"
+                android:drawablePadding="@dimen/_6sdp"
+                android:textColorHint="@color/grey_dark"
+                android:maxLength="30"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Your Rating: 0"
+                android:layout_below="@+id/nickname_edittext"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>
 
 </LinearLayout>

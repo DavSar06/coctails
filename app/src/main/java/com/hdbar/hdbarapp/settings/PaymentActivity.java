@@ -7,23 +7,21 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.hdbar.hdbarapp.R;
-import com.hdbar.hdbarapp.activities.MainActivity;
-import com.hdbar.hdbarapp.databinding.ActivityAccountBinding;
-import com.hdbar.hdbarapp.databinding.ActivityHelpAndSupportBinding;
 import com.hdbar.hdbarapp.databinding.ActivityLanguagesBinding;
+import com.hdbar.hdbarapp.databinding.ActivityPaymentBinding;
 
-public class AccountActivity extends AppCompatActivity {
+public class PaymentActivity extends AppCompatActivity {
 
-    private ActivityAccountBinding binding;
+    private ActivityPaymentBinding binding;
     private TextView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityAccountBinding.inflate(getLayoutInflater());
+        binding = ActivityPaymentBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        back = binding.backAboutUs;
+        back = binding.backPayment;
 
 
 
