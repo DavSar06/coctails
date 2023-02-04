@@ -88,10 +88,10 @@
             <RatingBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:id="@+id/rating_bar"
-                android:stepSize="0.5"
+                android:stepSize="1"
                 android:numStars="5"
+                android:progressDrawable="@drawable/custom_ratingbar_selector"
                 />
 
 
