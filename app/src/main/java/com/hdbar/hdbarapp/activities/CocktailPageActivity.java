@@ -21,7 +21,7 @@ public class CocktailPageActivity extends AppCompatActivity {
     private ActivityCocktailPageBinding binding;
     private String cocktailId;
     private Cocktail cocktail;
-    private RatingBar simple_rating;
+    public RatingBar simple_rating;
     private FirebaseFirestore database;
 
     @Override
@@ -56,6 +56,7 @@ public class CocktailPageActivity extends AppCompatActivity {
                     String recipe = documentSnapshot.get(Constants.KEY_COCKTAIL_RECIPE).toString();
                     String image = documentSnapshot.get(Constants.KEY_COCKTAIL_IMAGE).toString();
                     String rating = documentSnapshot.get(Constants.KEY_COCKTAIL_RATING).toString();
+                    //String howManyRating = documentSnapshot.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
                     cocktail = new Cocktail(documentSnapshot.getId(),cocktailName,recipe,image,rating,creator);
                     binding.cocktailAuthor.setText("Added by: "+cocktail.creator);
                     binding.cocktailName.setText(cocktail.name);
