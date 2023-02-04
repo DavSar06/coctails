@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_100sdp"
+    android:background="@color/background_color_light"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:paddingVertical="@dimen/_4sdp"
+    android:paddingHorizontal="@dimen/_6sdp"
+    android:layout_marginVertical="@dimen/_5sdp"
+    android:layout_marginHorizontal="@dimen/_10sdp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/cocktailImage"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:scaleType="centerCrop"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="7"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="@dimen/_5sdp">
+
+        <TextView
+            android:id="@+id/cocktailName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_17ssp"
+            android:fontFamily="@font/metropolisbold"
+            android:textStyle="bold" android:layout_marginBottom="@dimen/_3sdp"/>
+
+        <TextView
+            android:id="@+id/cocktailAuthor"
+            android:layout_width="match_parent"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/_13ssp"
+            android:fontFamily="@font/metropolisbold"
+            android:textStyle="bold" android:layout_marginBottom="@dimen/_3sdp"/>
+
+        <TextView
+            android:id="@+id/cocktailDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/_10ssp"
+            android:text="Added in 01.01.2023"
+            android:fontFamily="@font/metropolisbold"
+            android:textStyle="bold" android:layout_marginBottom="@dimen/_3sdp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -90,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new SettingsFragment());
                     Log.d("In","4");
                     break;
+                case R.id.moderator:
+                    replaceFragment(new ModeratePageFragment());
+                    Log.d("In","5");
+                    break;
             }
 
             return true;
