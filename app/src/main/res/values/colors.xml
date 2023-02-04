@@ -25,4 +25,6 @@
     <color name="error">#FF9800</color>
     <color name="border">#FF9800</color>
     <color name="mainRed">#D30E00</color>
+    <color name="approve">#00FF04</color>
+    <color name="deny">#E71000</color>
 </resources>

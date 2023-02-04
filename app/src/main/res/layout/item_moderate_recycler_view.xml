@@ -3,9 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/_100sdp"
     android:background="@color/background_color_light"
-    android:clickable="true"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
     android:paddingVertical="@dimen/_4sdp"
     android:paddingHorizontal="@dimen/_6sdp"
     android:layout_marginVertical="@dimen/_5sdp"
@@ -17,7 +14,10 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="4"
+        style="@style/ImageView.Circle.LowRoll"
         android:scaleType="centerCrop"/>
+
+<!--    Style Isnt working need to fix-->
 
     <LinearLayout
         android:layout_width="0dp"

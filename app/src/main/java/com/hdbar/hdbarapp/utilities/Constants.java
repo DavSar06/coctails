@@ -16,8 +16,8 @@ public class Constants {
     public static final String KEY_COCKTAIL_CREATOR_ID = "creatorId";
     public static final String KEY_COCKTAIL_CREATOR_NAME = "creatorName";
     public static final String KEY_COCKTAIL_HOW_MANY_RATES = "howManyRate";
-    public static final String KEY_COLLECTION_USER_SETTINGS = "userSettings";
-    public static final String KEY_USER_TYPE = "userSettings";
+    public static final String KEY_COLLECTION_MODERATORS = "moderators";
+    public static final String KEY_MODERATOR_STATUS = "status";
     public static final String KEY_COCKTAIL_STATUS = "status";
     public static final String KEY_COCKTAIL_STATUS_PENDING = "pending";
     public static final String KEY_COCKTAIL_STATUS_APPROVED = "approved";

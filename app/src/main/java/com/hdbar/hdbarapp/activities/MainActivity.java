@@ -17,8 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
     private PreferenceManager preferenceManager;
+    private FirebaseFirestore database;
 
     private String userName;
     private String userEmail;
@@ -57,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
 
         init();
         listeners();
-
 
         if (settingstrue){
             replaceFragment(new SettingsFragment());
@@ -108,11 +111,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init(){
+        database = FirebaseFirestore.getInstance();
         preferenceManager = new PreferenceManager(getApplicationContext());
         userName = preferenceManager.getString(Constants.KEY_USERNAME);
         userEmail = preferenceManager.getString(Constants.KEY_EMAIL);
         userImage = preferenceManager.getString(Constants.KEY_USER_IMAGE);
         fragmentContainer = binding.fragmentContainer;
+
+//        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//        database.collection(Constants.KEY_COLLECTION_MODERATORS)
+//                .document(userId)
+//                .get()
+//                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                        if(documentSnapshot.get(Constants.KEY_MODERATOR_STATUS).equals("moderator") || documentSnapshot.get(Constants.KEY_MODERATOR_STATUS).equals("administrator")){
+//                            binding.bottomNavigationView.findViewById(R.id.moderator).setVisibility(View.VISIBLE);
+//                            binding.bottomNavigationView.findViewById(R.id.moderator).setEnabled(true);
+//                        }
+//                    }
+//                });
     }
 
     @Override

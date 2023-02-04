@@ -18,6 +18,13 @@
         android:theme="@style/Theme.HDBarApplication"
         tools:targetApi="31">
         <activity
+            android:name=".activities.ModerateActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".settings.PaymentActivity"
             android:exported="false">
             <meta-data
@@ -61,20 +68,6 @@
         </activity>
         <activity
             android:name=".Account"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".FavoriteActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".SettingsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

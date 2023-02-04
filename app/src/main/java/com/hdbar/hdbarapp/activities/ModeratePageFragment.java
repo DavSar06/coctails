@@ -36,11 +36,12 @@ public class ModeratePageFragment extends Fragment {
     private FragmentModeratePageBinding binding;
     private List<Cocktail> cocktails;
     private FirebaseFirestore database;
+    private ModeratePageAdapter adapter;
 
     private final CocktailListener cocktailListener = new CocktailListener() {
         @Override
         public void onCocktailClicked(Cocktail cocktail) {
-            Intent intent = new Intent(binding.getRoot().getContext(), CocktailPageActivity.class);
+            Intent intent = new Intent(binding.getRoot().getContext(), ModerateActivity.class);
             intent.putExtra(Constants.KEY_COCKTAIL_ID, cocktail.id);
             startActivity(intent);
             getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
@@ -55,10 +56,19 @@ public class ModeratePageFragment extends Fragment {
         return new ModeratePageFragment();
     }
 
+
     private void init(){
         binding = FragmentModeratePageBinding.inflate(getLayoutInflater());
         database = FirebaseFirestore.getInstance();
         cocktails = new ArrayList<>();
+        adapter = new ModeratePageAdapter(cocktails,cocktailListener);
+        binding.cocktailsRecyclerView.setAdapter(adapter);
+        updateRecyclerView();
+    }
+
+    private void updateRecyclerView(){
+        binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
+        binding.progressBar.setVisibility(View.VISIBLE);
         database.collection(Constants.KEY_COLLECTION_COCKTAILS)
                 .whereEqualTo(Constants.KEY_COCKTAIL_STATUS,Constants.KEY_COCKTAIL_STATUS_PENDING)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -82,13 +92,12 @@ public class ModeratePageFragment extends Fragment {
         (new Handler()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                binding.cocktailsRecyclerView.setAdapter(new ModeratePageAdapter(cocktails,cocktailListener));
+
                 if(cocktails.size()==0){
                     binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
                     binding.progressBar.setVisibility(View.INVISIBLE);
                     binding.textErrorMessage.setVisibility(View.VISIBLE);
                 }else {
-
                     binding.cocktailsRecyclerView.setVisibility(View.VISIBLE);
                     binding.progressBar.setVisibility(View.INVISIBLE);
                     binding.textErrorMessage.setVisibility(View.INVISIBLE);

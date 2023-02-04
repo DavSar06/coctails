@@ -37,11 +37,6 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.HashMap;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CreateCocktailFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class CreateCocktailFragment extends Fragment {
 
     private FragmentCreateCocktailBinding binding;
@@ -120,7 +115,7 @@ public class CreateCocktailFragment extends Fragment {
             cocktail.put(Constants.KEY_COCKTAIL_HOW_MANY_RATES,new Integer(0));
             cocktail.put(Constants.KEY_COCKTAIL_STATUS,Constants.KEY_COCKTAIL_STATUS_PENDING);
             cocktail.put(Constants.KEY_COCKTAIL_CREATOR_ID, FirebaseAuth.getInstance().getCurrentUser().getUid());
-            cocktail.put(Constants.KEY_COCKTAIL_CREATOR_NAME, FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+            cocktail.put(Constants.KEY_COCKTAIL_CREATOR_NAME, preferenceManager.getString(Constants.KEY_USERNAME));
             database.collection(Constants.KEY_COLLECTION_COCKTAILS)
                     .add(cocktail)
                     .addOnSuccessListener(documentReference -> {
