@@ -15,4 +15,6 @@ public class Constants {
     public static final String KEY_COCKTAIL_RATING = "rating";
     public static final String KEY_COCKTAIL_CREATOR_ID = "creatorId";
     public static final String KEY_COCKTAIL_CREATOR_NAME = "creatorName";
+    public static final String KEY_COLLECTION_USER_SETTINGS = "userSettings";
+    public static final String KEY_USER_TYPE = "userSettings";
 }
