@@ -82,6 +82,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_15sdp"
+            android:gravity="center"
+            android:layout_gravity="center"
             android:layout_marginBottom="@dimen/_15sdp"
             android:id="@+id/rating_system_settings">
 
@@ -89,13 +91,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/rating_bar"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
                 android:stepSize="1"
+                android:rating="2"
                 android:numStars="5"
-                android:progressDrawable="@drawable/custom_ratingbar_selector"
                 />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_below="@id/rating_bar"
+                android:text="alahakbar"
 
-
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/white"/>
 
             <!--change animation of end slideing-->
         </RelativeLayout>

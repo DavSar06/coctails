@@ -26,6 +26,7 @@ public class CocktailPageActivity extends AppCompatActivity {
     private RelativeLayout rating_relative;
     public RatingBar simple_rating;
     private FirebaseFirestore database;
+    private float numberOfStars;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +37,19 @@ public class CocktailPageActivity extends AppCompatActivity {
         init();
         listeners();
 
+
+        simple_rating.setRating((float) 3);
+
         simple_rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 simple_rating.setEnabled(false);
                 how_many_rates++;
-                float numberOfStars = simple_rating.getRating();
+                numberOfStars = simple_rating.getRating();
+
+                database.collection(Constants.KEY_COLLECTION_COCKTAILS)
+                       .document(cocktailId)
+                       .update(Constants.KEY_COCKTAIL_RATING,numberOfStars);
                 Log.d("In", String.valueOf(numberOfStars));
                 Log.d("In", String.valueOf(how_many_rates));
             }
@@ -62,13 +70,14 @@ public class CocktailPageActivity extends AppCompatActivity {
                     String creator = documentSnapshot.getString(Constants.KEY_COCKTAIL_CREATOR_NAME);
                     String recipe = documentSnapshot.get(Constants.KEY_COCKTAIL_RECIPE).toString();
                     String image = documentSnapshot.get(Constants.KEY_COCKTAIL_IMAGE).toString();
+                    String rating_count = documentSnapshot.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
                     String rating = documentSnapshot.get(Constants.KEY_COCKTAIL_RATING).toString();
-                    //String howManyRating = documentSnapshot.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
-                    cocktail = new Cocktail(documentSnapshot.getId(),cocktailName,recipe,image,rating,creator);
+                    cocktail = new Cocktail(documentSnapshot.getId(),cocktailName,recipe,image,rating,creator,rating_count);
                     binding.cocktailAuthor.setText("Added by: "+cocktail.creator);
                     binding.cocktailName.setText(cocktail.name);
                     binding.cocktailImage.setImageBitmap(getCocktailImage(cocktail.image));
                     binding.cocktailRecipe.setText(cocktail.recipe);
+                    binding.ratingBar.setRating(Float.valueOf(cocktail.rating));
                 });
 
     }

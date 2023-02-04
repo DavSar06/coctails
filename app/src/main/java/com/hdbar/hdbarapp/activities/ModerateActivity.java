@@ -44,7 +44,8 @@ public class ModerateActivity extends AppCompatActivity {
                         String recipe = documentSnapshot.get(Constants.KEY_COCKTAIL_RECIPE).toString();
                         String image = documentSnapshot.get(Constants.KEY_COCKTAIL_IMAGE).toString();
                         String rating = documentSnapshot.get(Constants.KEY_COCKTAIL_RATING).toString();
-                        cocktail = new Cocktail(documentSnapshot.getId(),cocktailName,recipe,image,rating,creator);
+                        String rating_count = documentSnapshot.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
+                        cocktail = new Cocktail(documentSnapshot.getId(),cocktailName,recipe,image,rating,creator,rating_count);
                         binding.cocktailAuthor.setText("Added by: "+cocktail.creator);
                         binding.cocktailName.setText(cocktail.name);
                         binding.cocktailImage.setImageBitmap(getCocktailImage(cocktail.image));

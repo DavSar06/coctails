@@ -70,6 +70,7 @@ public class CreateCocktailFragment extends Fragment {
 
         init();
         listeners();
+
     }
 
     @Override

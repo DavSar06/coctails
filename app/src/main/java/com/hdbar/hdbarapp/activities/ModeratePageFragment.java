@@ -81,7 +81,8 @@ public class ModeratePageFragment extends Fragment {
                                 String recipe = document.get(Constants.KEY_COCKTAIL_RECIPE).toString();
                                 String image = document.get(Constants.KEY_COCKTAIL_IMAGE).toString();
                                 String rating = document.get(Constants.KEY_COCKTAIL_RATING).toString();
-                                Cocktail temp = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator);
+                                String rating_count = document.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
+                                Cocktail temp = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator,rating_count);
                                 cocktails.add(temp);
                             }
                         }else {
