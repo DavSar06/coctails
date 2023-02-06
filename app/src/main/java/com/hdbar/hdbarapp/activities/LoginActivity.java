@@ -29,10 +29,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.ActivityLoginBinding;
 import com.hdbar.hdbarapp.utilities.Constants;
 import com.hdbar.hdbarapp.utilities.PreferenceManager;
+
+import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -51,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
     public static final int RC_SIGN_IN = 123;
     GoogleSignInClient mGoogleSignInClient;
 
-
+    private FirebaseFirestore database;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     private AccessToken accessTokenTracker;
@@ -75,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void init(){
         preferenceManager = new PreferenceManager(getApplicationContext());
+        database = FirebaseFirestore.getInstance();
         inputEmail=binding.Login;
         inputPassword=binding.Password;
         buttonLogin=binding.Loginbtn;
@@ -195,6 +199,25 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    String name = task.getResult().getUser().getDisplayName();
+                                    String uid = task.getResult().getUser().getUid();
+                                    String userBio = "";
+                                    String userImageLink = "";
+
+                                    HashMap<String,Object> user = new HashMap<>();
+                                    user.put(Constants.KEY_USERNAME,name);
+                                    user.put(Constants.KEY_USER_BIO,userBio);
+                                    user.put(Constants.KEY_USER_IMAGE_LINK,userImageLink);
+                                    user.put(Constants.KEY_STATUS,Constants.KEY_STATUS_USER);
+
+                                    database.collection(Constants.KEY_COLLECTION_USERS).document(uid).set(user);
+                                }
+                            }).start();
+
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                         } else {
