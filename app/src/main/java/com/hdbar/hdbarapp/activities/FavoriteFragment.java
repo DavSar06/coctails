@@ -105,7 +105,7 @@ public class FavoriteFragment extends Fragment {
     }
 
     private void changeAdapter(Integer k){
-        database.collection(Constants.KEY_COLLECTION_COCKTAILS).whereEqualTo(Constants.KEY_COCKTAIL_STATUS,Constants.KEY_COCKTAIL_STATUS_APPROVED)
+        database.collection(Constants.KEY_COLLECTION_COCKTAILS).whereEqualTo(Constants.KEY_STATUS,Constants.KEY_COCKTAIL_STATUS_APPROVED)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

@@ -63,7 +63,7 @@ public class ModerateActivity extends AppCompatActivity {
         binding.approveBtn.setOnClickListener(v->{
             database.collection(Constants.KEY_COLLECTION_COCKTAILS)
                     .document(cocktail.id)
-                    .update(Constants.KEY_COCKTAIL_STATUS,Constants.KEY_COCKTAIL_STATUS_APPROVED)
+                    .update(Constants.KEY_STATUS,Constants.KEY_COCKTAIL_STATUS_APPROVED)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
@@ -78,7 +78,7 @@ public class ModerateActivity extends AppCompatActivity {
         binding.denyBtn.setOnClickListener(v->{
             database.collection(Constants.KEY_COLLECTION_COCKTAILS)
                     .document(cocktail.id)
-                    .update(Constants.KEY_COCKTAIL_STATUS,Constants.KEY_COCKTAIL_STATUS_DENIED)
+                    .update(Constants.KEY_STATUS,Constants.KEY_COCKTAIL_STATUS_DENIED)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
