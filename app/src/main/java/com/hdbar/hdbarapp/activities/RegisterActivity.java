@@ -70,9 +70,9 @@ public class RegisterActivity extends AppCompatActivity {
         if(!email.matches(emailPattern)){
             inputEmail.setError("Enter Context Email");
         }else if(password.isEmpty() || password.length()<6){
-            inputEmail.setError("Enter Proper Password");// input password poxel
+            inputPassword.setError("Enter Proper Password");// input password poxel
         }else if(!password.equals(passwordConfirm)){
-            inputEmail.setError("Password Not match Both field  ");// input password poxel
+            inputPassword.setError("Password Confirm Doesn't Match");// input password poxel
         }else{
             //can be a problem with progress dialog
             progressDialog.setCanceledOnTouchOutside(false);

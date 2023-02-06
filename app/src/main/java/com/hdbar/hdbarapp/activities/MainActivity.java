@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private String userName;
     private String userEmail;
     private String userImage;
-    public boolean settingstrue = false;
+    public static boolean moderateActivity = false;
 
     private FrameLayout fragmentContainer;
 
@@ -62,11 +62,6 @@ public class MainActivity extends AppCompatActivity {
         init();
         listeners();
 
-        if (settingstrue){
-            replaceFragment(new SettingsFragment());
-        }else{
-            replaceFragment(new HomeFragment());
-        }
         bottomNavigationBar();
 
 
@@ -108,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container,fragment).commit();
+        moderateActivity = false;
     }
 
     private void init(){
@@ -117,6 +113,13 @@ public class MainActivity extends AppCompatActivity {
         userEmail = preferenceManager.getString(Constants.KEY_EMAIL);
         userImage = preferenceManager.getString(Constants.KEY_USER_IMAGE);
         fragmentContainer = binding.fragmentContainer;
+
+        if(moderateActivity){
+            replaceFragment(new ModeratePageFragment());
+            binding.bottomNavigationView.findViewById(R.id.moderator).performClick();
+        } else{
+            replaceFragment(new HomeFragment());
+        }
 
 //        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 //        database.collection(Constants.KEY_COLLECTION_MODERATORS)
