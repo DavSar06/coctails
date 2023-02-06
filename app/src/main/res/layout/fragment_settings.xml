@@ -150,6 +150,52 @@
                 </RelativeLayout>
 
                 <View
+                    android:id="@+id/viewModeratorTop"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/white_transparency" />
+
+                <RelativeLayout
+                    android:id="@+id/moderators_settings_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_15sdp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/settings_images0"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/accout_settings"
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/_12sdp"
+                        android:layout_toRightOf="@+id/settings_images0"
+                        android:fontFamily="@font/montserratmedium"
+                        android:text="Moderators"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14sdp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="6dp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:background="@drawable/ic_baseline_arrow_forward" />
+
+
+                </RelativeLayout>
+
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:background="@color/white_transparency" />

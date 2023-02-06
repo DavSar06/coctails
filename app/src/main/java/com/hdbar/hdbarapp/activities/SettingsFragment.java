@@ -19,11 +19,16 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.FragmentSettingsBinding;
 import com.hdbar.hdbarapp.settings.AboutUsActivity;
@@ -32,6 +37,9 @@ import com.hdbar.hdbarapp.settings.HelpAndSupportActivity;
 import com.hdbar.hdbarapp.settings.LanguagesActivity;
 import com.hdbar.hdbarapp.settings.PaymentActivity;
 import com.hdbar.hdbarapp.settings.PrivacyPolicyActivity;
+import com.hdbar.hdbarapp.utilities.Constants;
+
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,20 +48,13 @@ import com.hdbar.hdbarapp.settings.PrivacyPolicyActivity;
  */
 public class SettingsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     private EditText search;
-    private RelativeLayout account,languages,privacyAndSecurity,helpAndSupport,aboutUs,logOut, payment, notification;
+    private RelativeLayout moderators,account,languages,privacyAndSecurity,helpAndSupport,aboutUs,logOut, payment, notification;
     private SwitchCompat notifications;
     private boolean isNormal = true;
     private FragmentSettingsBinding binding;
-
+    private FirebaseFirestore database;
 
 
 
@@ -65,10 +66,6 @@ public class SettingsFragment extends Fragment {
 
     public static SettingsFragment newInstance(String param1, String param2) {
         SettingsFragment fragment = new SettingsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -77,17 +74,10 @@ public class SettingsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         binding = FragmentSettingsBinding.inflate(getLayoutInflater());
 
-
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
         init();
         onClick();
 
         getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-
-
     }
 
 
@@ -100,6 +90,8 @@ public class SettingsFragment extends Fragment {
     }
 
     private void init(){
+        database = FirebaseFirestore.getInstance();
+        moderators = binding.moderatorsSettingsBtn;
         search = binding.settingsSearch;
         account = binding.accountSettingsBtn;
         languages = binding.languagesSettingsBtn;
@@ -110,10 +102,36 @@ public class SettingsFragment extends Fragment {
         logOut = binding.logoutBtn;
         notification = binding.notificationsSettingsBtn;
         notifications = binding.settingsNotificationsSwitch;
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                database.collection(Constants.KEY_COLLECTION_USERS)
+                        .document(FirebaseAuth.getInstance().getUid())
+                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    if(task.getResult().get(Constants.KEY_STATUS).equals(Constants.KEY_STATUS_ADMINISTRATOR)){
+                                        moderators.setVisibility(View.VISIBLE);
+                                        binding.viewModeratorTop.setVisibility(View.VISIBLE);
+                                    }
+                                }
+                            }
+                        });
+            }
+        }).start();
+
     }
 
     private void  onClick(){
-
+        moderators.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),ModeratorsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         account.setOnClickListener(new View.OnClickListener() {
             @Override
