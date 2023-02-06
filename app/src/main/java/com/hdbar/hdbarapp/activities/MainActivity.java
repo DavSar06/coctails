@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         } else{
             replaceFragment(new HomeFragment());
         }
-
+//
 //        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 //        database.collection(Constants.KEY_COLLECTION_MODERATORS)
 //                .document(userId)

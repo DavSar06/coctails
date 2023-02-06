@@ -39,7 +39,7 @@
             <EditText
                 android:id="@+id/register_username"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_height="@dimen/_50sdp"
                 android:layout_marginVertical="@dimen/_10sdp"
                 android:backgroundTint="@color/background_color_light"
                 android:layout_weight="0"
@@ -59,7 +59,7 @@
             <EditText
                 android:id="@+id/register_email"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_height="@dimen/_50sdp"
                 android:layout_marginVertical="@dimen/_10sdp"
                 android:layout_weight="0"
                 android:background="@drawable/borders_for_edittext"
@@ -76,32 +76,60 @@
                 android:textColorHint="@color/white"
                 android:textSize="@dimen/_15sdp" />
 
+            <com.google.android.material.textfield.TextInputLayout
 
-            <EditText
-                android:id="@+id/register_password"
+                android:id="@+id/register_password_layout"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginVertical="@dimen/_10sdp"
-                android:layout_weight="0"
-                android:background="@drawable/borders_for_edittext"
-                android:drawableStart="@drawable/ic_baseline_lock_24"
-                android:drawablePadding="@dimen/_12sdp"
-                android:backgroundTint="@color/background_color_light"
+                android:layout_height="@dimen/_50sdp"
+                app:hintTextColor="@color/white"
                 android:hint="Password"
-                android:inputType="textPassword"
-                android:maxLength="30"
-                android:maxLines="1"
-                android:paddingStart="@dimen/_12sdp"
-                android:textColor="@color/white"
                 android:textColorHint="@color/white"
-                android:fontFamily="@font/metropolislight"
-                android:textSize="@dimen/_15sdp" />
+                app:endIconMode="password_toggle"
+                app:errorEnabled="true"
+                app:boxBackgroundColor="@color/background_color_light"
+                app:errorIconDrawable="@drawable/ic_baseline_error_24"
+                app:endIconTint="@color/white"
+                app:counterTextColor="@color/white"
+                app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                app:startIconTint="@color/white"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/register_password"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/white"
+                    android:inputType="textPassword"
+                    android:textSize="@dimen/_16sdp"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!--            <EditText-->
+<!--                android:id="@+id/register_password"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/_40sdp"-->
+<!--                android:layout_marginVertical="@dimen/_10sdp"-->
+<!--                android:layout_weight="0"-->
+<!--                android:background="@drawable/borders_for_edittext"-->
+<!--                android:drawableStart="@drawable/ic_baseline_lock_24"-->
+<!--                android:drawablePadding="@dimen/_12sdp"-->
+<!--                android:backgroundTint="@color/background_color_light"-->
+<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                android:hint="Password"-->
+<!--                android:inputType="textPassword"-->
+<!--                android:maxLength="30"-->
+<!--                app:endIconMode = "password_toggle"-->
+<!--                android:maxLines="1"-->
+<!--                android:paddingStart="@dimen/_12sdp"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textColorHint="@color/white"-->
+<!--                android:fontFamily="@font/metropolislight"-->
+<!--                android:textSize="@dimen/_15sdp" />-->
 
 
             <EditText
                 android:id="@+id/register_password_confirm"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_height="@dimen/_50sdp"
                 android:layout_marginVertical="@dimen/_10sdp"
                 android:backgroundTint="@color/background_color_light"
                 android:layout_weight="0"
@@ -121,7 +149,7 @@
             <CheckBox
                 android:id="@+id/are_you_older_18"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_height="@dimen/_50sdp"
                 android:layout_marginVertical="@dimen/_10sdp"
                 android:background="@drawable/borders_for_edittext"
                 android:button="@null"
