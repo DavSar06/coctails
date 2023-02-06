@@ -59,7 +59,7 @@
         android:layout_marginBottom="@dimen/_25sdp"
         android:paddingHorizontal="@dimen/_15sdp"
         android:maxLines="1"
-        android:hint="password"
+        android:hint="Password"
         android:backgroundTint="@color/background_color_light"
         android:textColor="@color/white"
         android:fontFamily="@font/metropolislight"
