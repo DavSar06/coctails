@@ -1,6 +1,12 @@
 package com.hdbar.hdbarapp.activities;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +20,7 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,7 +49,7 @@ public class SettingsFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private EditText search;
-    private RelativeLayout account,languages,privacyAndSecurity,helpAndSupport,aboutUs,logOut, payment;
+    private RelativeLayout account,languages,privacyAndSecurity,helpAndSupport,aboutUs,logOut, payment, notification;
     private SwitchCompat notifications;
     private boolean isNormal = true;
     private FragmentSettingsBinding binding;
@@ -78,6 +85,9 @@ public class SettingsFragment extends Fragment {
         init();
         onClick();
 
+        getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+
     }
 
 
@@ -98,6 +108,7 @@ public class SettingsFragment extends Fragment {
         aboutUs = binding.aboutusSettingsBtn;
         payment = binding.paymentBtn;
         logOut = binding.logoutBtn;
+        notification = binding.notificationsSettingsBtn;
         notifications = binding.settingsNotificationsSwitch;
     }
 
@@ -166,6 +177,13 @@ public class SettingsFragment extends Fragment {
                 startActivity(i);
                 getActivity().finish();
                 getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+            }
+        });
+
+        notification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 
