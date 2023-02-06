@@ -36,13 +36,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     private ActivityRegisterBinding binding;
     private PreferenceManager preferenceManager;
-    private EditText inputName,inputEmail,inputConformPassword;
-    TextInputEditText inputPassword;
+    private TextInputEditText inputPassword, inputUsername,inputEmail,inputConformPassword,areYouOlder18;
     private TextView confirmButton;
-    private TextInputLayout textInputLayout;
-    private CheckBox areYouOlder18;
+    private TextInputLayout inputUsernameLayout,inputEmailLayout,inputPasswordLayout,inputConfirmLayout;
     private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private ProgressDialog progressDialog;
+    private int canStartInit = 0;
 
 
     private FirebaseAuth mAuth;
@@ -68,34 +67,78 @@ public class RegisterActivity extends AppCompatActivity {
         inputConformPassword=binding.registerPasswordConfirm;
         confirmButton=binding.registerConfirm;
         areYouOlder18=binding.areYouOlder18;
-        inputName=binding.registerUsername;
-        textInputLayout = binding.registerPasswordLayout;
+        inputUsername=binding.registerUsername;
+        inputPasswordLayout = binding.registerPasswordLayout;
+        inputEmailLayout = binding.registerEmailLayout;
+        inputUsernameLayout = binding.registerUsernameLayout;
+        inputConfirmLayout = binding.registerPasswordConfirmLayout;
         progressDialog = new ProgressDialog(RegisterActivity.this);
         mAuth=FirebaseAuth.getInstance();
         mUser=mAuth.getCurrentUser();
     }
 
     private void PerformAuth() {
-        String email = inputEmail.getText().toString();
+        String username = inputUsername.getText().toString().trim();
+        String email = inputEmail.getText().toString().trim();
         String password = inputPassword.getText().toString().trim();
-        String passwordConfirm = inputConformPassword.getText().toString();
-        String name = inputName.getText().toString();
+        String passwordConfirm = inputConformPassword.getText().toString().trim();
 
-        if(!password.isEmpty() || password.length()>8){
-            textInputLayout.setErrorEnabled(false);
+        int canStartInit = 0;
+
+        //Username
+        if (username.isEmpty() || username.length() < 2){
+            inputUsernameLayout.setErrorEnabled(true);
+            inputUsernameLayout.setErrorIconDrawable(0);
+            inputUsernameLayout.setError("Too short username");
+            canStartInit ++;
+        }else{
+            inputUsernameLayout.setErrorEnabled(false);
+            inputUsernameLayout.setError(null);
+            canStartInit --;
         }
 
+        //Email
         if(!email.matches(emailPattern) || email.isEmpty()){
-            inputEmail.setError("Enter Context Email");
-        }else if(password.isEmpty() || password.length()<8){
-            textInputLayout.setErrorEnabled(true);
-            textInputLayout.setErrorIconDrawable(0);
-            textInputLayout.setError(" ");
-        }else if(!password.equals(passwordConfirm) ){
-            inputConformPassword.setError("Password Confirm Doesn't Match");
-        }else if(!areYouOlder18.isChecked()){
-            areYouOlder18.setError("Confirm Your Age");
-        }else{
+            inputEmailLayout.setErrorEnabled(true);
+            inputEmailLayout.setErrorIconDrawable(0);
+            inputEmailLayout.setError("Write an Email");
+            canStartInit ++;
+        }else {
+            inputEmailLayout.setErrorEnabled(false);
+            inputEmailLayout.setError(null);
+            canStartInit --;
+        }
+
+        //Password
+        if(password.isEmpty() || password.length()<8){
+            inputPasswordLayout.setErrorEnabled(true);
+            inputPasswordLayout.setErrorIconDrawable(0);
+            inputPasswordLayout.setError("Too short password");
+            canStartInit ++;
+        }
+        else{
+            inputPasswordLayout.setErrorEnabled(false);
+            inputPasswordLayout.setError(null);
+            canStartInit --;
+        }
+
+        //Confirm Email
+        if(!password.equals(passwordConfirm) || passwordConfirm.isEmpty() ){
+            inputConfirmLayout.setErrorEnabled(true);
+            inputConfirmLayout.setErrorIconDrawable(0);
+            inputConfirmLayout.setError("Password Confirm Doesn't Match");
+            canStartInit ++;
+        }
+        else{
+            inputConfirmLayout.setErrorEnabled(false);
+            inputConfirmLayout.setError(null);
+            canStartInit --;
+        }
+
+
+
+        if(canStartInit == -4)
+        {
             //can be a problem with progress dialog
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
@@ -114,7 +157,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 String userImageLink = "";
 
                                 HashMap<String,Object> user = new HashMap<>();
-                                user.put(Constants.KEY_USERNAME,name);
+                                user.put(Constants.KEY_USERNAME,username);
                                 user.put(Constants.KEY_USER_BIO,userBio);
                                 user.put(Constants.KEY_USER_IMAGE_LINK,userImageLink);
                                 user.put(Constants.KEY_STATUS,Constants.KEY_STATUS_USER);

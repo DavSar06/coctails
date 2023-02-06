@@ -26,4 +26,5 @@
     <style name="ImageView.Circle.LowRoll" parent="">
         <item name="cornerSize">10%</item>
     </style>
+
 </resources>
