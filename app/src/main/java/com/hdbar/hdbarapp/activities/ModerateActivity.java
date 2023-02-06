@@ -2,6 +2,7 @@ package com.hdbar.hdbarapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -66,6 +67,9 @@ public class ModerateActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
+                            MainActivity.moderateActivity = true;
+                            Intent i = new Intent(getApplicationContext(),MainActivity.class);
+                            startActivity(i);
                             finish();
                             overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                         }
@@ -78,6 +82,9 @@ public class ModerateActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
+                            MainActivity.moderateActivity = true;
+                            Intent i = new Intent(getApplicationContext(),MainActivity.class);
+                            startActivity(i);
                             finish();
                             overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                         }
