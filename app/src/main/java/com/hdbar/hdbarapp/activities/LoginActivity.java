@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -196,7 +197,6 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
-
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(LoginActivity.this,"Authentication Failed", Toast.LENGTH_SHORT).show();
@@ -221,10 +221,10 @@ public class LoginActivity extends AppCompatActivity {
                 preferenceManager.putString(Constants.KEY_USER_IMAGE,account.getPhotoUrl().toString());
 
 
-                Toast.makeText(LoginActivity.this,"Sign in Complete ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this,"Sign in Complete", Toast.LENGTH_SHORT).show();
             }catch (ApiException e){
-
-                Toast.makeText(LoginActivity.this,"Authentication Failed Poblems with "  + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this,"Authentication Failed Problems with "  + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("FCM",e.getMessage());
             }
         }
     }
@@ -239,12 +239,15 @@ public class LoginActivity extends AppCompatActivity {
         String email = inputEmail.getText().toString();
         String password = inputPassword.getText().toString();
 
-        if(!email.matches(emailPattern)){
-            inputEmail.setError("Enter Context Email");
-        }else if(password.trim().isEmpty()){
-            inputEmail.setError("Enter Proper Password"); // input password poxel
-        }else if(password.length()<6){
-            inputEmail.setError("Enter Proper Password"); // input password poxel
+        if(!email.matches(emailPattern) || password.trim().isEmpty() || password.length()<8){
+            if(!email.matches(emailPattern)){
+                inputEmail.setError("Enter Existing Email");
+            }
+            if(password.trim().isEmpty()){
+                inputPassword.setError("Password field is empty");
+            }else if(password.length()<8){
+                inputPassword.setError("Password is short (need more than 8 characters)");
+            }
         }else{
             //can be a problem with progress dialog
             progressDialog.setMessage("Pleas Wait For Login...");
@@ -263,8 +266,12 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     else {
                         progressDialog.dismiss();
-                        Toast.makeText(LoginActivity.this,""+task.getException(),Toast.LENGTH_SHORT).show();
 
+                        if(task.getException().getMessage().contains("password")){
+                            inputPassword.setError("Wrong password");
+                        }else {
+                            inputEmail.setError("Wrong Email");
+                        }
                     }
                 }
             });
