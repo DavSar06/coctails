@@ -114,7 +114,7 @@ public class CreateCocktailFragment extends Fragment {
             cocktail.put(Constants.KEY_COCKTAIL_VIDEO,null);
             cocktail.put(Constants.KEY_COCKTAIL_RATING,new Integer(0));
             cocktail.put(Constants.KEY_COCKTAIL_HOW_MANY_RATES,new Integer(0));
-            cocktail.put(Constants.KEY_COCKTAIL_STATUS,Constants.KEY_COCKTAIL_STATUS_PENDING);
+            cocktail.put(Constants.KEY_STATUS,Constants.KEY_COCKTAIL_STATUS_PENDING);
             cocktail.put(Constants.KEY_COCKTAIL_CREATOR_ID, FirebaseAuth.getInstance().getCurrentUser().getUid());
             cocktail.put(Constants.KEY_COCKTAIL_CREATOR_NAME, preferenceManager.getString(Constants.KEY_USERNAME));
             database.collection(Constants.KEY_COLLECTION_COCKTAILS)

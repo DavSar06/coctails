@@ -24,9 +24,13 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.ActivityRegisterBinding;
+import com.hdbar.hdbarapp.utilities.Constants;
 import com.hdbar.hdbarapp.utilities.PreferenceManager;
+
+import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -44,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     private FirebaseUser user;
+    private FirebaseFirestore database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +56,13 @@ public class RegisterActivity extends AppCompatActivity {
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Toast.makeText(RegisterActivity.this,"password", Toast.LENGTH_SHORT).show();
         init();
         listeners();
     }
 
     private void init(){
         preferenceManager = new PreferenceManager(getApplicationContext());
+        database = FirebaseFirestore.getInstance();
         inputEmail=binding.registerEmail;
         inputPassword=binding.registerPassword;
         inputConformPassword=binding.registerPasswordConfirm;
@@ -73,18 +78,19 @@ public class RegisterActivity extends AppCompatActivity {
     private void PerformAuth() {
         String email = inputEmail.getText().toString();
         String password = inputPassword.getText().toString().trim();
-        Toast.makeText(RegisterActivity.this,password, Toast.LENGTH_SHORT);
         String passwordConfirm = inputConformPassword.getText().toString();
         String name = inputName.getText().toString();
 
+        if(!password.isEmpty() || password.length()>8){
+            textInputLayout.setErrorEnabled(false);
+        }
+
         if(!email.matches(emailPattern) || email.isEmpty()){
             inputEmail.setError("Enter Context Email");
-        }else if(password.isEmpty() || password.length()<6){
+        }else if(password.isEmpty() || password.length()<8){
             textInputLayout.setErrorEnabled(true);
             textInputLayout.setErrorIconDrawable(0);
             textInputLayout.setError(" ");
-        }else if(!password.isEmpty() || password.length()>6){
-            textInputLayout.setErrorEnabled(false);
         }else if(!password.equals(passwordConfirm) ){
             inputConformPassword.setError("Password Confirm Doesn't Match");
         }else if(!areYouOlder18.isChecked()){
@@ -99,6 +105,25 @@ public class RegisterActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
                         progressDialog.dismiss();
+
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                String uid = task.getResult().getUser().getUid();
+                                String userBio = "";
+                                String userImageLink = "";
+
+                                HashMap<String,Object> user = new HashMap<>();
+                                user.put(Constants.KEY_USERNAME,name);
+                                user.put(Constants.KEY_USER_BIO,userBio);
+                                user.put(Constants.KEY_USER_IMAGE_LINK,userImageLink);
+                                user.put(Constants.KEY_STATUS,Constants.KEY_STATUS_USER);
+
+                                database.collection(Constants.KEY_COLLECTION_USERS).document(uid).set(user);
+                            }
+                        }).start();
+
+
                         sendUserToNextActivity();
 
                         Toast.makeText(RegisterActivity.this,"Registration Successful",Toast.LENGTH_SHORT).show();

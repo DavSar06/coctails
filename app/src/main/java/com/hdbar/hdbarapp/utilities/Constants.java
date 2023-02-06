@@ -17,17 +17,16 @@ public class Constants {
     public static final String KEY_COCKTAIL_CREATOR_NAME = "creatorName";
     public static final String KEY_COCKTAIL_HOW_MANY_RATES = "howManyRate";
 
-
-    public static final String KEY_COLLECTION_MODERATORS = "moderators";
-    public static final String KEY_MODERATOR_STATUS = "status";
+    public static final String KEY_STATUS = "status";
+    public static final String KEY_STATUS_MODERATOR = "moderator";
+    public static final String KEY_STATUS_USER = "user";
+    public static final String KEY_STATUS_ADMINISTRATOR = "administrator";
 
     public static final String KEY_COLLECTION_USERS = "users";
     public static final String KEY_USER_UID = "userUid";
     public static final String KEY_USER_BIO = "userBio";
     public static final String KEY_USER_IMAGE_LINK = "userImage";
-    public static final String KEY_USER_TYPE = "userImage";
 
-    public static final String KEY_COCKTAIL_STATUS = "status";
     public static final String KEY_COCKTAIL_STATUS_PENDING = "pending";
     public static final String KEY_COCKTAIL_STATUS_APPROVED = "approved";
     public static final String KEY_COCKTAIL_STATUS_DENIED = "denied";

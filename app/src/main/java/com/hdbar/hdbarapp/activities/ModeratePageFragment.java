@@ -70,7 +70,7 @@ public class ModeratePageFragment extends Fragment {
         binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
         binding.progressBar.setVisibility(View.VISIBLE);
         database.collection(Constants.KEY_COLLECTION_COCKTAILS)
-                .whereEqualTo(Constants.KEY_COCKTAIL_STATUS,Constants.KEY_COCKTAIL_STATUS_PENDING)
+                .whereEqualTo(Constants.KEY_STATUS,Constants.KEY_COCKTAIL_STATUS_PENDING)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
