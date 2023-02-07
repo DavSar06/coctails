@@ -2,6 +2,7 @@ package com.hdbar.hdbarapp.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
@@ -36,14 +38,16 @@ public class RegisterActivity extends AppCompatActivity {
 
     private ActivityRegisterBinding binding;
     private PreferenceManager preferenceManager;
-    private TextInputEditText inputPassword, inputUsername,inputEmail,inputConformPassword,areYouOlder18;
+    private TextInputEditText inputPassword, inputUsername,inputEmail,inputConformPassword;
     private TextView confirmButton;
+    private MaterialCheckBox areYouOlder18;
     private TextInputLayout inputUsernameLayout,inputEmailLayout,inputPasswordLayout,inputConfirmLayout;
     private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private ProgressDialog progressDialog;
     private int canStartInit = 0;
 
 
+    private boolean t = true;
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     private FirebaseUser user;
@@ -136,8 +140,18 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
 
+        if(!areYouOlder18.isChecked()){
+            Log.d("GG","UnChecked");
+            areYouOlder18.setButtonTintList(ContextCompat.getColorStateList(RegisterActivity.this, R.color.red));
+            canStartInit ++;
+        }
+        else{
+            canStartInit --;
+            areYouOlder18.setButtonTintList(ContextCompat.getColorStateList(RegisterActivity.this, R.color.white));
+        }
 
-        if(canStartInit == -4)
+
+        if(canStartInit == -5)
         {
             //can be a problem with progress dialog
             progressDialog.setCanceledOnTouchOutside(false);

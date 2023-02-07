@@ -15,58 +15,74 @@
     tools:context=".activities.RegisterActivity">
 
 
-    <TextView
-        android:id="@+id/Logintext"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_30sdp"
-        android:text="Register"
-        android:layout_weight="0"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:fontFamily="@font/metropolislight"
-        android:textSize="@dimen/_40ssp"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:gravity="center"
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/Logintext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            android:fontFamily="@font/metropolislight"
+            android:gravity="center"
+            android:text="Register"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_40ssp"
+            android:textStyle="bold" />
 
-        <LinearLayout
+    </LinearLayout>
+
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_15sdp"
-            android:gravity="top"
+            android:gravity="center"
+            android:layout_weight="75"
             android:orientation="vertical">
 
 
-            <com.google.android.material.textfield.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
 
-            android:id="@+id/register_username_layout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_65sdp"
-            app:hintTextColor="@color/white"
-            android:hint="Username"
-            android:textColorHint="@color/white"
-            android:layout_marginTop="@dimen/_5sdp"
-            app:endIconMode="clear_text"
-            app:helperTextEnabled="true"
-            app:helperText=""
-            app:helperTextTextColor="@color/white"
-            app:errorEnabled="true"
-            app:boxBackgroundColor="@color/background_color_light"
-            app:errorIconDrawable="@drawable/ic_baseline_error_24"
-            app:endIconTint="@color/white"
-            app:counterTextColor="@color/white"
-            app:startIconDrawable="@drawable/user_icon"
-            app:startIconTint="@color/white"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    android:id="@+id/register_username_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_65sdp"
+                    app:hintTextColor="@color/white"
+                    app:errorTextColor="@color/red_light"
+                    app:boxStrokeColor="@color/grey_dark"
+                    android:hint="Username"
+                    android:textColorHint="@color/white"
+                    app:endIconMode="clear_text"
+                    app:helperTextEnabled="true"
+                    app:helperText=""
+                    app:helperTextTextColor="@color/white"
+                    app:boxStrokeErrorColor="@color/red_light"
+                    app:errorEnabled="true"
+                    app:boxBackgroundColor="@color/background_color_light"
+                    app:errorIconDrawable="@drawable/ic_baseline_error_24"
+                    app:endIconTint="@color/white"
+                    app:counterTextColor="@color/white"
+                    app:startIconDrawable="@drawable/user_icon"
+                    app:startIconTint="@color/white"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/register_username"
-                android:layout_width="match_parent"
-                android:textColor="@color/white"
-                android:inputType="textUri"
-                android:textSize="@dimen/_14sdp"
-                android:layout_height="wrap_content"/>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/register_username"
+                        android:layout_width="match_parent"
+                        android:textColor="@color/white"
+                        android:inputType="textUri"
+                        android:textSize="@dimen/_14sdp"
+                        android:layout_height="wrap_content"/>
 
-        </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
+
+
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -77,10 +93,12 @@
                 app:hintTextColor="@color/white"
                 android:hint="Email"
                 android:textColorHint="@color/white"
-                android:layout_marginTop="@dimen/_5sdp"
                 app:endIconMode="clear_text"
+                app:errorTextColor="@color/red_light"
+                app:boxStrokeColor="@color/grey_dark"
                 app:helperTextTextColor="@color/white"
                 app:helperTextEnabled="true"
+                app:boxStrokeErrorColor="@color/red_light"
                 app:helperText=" "
                 app:errorEnabled="true"
                 app:boxBackgroundColor="@color/background_color_light"
@@ -109,12 +127,14 @@
                 app:hintTextColor="@color/white"
                 android:hint="Password"
                 android:textColorHint="@color/white"
-                android:layout_marginTop="@dimen/_5sdp"
+                app:errorTextColor="@color/red_light"
+                app:boxStrokeColor="@color/grey_dark"
                 app:endIconMode="password_toggle"
                 app:helperTextTextColor="@color/white"
                 app:helperTextEnabled="true"
                 app:helperText=" "
                 app:errorEnabled="true"
+                app:boxStrokeErrorColor="@color/red_light"
                 app:boxBackgroundColor="@color/background_color_light"
                 app:errorIconDrawable="@drawable/ic_baseline_error_24"
                 app:endIconTint="@color/white"
@@ -132,29 +152,6 @@
                     android:layout_height="wrap_content"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-<!--            <EditText-->
-<!--                android:id="@+id/register_password"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="@dimen/_40sdp"-->
-<!--                android:layout_marginVertical="@dimen/_10sdp"-->
-<!--                android:layout_weight="0"-->
-<!--                android:background="@drawable/borders_for_edittext"-->
-<!--                android:drawableStart="@drawable/ic_baseline_lock_24"-->
-<!--                android:drawablePadding="@dimen/_12sdp"-->
-<!--                android:backgroundTint="@color/background_color_light"-->
-<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--                android:hint="Password"-->
-<!--                android:inputType="textPassword"-->
-<!--                android:maxLength="30"-->
-<!--                app:endIconMode = "password_toggle"-->
-<!--                android:maxLines="1"-->
-<!--                android:paddingStart="@dimen/_12sdp"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textColorHint="@color/white"-->
-<!--                android:fontFamily="@font/metropolislight"-->
-<!--                android:textSize="@dimen/_15sdp" />-->
-
-<!--            android:id="@+id/register_password_confirm"-->
 
             <com.google.android.material.textfield.TextInputLayout
 
@@ -163,9 +160,11 @@
                 android:layout_height="@dimen/_65sdp"
                 app:hintTextColor="@color/white"
                 android:hint="Confirm Password"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:textColorHint="@color/white"
                 app:endIconMode="password_toggle"
+                app:boxStrokeErrorColor="@color/red_light"
+                app:errorTextColor="@color/red_light"
+                app:boxStrokeColor="@color/grey_dark"
                 app:helperTextTextColor="@color/white"
                 app:helperTextEnabled="true"
                 app:helperText=" "
@@ -187,37 +186,19 @@
                     android:layout_height="wrap_content"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
 
-                android:id="@+id/are_you_older_18_layout"
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/are_you_older_18"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_65sdp"
-                app:hintTextColor="@color/white"
-                android:hint="Username"
-                android:textColorHint="@color/white"
+                android:layout_height="@dimen/_45sdp"
+                android:background="@color/background_color_light"
+                android:textSize="@dimen/_14ssp"
                 android:layout_marginTop="@dimen/_5sdp"
-                app:endIconMode="custom"
-                app:endIconDrawable="@drawable/custom_round_checkbox"
-                app:helperTextEnabled="true"
-                app:helperText=""
-                app:helperTextTextColor="@color/white"
-                app:errorEnabled="true"
-                app:boxBackgroundColor="@color/background_color_light"
-                app:errorIconDrawable="@drawable/ic_baseline_error_24"
-                app:endIconTint="@color/white"
-                app:counterTextColor="@color/white"
-                app:startIconTint="@color/white"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/are_you_older_18"
-                    android:layout_width="match_parent"
-                    android:textColor="@color/white"
-                    android:inputType="textUri"
-                    android:textSize="@dimen/_14sdp"
-                    android:layout_height="wrap_content"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
+                android:buttonTint="@color/white"
+                android:textColor="@color/white"
+                android:paddingStart="@dimen/_5sdp"
+                app:errorShown="false"
+                android:text="Are you older 18" />
 
 
         </LinearLayout>
@@ -227,7 +208,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginBottom="@dimen/_25sdp"
             android:layout_marginTop="@dimen/_10sdp"
+            android:layout_weight="50"
             android:orientation="horizontal">
 
             <TextView
