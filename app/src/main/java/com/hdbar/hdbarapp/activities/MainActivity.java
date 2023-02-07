@@ -123,15 +123,15 @@ public class MainActivity extends AppCompatActivity {
         } else{
             replaceFragment(new HomeFragment());
         }
-//
+
 //        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//        database.collection(Constants.KEY_COLLECTION_MODERATORS)
+//        database.collection(Constants.KEY_COLLECTION_USERS)
 //                .document(userId)
 //                .get()
 //                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
 //                    @Override
 //                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-//                        if(documentSnapshot.get(Constants.KEY_MODERATOR_STATUS).equals("moderator") || documentSnapshot.get(Constants.KEY_MODERATOR_STATUS).equals("administrator")){
+//                        if(documentSnapshot.get(Constants.KEY_STATUS).equals("moderator") || documentSnapshot.get(Constants.KEY_STATUS).equals("administrator")){
 //                            binding.bottomNavigationView.findViewById(R.id.moderator).setVisibility(View.VISIBLE);
 //                            binding.bottomNavigationView.findViewById(R.id.moderator).setEnabled(true);
 //                        }
