@@ -23,9 +23,7 @@ public class Constants {
     public static final String KEY_STATUS_ADMINISTRATOR = "administrator";
 
     public static final String KEY_COLLECTION_USERS = "users";
-    public static final String KEY_USER_UID = "userUid";
     public static final String KEY_USER_BIO = "userBio";
-    public static final String KEY_USER_IMAGE_LINK = "userImage";
 
     public static final String KEY_COCKTAIL_STATUS_PENDING = "pending";
     public static final String KEY_COCKTAIL_STATUS_APPROVED = "approved";
