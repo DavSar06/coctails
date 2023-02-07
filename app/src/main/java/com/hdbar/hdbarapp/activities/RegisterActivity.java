@@ -167,13 +167,15 @@ public class RegisterActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 String uid = task.getResult().getUser().getUid();
+                                String name = task.getResult().getUser().getEmail();
                                 String userBio = "";
                                 String userImageLink = "";
 
                                 HashMap<String,Object> user = new HashMap<>();
                                 user.put(Constants.KEY_USERNAME,username);
+                                user.put(Constants.KEY_EMAIL,email);
                                 user.put(Constants.KEY_USER_BIO,userBio);
-                                user.put(Constants.KEY_USER_IMAGE_LINK,userImageLink);
+                                user.put(Constants.KEY_USER_IMAGE,userImageLink);
                                 user.put(Constants.KEY_STATUS,Constants.KEY_STATUS_USER);
 
                                 database.collection(Constants.KEY_COLLECTION_USERS).document(uid).set(user);
