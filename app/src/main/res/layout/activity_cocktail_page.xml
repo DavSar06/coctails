@@ -31,8 +31,7 @@
                     android:layout_height="@dimen/_300sdp"
                     android:id="@+id/imageSlider"
                     app:iss_period="1000"
-                    app:iss_auto_cycle="true"
-                    app:iss_corner_radius="20"
+                    app:iss_auto_cycle="false"
                     app:iss_title_background="@drawable/gradient"/>
 
             </androidx.cardview.widget.CardView>

@@ -17,6 +17,9 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,6 +32,7 @@ import com.hdbar.hdbarapp.databinding.ActivityCocktailPageBinding;
 import com.hdbar.hdbarapp.models.Cocktail;
 import com.hdbar.hdbarapp.utilities.Constants;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CocktailPageActivity extends AppCompatActivity {
@@ -41,6 +45,7 @@ public class CocktailPageActivity extends AppCompatActivity {
     public RatingBar simple_rating;
     private FirebaseFirestore database;
     private float numberOfStars;
+    private ImageSlider imageSlider;
 
     private boolean isFavorite;
     private String uid;
@@ -52,9 +57,20 @@ public class CocktailPageActivity extends AppCompatActivity {
         binding = ActivityCocktailPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        init();
-        listeners();
+        imageSlider = binding.imageSlider;
+        ArrayList<SlideModel> slideModels = new ArrayList<>();
 
+        slideModels.add(new SlideModel(R.drawable.image1, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.image2, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.image3, ScaleTypes.FIT));
+
+        imageSlider.setImageList(slideModels,ScaleTypes.FIT);
+
+
+//        init();
+//        listeners();
+
+/*
 
         simple_rating.setRating((float) 3);
 
@@ -72,9 +88,10 @@ public class CocktailPageActivity extends AppCompatActivity {
                 Log.d("In", String.valueOf(how_many_rates));
             }
         });
+*/
 
     }
-
+/*
     private void init(){
         cocktailId = getIntent().getStringExtra(Constants.KEY_COCKTAIL_ID);
         database = FirebaseFirestore.getInstance();
@@ -183,7 +200,7 @@ public class CocktailPageActivity extends AppCompatActivity {
                         }
                     });
         }
-    }
+    }*/
 
     private Bitmap getCocktailImage(String encodedImage){
         byte[] bytes = Base64.decode(encodedImage,Base64.DEFAULT);
