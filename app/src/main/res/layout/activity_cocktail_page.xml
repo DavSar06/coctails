@@ -35,17 +35,18 @@
         android:textSize="@dimen/_20ssp"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@id/imageBack"
-        app:layout_constraintRight_toLeftOf="@id/topHolder"
+        app:layout_constraintRight_toLeftOf="@id/favorite"
         />
 
-    <View
-        android:id="@+id/topHolder"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/favorite"
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
         android:layout_marginEnd="@dimen/_16sdp"
         android:layout_marginRight="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_12sdp"
-        android:padding="@dimen/_5sdp"
+        android:src="@drawable/ic_favorite"
+        android:tint="@color/background_color_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
