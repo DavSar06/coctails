@@ -2,6 +2,7 @@ package com.hdbar.hdbarapp.adapters;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -9,6 +10,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
 import com.hdbar.hdbarapp.databinding.ItemContainerCocktailBinding;
 import com.hdbar.hdbarapp.databinding.ItemSingleCocktailBinding;
 import com.hdbar.hdbarapp.listeners.CocktailListener;
@@ -56,13 +61,15 @@ public class CocktailsSingleAdapter extends RecyclerView.Adapter<CocktailsSingle
             binding.cocktailName.setText(cocktail.name);
             binding.cocktailCreator.setText(cocktail.creator);
             binding.cocktailRating.setText(cocktail.rating+"");
-            binding.cocktailImage.setImageBitmap(getCocktailImage(cocktail.image));
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+
+            storage.getReference(cocktail.image).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    Glide.with(binding.cocktailImage).load(task.getResult()).into(binding.cocktailImage);
+                }
+            });
             binding.getRoot().setOnClickListener(v -> listener.onCocktailClicked(cocktail));
         }
-    }
-
-    private Bitmap getCocktailImage(String encodedImage){
-        byte[] bytes = Base64.decode(encodedImage,Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(bytes,0, bytes.length);
     }
 }

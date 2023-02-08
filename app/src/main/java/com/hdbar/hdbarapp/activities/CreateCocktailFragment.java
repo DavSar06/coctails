@@ -2,6 +2,7 @@ package com.hdbar.hdbarapp.activities;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -22,12 +23,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.hdbar.hdbarapp.databinding.FragmentCreateCocktailBinding;
 import com.hdbar.hdbarapp.utilities.Constants;
 import com.hdbar.hdbarapp.utilities.PreferenceManager;
@@ -49,7 +56,9 @@ public class CreateCocktailFragment extends Fragment {
     private EditText cocktailName;
     private EditText cocktailRecipe;
     private Integer SELECT_PICTURE = 200;
-    private String encodedImage;
+
+    private Uri imageUri;
+    private StorageReference storage;
 
 
     public CreateCocktailFragment() {
@@ -102,30 +111,37 @@ public class CreateCocktailFragment extends Fragment {
         cocktailRecipe = binding.cocktailRecipe;
         cocktailImage = binding.cocktailImage;
         imageChooseText = binding.imageChooseText;
+        storage = FirebaseStorage.getInstance().getReference("cocktails");
     }
 
     private void publish(){
-        if(!cocktailName.getText().toString().isEmpty() && !cocktailRecipe.getText().toString().isEmpty() && encodedImage != null){
+        if(!cocktailName.getText().toString().isEmpty() && !cocktailRecipe.getText().toString().isEmpty() && imageUri != null){
             FirebaseFirestore database = FirebaseFirestore.getInstance();
-            HashMap<String,Object> cocktail = new HashMap<>();
-            cocktail.put(Constants.KEY_COCKTAIL_NAME,cocktailName.getText().toString());
-            cocktail.put(Constants.KEY_COCKTAIL_RECIPE,cocktailRecipe.getText().toString());
-            cocktail.put(Constants.KEY_COCKTAIL_IMAGE,encodedImage);
-            cocktail.put(Constants.KEY_COCKTAIL_VIDEO,null);
-            cocktail.put(Constants.KEY_COCKTAIL_RATING,new Integer(0));
-            cocktail.put(Constants.KEY_COCKTAIL_HOW_MANY_RATES,new Integer(0));
-            cocktail.put(Constants.KEY_STATUS,Constants.KEY_COCKTAIL_STATUS_PENDING);
-            cocktail.put(Constants.KEY_COCKTAIL_CREATOR_ID, FirebaseAuth.getInstance().getCurrentUser().getUid());
-            cocktail.put(Constants.KEY_COCKTAIL_CREATOR_NAME, preferenceManager.getString(Constants.KEY_USERNAME));
-            database.collection(Constants.KEY_COLLECTION_COCKTAILS)
-                    .add(cocktail)
-                    .addOnSuccessListener(documentReference -> {
-                        Intent i = new Intent(getActivity(),CocktailPageActivity.class);
-                        i.putExtra(Constants.KEY_COCKTAIL_ID,documentReference.getId());
-                        startActivity(i);
-                    }).addOnFailureListener(exception -> {
-                        Log.d("FCM",exception.getMessage());
-                    });;
+            StorageReference reference = storage.child(System.currentTimeMillis()+"."+getFileExtension(imageUri));
+            reference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    HashMap<String,Object> cocktail = new HashMap<>();
+                    cocktail.put(Constants.KEY_COCKTAIL_NAME,cocktailName.getText().toString());
+                    cocktail.put(Constants.KEY_COCKTAIL_RECIPE,cocktailRecipe.getText().toString());
+                    cocktail.put(Constants.KEY_COCKTAIL_IMAGE,taskSnapshot.getMetadata().getPath());
+                    cocktail.put(Constants.KEY_COCKTAIL_VIDEO,null);
+                    cocktail.put(Constants.KEY_COCKTAIL_RATING,new Integer(0));
+                    cocktail.put(Constants.KEY_COCKTAIL_HOW_MANY_RATES,new Integer(0));
+                    cocktail.put(Constants.KEY_STATUS,Constants.KEY_COCKTAIL_STATUS_PENDING);
+                    cocktail.put(Constants.KEY_COCKTAIL_CREATOR_ID, FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    cocktail.put(Constants.KEY_COCKTAIL_CREATOR_NAME, preferenceManager.getString(Constants.KEY_USERNAME));
+                    database.collection(Constants.KEY_COLLECTION_COCKTAILS)
+                            .add(cocktail)
+                            .addOnSuccessListener(documentReference -> {
+                                Intent i = new Intent(getActivity(),CocktailPageActivity.class);
+                                i.putExtra(Constants.KEY_COCKTAIL_ID,documentReference.getId());
+                                startActivity(i);
+                            }).addOnFailureListener(exception -> {
+                                Log.d("FCM",exception.getMessage());
+                            });;
+                }
+            });
         }else {
             //Avelacnel dzent aveli konkret default nkar
         }
@@ -137,29 +153,18 @@ public class CreateCocktailFragment extends Fragment {
         pickImage.launch(intent);
     }
 
-    private String encodeImage(Bitmap bitmap){
-        int previewWidth = 150;
-        int previewHeight = bitmap.getHeight() * previewWidth / bitmap.getWidth();
-        Bitmap previewBitmap = Bitmap.createScaledBitmap(bitmap, previewWidth, previewHeight, false);
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        previewBitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
-        byte[] bytes = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(bytes, Base64.DEFAULT);
+    private String getFileExtension(Uri uri){
+        ContentResolver cR = getContext().getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
     private final ActivityResultLauncher<Intent> pickImage = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
         if(result.getResultCode() == RESULT_OK){
             if(result.getData() != null){
-                Uri imageUri = result.getData().getData();
-                try {
-                    InputStream inputStream = getActivity().getContentResolver().openInputStream(imageUri);
-                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    binding.cocktailImage.setImageBitmap(bitmap);
-                    binding.imageChooseText.setVisibility(View.GONE);
-                    encodedImage = encodeImage(bitmap);
-                }catch(FileNotFoundException e){
-                    e.printStackTrace();
-                }
+                imageUri = result.getData().getData();
+                Glide.with(binding.cocktailImage).load(imageUri).into(binding.cocktailImage);
+                binding.imageChooseText.setVisibility(View.INVISIBLE);
             }
         }
     });

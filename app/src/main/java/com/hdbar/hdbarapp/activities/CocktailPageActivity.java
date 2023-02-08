@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Base64;
@@ -15,12 +16,14 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
 import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.ActivityCocktailPageBinding;
 import com.hdbar.hdbarapp.models.Cocktail;
@@ -109,6 +112,8 @@ public class CocktailPageActivity extends AppCompatActivity {
             }
         }, 500);
 
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+
         database.collection(Constants.KEY_COLLECTION_COCKTAILS)
                 .document(cocktailId)
                 .get()
@@ -122,6 +127,12 @@ public class CocktailPageActivity extends AppCompatActivity {
                     cocktail = new Cocktail(documentSnapshot.getId(),cocktailName,recipe,image,rating,creator,rating_count);
                     binding.cocktailAuthor.setText("Added by: "+cocktail.creator);
                     binding.cocktailName.setText(cocktail.name);
+                    storage.getReference(cocktail.image).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            Glide.with(binding.cocktailImage).load(task.getResult()).into(binding.cocktailImage);
+                        }
+                    });
                     binding.cocktailImage.setImageBitmap(getCocktailImage(cocktail.image));
                     binding.cocktailRecipe.setText(cocktail.recipe);
                     binding.ratingBar.setRating(Float.valueOf(cocktail.rating));
