@@ -1,16 +1,22 @@
 package com.hdbar.hdbarapp.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.ActivityModerateBinding;
 import com.hdbar.hdbarapp.models.Cocktail;
@@ -49,7 +55,14 @@ public class ModerateActivity extends AppCompatActivity {
                         cocktail = new Cocktail(documentSnapshot.getId(),cocktailName,recipe,image,rating,creator,rating_count);
                         binding.cocktailAuthor.setText("Added by: "+cocktail.creator);
                         binding.cocktailName.setText(cocktail.name);
-                        binding.cocktailImage.setImageBitmap(getCocktailImage(cocktail.image));
+                        FirebaseStorage storage = FirebaseStorage.getInstance();
+
+                        storage.getReference(cocktail.image).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                Glide.with(binding.cocktailImage).load(task.getResult()).into(binding.cocktailImage);
+                            }
+                        });
                         binding.cocktailRecipe.setText(cocktail.recipe);
                     }
                 });
@@ -90,10 +103,5 @@ public class ModerateActivity extends AppCompatActivity {
                         }
                     });
         });
-    }
-
-    private Bitmap getCocktailImage(String encodedImage){
-        byte[] bytes = Base64.decode(encodedImage,Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(bytes,0, bytes.length);
     }
 }
