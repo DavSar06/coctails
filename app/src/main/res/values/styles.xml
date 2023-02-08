@@ -32,4 +32,10 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="alertDialogModerators" parent="Base.Theme.AppCompat.Dialog">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
 </resources>

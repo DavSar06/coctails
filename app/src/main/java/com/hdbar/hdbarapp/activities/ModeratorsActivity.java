@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -79,16 +80,20 @@ public class ModeratorsActivity extends AppCompatActivity {
             InputMethodManager inm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
         });
+        binding.imageBack.setOnClickListener(v->{
+            finish();
+            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+        });
         binding.reload.setOnClickListener(v->{
             updateRecyclerView();
         });
         binding.addModeratorBtn.setOnClickListener(v->{
             String s = binding.atv.getText().toString();
             if(!s.isEmpty() && allUsers.contains(s)){
-                new AlertDialog.Builder(this)
+                AlertDialog a = new AlertDialog.Builder(this,R.style.alertDialogModerators)
                         .setTitle("Adding Moderator")
                         .setMessage("Are you sure you want to set this user as moderator?")
-                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setIcon(R.drawable.ic_alert)
                         .setPositiveButton("I'm sure", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 database.collection(Constants.KEY_COLLECTION_USERS)
@@ -115,12 +120,21 @@ public class ModeratorsActivity extends AppCompatActivity {
                                             public void run() {
                                                 updateRecyclerView();
                                                 allUsers.remove(s);
+                                                binding.atv.setText("");
                                             }
                                         },500);
                                     }
                                 },500);
                             }})
-                        .setNegativeButton("Cancel", null).show();
+                        .setNegativeButton("Cancel", null).create();
+                a.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialogInterface) {
+                        a.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(Color.BLACK);
+                        a.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+                    }
+                });
+                a.show();
             }else{
                 Toast.makeText(getApplicationContext(), "There is no such user", Toast.LENGTH_SHORT).show();
             }

@@ -29,6 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.ActivityLoginBinding;
@@ -209,14 +210,30 @@ public class LoginActivity extends AppCompatActivity {
                                     String userBio = "";
                                     String userImageLink = "";
 
-                                    HashMap<String,Object> user = new HashMap<>();
-                                    user.put(Constants.KEY_USERNAME,name);
-                                    user.put(Constants.KEY_EMAIL,email);
-                                    user.put(Constants.KEY_USER_BIO,userBio);
-                                    user.put(Constants.KEY_USER_IMAGE,userImageLink);
-                                    user.put(Constants.KEY_STATUS,Constants.KEY_STATUS_USER);
 
-                                    database.collection(Constants.KEY_COLLECTION_USERS).document(uid).set(user);
+                                    database.collection(Constants.KEY_COLLECTION_USERS)
+                                            .document(uid)
+                                            .get()
+                                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                    if(task.isSuccessful()){
+                                                        if(!task.getResult().exists()){
+                                                            HashMap<String,Object> user = new HashMap<>();
+                                                            user.put(Constants.KEY_USERNAME,name);
+                                                            user.put(Constants.KEY_EMAIL,email);
+                                                            user.put(Constants.KEY_USER_BIO,userBio);
+                                                            user.put(Constants.KEY_USER_IMAGE,userImageLink);
+                                                            user.put(Constants.KEY_STATUS,Constants.KEY_STATUS_USER);
+                                                            database.collection(Constants.KEY_COLLECTION_USERS).document(uid).set(user);
+                                                        }
+                                                    }else {
+                                                        Log.d("FCM",task.getException().getMessage());
+                                                    }
+                                                }
+                                            });
+
+
                                 }
                             }).start();
 
