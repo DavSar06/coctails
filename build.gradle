@@ -4,15 +4,18 @@ buildscript {
         google()
         jcenter()
         mavenCentral()
+
     }
     dependencies {
         classpath 'com.google.gms:google-services:4.3.13'
     }
 }
-//--//
-//--
-//
+
 plugins {
     id 'com.android.application' version '7.3.1' apply false
     id 'com.android.library' version '7.3.1' apply false
 }
+
+//--//
+//--
+//
