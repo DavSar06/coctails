@@ -50,7 +50,7 @@ public class SettingsFragment extends Fragment {
 
 
     private EditText search;
-    private RelativeLayout moderators,account,languages,privacyAndSecurity,helpAndSupport,aboutUs,logOut, payment, notification;
+    private RelativeLayout moderators,languages,privacyAndSecurity,helpAndSupport,aboutUs,logOut, payment, notification;
     private SwitchCompat notifications;
     private boolean isNormal = true;
     private FragmentSettingsBinding binding;
@@ -92,7 +92,6 @@ public class SettingsFragment extends Fragment {
     private void init(){
         database = FirebaseFirestore.getInstance();
         moderators = binding.moderatorsSettingsBtn;
-        account = binding.accountSettingsBtn;
         languages = binding.languagesSettingsBtn;
         privacyAndSecurity = binding.privacySettingsBtn;
         helpAndSupport = binding.helpAndSupportBtn;
@@ -132,14 +131,6 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        account.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AccountActivity.class);
-                startActivity(intent);
-                //getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
-            }
-        });
 
         languages.setOnClickListener(new View.OnClickListener() {
             @Override

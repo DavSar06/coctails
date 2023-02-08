@@ -113,59 +113,7 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/_16sdp" />
 
-                <RelativeLayout
-                    android:id="@+id/account_settings_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_25sdp"
-                    android:layout_marginBottom="@dimen/_15sdp">
 
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/settings_images1"
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/accout_settings"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle" />
-
-                    <TextView
-                        android:id="@+id/settings_text1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/_12sdp"
-                        android:layout_toRightOf="@+id/settings_images1"
-                        android:fontFamily="@font/montserratmedium"
-                        android:text="Account"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_14sdp" />
-
-                    <TextView
-                        android:id="@+id/settings_languages_btn1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="6dp"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:background="@drawable/ic_baseline_arrow_forward" />
-
-
-                    <!--Custom Switch-->
-                    <!--<androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/settings_notifications_switch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="false"
-                        app:track="@drawable/track"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:thumb="@drawable/thumb"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        tools:ignore="UseSwitchCompatOrMaterialXml" />-->
-
-
-                </RelativeLayout>
 
                 <View
                     android:id="@+id/viewModeratorTop"
@@ -217,6 +165,7 @@
                     android:id="@+id/notifications_settings_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_25sdp"
                     android:layout_marginBottom="@dimen/_15sdp">
 
                     <com.google.android.material.imageview.ShapeableImageView
@@ -291,16 +240,11 @@
 
 
                 </RelativeLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/white_transparency" />
 
                 <RelativeLayout
                     android:id="@+id/privacy_settings_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginBottom="@dimen/_15sdp">
 
                     <com.google.android.material.imageview.ShapeableImageView
@@ -380,16 +324,11 @@
 
                 </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/white_transparency" />
 
                 <RelativeLayout
                     android:id="@+id/payment_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginBottom="@dimen/_15sdp">
 
                     <com.google.android.material.imageview.ShapeableImageView
@@ -424,16 +363,11 @@
 
                 </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/white_transparency" />
 
                 <RelativeLayout
                     android:id="@+id/aboutus_settings_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginBottom="@dimen/_15sdp">
 
                     <com.google.android.material.imageview.ShapeableImageView
