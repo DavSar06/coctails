@@ -18,7 +18,7 @@
     <color name="green_dark">#272727</color>
     <color name="red">#ed0b0e</color>
     <color name="red_light">#F44244</color>
-    <color name="background_color">#121214</color>
+    <color name="background_color">#101010</color>
     <color name="background_color_light">#28282A</color>
     <color name="background_color_dark">#161617</color>
     <color name="pass_log_color">#bbb8b5</color>
