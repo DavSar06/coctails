@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +27,7 @@ import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.adapters.ModeratorAdapter;
 import com.hdbar.hdbarapp.databinding.ActivityModeratorsBinding;
 import com.hdbar.hdbarapp.databinding.ListItemBinding;
+import com.hdbar.hdbarapp.listeners.DropdownListener;
 import com.hdbar.hdbarapp.models.User;
 import com.hdbar.hdbarapp.utilities.Constants;
 
@@ -40,8 +43,67 @@ public class ModeratorsActivity extends AppCompatActivity {
     private List<User> users;
     private ArrayList<String> allUsers;
     private ModeratorAdapter adapter;
+    private ArrayAdapter atvAdapter;
 
     private String id;
+
+    private DropdownListener listener = new DropdownListener() {
+        @Override
+        public void onItemClick(String text, String id) {
+            if(text.equals("Go to page")){
+                Intent i = new Intent(getApplicationContext(),UserPageActivity.class);
+                i.putExtra(Constants.KEY_USER_UID,id);
+                startActivity(i);
+            }else {
+                AlertDialog a = new AlertDialog.Builder(binding.moderatorsRecyclerView.getContext(),R.style.alertDialogModerators)
+                        .setTitle("Removing Moderator")
+                        .setMessage("Are you sure you want to set this moderator as user?")
+                        .setIcon(R.drawable.ic_alert)
+                        .setPositiveButton("I'm sure", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                database.collection(Constants.KEY_COLLECTION_USERS)
+                                        .document(id)
+                                        .update(Constants.KEY_STATUS,Constants.KEY_STATUS_USER)
+                                        .addOnCompleteListener(new OnCompleteListener() {
+                                            @Override
+                                            public void onComplete(@NonNull Task task) {
+                                                if(task.isSuccessful()){
+                                                    Toast.makeText(getApplicationContext(), "Moderator Removed Successfully", Toast.LENGTH_SHORT).show();
+                                                    database.collection(Constants.KEY_COLLECTION_USERS)
+                                                            .document(id)
+                                                            .get()
+                                                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                                    String email = task.getResult().get(Constants.KEY_EMAIL).toString();
+                                                                    allUsers.add(email);
+                                                                    atvAdapter.add(email);
+                                                                }
+                                                            });
+                                                    (new Handler()).postDelayed(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            updateRecyclerView();
+                                                        }
+                                                    },500);
+                                                }else {
+                                                    Log.d("FCM",task.getException().getMessage());
+                                                }
+                                            }
+                                        });
+                            }})
+                        .setNegativeButton("Cancel", null).create();
+                a.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialogInterface) {
+                        a.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(Color.BLACK);
+                        a.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+                    }
+                });
+                a.show();
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +119,9 @@ public class ModeratorsActivity extends AppCompatActivity {
         users = new ArrayList<>();
         allUsers = new ArrayList<>();
         database = FirebaseFirestore.getInstance();
-        adapter = new ModeratorAdapter(users);
+        adapter = new ModeratorAdapter(users,listener);
+        atvAdapter = new ArrayAdapter(getApplicationContext(), R.layout.list_item,allUsers);
+        binding.atv.setAdapter(atvAdapter);
         binding.moderatorsRecyclerView.setAdapter(adapter);
         database.collection(Constants.KEY_COLLECTION_USERS)
                 .whereEqualTo(Constants.KEY_STATUS,Constants.KEY_STATUS_USER)
@@ -65,11 +129,10 @@ public class ModeratorsActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        Log.d("FCM","mtanq berlin");
                         for(DocumentSnapshot document: queryDocumentSnapshots){
                             allUsers.add(document.get(Constants.KEY_EMAIL).toString());
                         }
-                        binding.atv.setAdapter(new ArrayAdapter(getApplicationContext(), R.layout.list_item,allUsers));
+                        atvAdapter.notifyDataSetChanged();
                     }
         });
         updateRecyclerView();
@@ -104,6 +167,9 @@ public class ModeratorsActivity extends AppCompatActivity {
                                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                 if(task.isSuccessful()){
                                                     id = task.getResult().getDocuments().get(0).getId();
+                                                    allUsers.remove(s);
+                                                    atvAdapter.remove(s);
+                                                    binding.atv.setText("");
                                                 }else {
                                                     Log.d("FCM",task.getException().getMessage());
                                                 }
@@ -119,8 +185,6 @@ public class ModeratorsActivity extends AppCompatActivity {
                                             @Override
                                             public void run() {
                                                 updateRecyclerView();
-                                                allUsers.remove(s);
-                                                binding.atv.setText("");
                                             }
                                         },500);
                                     }

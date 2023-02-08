@@ -18,6 +18,7 @@ public class Constants {
     public static final String KEY_COCKTAIL_HOW_MANY_RATES = "howManyRate";
 
     public static final String KEY_STATUS = "status";
+    public static final String KEY_USER_UID = "uid";
     public static final String KEY_STATUS_MODERATOR = "moderator";
     public static final String KEY_STATUS_USER = "user";
     public static final String KEY_STATUS_ADMINISTRATOR = "administrator";
