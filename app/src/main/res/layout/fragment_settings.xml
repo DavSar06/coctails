@@ -14,8 +14,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_10sdp">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,67 +22,76 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/settings_search"
+
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginVertical="@dimen/_7sdp"
-                android:background="@drawable/borders_for_search_bar"
-                android:backgroundTint="@color/background_color_light"
-                android:drawableStart="@drawable/ic_baseline_search_24"
-                android:drawablePadding="@dimen/_6sdp"
-                android:fontFamily="@font/metropolislight"
-                android:hint="Search"
-                android:inputType="textUri"
-                android:maxLength="25"
-                android:maxLines="1"
-                android:paddingStart="@dimen/_12sdp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="16sp" />
-
-
-            <!--<com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="@dimen/_110sdp"
-                android:layout_height="@dimen/_110sdp"
-                android:background="@drawable/download"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_gravity="center"
-                app:shapeAppearanceOverlay="@style/ImageView.Circle"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Nickname"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:textSize="@dimen/_20ssp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:text="Settings"
+                android:gravity="left|center_vertical"
+                android:fontFamily="@font/standard_bold"
+                android:textSize="@dimen/_26ssp"
                 android:textColor="@color/white"/>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="your mail@gmail.com"
-                android:textSize="@dimen/_10sdp"
-                android:textColor="@color/white"/>
+                android:paddingVertical="@dimen/_5sdp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:paddingHorizontal="@dimen/_5sdp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/borders_for_edittext"
-                android:backgroundTint="@color/red"
-                android:fontFamily="@font/metropolisbold"
-                android:paddingHorizontal="@dimen/_15sdp"
-                android:paddingVertical="@dimen/_7sdp"
-                android:textSize="@dimen/_15sdp"
-                android:textColor="@color/white"
-                android:layout_gravity="center"
-                android:text="Edit Profile"/>
--->
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/profile_picture_settings"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    app:srcCompat="@mipmap/ic_launcher"
+                    android:layout_marginRight="@dimen/_15sdp"
+                    app:shapeAppearanceOverlay="@style/ImageView.Circle"/>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/profile_picture_settings">
+
+                    <TextView
+                        android:id="@+id/profile_name_settings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/standard_book"
+                        android:text="Hayk Karamyan"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_16sdp" />
+
+                    <TextView
+                        android:id="@+id/profile_email_settings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/standard_book"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:text="haykaakaramyan@gmail.com"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_11sdp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/settings_languages_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:background="@drawable/ic_baseline_arrow_forward" />
+
+            </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -95,11 +103,21 @@
                 android:backgroundTint="@color/background_color_light">
 
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/standard_book"
+                    android:textStyle="normal"
+                    android:text="Account"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16sdp" />
+
                 <RelativeLayout
                     android:id="@+id/account_settings_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_25sdp"
                     android:layout_marginBottom="@dimen/_15sdp">
 
                     <com.google.android.material.imageview.ShapeableImageView
@@ -108,7 +126,7 @@
                         android:layout_height="@dimen/_30sdp"
                         android:layout_centerVertical="true"
                         android:background="@drawable/accout_settings"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle" />
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle" />
 
                     <TextView
                         android:id="@+id/settings_text1"
@@ -195,16 +213,10 @@
 
                 </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/white_transparency" />
-
                 <RelativeLayout
                     android:id="@+id/notifications_settings_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginBottom="@dimen/_15sdp">
 
                     <com.google.android.material.imageview.ShapeableImageView
@@ -213,7 +225,7 @@
                         android:layout_height="@dimen/_30sdp"
                         android:background="@drawable/notificatoin_settings"
                         android:layout_centerVertical="true"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle"/>
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle"/>
 
                     <TextView
                         android:id="@+id/settings_text2"
@@ -241,16 +253,11 @@
 
 
                 </RelativeLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/white_transparency" />
 
                 <RelativeLayout
                     android:id="@+id/languages_settings_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginBottom="@dimen/_15sdp">
 
                     <com.google.android.material.imageview.ShapeableImageView
@@ -258,7 +265,7 @@
                         android:layout_width="@dimen/_30sdp"
                         android:layout_height="@dimen/_30sdp"
                         android:background="@drawable/langueges_settings"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle" />
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle" />
 
                     <TextView
                         android:id="@+id/settings_text3"
@@ -302,7 +309,7 @@
                         android:layout_height="@dimen/_30sdp"
                         android:background="@drawable/secutity_settings"
                         android:layout_centerVertical="true"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle"/>
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle"/>
 
                     <TextView
                         android:id="@+id/settings_text4"
@@ -346,7 +353,7 @@
                         android:layout_height="@dimen/_30sdp"
                         android:layout_centerVertical="true"
                         android:background="@drawable/helpandquestions_settings"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle" />
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle" />
 
                     <TextView
                         android:id="@+id/settings_text5"
@@ -389,9 +396,8 @@
                         android:id="@+id/settings_images6"
                         android:layout_width="@dimen/_30sdp"
                         android:layout_height="@dimen/_30sdp"
-                        android:layout_centerVertical="true"
                         android:background="@drawable/payment_icon_settings"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle" />
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle" />
 
                     <TextView
                         android:id="@+id/settings_text6"
@@ -436,7 +442,7 @@
                         android:layout_height="@dimen/_30sdp"
                         android:layout_centerVertical="true"
                         android:background="@drawable/aboutus_settings"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle" />
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle" />
 
                     <TextView
                         android:id="@+id/settings_text7"
@@ -481,7 +487,7 @@
                         android:layout_height="@dimen/_30sdp"
                         android:layout_centerVertical="true"
                         android:background="@drawable/logout_settings"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle" />
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle" />
 
                     <TextView
                         android:id="@+id/settings_text8"

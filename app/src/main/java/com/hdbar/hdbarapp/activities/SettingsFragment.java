@@ -92,7 +92,6 @@ public class SettingsFragment extends Fragment {
     private void init(){
         database = FirebaseFirestore.getInstance();
         moderators = binding.moderatorsSettingsBtn;
-        search = binding.settingsSearch;
         account = binding.accountSettingsBtn;
         languages = binding.languagesSettingsBtn;
         privacyAndSecurity = binding.privacySettingsBtn;
