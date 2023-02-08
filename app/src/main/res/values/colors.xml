@@ -12,12 +12,13 @@
     <color name="grey">#A6A6A6</color>
     <color name="grey_dark">#919191</color>
     <color name="grey_for_animation">#CACACA</color>
+    <color name="lime">#DCED31</color>
     <color name="green">#00BD0A</color>
     <color name="green_dark">#272727</color>
     <color name="red">#ed0b0e</color>
     <color name="red_light">#F44244</color>
-    <color name="background_color">#252527</color>
-    <color name="background_color_light">#363636</color>
+    <color name="background_color">#0E0E0E</color>
+    <color name="background_color_light">#141414</color>
     <color name="background_color_dark">#161617</color>
     <color name="pass_log_color">#bbb8b5</color>
     <color name="bold_text_color">#050507</color>
