@@ -3,6 +3,8 @@ package com.hdbar.hdbarapp.activities;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -46,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private EditText inputEmail,inputPassword;
-    private ImageView btnGoogle,btnTwitter,btnGithub,btnFacebook;
+    private ImageView btnGoogle,btnPhone,btnGithub,btnFacebook;
     private TextView buttonLogin;
     private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private ProgressDialog progressDialog;
@@ -74,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
 
         init();
         listeners();
-
+        getNetworkClass(LoginActivity.this);
     }
 
     private void init(){
@@ -85,9 +87,8 @@ public class LoginActivity extends AppCompatActivity {
         buttonLogin=binding.Loginbtn;
         //loginButton=binding.loginButton;
         //loginButton.setReadPermissions("email","public_profile");
-        btnGithub=binding.github;
         btnGoogle=binding.google;
-        btnTwitter=binding.twitter;
+        btnPhone = binding.phoneLogin;
         registerTextView = binding.registerMain;
 
         //loginButton = findViewById(R.id.facebook);
@@ -188,6 +189,11 @@ public class LoginActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(LoginActivity.this,gso);
 
     }
+
+    private void phoneLogIn(){
+
+    }
+
 
     private void firebaseAuthWithGoogle(String idToken) {
 
@@ -320,6 +326,17 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
+    public static String getNetworkClass(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = cm.getActiveNetworkInfo();
+        if (info == null || !info.isConnected())
+            Log.d("Ine", "NoConnection");
+        else {
+            Log.e("Ine", "Connected");    }
+        return null;
+    }
+
     private void sendUserToNextActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -345,6 +362,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 performLogin();
+            }
+        });
+
+        btnPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //some voide
             }
         });
 

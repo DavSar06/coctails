@@ -120,28 +120,12 @@
             android:layout_marginHorizontal="@dimen/_5sdp"/>
 
         <ImageView
-            android:id="@+id/twitter"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
-            android:padding="@dimen/_5sdp"
-            android:src="@drawable/twitterlogo"
-            android:layout_marginHorizontal="@dimen/_5sdp"/>
-
-        <ImageView
-            android:id="@+id/phone"
+            android:id="@+id/phone_login"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
             android:padding="@dimen/_5sdp"
             android:src="@drawable/phonecallicon"
             android:layout_marginHorizontal="@dimen/_5sdp"/>
-
-        <ImageView
-            android:id="@+id/github"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
-            android:padding="@dimen/_5sdp"
-            android:src="@drawable/githubicon"
-            android:layout_marginHorizontal="@dimen/_5sdp" />
 
         <ImageView
             android:id="@+id/facebook"
@@ -203,7 +187,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_weight="30"
-        android:width="@dimen/_100sdp"
         android:fontFamily="@font/metropolislight"
         android:gravity="top|center"
         android:text="Forgot Password ?"

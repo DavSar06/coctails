@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
@@ -39,6 +40,8 @@ import com.hdbar.hdbarapp.settings.PaymentActivity;
 import com.hdbar.hdbarapp.settings.PrivacyPolicyActivity;
 import com.hdbar.hdbarapp.utilities.Constants;
 
+import org.w3c.dom.Text;
+
 import java.util.HashMap;
 
 /**
@@ -50,11 +53,14 @@ public class SettingsFragment extends Fragment {
 
 
     private EditText search;
-    private RelativeLayout moderators,languages,privacyAndSecurity,helpAndSupport,aboutUs,logOut, payment, notification;
+    private RelativeLayout moderators,languages,privacyAndSecurity,helpAndSupport,aboutUs,logOut, payment, notification,account;
+    private TextView email_settings, user_name_settings;
     private SwitchCompat notifications;
     private boolean isNormal = true;
     private FragmentSettingsBinding binding;
     private FirebaseFirestore database;
+    private String userId;
+    private String useremail;
 
 
 
@@ -76,11 +82,30 @@ public class SettingsFragment extends Fragment {
 
         init();
         onClick();
+;
+
+
+        getUserEmail();
 
         getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
 
+    private void getUserEmail(){
+        database.collection(Constants.KEY_COLLECTION_USERS)
+                .document(userId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            useremail = task.getResult().get(Constants.KEY_EMAIL).toString();
+                            user_name_settings.setText(useremail);
+                        }
+                        else {
+                            Log.e("Exception", task.getException().getMessage());
+                        }
+                    }
+                });
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,11 +116,15 @@ public class SettingsFragment extends Fragment {
 
     private void init(){
         database = FirebaseFirestore.getInstance();
+        userId = FirebaseAuth.getInstance().getUid();
         moderators = binding.moderatorsSettingsBtn;
         languages = binding.languagesSettingsBtn;
         privacyAndSecurity = binding.privacySettingsBtn;
         helpAndSupport = binding.helpAndSupportBtn;
         aboutUs = binding.aboutusSettingsBtn;
+        account = binding.accountSettings;
+        email_settings = binding.profileEmailSettings;
+        user_name_settings = binding.profileEmailSettings;
         payment = binding.paymentBtn;
         logOut = binding.logoutBtn;
         notification = binding.notificationsSettingsBtn;
@@ -123,11 +152,22 @@ public class SettingsFragment extends Fragment {
     }
 
     private void  onClick(){
+
+        account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),AccountActivity.class);
+                startActivity(intent);
+                //getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
+            }
+        });
+
         moderators.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),ModeratorsActivity.class);
                 startActivity(intent);
+                //getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
             }
         });
 
@@ -137,7 +177,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), LanguagesActivity.class);
                 startActivity(intent);
-                //getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+//                getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
             }
         });
 
@@ -146,7 +186,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), PrivacyPolicyActivity.class);
                 startActivity(intent);
-                //getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+                //getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
             }
         });
 
@@ -155,7 +195,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), HelpAndSupportActivity.class);
                 startActivity(intent);
-                //getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+                //getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
             }
         });
 
@@ -164,7 +204,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), PaymentActivity.class);
                 startActivity(intent);
-                //getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+                //getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
             }
         });
 
@@ -173,7 +213,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AboutUsActivity.class);
                 startActivity(intent);
-                //getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+                //getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
             }
         });
 

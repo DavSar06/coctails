@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_gravity="center"
-                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
                 android:layout_marginVertical="@dimen/_10sdp"
                 android:text="Settings"
                 android:gravity="left|center_vertical"
@@ -37,11 +37,11 @@
                 android:textColor="@color/white"/>
 
             <RelativeLayout
+                android:id="@+id/account_settings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="@dimen/_5sdp"
-                android:layout_marginHorizontal="@dimen/_15sdp"
-                android:paddingHorizontal="@dimen/_5sdp">
+                android:layout_marginHorizontal="@dimen/_15sdp">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/profile_picture_settings"
@@ -74,7 +74,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/standard_book"
                         android:layout_marginTop="@dimen/_3sdp"
-                        android:text="haykaakaramyan@gmail.com"
+                        android:text="hadsaf"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_11sdp" />
 
@@ -97,7 +97,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:paddingVertical="@dimen/_10sdp"
-                android:paddingHorizontal="@dimen/_10sdp"
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:orientation="vertical"
                 android:backgroundTint="@color/background_color_light">

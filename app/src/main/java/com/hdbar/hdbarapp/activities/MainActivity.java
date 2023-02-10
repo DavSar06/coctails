@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -68,8 +70,6 @@ public class MainActivity extends AppCompatActivity {
         listeners();
         bottomNavigationBar();
 
-
-
         //To make class and run in every activity
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
@@ -84,7 +84,32 @@ public class MainActivity extends AppCompatActivity {
             window.setStatusBarColor(this.getResources().getColor(R.color.background_color));
         }
 
+
+        getNetworkClass(MainActivity.this);
     }
+
+
+    public static String getNetworkClass(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = cm.getActiveNetworkInfo();
+        if (info == null || !info.isConnected())
+            Log.d("Ine", "NoConnection");
+        else {
+            Log.e("Ine", "Connected");    }
+        return null;
+    }
+
+
+    boolean isOnline() {
+        // Checking internet connectivity
+        ConnectivityManager connectivityMgr = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = null;
+        if (connectivityMgr != null) {
+            activeNetwork = connectivityMgr.getActiveNetworkInfo();
+        }
+        return activeNetwork != null;
+    }
+
 
     private void bottomNavigationBar(){
 
