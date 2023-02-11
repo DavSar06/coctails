@@ -48,8 +48,8 @@ public class HelpAndSupportActivity extends AppCompatActivity {
         chat_to_us.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HelpAndSupportActivity.this,
-                        "We forgot tg bot", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/+GjIdcEIbjC43NDcy"));
+                startActivity(intent);
             }
         });
     }
