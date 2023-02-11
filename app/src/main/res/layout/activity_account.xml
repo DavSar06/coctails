@@ -56,6 +56,7 @@
 
 
                 <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/userImage"
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="@dimen/_100sdp"
                     android:background="@drawable/profile_icon_type"
@@ -63,11 +64,15 @@
                     app:shapeAppearanceOverlay="@style/ImageView.Circle.LowRoll"/>
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="@dimen/_100sdp"
-                    android:layout_height="@dimen/_100sdp"
-                    android:layout_centerHorizontal="true"
-                    app:shapeAppearanceOverlay="@style/ImageView.Circle.LowRoll"/>
-
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_margin="@dimen/_4sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignBottom="@id/userImage"
+                    android:layout_alignRight="@id/userImage"
+                    android:src="@drawable/ic_edit"
+                    android:tint="@color/grey_dark"
+                    android:background="@color/white"
+                    app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle"/>
             </RelativeLayout>
 
             <EditText
