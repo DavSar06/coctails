@@ -31,4 +31,5 @@ public class Constants {
     public static final String KEY_COCKTAIL_STATUS_DENIED = "denied";
 
     public static final String KEY_COLLECTION_FAVORITES = "favorites";
+    public static final String KEY_COLLECTION_RATINGS = "ratings";
 }

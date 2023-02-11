@@ -121,7 +121,7 @@
                     android:autoSizeTextType="uniform"
                     android:fontFamily="@font/garutemedium"
                     android:gravity="center"
-                    android:text="4.0"
+                    android:text="0.0"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_46sdp" />
 
@@ -143,8 +143,9 @@
                         android:foregroundGravity="left|center_vertical"
                         style="@style/Widget.AppCompat.RatingBar.Indicator"
                         android:isIndicator="false"
+                        android:clickable="false"
+                        android:focusable="false"
                         android:numStars="5"
-                        android:rating="2"
                         android:theme="@style/RatingBar"
                         />
 
@@ -152,7 +153,7 @@
                         android:id="@+id/how_many_rates"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="(4000 rates)"
+                        android:text="0"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:layout_below="@+id/rating_bar"
                         android:textColor="@color/grey_white"
@@ -167,6 +168,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
                 android:scrollbars="none"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:paddingHorizontal="@dimen/_15sdp">
 
@@ -278,11 +280,30 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/sbs_list"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:dividerHeight="2dp" />
+                android:layout_height="wrap_content"
+                android:text="Comments"
+                android:paddingLeft="@dimen/_15sdp"
+                android:textSize="16dp"
+                android:textColor="@color/white"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/sbs_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:dividerHeight="2dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:spanCount="1"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_comments_layout" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
