@@ -1,14 +1,18 @@
 package com.hdbar.hdbarapp.activities;
 
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,6 +28,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -33,6 +38,9 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.ActivityLoginBinding;
 import com.hdbar.hdbarapp.utilities.Constants;
@@ -63,6 +71,8 @@ public class LoginActivity extends AppCompatActivity {
     private AccessToken accessTokenTracker;
     private FirebaseUser mUser;
     private FirebaseUser user;
+    private StorageReference storage;
+    private Uri imageUri;
     //private CallbackManager mCallbackManger;
     //private LoginButton loginButton;
     //private static final String TAG ="FacebookAuthentication";
@@ -80,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void init(){
+        storage = FirebaseStorage.getInstance().getReference("cocktails");
         preferenceManager = new PreferenceManager(getApplicationContext());
         database = FirebaseFirestore.getInstance();
         inputEmail=binding.Login;
@@ -214,7 +225,6 @@ public class LoginActivity extends AppCompatActivity {
                                     String email = task.getResult().getUser().getEmail();
                                     String uid = task.getResult().getUser().getUid();
                                     String userBio = "";
-                                    String userImageLink = "";
 
 
                                     database.collection(Constants.KEY_COLLECTION_USERS)
@@ -225,13 +235,26 @@ public class LoginActivity extends AppCompatActivity {
                                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                                     if(task.isSuccessful()){
                                                         if(!task.getResult().exists()){
-                                                            HashMap<String,Object> user = new HashMap<>();
-                                                            user.put(Constants.KEY_USERNAME,name);
-                                                            user.put(Constants.KEY_EMAIL,email);
-                                                            user.put(Constants.KEY_USER_BIO,userBio);
-                                                            user.put(Constants.KEY_USER_IMAGE,userImageLink);
-                                                            user.put(Constants.KEY_STATUS,Constants.KEY_STATUS_USER);
-                                                            database.collection(Constants.KEY_COLLECTION_USERS).document(uid).set(user);
+                                                            Resources resources = getResources();
+                                                            imageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                                                                    .authority(resources.getResourcePackageName(R.drawable.profile_icon_type))
+                                                                    .appendPath(resources.getResourceTypeName(R.drawable.profile_icon_type))
+                                                                    .appendPath(resources.getResourceEntryName(R.drawable.profile_icon_type))
+                                                                    .build();
+                                                            StorageReference reference = storage.child(System.currentTimeMillis()+"."+getFileExtension(imageUri));
+                                                            reference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                                @Override
+                                                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                                    HashMap<String,Object> user = new HashMap<>();
+                                                                    user.put(Constants.KEY_USERNAME,name);
+                                                                    user.put(Constants.KEY_EMAIL,email);
+                                                                    user.put(Constants.KEY_USER_BIO,userBio);
+                                                                    user.put(Constants.KEY_USER_IMAGE,taskSnapshot.getMetadata().getPath());
+                                                                    user.put(Constants.KEY_STATUS,Constants.KEY_STATUS_USER);
+
+                                                                    database.collection(Constants.KEY_COLLECTION_USERS).document(uid).set(user);
+                                                                }
+                                                            });
                                                         }
                                                     }else {
                                                         Log.d("FCM",task.getException().getMessage());
@@ -383,5 +406,11 @@ public class LoginActivity extends AppCompatActivity {
             inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
         });
         requestGoogleSignIn();
+    }
+
+    private String getFileExtension(Uri uri){
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 }

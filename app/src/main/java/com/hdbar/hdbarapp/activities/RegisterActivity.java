@@ -6,26 +6,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.CheckBox;
-import android.widget.Checkable;
-import android.widget.EditText;
+import android.webkit.MimeTypeMap;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,14 +29,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.ActivityRegisterBinding;
 import com.hdbar.hdbarapp.utilities.Constants;
 import com.hdbar.hdbarapp.utilities.PreferenceManager;
 
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -65,6 +58,9 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseUser user;
     private FirebaseFirestore database;
 
+    private StorageReference storage;
+    private Uri imageUri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void init(){
+        storage = FirebaseStorage.getInstance().getReference("cocktails");
         preferenceManager = new PreferenceManager(getApplicationContext());
         database = FirebaseFirestore.getInstance();
         inputEmail=binding.registerEmail;
@@ -194,19 +191,33 @@ public class RegisterActivity extends AppCompatActivity {
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                String uid = task.getResult().getUser().getUid();
-                                String name = task.getResult().getUser().getEmail();
-                                String userBio = "";
-                                String userImageLink = "";
+                                Resources resources = getResources();
+                                imageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                                        .authority(resources.getResourcePackageName(R.drawable.profile_icon_type))
+                                        .appendPath(resources.getResourceTypeName(R.drawable.profile_icon_type))
+                                        .appendPath(resources.getResourceEntryName(R.drawable.profile_icon_type))
+                                        .build();
+                                StorageReference reference = storage.child(System.currentTimeMillis()+"."+getFileExtension(imageUri));
+                                reference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        String uid = task.getResult().getUser().getUid();
+                                        String name = task.getResult().getUser().getEmail();
+                                        String userBio = "";
+                                        String userImageLink = taskSnapshot.getMetadata().getPath();
 
-                                HashMap<String,Object> user = new HashMap<>();
-                                user.put(Constants.KEY_USERNAME,username);
-                                user.put(Constants.KEY_EMAIL,email);
-                                user.put(Constants.KEY_USER_BIO,userBio);
-                                user.put(Constants.KEY_USER_IMAGE,userImageLink);
-                                user.put(Constants.KEY_STATUS,Constants.KEY_STATUS_USER);
+                                        HashMap<String,Object> user = new HashMap<>();
+                                        user.put(Constants.KEY_USERNAME,username);
+                                        user.put(Constants.KEY_EMAIL,email);
+                                        user.put(Constants.KEY_USER_BIO,userBio);
+                                        user.put(Constants.KEY_USER_IMAGE,userImageLink);
+                                        user.put(Constants.KEY_STATUS,Constants.KEY_STATUS_USER);
 
-                                database.collection(Constants.KEY_COLLECTION_USERS).document(uid).set(user);
+                                        database.collection(Constants.KEY_COLLECTION_USERS).document(uid).set(user);
+                                    }
+                                });
+
+
                             }
                         }).start();
 
@@ -275,5 +286,11 @@ public class RegisterActivity extends AppCompatActivity {
             inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
         });
         binding.registerCancel.setOnClickListener(v->finish());
+    }
+
+    private String getFileExtension(Uri uri){
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 }
