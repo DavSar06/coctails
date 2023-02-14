@@ -103,7 +103,9 @@
 
                 <HorizontalScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:scrollbars="none">
 
                     <LinearLayout
                         android:layout_marginVertical="@dimen/_10sdp"
@@ -163,7 +165,9 @@
 
                 <HorizontalScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:scrollbars="none">
 
                     <LinearLayout
                         android:layout_marginVertical="@dimen/_10sdp"
@@ -223,7 +227,9 @@
 
                 <HorizontalScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:scrollbars="none">
 
                     <LinearLayout
                         android:layout_marginVertical="@dimen/_10sdp"

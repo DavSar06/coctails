@@ -1,6 +1,7 @@
 package com.hdbar.hdbarapp.activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -18,7 +19,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputEditText;
@@ -33,6 +43,8 @@ import com.hdbar.hdbarapp.utilities.Constants;
 import com.hdbar.hdbarapp.utilities.PreferenceManager;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -44,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
     private TextInputLayout inputUsernameLayout,inputEmailLayout,inputPasswordLayout,inputConfirmLayout;
     private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private ProgressDialog progressDialog;
-    private int canStartInit = 0;
+    private int canStartInit = 0, confirmCode;
 
 
     private boolean t = true;
@@ -163,6 +175,22 @@ public class RegisterActivity extends AppCompatActivity {
                     if (task.isSuccessful()){
                         progressDialog.dismiss();
 
+                        // send verification link
+
+                        FirebaseUser fuser = mAuth.getCurrentUser();
+                        fuser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(RegisterActivity.this, "Verification Email Has been Sent", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.d("Tag", "onFailure: Email not sent " + e.getMessage());
+                            }
+                        });
+
+
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -182,10 +210,10 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         }).start();
 
-
+                        if (fuser.isEmailVerified()){
+                        }
                         sendUserToNextActivity();
 
-                        Toast.makeText(RegisterActivity.this,"Registration Successful",Toast.LENGTH_SHORT).show();
                     }
                     else {
                         progressDialog.dismiss();
@@ -208,9 +236,37 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void listeners(){
         // texapoxel settings binding.registerIconChooseIconToChange.setOnClickListener(v->startActivity(new Intent(getApplicationContext(),ChooseImageActivity.class)));
-        binding.registerConfirm.setOnClickListener(new View.OnClickListener() {
+        confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                /*Random random = new Random();
+                confirmCode = random.nextInt(8999) + 1000;
+                String url = "";
+                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(RegisterActivity.this,"" + response,Toast.LENGTH_SHORT).show();
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(RegisterActivity.this,""  + error,Toast.LENGTH_SHORT).show();
+
+                    }
+                }){
+                    @Nullable
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String,String> params = new HashMap<>();
+                        params.put("email", inputEmail.getText().toString());
+                        params.put("code",String.valueOf(confirmCode));
+                        return super.getParams();
+                    }
+                };*//*
+                requestQueue.add(stringRequest);*/
                 PerformAuth();
             }
         });
