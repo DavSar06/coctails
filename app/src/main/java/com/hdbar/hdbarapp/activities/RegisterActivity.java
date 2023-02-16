@@ -62,6 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean t = true;
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
+    private FirebaseUser fuser;
     private FirebaseUser user;
     private FirebaseFirestore database;
 
@@ -73,6 +74,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         init();
         listeners();
+
+
+
     }
 
     private void init(){
@@ -166,6 +170,8 @@ public class RegisterActivity extends AppCompatActivity {
         if(canStartInit == -5)
         {
             //can be a problem with progress dialog
+            progressDialog.setMessage("Pleas confirm your email...");
+            progressDialog.setTitle("Verification");
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
 
@@ -173,7 +179,6 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
-                        progressDialog.dismiss();
 
                         // send verification link
 
@@ -211,7 +216,10 @@ public class RegisterActivity extends AppCompatActivity {
                         }).start();
 
                         if (fuser.isEmailVerified()){
+                            progressDialog.dismiss();
+                            sendUserToNextActivity();
                         }
+
                         sendUserToNextActivity();
 
                     }
