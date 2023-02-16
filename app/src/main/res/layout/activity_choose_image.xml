@@ -75,8 +75,10 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:background="@drawable/image1"
+                        android:id="@+id/currentImage"
+                        android:src="@drawable/profile_icon_type"
                         style="@style/ImageView.Circle.Rectangle"
+                        android:scaleType="centerCrop"
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="@dimen/_100sdp"
                         android:layout_marginEnd="@dimen/_10sdp"/>

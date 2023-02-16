@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,11 +26,14 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.FragmentSettingsBinding;
 import com.hdbar.hdbarapp.settings.AboutUsActivity;
@@ -85,20 +89,28 @@ public class SettingsFragment extends Fragment {
 ;
 
 
-        getUserEmail();
+        setUserInfo();
 
         getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
 
-    private void getUserEmail(){
+    private void setUserInfo(){
         database.collection(Constants.KEY_COLLECTION_USERS)
                 .document(userId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if(task.isSuccessful()){
                             useremail = task.getResult().get(Constants.KEY_EMAIL).toString();
-                            user_name_settings.setText(useremail);
+                            binding.profileEmailSettings.setText(useremail);
+                            user_name_settings.setText(task.getResult().get(Constants.KEY_USERNAME).toString());
+                            FirebaseStorage storage = FirebaseStorage.getInstance();
+                            storage.getReference(task.getResult().get(Constants.KEY_USER_IMAGE).toString()).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    Glide.with(binding.profilePictureSettings).load(task.getResult()).into(binding.profilePictureSettings);
+                                }
+                            });
                         }
                         else {
                             Log.e("Exception", task.getException().getMessage());
@@ -124,7 +136,7 @@ public class SettingsFragment extends Fragment {
         aboutUs = binding.aboutusSettingsBtn;
         account = binding.accountSettings;
         email_settings = binding.profileEmailSettings;
-        user_name_settings = binding.profileEmailSettings;
+        user_name_settings = binding.profileNameSettings;
         payment = binding.paymentBtn;
         logOut = binding.logoutBtn;
         notification = binding.notificationsSettingsBtn;

@@ -59,7 +59,8 @@
                         android:id="@+id/userImage"
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="@dimen/_100sdp"
-                        android:background="@drawable/profile_icon_type"
+                        android:src="@drawable/profile_icon_type"
+                        android:scaleType="centerCrop"
                         android:layout_centerHorizontal="true"
                         app:shapeAppearanceOverlay="@style/ImageView.Circle.LowRoll"/>
 
@@ -113,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:text="moderator"
+                    android:text="User Type"
                     android:layout_below="@+id/account_nickname"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14sdp"
