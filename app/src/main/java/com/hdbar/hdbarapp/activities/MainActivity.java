@@ -72,31 +72,10 @@ public class MainActivity extends AppCompatActivity {
 
         AlwaysOnRun.AlwaysRun(MainActivity.this);
 
-
-        getNetworkClass(MainActivity.this);
     }
 
 
-    public static String getNetworkClass(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo info = cm.getActiveNetworkInfo();
-        if (info == null || !info.isConnected())
-            Log.d("Ine", "NoConnection");
-        else {
-            Log.e("Ine", "Connected");    }
-        return null;
-    }
 
-
-    boolean isOnline() {
-        // Checking internet connectivity
-        ConnectivityManager connectivityMgr = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = null;
-        if (connectivityMgr != null) {
-            activeNetwork = connectivityMgr.getActiveNetworkInfo();
-        }
-        return activeNetwork != null;
-    }
 
 
     private void bottomNavigationBar(){

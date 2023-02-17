@@ -1,6 +1,9 @@
 package com.hdbar.hdbarapp.activities;
 
 import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +27,16 @@ public class AlwaysOnRun {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(myActivityReference.getResources().getColor(R.color.background_color));
         }
+
+
+        ConnectivityManager cm = (ConnectivityManager) myActivityReference.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = cm.getActiveNetworkInfo();
+        if (info == null || !info.isConnected())
+            Log.d("Ine", "NoConnection");
+        else {
+            Log.e("Ine", "Connected");    }
+
+
 
         Log.d("TAG","AlwaysOnRun");
     }
