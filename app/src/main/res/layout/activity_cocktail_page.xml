@@ -44,7 +44,7 @@
                         app:iss_title_background="@drawable/gradient"/>
 
                     <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/settings_languages_btn"
+                        android:id="@+id/imageBack"
                         android:layout_width="@dimen/_30sdp"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_margin="@dimen/_10sdp"
@@ -55,7 +55,7 @@
 
 
                     <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/profile_picture_settings"
+                        android:id="@+id/creatorImage"
                         android:layout_margin="@dimen/_5sdp"
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_50sdp"
@@ -106,6 +106,7 @@
 
 
             <RelativeLayout
+                android:id="@+id/rating_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
@@ -159,6 +160,18 @@
                         android:textColor="@color/grey_white"
                         android:textSize="@dimen/_12ssp"/>
                 </RelativeLayout>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/favourite_star"
+                    android:layout_width="@dimen/_65sdp"
+                    android:layout_height="@dimen/_65sdp"
+                    android:padding="@dimen/_5sdp"
+                    android:src="@drawable/ic_favourite_star"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:tint="@color/grey_dark" />
+
+
 
             </RelativeLayout>
 
