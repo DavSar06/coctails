@@ -105,7 +105,7 @@ public class CocktailPageActivity extends AppCompatActivity {
         if (!rating_bool){
             simpleRating();
         }
-//        listeners();
+        listeners();
 
 
 
@@ -258,15 +258,15 @@ public class CocktailPageActivity extends AppCompatActivity {
 
 
 
-/*
+
         (new Handler()).postDelayed(new Runnable() {
             @Override
             public void run() {
                 if(isFavorite){
-                    binding.favorite.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.favorite), android.graphics.PorterDuff.Mode.SRC_IN);;
+                    binding.favouriteStar.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.favorite), android.graphics.PorterDuff.Mode.SRC_IN);;
                 }
             }
-        }, 500);*/
+        }, 500);
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
 
@@ -295,12 +295,10 @@ public class CocktailPageActivity extends AppCompatActivity {
                 });
 
     }
-/*
     private void listeners(){
         binding.imageBack.setOnClickListener(v->finish());
-        binding.favorite.setOnClickListener(v->changeFavoriteStatus());
-    }*/
-/*
+        binding.favouriteStar.setOnClickListener(v->changeFavoriteStatus());
+    }
 
     private void changeFavoriteStatus(){
         if(!isFavorite){
@@ -315,7 +313,7 @@ public class CocktailPageActivity extends AppCompatActivity {
                             if(task.isSuccessful()){
                                 isFavorite = true;
                                 favoriteId = task.getResult().getId();
-                                binding.favorite.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.favorite), android.graphics.PorterDuff.Mode.SRC_IN);;
+                                binding.favouriteStar.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.favorite), android.graphics.PorterDuff.Mode.SRC_IN);;
                             }else{
                                 Log.d("FCM",task.getException().getMessage());
                                 Toast.makeText(getApplicationContext(), "Problems occurred", Toast.LENGTH_SHORT).show();
@@ -332,7 +330,7 @@ public class CocktailPageActivity extends AppCompatActivity {
                             if(task.isSuccessful()){
                                 isFavorite = false;
                                 favoriteId = null;
-                                binding.favorite.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.background_color_light), android.graphics.PorterDuff.Mode.SRC_IN);;
+                                binding.favouriteStar.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.background_color_light), android.graphics.PorterDuff.Mode.SRC_IN);;
                             }else {
                                 Log.d("FCM",task.getException().getMessage());
                                 Toast.makeText(getApplicationContext(), "Error occurred" , Toast.LENGTH_SHORT).show();
@@ -342,7 +340,6 @@ public class CocktailPageActivity extends AppCompatActivity {
         }
     }
 
-*/
 
     private Bitmap getCocktailImage(String encodedImage){
         byte[] bytes = Base64.decode(encodedImage,Base64.DEFAULT);
