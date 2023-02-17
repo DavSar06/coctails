@@ -20,6 +20,7 @@
     <color name="red">#ed0b0e</color>
     <color name="red_light">#F44244</color>
     <color name="background_color">#131416</color>
+    <color name="background_color_transparent">#801D1D1F</color>
     <color name="background_color_light">#1D1D1F</color>
     <color name="background_color_dark">#161617</color>
     <color name="background_light">#59000000</color>

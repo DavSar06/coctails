@@ -18,7 +18,7 @@
         android:theme="@style/Theme.HDBarApplication"
         tools:targetApi="31">
         <activity
-            android:name="lists.setp_by_step_recipte"
+            android:name=".lists.setp_by_step_recipte"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
