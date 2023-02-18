@@ -63,6 +63,7 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         init();
         listeners();
+
         super.onCreate(savedInstanceState);
     }
 
@@ -100,14 +101,18 @@ public class HomeFragment extends Fragment {
                                 String image = document.get(Constants.KEY_COCKTAIL_IMAGE).toString();
                                 String rating = document.get(Constants.KEY_COCKTAIL_RATING).toString();
                                 Cocktail a = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator,rating_count);
+                                Log.d("GG", creator + " creator" + cocktailName +  " " + cocktails.size());
                                 for (int i = 0; i < 10; i++){
                                     cocktails.add(a);
                                 }
+
+
+                                cocktails.add(a);
                             }
                             adapter = new TopTenOfWeekAdapter(cocktails,cocktailListener);
                             binding.topTenOfWeekRecyclerView.setAdapter(adapter);
 
-                            Log.d("GG", cocktails.size() + "");
+                            Log.d("GG", cocktails.size() / 10 + "");
                         } else {
                             Log.d("FCM", "Error getting documents: ", task.getException());
                         }

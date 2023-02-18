@@ -12,23 +12,6 @@
     tools:context=".activities.FavoriteFragment"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/topBar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_60sdp"
-        android:layout_gravity="top"
-        android:background="@color/background_color_light">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Favourite Cocktails"
-            android:textColor="@color/white"
-            android:fontFamily="@font/metropolislight"
-            android:textSize="@dimen/_20ssp"/>
-
-    </FrameLayout>
 
     <FrameLayout
          android:layout_marginTop="@dimen/_10sdp"
