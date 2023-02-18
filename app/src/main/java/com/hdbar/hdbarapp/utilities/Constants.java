@@ -32,4 +32,8 @@ public class Constants {
 
     public static final String KEY_COLLECTION_FAVORITES = "favorites";
     public static final String KEY_COLLECTION_RATINGS = "ratings";
+    public static final String KEY_COLLECTION_COMMENTS = "comments";
+    public static final String KEY_COMMENT_BODY = "body";
+    public static final String KEY_DATE = "date";
+    public static final String KEY_COMMENTER_ID = "commenterId";
 }
