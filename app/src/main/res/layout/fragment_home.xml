@@ -362,7 +362,7 @@
             android:id="@+id/recyclerview_others"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 

@@ -134,18 +134,17 @@
                     <RatingBar
 
                         android:id="@+id/rating_bar"
+                        style="@style/Widget.AppCompat.RatingBar.Indicator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:stepSize="1"
                         android:layout_gravity="left|center_vertical"
-                        android:foregroundGravity="left|center_vertical"
-                        style="@style/Widget.AppCompat.RatingBar.Indicator"
-                        android:isIndicator="false"
                         android:clickable="false"
                         android:focusable="false"
+                        android:foregroundGravity="left|center_vertical"
+                        android:isIndicator="false"
                         android:numStars="5"
-                        android:theme="@style/RatingBar"
-                        />
+                        android:stepSize="1"
+                        android:theme="@style/RatingBar" />
 
                     <TextView
                         android:id="@+id/how_many_rates"
@@ -289,16 +288,18 @@
 
                 </LinearLayout>
             </HorizontalScrollView>
-
+<!--
             <VideoView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_100sdp"/>
+                android:layout_height="@dimen/_100sdp"/>-->
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Comments"
                 android:fontFamily="@font/metropolisbold"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:paddingLeft="@dimen/_15sdp"
                 android:textSize="@dimen/_20ssp"
                 android:textColor="@color/white"/>
