@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +16,10 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -43,6 +46,7 @@ public class FavoriteFragment extends Fragment {
     private FragmentFavoriteBinding binding;
     private List<Cocktail> cocktails;
     private FirebaseFirestore database;
+    private String uid;
 
     private final CocktailListener cocktailListener = new CocktailListener() {
         @Override
@@ -73,6 +77,7 @@ public class FavoriteFragment extends Fragment {
     }
 
     private void init(){
+        uid = FirebaseAuth.getInstance().getUid();
         database = FirebaseFirestore.getInstance();
         binding = FragmentFavoriteBinding.inflate(getLayoutInflater());
         cocktails = new LinkedList<>();
@@ -92,6 +97,7 @@ public class FavoriteFragment extends Fragment {
             binding.rowSingle.setColorFilter(ContextCompat.getColor(getActivity(), R.color.background_color_light), android.graphics.PorterDuff.Mode.SRC_IN);
             binding.rowDouble.setColorFilter(ContextCompat.getColor(getActivity(), R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
             binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
+            binding.textErrorMessage.setVisibility(View.INVISIBLE);
             binding.progressBar.setVisibility(View.VISIBLE);
             changeAdapter(0);
         });
@@ -99,49 +105,98 @@ public class FavoriteFragment extends Fragment {
             binding.rowSingle.setColorFilter(ContextCompat.getColor(getActivity(), R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
             binding.rowDouble.setColorFilter(ContextCompat.getColor(getActivity(), R.color.background_color_light), android.graphics.PorterDuff.Mode.SRC_IN);
             binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
+            binding.textErrorMessage.setVisibility(View.INVISIBLE);
             binding.progressBar.setVisibility(View.VISIBLE);
             changeAdapter(1);
         });
     }
 
     private void changeAdapter(Integer k){
-        database.collection(Constants.KEY_COLLECTION_COCKTAILS).whereEqualTo(Constants.KEY_STATUS,Constants.KEY_COCKTAIL_STATUS_APPROVED)
+        database.collection(Constants.KEY_COLLECTION_FAVORITES)
+                .whereEqualTo(Constants.KEY_USER_UID,uid)
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            cocktails = new LinkedList<>();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                String cocktailName = document.getString(Constants.KEY_COCKTAIL_NAME);
-                                String creator = document.getString(Constants.KEY_COCKTAIL_CREATOR_NAME);
-                                String recipe = document.get(Constants.KEY_COCKTAIL_RECIPE).toString();
-                                String rating_count = document.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
-                                String image = document.get(Constants.KEY_COCKTAIL_IMAGE).toString();
-                                String rating = document.get(Constants.KEY_COCKTAIL_RATING).toString();
-                                Cocktail a = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator,rating_count);
-                                cocktails.add(a);
-                            }
-                            if(cocktails.size()==0){
-                                binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
-                                binding.progressBar.setVisibility(View.INVISIBLE);
-                                binding.textErrorMessage.setVisibility(View.VISIBLE);
-                            }else {
-                                if(k==0){
-                                    CocktailsAdapter adapter = new CocktailsAdapter(cocktails,cocktailListener);
-                                    binding.cocktailsRecyclerView.setAdapter(adapter);
-                                }else{
-                                    CocktailsSingleAdapter adapter = new CocktailsSingleAdapter(cocktails,cocktailListener);
-                                    binding.cocktailsRecyclerView.setAdapter(adapter);
-                                }
-                                binding.cocktailsRecyclerView.setVisibility(View.VISIBLE);
-                                binding.progressBar.setVisibility(View.INVISIBLE);
-                                binding.textErrorMessage.setVisibility(View.INVISIBLE);
-                            }
-                        } else {
-                            Log.d("FCM", "Error getting documents: ", task.getException());
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        cocktails = new LinkedList<>();
+                        for(DocumentSnapshot snapshot: queryDocumentSnapshots){
+                            database.collection(Constants.KEY_COLLECTION_COCKTAILS)
+                                    .document(snapshot.get(Constants.KEY_COCKTAIL_ID).toString())
+                                    .get()
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onSuccess(DocumentSnapshot document) {
+                                            String cocktailName = document.getString(Constants.KEY_COCKTAIL_NAME);
+                                            String creator = document.getString(Constants.KEY_COCKTAIL_CREATOR_NAME);
+                                            String recipe = document.get(Constants.KEY_COCKTAIL_RECIPE).toString();
+                                            String rating_count = document.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
+                                            String image = document.get(Constants.KEY_COCKTAIL_IMAGE).toString();
+                                            String rating = document.get(Constants.KEY_COCKTAIL_RATING).toString();
+                                            Cocktail a = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator,rating_count);
+                                            cocktails.add(a);
+                                        }
+                                    });
                         }
+                        (new Handler()).postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(cocktails.size()==0){
+                                    binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
+                                    binding.progressBar.setVisibility(View.INVISIBLE);
+                                    binding.textErrorMessage.setVisibility(View.VISIBLE);
+                                }else {
+                                    if(k==0){
+                                        CocktailsAdapter adapter = new CocktailsAdapter(cocktails,cocktailListener);
+                                        binding.cocktailsRecyclerView.setAdapter(adapter);
+                                    }else{
+                                        CocktailsSingleAdapter adapter = new CocktailsSingleAdapter(cocktails,cocktailListener);
+                                        binding.cocktailsRecyclerView.setAdapter(adapter);
+                                    }
+                                    binding.cocktailsRecyclerView.setVisibility(View.VISIBLE);
+                                    binding.progressBar.setVisibility(View.INVISIBLE);
+                                    binding.textErrorMessage.setVisibility(View.INVISIBLE);
+                                }
+                            }
+                        },500);
                     }
                 });
+//        database.collection(Constants.KEY_COLLECTION_COCKTAILS).whereEqualTo(Constants.KEY_STATUS,Constants.KEY_COCKTAIL_STATUS_APPROVED)
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            cocktails = new LinkedList<>();
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                String cocktailName = document.getString(Constants.KEY_COCKTAIL_NAME);
+//                                String creator = document.getString(Constants.KEY_COCKTAIL_CREATOR_NAME);
+//                                String recipe = document.get(Constants.KEY_COCKTAIL_RECIPE).toString();
+//                                String rating_count = document.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
+//                                String image = document.get(Constants.KEY_COCKTAIL_IMAGE).toString();
+//                                String rating = document.get(Constants.KEY_COCKTAIL_RATING).toString();
+//                                Cocktail a = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator,rating_count);
+//                                cocktails.add(a);
+//                            }
+//                            if(cocktails.size()==0){
+//                                binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
+//                                binding.progressBar.setVisibility(View.INVISIBLE);
+//                                binding.textErrorMessage.setVisibility(View.VISIBLE);
+//                            }else {
+//                                if(k==0){
+//                                    CocktailsAdapter adapter = new CocktailsAdapter(cocktails,cocktailListener);
+//                                    binding.cocktailsRecyclerView.setAdapter(adapter);
+//                                }else{
+//                                    CocktailsSingleAdapter adapter = new CocktailsSingleAdapter(cocktails,cocktailListener);
+//                                    binding.cocktailsRecyclerView.setAdapter(adapter);
+//                                }
+//                                binding.cocktailsRecyclerView.setVisibility(View.VISIBLE);
+//                                binding.progressBar.setVisibility(View.INVISIBLE);
+//                                binding.textErrorMessage.setVisibility(View.INVISIBLE);
+//                            }
+//                        } else {
+//                            Log.d("FCM", "Error getting documents: ", task.getException());
+//                        }
+//                    }
+//                });
     }
 }
