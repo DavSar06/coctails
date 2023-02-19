@@ -233,7 +233,7 @@ public class ModeratorsActivity extends AppCompatActivity {
             @Override
             public void run() {
                 database.collection(Constants.KEY_COLLECTION_USERS)
-                        .whereEqualTo(Constants.KEY_STATUS,Constants.KEY_STATUS_MODERATOR)
+                        .whereNotEqualTo(Constants.KEY_STATUS,Constants.KEY_STATUS_USER)
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
