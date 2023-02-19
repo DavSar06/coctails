@@ -22,7 +22,7 @@
         />
 
     <item android:title="Moderate"
-        android:icon="@drawable/ic_baseline_add_24"
+        android:icon="@drawable/ic_check"
         android:id="@+id/moderator"
         android:enabled="true"
         android:visible="true"
