@@ -99,7 +99,6 @@ public class HomeFragment extends Fragment {
                                 String image = document.get(Constants.KEY_COCKTAIL_IMAGE).toString();
                                 String rating = document.get(Constants.KEY_COCKTAIL_RATING).toString();
                                 Cocktail a = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator,rating_count);
-                                Log.d("GG", creator + " creator" + cocktailName +  " " + cocktails.size());
                                 cocktails.add(a);
                             }
                             adapter = new TopTenOfWeekAdapter(cocktails,cocktailListener);
