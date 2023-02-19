@@ -61,13 +61,12 @@ public class OthersAdapter extends RecyclerView.Adapter<OthersAdapter.CocktailVi
             binding.topOfWeekAuthor.setText(cocktail.creator);
             FirebaseStorage storage = FirebaseStorage.getInstance();
 
-    /*
-                storage.getReference(cocktail.image).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        Glide.with(binding.cocktailImage).load(task.getResult()).into(binding.cocktailImage);
-                    }
-                });*/
+            storage.getReference(cocktail.image).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    Glide.with(binding.topOfWeekImage).load(task.getResult()).into(binding.topOfWeekImage);
+                }
+            });
 
             binding.getRoot().setOnClickListener(v -> listener.onCocktailClicked(cocktail));
         }

@@ -61,15 +61,13 @@ public class TopTenOfWeekAdapter extends RecyclerView.Adapter<TopTenOfWeekAdapte
             binding.topOfWeekAuthor.setText(cocktail.creator);
             FirebaseStorage storage = FirebaseStorage.getInstance();
 
-/*
-            storage.getReference(cocktail.image).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    Glide.with(binding.cocktailImage).load(task.getResult()).into(binding.cocktailImage);
+        storage.getReference(cocktail.image).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                Glide.with(binding.topOfWeekImage).load(task.getResult()).into(binding.topOfWeekImage);
                 }
-            });*/
+            });
 
-            Log.d("GG", cocktail.name + " davo gay");
             binding.getRoot().setOnClickListener(v -> listener.onCocktailClicked(cocktail));
         }
     }
