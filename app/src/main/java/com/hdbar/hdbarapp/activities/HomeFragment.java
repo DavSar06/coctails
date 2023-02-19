@@ -4,15 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Adapter;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,10 +19,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.hdbar.hdbarapp.R;
-import com.hdbar.hdbarapp.adapters.CocktailsAdapter;
-import com.hdbar.hdbarapp.adapters.CocktailsSingleAdapter;
+import com.hdbar.hdbarapp.adapters.OthersAdapter;
 import com.hdbar.hdbarapp.adapters.TopTenOfWeekAdapter;
-import com.hdbar.hdbarapp.databinding.FragmentFavoriteBinding;
 import com.hdbar.hdbarapp.databinding.FragmentHomeBinding;
 import com.hdbar.hdbarapp.listeners.CocktailListener;
 import com.hdbar.hdbarapp.models.Cocktail;
@@ -41,7 +38,9 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding  binding;
     private List<Cocktail> cocktails;
     private FirebaseFirestore database;
+    private RecyclerView recyclerView;
     private TopTenOfWeekAdapter adapter;
+    private OthersAdapter othersAdapter;
 
 
     private final CocktailListener cocktailListener = new CocktailListener() {
@@ -66,8 +65,6 @@ public class HomeFragment extends Fragment {
 
         super.onCreate(savedInstanceState);
     }
-
-
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -102,16 +99,12 @@ public class HomeFragment extends Fragment {
                                 String rating = document.get(Constants.KEY_COCKTAIL_RATING).toString();
                                 Cocktail a = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator,rating_count);
                                 Log.d("GG", creator + " creator" + cocktailName +  " " + cocktails.size());
-                                for (int i = 0; i < 10; i++){
-                                    cocktails.add(a);
-                                }
-
-
                                 cocktails.add(a);
                             }
                             adapter = new TopTenOfWeekAdapter(cocktails,cocktailListener);
+                            othersAdapter = new OthersAdapter(cocktails,cocktailListener);
                             binding.topTenOfWeekRecyclerView.setAdapter(adapter);
-
+                            binding.recyclerviewOthers.setAdapter(othersAdapter);
                             Log.d("GG", cocktails.size() / 10 + "");
                         } else {
                             Log.d("FCM", "Error getting documents: ", task.getException());

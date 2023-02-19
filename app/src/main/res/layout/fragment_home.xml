@@ -83,6 +83,7 @@
             android:id="@+id/top_ten_of_week_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp"
+            android:nestedScrollingEnabled="false"
             android:orientation="horizontal"
             android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -327,7 +328,6 @@
 
 
                         <TextView
-                            android:id="@+id/top_of_week_name"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_20sdp"
                             android:text="Martini"
@@ -346,13 +346,29 @@
         </HorizontalScrollView>
 
 
-        <ListView
-            android:id="@+id/more_cocktails_home"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="Other"
+            android:textColor="@color/white"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:fontFamily="@font/metropolisbold"
+            android:textSize="@dimen/_15ssp"/>
 
 
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_others"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_gravity="center_vertical"
+            android:layout_marginVertical="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"/>
 
     </LinearLayout>
 </ScrollView>
