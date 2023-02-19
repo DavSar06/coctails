@@ -1,41 +1,42 @@
 package com.hdbar.hdbarapp.adapters;
 
-import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hdbar.hdbarapp.R;
-import com.hdbar.hdbarapp.models.Comments;
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.hdbar.hdbarapp.databinding.ItemCommentBinding;
+import com.hdbar.hdbarapp.listeners.CommentImageListener;
+import com.hdbar.hdbarapp.models.Comment;
 
 import java.util.ArrayList;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHolder> {
 
-    Context context;
-    ArrayList<Comments> commentsModels;
+    ArrayList<Comment> commentsModels;
+    private final CommentImageListener listener;
 
-    public CommentAdapter (Context context, ArrayList<Comments> commentsModels){
-        this.context = context;
+    public CommentAdapter (ArrayList<Comment> commentsModels,CommentImageListener listener){
         this.commentsModels = commentsModels;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public CommentAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.item_cocktails_row,parent, false);
-        return new CommentAdapter.MyViewHolder(view);
+        ItemCommentBinding itemCommentBinding = ItemCommentBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
+        return new CommentAdapter.MyViewHolder(itemCommentBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CommentAdapter.MyViewHolder holder, int position) {
-
-        //holder.tv_comment.setText(commentsModels.get(position).getComment());
+        holder.setComment(commentsModels.get(position));
     }
 
     @Override
@@ -43,13 +44,27 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
         return commentsModels.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView tv_comment;
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
+        ItemCommentBinding binding;
 
-            tv_comment = itemView.findViewById(R.id.tv_comments);
+        public MyViewHolder(@NonNull ItemCommentBinding itemCommentBinding) {
+            super(itemCommentBinding.getRoot());
+            binding = itemCommentBinding;
+        }
+
+        public void setComment(Comment comment){
+            binding.comment.setText(comment.comment);
+            binding.commenter.setText(comment.commenter);
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+
+            storage.getReference(comment.uImage).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    Glide.with(binding.image).load(task.getResult()).into(binding.image);
+                }
+            });
+            binding.image.setOnClickListener(v->listener.onImageClicked(comment.uid));
         }
     }
 }

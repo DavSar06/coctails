@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -15,35 +16,33 @@ import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.LoadBundleTask;
 import com.google.firebase.firestore.QuerySnapshot;
-//import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.FirebaseStorage;
 import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.adapters.CommentAdapter;
-import com.hdbar.hdbarapp.adapters.sbsAdapter;
 import com.hdbar.hdbarapp.databinding.ActivityCocktailPageBinding;
+import com.hdbar.hdbarapp.listeners.CommentImageListener;
 import com.hdbar.hdbarapp.models.Cocktail;
-import com.hdbar.hdbarapp.models.Comments;
+import com.hdbar.hdbarapp.models.Comment;
 import com.hdbar.hdbarapp.utilities.Constants;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class CocktailPageActivity extends AppCompatActivity {
@@ -72,11 +71,20 @@ public class CocktailPageActivity extends AppCompatActivity {
     private String uid;
     private String favoriteId;
 
-    ArrayList<Comments> commentsModels = new ArrayList<>();
+    private CommentImageListener listener = new CommentImageListener() {
+        @Override
+        public void onImageClicked(String userId) {
+            Intent i = new Intent(getApplicationContext(),UserPageActivity.class);
+            i.putExtra(Constants.KEY_USER_UID,userId);
+            startActivity(i);
+        }
+    };
+
+    ArrayList<Comment> commentsModels = new ArrayList<>();
+
+    private CommentAdapter commentAdapter = new CommentAdapter(commentsModels,listener);
 
     String fruitList[]  ={"Apple","Bannana", "Appcorit", "Orange","Whater Melon"};
-
-    RecyclerView RecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,43 +95,20 @@ public class CocktailPageActivity extends AppCompatActivity {
         imageSlider = binding.imageSlider;
         ArrayList<SlideModel> slideModels = new ArrayList<>();
 
+
+//        Default Images in slider (To change)
         slideModels.add(new SlideModel(R.drawable.image1, ScaleTypes.CENTER_CROP));
         slideModels.add(new SlideModel(R.drawable.image2, ScaleTypes.CENTER_CROP));
         slideModels.add(new SlideModel(R.drawable.image3, ScaleTypes.CENTER_CROP));
         slideModels.add(new SlideModel(R.drawable.image4, ScaleTypes.CENTER_CROP));
         imageSlider.setImageList(slideModels,ScaleTypes.CENTER_CROP);
-/*
-        RecyclerView = (RecyclerView) findViewById(R.id.sbs_list);
-        sbsAdapter sbsAdapter = new sbsAdapter(getApplicationContext(),fruitList);
+//
 
-        RecyclerView.setAdapter(sbsAdapter);*/
-
-//transform to init
-;
         init();
-        setRating();
-        if (!rating_bool){
-            simpleRating();
-        }
         listeners();
-
-
-
-        RecyclerView recyclerView = findViewById(R.id.sbs_list);
-        CommentAdapter adapter = new CommentAdapter(this,commentsModels);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-        setUpCommntModels();
-
-        rate_i = 0;
-        //Log.i("R", String.valueOf(rate_i));
-
     }
 
     private void setRating(){
-
         database.collection(Constants.KEY_COLLECTION_RATINGS)
                 .whereEqualTo(Constants.KEY_USER_UID,uid)
                 .whereEqualTo(Constants.KEY_COCKTAIL_ID,cocktailId)
@@ -141,16 +126,6 @@ public class CocktailPageActivity extends AppCompatActivity {
                         }
                     }
                 });
-    }
-
-    private void setUpCommntModels(){
-
-        String[] comments = {"fijasldfj","fosajdoifjsa","dfasdfpsof","fmsapfo"};
-
-        for (int i = 0; i < comments.length;i++){
-            commentsModels.add(new Comments(comments[i]));
-        }
-
     }
 
     private void simpleRating(){
@@ -230,9 +205,13 @@ public class CocktailPageActivity extends AppCompatActivity {
         hm_rates = binding.howManyRates;
         rate_i = 0;
         arrayListRatings = new ArrayList<>();
-
+        setRating();
+        if (!rating_bool){
+            simpleRating();
+        }
         ratingsSize();
-
+        binding.commentsRecyclerView.setAdapter(commentAdapter);
+        showComments();
         uid = FirebaseAuth.getInstance().getUid();
         database.collection(Constants.KEY_COLLECTION_FAVORITES)
                 .whereEqualTo(Constants.KEY_COCKTAIL_ID,cocktailId)
@@ -295,9 +274,75 @@ public class CocktailPageActivity extends AppCompatActivity {
                 });
 
     }
+
     private void listeners(){
         binding.imageBack.setOnClickListener(v->finish());
         binding.favouriteStar.setOnClickListener(v->changeFavoriteStatus());
+        binding.addCommentBtn.setOnClickListener(v->addComment());
+    }
+
+    private void addComment(){
+        if(binding.inputComment.getText().length()>0) {
+            HashMap<String, Object> comment = new HashMap<>();
+            comment.put(Constants.KEY_COMMENT_BODY, binding.inputComment.getText().toString());
+            comment.put(Constants.KEY_DATE,new Date());
+            comment.put(Constants.KEY_COCKTAIL_ID,cocktailId);
+            comment.put(Constants.KEY_COMMENTER_ID,uid);
+            database.collection(Constants.KEY_COLLECTION_COMMENTS)
+                    .add(comment)
+                    .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentReference> task) {
+                            showComments();
+                        }
+                    });
+            binding.inputComment.setText("");
+        }
+    }
+
+    private void showComments(){
+        commentsModels = new ArrayList<>();
+        binding.progressBar.setVisibility(View.VISIBLE);
+        binding.commentsRecyclerView.setVisibility(View.INVISIBLE);
+        database.collection(Constants.KEY_COLLECTION_COMMENTS)
+                .whereEqualTo(Constants.KEY_COCKTAIL_ID,cocktailId)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for(DocumentSnapshot snapshot: queryDocumentSnapshots){
+                            database.collection(Constants.KEY_COLLECTION_USERS)
+                                    .document(snapshot.get(Constants.KEY_COMMENTER_ID).toString())
+                                    .get()
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                            String comment = snapshot.getString(Constants.KEY_COMMENT_BODY).toString();
+                                            Date date = snapshot.getDate(Constants.KEY_DATE);
+                                            String uid = snapshot.get(Constants.KEY_COMMENTER_ID).toString();
+                                            String commenter = documentSnapshot.get(Constants.KEY_USERNAME).toString();
+                                            String commenterImage = documentSnapshot.get(Constants.KEY_USER_IMAGE).toString();
+                                            Comment singleComment = new Comment(comment,commenter,date,uid,commenterImage);
+                                            commentsModels.add(singleComment);
+                                        }
+                                    });
+                        }
+                        (new Handler()).postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(commentsModels.size()!=0){
+                                    commentAdapter = new CommentAdapter(commentsModels,listener);
+                                    binding.commentsRecyclerView.setAdapter(commentAdapter);
+                                    binding.progressBar.setVisibility(View.INVISIBLE);
+                                    binding.commentsRecyclerView.setVisibility(View.VISIBLE);
+                                }else{
+                                    binding.progressBar.setVisibility(View.INVISIBLE);
+                                    binding.commentsRecyclerView.setVisibility(View.INVISIBLE);
+                                }
+                            }
+                        },500);
+                    }
+                });
     }
 
     private void changeFavoriteStatus(){
@@ -338,12 +383,6 @@ public class CocktailPageActivity extends AppCompatActivity {
                         }
                     });
         }
-    }
-
-
-    private Bitmap getCocktailImage(String encodedImage){
-        byte[] bytes = Base64.decode(encodedImage,Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(bytes,0, bytes.length);
     }
 
     @Override

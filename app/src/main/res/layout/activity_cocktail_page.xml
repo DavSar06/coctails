@@ -87,12 +87,9 @@
                     android:autoSizeTextType="uniform"
                     android:fontFamily="@font/argesta"
                     android:gravity="left"
-                    android:text="Moscow  Mul"
+                    android:text="Cocktail"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_35sdp"/>
-
-                    <!--davoi qunac astx-->
-
 
             </LinearLayout>
 
@@ -297,26 +294,92 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Comments"
+                android:fontFamily="@font/metropolisbold"
                 android:paddingLeft="@dimen/_15sdp"
-                android:textSize="16dp"
+                android:textSize="@dimen/_20ssp"
                 android:textColor="@color/white"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/_5sdp"
+                android:gravity="end"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp">
 
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/sbs_list"
+                <EditText
+                    android:id="@+id/inputComment"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:dividerHeight="2dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:spanCount="1"
-                    tools:itemCount="5"
-                    tools:listitem="@layout/item_comments_layout" />
+                    android:layout_height="wrap_content"
+                    android:hint="Input comment"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:backgroundTint="@color/background_color_light"
+                    android:background="@drawable/button_background"
+                    android:gravity="top"
+                    android:textSize="@dimen/_17ssp"
+                    android:fontFamily="@font/metropolisbold"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/grey_white"
+                    android:minHeight="@dimen/_100sdp"
+                    android:inputType="textMultiLine"/>
+                
+                <TextView
+                    android:id="@+id/addCommentBtn"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_16ssp"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:paddingVertical="@dimen/_10sdp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/metropolisbold"
+                    android:background="@drawable/button_background"
+                    android:backgroundTint="@color/background_color_light"
+                    android:text="Publish Comment"/>
 
             </LinearLayout>
+            
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/_200sdp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_gravity="center"
+                android:padding="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_10sdp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/commentsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:clipToPadding="false"
+                    android:orientation="vertical"
+                    android:overScrollMode="always"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:id="@+id/textErrorMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginEnd="@dimen/_24sdp"
+                    android:gravity="center"
+                    android:text="There is no comments yet!"
+                    android:textColor="@color/error"
+                    android:textSize="@dimen/_12ssp"
+                    android:visibility="gone" />
+            </FrameLayout>
 
         </LinearLayout>
 
