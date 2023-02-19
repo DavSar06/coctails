@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Space;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,7 +39,7 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding  binding;
     private List<Cocktail> cocktails;
     private FirebaseFirestore database;
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerViewOthers;
     private TopTenOfWeekAdapter adapter;
     private OthersAdapter othersAdapter;
 

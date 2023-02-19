@@ -35,13 +35,13 @@
                     app:cardElevation="@dimen/_20sdp">
 
                     <com.denzcoskun.imageslider.ImageSlider
+                        android:id="@+id/imageSlider"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_300sdp"
-                        android:id="@+id/imageSlider"
-                        android:background="@mipmap/ic_launcher"
-                        app:iss_period="1000"
+                        android:background="@color/background_color"
                         app:iss_auto_cycle="false"
-                        app:iss_title_background="@drawable/gradient"/>
+                        app:iss_period="1000"
+                        app:iss_title_background="@drawable/gradient" />
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/imageBack"
@@ -289,6 +289,10 @@
 
                 </LinearLayout>
             </HorizontalScrollView>
+
+            <VideoView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"/>
 
             <TextView
                 android:layout_width="match_parent"

@@ -355,20 +355,16 @@
             android:layout_marginBottom="@dimen/_5sdp"
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:fontFamily="@font/metropolisbold"
-            android:textSize="@dimen/_15ssp"/>
-
+            android:textSize="@dimen/_16ssp"/>
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_others"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/_200sdp"
             android:orientation="vertical"
             android:visibility="visible"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:layout_gravity="center_vertical"
-            android:layout_marginVertical="@dimen/_10sdp"
-            android:layout_marginHorizontal="@dimen/_10sdp"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </LinearLayout>
 </ScrollView>
