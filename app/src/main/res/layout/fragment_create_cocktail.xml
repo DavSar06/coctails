@@ -12,27 +12,6 @@
     tools:context=".activities.MainActivity"
     tools:ignore="HardcodedText">
 
-
-    <FrameLayout
-        android:id="@+id/topBar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_60sdp"
-        android:layout_weight="3"
-        android:layout_gravity="top"
-        android:background="@color/background_color_light">
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Your Custom Cocktail"
-            android:textColor="@color/white"
-            android:fontFamily="@font/metropolislight"
-            android:textSize="@dimen/_20ssp"/>
-
-    </FrameLayout>
-
     <LinearLayout
         android:id="@+id/endBar"
         android:layout_width="match_parent"
@@ -41,6 +20,7 @@
         android:layout_weight="300"
         android:orientation="vertical"
         android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:foregroundGravity="bottom">
 
         <TextView

@@ -11,24 +11,7 @@
     android:focusableInTouchMode="true"
     android:orientation="vertical"
     tools:context=".activities.ModeratePageFragment">
-
-    <FrameLayout
-        android:id="@+id/topBar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_60sdp"
-        android:layout_gravity="top"
-        android:background="@color/background_color_light">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Recently suggested recipes"
-            android:textColor="@color/white"
-            android:fontFamily="@font/metropolislight"
-            android:textSize="@dimen/_20ssp"/>
-
-    </FrameLayout>
+<!--
 
     <FrameLayout
         android:layout_marginTop="@dimen/_10sdp"
@@ -58,6 +41,7 @@
             android:textSize="16sp" />
 
     </FrameLayout>
+-->
 
     <FrameLayout
         android:layout_width="match_parent"
