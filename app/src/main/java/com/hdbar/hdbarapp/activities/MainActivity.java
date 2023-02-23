@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
         AlwaysOnRun.AlwaysRun(MainActivity.this);
 
+        FirebaseAuth.getInstance().signOut();
     }
 
 

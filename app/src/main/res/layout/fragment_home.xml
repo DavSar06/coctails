@@ -53,12 +53,13 @@
                 android:id="@+id/home_filter"
                 android:layout_width="@dimen/_25sdp"
                 android:layout_height="@dimen/_25sdp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
-                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
                 android:layout_marginBottom="@dimen/_15sdp"
-                android:layout_alignParentRight="true"
                 android:background="@drawable/filter"
                 android:backgroundTint="@color/white"
                 android:gravity="top|right" />
@@ -78,19 +79,17 @@
             android:textSize="@dimen/_15ssp"/>
 
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/top_ten_of_week_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginVertical="@dimen/_10sdp"
             android:nestedScrollingEnabled="false"
             android:orientation="horizontal"
             android:visibility="visible"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:layout_gravity="center_vertical"
-            android:layout_marginVertical="@dimen/_10sdp"
-            android:layout_marginHorizontal="@dimen/_10sdp"/>
-
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <TextView
             android:layout_width="match_parent"
@@ -362,7 +361,7 @@
             android:id="@+id/recyclerview_others"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 

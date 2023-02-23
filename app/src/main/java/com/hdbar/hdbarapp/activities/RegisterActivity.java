@@ -55,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean t = true;
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
-    private FirebaseUser fuser;
+    private FirebaseUser fUser;
     private FirebaseUser user;
     private FirebaseFirestore database;
 
@@ -70,8 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         init();
         listeners();
-
-
+        AlwaysOnRun.AlwaysRun(this);
 
     }
 
@@ -179,8 +178,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                         // send verification link
 
-                        FirebaseUser fuser = mAuth.getCurrentUser();
-                        fuser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        fUser = mAuth.getCurrentUser();
+                        fUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
                                 Toast.makeText(RegisterActivity.this, "Verification Email Has been Sent", Toast.LENGTH_SHORT).show();
@@ -225,11 +224,13 @@ public class RegisterActivity extends AppCompatActivity {
 
                             }
                         }).start();
+/*
 
-                        if (fuser.isEmailVerified()){
+                        if (fUser.isEmailVerified()){
                             progressDialog.dismiss();
                             sendUserToNextActivity();
                         }
+*/
 
                         sendUserToNextActivity();
 
@@ -247,7 +248,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     private void sendUserToNextActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, EmailConfirmActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 

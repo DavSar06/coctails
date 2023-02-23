@@ -87,6 +87,8 @@ public class LoginActivity extends AppCompatActivity {
         init();
         listeners();
         getNetworkClass(LoginActivity.this);
+
+        AlwaysOnRun.AlwaysRun(this);
     }
 
     private void init(){

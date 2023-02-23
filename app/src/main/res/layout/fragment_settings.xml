@@ -345,7 +345,7 @@
                         android:gravity="left"
                         android:fontFamily="@font/montserratmedium"
                         android:layout_toRightOf="@+id/settings_images6"
-                        android:text="Payment"
+                        android:text="Donate"
                         android:layout_centerVertical="true"
                         android:textSize="@dimen/_14sdp"
                         android:textColor="@color/white"/>
