@@ -3,6 +3,7 @@ package com.hdbar.hdbarapp.activities;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -40,9 +42,12 @@ import com.hdbar.hdbarapp.settings.AboutUsActivity;
 import com.hdbar.hdbarapp.settings.AccountActivity;
 import com.hdbar.hdbarapp.settings.HelpAndSupportActivity;
 import com.hdbar.hdbarapp.settings.LanguagesActivity;
+import com.hdbar.hdbarapp.utilities.Constants;
+import com.hdbar.hdbarapp.utilities.PreferenceManager;
 import com.hdbar.hdbarapp.settings.PaymentActivity;
 import com.hdbar.hdbarapp.settings.PrivacyPolicyActivity;
 import com.hdbar.hdbarapp.utilities.Constants;
+
 
 import org.w3c.dom.Text;
 
@@ -263,4 +268,7 @@ public class SettingsFragment extends Fragment {
         });
 
     }
+
+
+
 }

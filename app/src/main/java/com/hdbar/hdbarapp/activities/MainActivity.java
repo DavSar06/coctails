@@ -1,50 +1,31 @@
 package com.hdbar.hdbarapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.View;
-import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.hdbar.hdbarapp.R;
-import com.hdbar.hdbarapp.adapters.CocktailsAdapter;
 import com.hdbar.hdbarapp.databinding.ActivityMainBinding;
-import com.hdbar.hdbarapp.databinding.FragmentSettingsBinding;
-import com.hdbar.hdbarapp.listeners.CocktailListener;
-import com.hdbar.hdbarapp.models.Cocktail;
 import com.hdbar.hdbarapp.utilities.Constants;
 import com.hdbar.hdbarapp.utilities.PreferenceManager;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
-
-import java.util.LinkedList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -71,13 +52,38 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationBar();
 
         AlwaysOnRun.AlwaysRun(MainActivity.this);
-
         FirebaseAuth.getInstance().signOut();
     }
 
-
-
-
+    private void createNotify(){
+        String id = "my_idd";
+        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = manager.getNotificationChannel(id);
+            if (channel == null){
+                channel = new NotificationChannel(id, "channel Title", NotificationManager.IMPORTANCE_HIGH);
+                channel.setDescription("inchvor description");
+                channel.enableVibration(true);
+                channel.setVibrationPattern(new long[]{100,200,300,340});
+                channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+                manager.createNotificationChannel(channel);
+            }
+        }
+        Intent notificationIntent = new Intent(this,NotificationActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,id)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(null)
+                .setContentTitle("Title")
+                .setContentText("Your text description")
+                .setVibrate(new long[]{100,200,300,340})
+                .setAutoCancel(false)
+                .setTicker("Notification");
+        builder.setContentIntent(contentIntent);
+        NotificationManagerCompat m = NotificationManagerCompat.from(getApplicationContext());
+        m.notify(1,builder.build());
+    }
 
     private void bottomNavigationBar(){
 

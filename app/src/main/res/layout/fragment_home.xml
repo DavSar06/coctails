@@ -45,24 +45,10 @@
                 android:layout_height="@dimen/_30sdp"
                 android:layout_centerVertical="true"
                 android:layout_marginBottom="@dimen/_15sdp"
-                android:layout_toLeftOf="@+id/home_filter"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/_15sdp"
                 android:background="@drawable/ic_baseline_list_alt_24" />
 
-
-            <TextView
-                android:id="@+id/home_filter"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="@dimen/_15sdp"
-                android:background="@drawable/filter"
-                android:backgroundTint="@color/white"
-                android:gravity="top|right" />
 
 
         </RelativeLayout>
