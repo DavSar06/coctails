@@ -16,6 +16,7 @@ public class Constants {
     public static final String KEY_COCKTAIL_CREATOR_ID = "creatorId";
     public static final String KEY_COCKTAIL_CREATOR_NAME = "creatorName";
     public static final String KEY_COCKTAIL_HOW_MANY_RATES = "howManyRate";
+    public static final String KEY_COCKTAIL_TAGS = "tags";
 
     public static final String KEY_STATUS = "status";
     public static final String KEY_USER_UID = "uid";
@@ -36,4 +37,7 @@ public class Constants {
     public static final String KEY_COMMENT_BODY = "body";
     public static final String KEY_DATE = "date";
     public static final String KEY_COMMENTER_ID = "commenterId";
+
+    public static final String KEY_COLLECTION_TAGS = "tags";
+    public static final String KEY_TAG_NAME = "tagName";
 }

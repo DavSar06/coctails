@@ -132,8 +132,9 @@ public class FavoriteFragment extends Fragment {
                                             String recipe = document.get(Constants.KEY_COCKTAIL_RECIPE).toString();
                                             String rating_count = document.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
                                             ArrayList<String> image = (ArrayList<String>) document.get(Constants.KEY_COCKTAIL_IMAGE);
+                                            ArrayList<String> tags = (ArrayList<String>) document.get(Constants.KEY_COCKTAIL_TAGS);
                                             String rating = document.get(Constants.KEY_COCKTAIL_RATING).toString();
-                                            Cocktail a = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator,rating_count);
+                                            Cocktail a = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator,rating_count,tags);
                                             cocktails.add(a);
                                         }
                                     });

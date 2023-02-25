@@ -19,6 +19,8 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,8 +28,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,10 +41,13 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.FragmentCreateCocktailBinding;
 import com.hdbar.hdbarapp.utilities.Constants;
 import com.hdbar.hdbarapp.utilities.PreferenceManager;
@@ -49,7 +56,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 public class CreateCocktailFragment extends Fragment {
 
@@ -60,6 +69,11 @@ public class CreateCocktailFragment extends Fragment {
     private EditText cocktailName;
     private EditText cocktailRecipe;
     private Integer PICK_IMAGE_MULTIPLE = 1;
+
+    private FirebaseFirestore database;
+
+    private List<String> cocktailTags;
+    private ArrayList<String> tags = new ArrayList<>();
 
     private ArrayList<Uri> imageUri = new ArrayList<>();
     private ArrayList<String> finalImages = new ArrayList<>();
@@ -116,13 +130,27 @@ public class CreateCocktailFragment extends Fragment {
         cocktailName = binding.cocktailName;
         cocktailRecipe = binding.cocktailRecipe;
         storage = FirebaseStorage.getInstance().getReference("cocktails");
+        database = FirebaseFirestore.getInstance();
+
+        database.collection(Constants.KEY_COLLECTION_TAGS)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for(DocumentSnapshot snapshot:queryDocumentSnapshots){
+                            tags.add(snapshot.get(Constants.KEY_TAG_NAME).toString());
+                        }
+                        ArrayAdapter<String> tagArrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item, tags);
+                        binding.tagsACTV.setAdapter(tagArrayAdapter);
+                        binding.tagsACTV.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+                    }
+                });
     }
 
     private void publish(){
-        if(!cocktailName.getText().toString().isEmpty() && !cocktailRecipe.getText().toString().isEmpty() && imageUri != null){
+        if(!cocktailName.getText().toString().isEmpty() && !cocktailRecipe.getText().toString().isEmpty() && imageUri != null && !binding.tagsACTV.getText().toString().isEmpty()){
             binding.publishRecipe.setEnabled(false);
             binding.progressBar.setVisibility(View.VISIBLE);
-            FirebaseFirestore database = FirebaseFirestore.getInstance();
             for(int i=0;i<imageUri.size();i++){
                 StorageReference reference = storage.child(System.currentTimeMillis()+"."+getFileExtension(imageUri.get(i)));
                 reference.putFile(imageUri.get(i)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -130,11 +158,14 @@ public class CreateCocktailFragment extends Fragment {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         finalImages.add(taskSnapshot.getMetadata().getPath());
                         if(finalImages.size()==imageUri.size()){
+                            String tags = binding.tagsACTV.getText().toString();
+                            cocktailTags = Arrays.asList(tags.split(","));
                             HashMap<String,Object> cocktail = new HashMap<>();
                             cocktail.put(Constants.KEY_COCKTAIL_NAME,cocktailName.getText().toString());
                             cocktail.put(Constants.KEY_COCKTAIL_RECIPE,cocktailRecipe.getText().toString());
                             cocktail.put(Constants.KEY_COCKTAIL_IMAGE,finalImages);
                             cocktail.put(Constants.KEY_COCKTAIL_VIDEO,null);
+                            cocktail.put(Constants.KEY_COCKTAIL_TAGS,cocktailTags);
                             cocktail.put(Constants.KEY_COCKTAIL_RATING,new Integer(0));
                             cocktail.put(Constants.KEY_COCKTAIL_HOW_MANY_RATES,new Integer(0));
                             cocktail.put(Constants.KEY_STATUS,Constants.KEY_COCKTAIL_STATUS_PENDING);
@@ -153,6 +184,8 @@ public class CreateCocktailFragment extends Fragment {
                     }
                 });
             }
+        }else{
+            Toast.makeText(getActivity(), "Fill in all fields", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -237,10 +237,11 @@ public class CocktailPageActivity extends AppCompatActivity {
                     String cocktailName = documentSnapshot.getString(Constants.KEY_COCKTAIL_NAME);
                     String creator = documentSnapshot.getString(Constants.KEY_COCKTAIL_CREATOR_NAME);
                     ArrayList<String> image = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_IMAGE);
+                    ArrayList<String> tags = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_TAGS);
                     String rating_count = documentSnapshot.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
                     String recipe = documentSnapshot.get(Constants.KEY_COCKTAIL_RECIPE).toString();
                     String rating = documentSnapshot.get(Constants.KEY_COCKTAIL_RATING).toString();
-                    cocktail = new Cocktail(documentSnapshot.getId(),cocktailName,recipe,image,rating,creator,rating_count);
+                    cocktail = new Cocktail(documentSnapshot.getId(),cocktailName,recipe,image,rating,creator,rating_count,tags);
 
 
                     for(int i=0;i<cocktail.image.size();i++){

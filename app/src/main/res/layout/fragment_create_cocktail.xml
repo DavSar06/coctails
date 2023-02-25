@@ -112,14 +112,14 @@
                     android:layout_marginBottom="@dimen/_10sdp"/>
 
 
-
-                <EditText
-                    android:id="@+id/customCocktailAddTag"
+                <MultiAutoCompleteTextView
+                    android:id="@+id/tagsACTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_15sdp"
                     android:padding="@dimen/_5sdp"
-                    android:hint="Enter your tag"
+                    android:hint="Enter tags(break with commas)"
+                    android:ems="10"
                     android:backgroundTint="@color/background_color_light"
                     android:textColorHint="@color/grey"
                     android:inputType="text"
