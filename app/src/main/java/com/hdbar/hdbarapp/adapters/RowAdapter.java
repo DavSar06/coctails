@@ -63,7 +63,7 @@ public class RowAdapter extends RecyclerView.Adapter<RowAdapter.CocktailViewHold
             binding.cocktailRating.setText(cocktail.rating+"");
             FirebaseStorage storage = FirebaseStorage.getInstance();
 
-            storage.getReference(cocktail.image).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            storage.getReference(cocktail.image.get(0)).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     Glide.with(binding.cocktailImage).load(task.getResult()).into(binding.cocktailImage);

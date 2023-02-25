@@ -62,7 +62,7 @@ public class ModeratePageAdapter extends RecyclerView.Adapter<ModeratePageAdapte
             binding.cocktailAuthor.setText("Added by: "+cocktail.creator);
             FirebaseStorage storage = FirebaseStorage.getInstance();
 
-            storage.getReference(cocktail.image).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            storage.getReference(cocktail.image.get(0)).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     Glide.with(binding.cocktailImage).load(task.getResult()).into(binding.cocktailImage);

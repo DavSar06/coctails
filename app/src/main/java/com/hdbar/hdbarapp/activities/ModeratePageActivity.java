@@ -65,7 +65,7 @@ public class ModeratePageActivity extends AppCompatActivity {
                                 String cocktailName = document.getString(Constants.KEY_COCKTAIL_NAME);
                                 String creator = document.getString(Constants.KEY_COCKTAIL_CREATOR_NAME);
                                 String recipe = document.get(Constants.KEY_COCKTAIL_RECIPE).toString();
-                                String image = document.get(Constants.KEY_COCKTAIL_IMAGE).toString();
+                                ArrayList<String> image = (ArrayList<String>) document.get(Constants.KEY_COCKTAIL_IMAGE);
                                 String rating = document.get(Constants.KEY_COCKTAIL_RATING).toString();
                                 String rating_count = document.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
                                 Cocktail temp = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator,rating_count);

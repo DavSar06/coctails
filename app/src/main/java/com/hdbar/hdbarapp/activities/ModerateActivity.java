@@ -22,6 +22,8 @@ import com.hdbar.hdbarapp.databinding.ActivityModerateBinding;
 import com.hdbar.hdbarapp.models.Cocktail;
 import com.hdbar.hdbarapp.utilities.Constants;
 
+import java.util.ArrayList;
+
 public class ModerateActivity extends AppCompatActivity {
 
     private ActivityModerateBinding binding;
@@ -49,7 +51,7 @@ public class ModerateActivity extends AppCompatActivity {
                         String cocktailName = documentSnapshot.getString(Constants.KEY_COCKTAIL_NAME);
                         String creator = documentSnapshot.getString(Constants.KEY_COCKTAIL_CREATOR_NAME);
                         String recipe = documentSnapshot.get(Constants.KEY_COCKTAIL_RECIPE).toString();
-                        String image = documentSnapshot.get(Constants.KEY_COCKTAIL_IMAGE).toString();
+                        ArrayList<String> image = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_IMAGE);
                         String rating = documentSnapshot.get(Constants.KEY_COCKTAIL_RATING).toString();
                         String rating_count = documentSnapshot.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
                         cocktail = new Cocktail(documentSnapshot.getId(),cocktailName,recipe,image,rating,creator,rating_count);
@@ -57,7 +59,7 @@ public class ModerateActivity extends AppCompatActivity {
                         binding.cocktailName.setText(cocktail.name);
                         FirebaseStorage storage = FirebaseStorage.getInstance();
 
-                        storage.getReference(cocktail.image).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        storage.getReference(cocktail.image.get(0)).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                             @Override
                             public void onComplete(@NonNull Task<Uri> task) {
                                 Glide.with(binding.cocktailImage).load(task.getResult()).into(binding.cocktailImage);
