@@ -70,6 +70,8 @@ public class ModeratePageActivity extends AppCompatActivity {
                                 String rating_count = document.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
                                 Cocktail temp = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator,rating_count);
                                 cocktails.add(temp);
+                                adapter = new ModeratePageAdapter(cocktails,cocktailListener);
+                                binding.cocktailsRecyclerView.setAdapter(adapter);
                             }
                         }else {
                             Log.d("Exception",task.getException().toString());
