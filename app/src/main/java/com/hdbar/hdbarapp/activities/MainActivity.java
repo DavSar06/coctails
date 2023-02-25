@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationBar();
 
         AlwaysOnRun.AlwaysRun(MainActivity.this);
-        FirebaseAuth.getInstance().signOut();
     }
 
     private void createNotify(){
