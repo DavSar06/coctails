@@ -80,8 +80,7 @@ public class ModerateActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            MainActivity.moderateActivity = true;
-                            Intent i = new Intent(getApplicationContext(),MainActivity.class);
+                            Intent i = new Intent(getApplicationContext(),ModeratePageActivity.class);
                             startActivity(i);
                             finish();
                             overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
@@ -95,8 +94,7 @@ public class ModerateActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            MainActivity.moderateActivity = true;
-                            Intent i = new Intent(getApplicationContext(),MainActivity.class);
+                            Intent i = new Intent(getApplicationContext(),ModeratePageActivity.class);
                             startActivity(i);
                             finish();
                             overridePendingTransition(R.anim.fade_in,R.anim.fade_out);

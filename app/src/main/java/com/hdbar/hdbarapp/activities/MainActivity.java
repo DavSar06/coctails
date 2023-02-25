@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private String userName;
     private String userEmail;
     private String userImage;
-    public static boolean moderateActivity = false;
 
     private FrameLayout fragmentContainer;
 
@@ -46,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        replaceFragment(new HomeFragment());
 
         init();
         listeners();
@@ -105,10 +106,6 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new SettingsFragment());
                     Log.d("In","4");
                     break;
-                case R.id.moderator:
-                    replaceFragment(new ModeratePageFragment());
-                    Log.d("In","5");
-                    break;
             }
 
             return true;
@@ -120,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container,fragment).commit();
-        moderateActivity = false;
     }
 
     private void init(){
@@ -131,12 +127,6 @@ public class MainActivity extends AppCompatActivity {
         userImage = preferenceManager.getString(Constants.KEY_USER_IMAGE);
         fragmentContainer = binding.fragmentContainer;
 
-        if(moderateActivity){
-            replaceFragment(new ModeratePageFragment());
-            binding.bottomNavigationView.findViewById(R.id.moderator).performClick();
-        } else{
-            replaceFragment(new HomeFragment());
-        }
 
 //        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 //        database.collection(Constants.KEY_COLLECTION_USERS)

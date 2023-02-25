@@ -159,6 +159,11 @@ public class SettingsFragment extends Fragment {
                                     if(task.getResult().get(Constants.KEY_STATUS).equals(Constants.KEY_STATUS_ADMINISTRATOR)){
                                         moderators.setVisibility(View.VISIBLE);
                                         binding.viewModeratorTop.setVisibility(View.VISIBLE);
+                                        binding.moderateSettingsBtn.setVisibility(View.VISIBLE);
+                                    }
+                                    if(task.getResult().get(Constants.KEY_STATUS).equals(Constants.KEY_STATUS_MODERATOR)){
+                                        binding.moderateSettingsBtn.setVisibility(View.VISIBLE);
+                                        binding.viewModeratorTop.setVisibility(View.VISIBLE);
                                     }
                                 }
                             }
@@ -183,6 +188,15 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),ModeratorsActivity.class);
+                startActivity(intent);
+                //getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
+            }
+        });
+
+        binding.moderateSettingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),ModeratePageActivity.class);
                 startActivity(intent);
                 //getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
             }

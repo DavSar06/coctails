@@ -1,17 +1,14 @@
 package com.hdbar.hdbarapp.activities;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.os.Handler;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,10 +17,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.hdbar.hdbarapp.R;
-import com.hdbar.hdbarapp.adapters.CocktailsAdapter;
-import com.hdbar.hdbarapp.adapters.CocktailsSingleAdapter;
 import com.hdbar.hdbarapp.adapters.ModeratePageAdapter;
-import com.hdbar.hdbarapp.databinding.FragmentModeratePageBinding;
+import com.hdbar.hdbarapp.databinding.ActivityModeratePageBinding;
 import com.hdbar.hdbarapp.listeners.CocktailListener;
 import com.hdbar.hdbarapp.models.Cocktail;
 import com.hdbar.hdbarapp.utilities.Constants;
@@ -31,9 +26,9 @@ import com.hdbar.hdbarapp.utilities.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModeratePageFragment extends Fragment {
+public class ModeratePageActivity extends AppCompatActivity {
 
-    private FragmentModeratePageBinding binding;
+    private ActivityModeratePageBinding binding;
     private List<Cocktail> cocktails;
     private FirebaseFirestore database;
     private ModeratePageAdapter adapter;
@@ -44,21 +39,12 @@ public class ModeratePageFragment extends Fragment {
             Intent intent = new Intent(binding.getRoot().getContext(), ModerateActivity.class);
             intent.putExtra(Constants.KEY_COCKTAIL_ID, cocktail.id);
             startActivity(intent);
-            getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+            finish();
+            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         }
     };
 
-    public ModeratePageFragment() {
-        // Required empty public constructor
-    }
-
-    public static ModeratePageFragment newInstance(String param1, String param2) {
-        return new ModeratePageFragment();
-    }
-
-
     private void init(){
-        binding = FragmentModeratePageBinding.inflate(getLayoutInflater());
         database = FirebaseFirestore.getInstance();
         cocktails = new ArrayList<>();
         adapter = new ModeratePageAdapter(cocktails,cocktailListener);
@@ -109,21 +95,21 @@ public class ModeratePageFragment extends Fragment {
 
     private void listeners(){
         binding.getRoot().setOnClickListener(v->{
-            InputMethodManager inm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            inm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
+            InputMethodManager inm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+        });
+        binding.icBack.setOnClickListener(v->{
+            finish();
         });
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityModeratePageBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         init();
         listeners();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return binding.getRoot();
     }
 }
