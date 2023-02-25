@@ -12,6 +12,9 @@ import android.util.Base64;
 import android.widget.ArrayAdapter;
 
 import com.bumptech.glide.Glide;
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -33,6 +36,7 @@ public class ModerateActivity extends AppCompatActivity {
     private Cocktail cocktail;
     private FirebaseFirestore database;
     private ArrayList<String> tags = new ArrayList<>();
+    private ArrayList<SlideModel> slideModels = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +78,18 @@ public class ModerateActivity extends AppCompatActivity {
                         binding.cocktailName.setText(cocktail.name);
                         FirebaseStorage storage = FirebaseStorage.getInstance();
 
-                        storage.getReference(cocktail.image.get(0)).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Uri> task) {
-                                Glide.with(binding.cocktailImage).load(task.getResult()).into(binding.cocktailImage);
-                            }
-                        });
+                        for(int i=0;i<cocktail.image.size();i++){
+                            storage.getReference(cocktail.image.get(i)).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    slideModels.add(new SlideModel(task.getResult().toString(), ScaleTypes.CENTER_CROP));
+                                    if(slideModels.size()==cocktail.image.size()){
+                                        binding.cocktailImage.setImageList(slideModels,ScaleTypes.CENTER_CROP);
+                                    }
+                                }
+                            });
+                        }
+
                         binding.cocktailRecipe.setText(cocktail.recipe);
                     }
                 });
