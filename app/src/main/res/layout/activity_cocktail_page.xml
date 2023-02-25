@@ -181,112 +181,17 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:paddingHorizontal="@dimen/_15sdp">
 
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/tagsRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center_horizontal"
+                    android:clipToPadding="false"
+                    android:overScrollMode="always"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:orientation="horizontal"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="@dimen/_10sdp"
-                        android:autoSizeTextType="uniform"
-                        android:fontFamily="@font/garutemedium"
-                        android:gravity="center"
-                        android:text="tags"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_16sdp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="@dimen/_10sdp"
-                        android:autoSizeTextType="uniform"
-                        android:fontFamily="@font/garutemedium"
-                        android:gravity="center"
-                        android:text="tags"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_16sdp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="@dimen/_10sdp"
-                        android:autoSizeTextType="uniform"
-                        android:fontFamily="@font/garutemedium"
-                        android:gravity="center"
-                        android:text="tags"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_16sdp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="@dimen/_10sdp"
-                        android:autoSizeTextType="uniform"
-                        android:fontFamily="@font/garutemedium"
-                        android:gravity="center"
-                        android:text="tags"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_16sdp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="@dimen/_10sdp"
-                        android:autoSizeTextType="uniform"
-                        android:fontFamily="@font/garutemedium"
-                        android:gravity="center"
-                        android:text="tags"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_16sdp" />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="@dimen/_10sdp"
-                        android:autoSizeTextType="uniform"
-                        android:fontFamily="@font/garutemedium"
-                        android:gravity="center"
-                        android:text="tags"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_16sdp" />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="@dimen/_10sdp"
-                        android:autoSizeTextType="uniform"
-                        android:fontFamily="@font/garutemedium"
-                        android:gravity="center"
-                        android:text="tags"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_16sdp" />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="@dimen/_10sdp"
-                        android:autoSizeTextType="uniform"
-                        android:fontFamily="@font/garutemedium"
-                        android:gravity="center"
-                        android:text="tags"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_16sdp" />
-
-                </LinearLayout>
             </HorizontalScrollView>
 <!--
             <VideoView

@@ -35,6 +35,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.adapters.CommentAdapter;
+import com.hdbar.hdbarapp.adapters.TagAdapter;
 import com.hdbar.hdbarapp.databinding.ActivityCocktailPageBinding;
 import com.hdbar.hdbarapp.listeners.CommentImageListener;
 import com.hdbar.hdbarapp.models.Cocktail;
@@ -255,6 +256,11 @@ public class CocktailPageActivity extends AppCompatActivity {
                             }
                         });
                     }
+
+                    TagAdapter tagAdapter = new TagAdapter(cocktail.tags);
+                    binding.tagsRecyclerView.setAdapter(tagAdapter);
+                    binding.tagsRecyclerView.setVisibility(View.VISIBLE);
+
                     binding.cocktailName.setText(cocktail.name);/*
 
                     binding.cocktailAuthor.setText("Added by: "+cocktail.creator);
