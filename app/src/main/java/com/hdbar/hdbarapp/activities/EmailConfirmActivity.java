@@ -59,8 +59,10 @@ public class EmailConfirmActivity extends AppCompatActivity {
 
     public void confirmBtn(){
         Toast.makeText(EmailConfirmActivity.this, "click", Toast.LENGTH_SHORT).show();
-        if (!fUser.isEmailVerified()){
+        if (mAuth.getCurrentUser().isEmailVerified()){
             Toast.makeText(EmailConfirmActivity.this, "verifid", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(EmailConfirmActivity.this, "unverifid", Toast.LENGTH_SHORT).show();
         }
     }
 
