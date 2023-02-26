@@ -146,7 +146,6 @@ public class SettingsFragment extends Fragment {
         logOut = binding.logoutBtn;
         notification = binding.notificationsSettingsBtn;
         notifications = binding.settingsNotificationsSwitch;
-
         new Thread(new Runnable() {
             @Override
             public void run() {
