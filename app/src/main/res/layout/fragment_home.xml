@@ -346,7 +346,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_others"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_200sdp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_10sdp"
             android:orientation="vertical"
             android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

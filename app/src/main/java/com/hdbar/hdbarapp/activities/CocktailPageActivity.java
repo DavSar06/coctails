@@ -35,6 +35,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.adapters.CommentAdapter;
+import com.hdbar.hdbarapp.adapters.TagAdapter;
 import com.hdbar.hdbarapp.databinding.ActivityCocktailPageBinding;
 import com.hdbar.hdbarapp.listeners.CommentImageListener;
 import com.hdbar.hdbarapp.models.Cocktail;
@@ -55,6 +56,7 @@ public class CocktailPageActivity extends AppCompatActivity {
     private FirebaseFirestore database;
     private float numberOfStars;
     private ImageSlider imageSlider;
+    private ArrayList<SlideModel> slideModels = new ArrayList<>();
 
 
     //rating
@@ -84,25 +86,11 @@ public class CocktailPageActivity extends AppCompatActivity {
 
     private CommentAdapter commentAdapter = new CommentAdapter(commentsModels,listener);
 
-    String fruitList[]  ={"Apple","Bannana", "Appcorit", "Orange","Whater Melon"};
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCocktailPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        imageSlider = binding.imageSlider;
-        ArrayList<SlideModel> slideModels = new ArrayList<>();
-
-
-//        Default Images in slider (To change)
-        slideModels.add(new SlideModel(R.drawable.image1, ScaleTypes.CENTER_CROP));
-        slideModels.add(new SlideModel(R.drawable.image2, ScaleTypes.CENTER_CROP));
-        slideModels.add(new SlideModel(R.drawable.image3, ScaleTypes.CENTER_CROP));
-        slideModels.add(new SlideModel(R.drawable.image4, ScaleTypes.CENTER_CROP));
-        imageSlider.setImageList(slideModels,ScaleTypes.CENTER_CROP);
-//
 
         init();
         listeners();
@@ -121,7 +109,6 @@ public class CocktailPageActivity extends AppCompatActivity {
                                 simple_rating.setRating(Float.parseFloat(task.getResult().getDocuments().get(0).get(Constants.KEY_COCKTAIL_RATING).toString()));
                                 simple_rating.setIsIndicator(false);
                                 rating_bool = true;
-                                Log.i("R", "rating seted");
                             }
                         }
                     }
@@ -152,14 +139,10 @@ public class CocktailPageActivity extends AppCompatActivity {
                                             database.collection(Constants.KEY_COLLECTION_RATINGS).add(rating_hm);
                                             simple_rating.setIsIndicator(false);
                                             ratingsSize();
-                                            Log.i("Y", "off");
-                                            Log.i("Y", rate_i + "");
                                         }
                                         else {
                                             simple_rating.setIsIndicator(true);
                                             rate_i--;
-                                            Log.i("Y", "on");
-                                            Log.i("Y", rate_i + "");
                                         }
                                     }
                                 }
@@ -185,7 +168,6 @@ public class CocktailPageActivity extends AppCompatActivity {
                                     getRatingsFB = Float.parseFloat(snapshot.get(Constants.KEY_COCKTAIL_RATING).toString());
                                     arrayListRatings.add(getRatingsFB);
                                     sum += getRatingsFB;
-                                    //Log.e("Y", y + "");
                                 }
                                 local_rate.setText(String.format("%.01f",sum/arrayListRatings.size() )+ "");
                                 hm_rates.setText(arrayListRatings.size() + "");
@@ -255,13 +237,34 @@ public class CocktailPageActivity extends AppCompatActivity {
                 .addOnSuccessListener(documentSnapshot -> {
                     String cocktailName = documentSnapshot.getString(Constants.KEY_COCKTAIL_NAME);
                     String creator = documentSnapshot.getString(Constants.KEY_COCKTAIL_CREATOR_NAME);
-                    String image = documentSnapshot.get(Constants.KEY_COCKTAIL_IMAGE).toString();
+                    ArrayList<String> image = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_IMAGE);
+                    ArrayList<String> tags = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_TAGS);
                     String rating_count = documentSnapshot.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
                     String recipe = documentSnapshot.get(Constants.KEY_COCKTAIL_RECIPE).toString();
                     String rating = documentSnapshot.get(Constants.KEY_COCKTAIL_RATING).toString();
-                    cocktail = new Cocktail(documentSnapshot.getId(),cocktailName,recipe,image,rating,creator,rating_count);
-                    //binding.cocktailAuthor.setText("Added by: "+cocktail.creator);
+                    cocktail = new Cocktail(documentSnapshot.getId(),cocktailName,recipe,image,rating,creator,rating_count,tags);
+
+
+                    for(int i=0;i<cocktail.image.size();i++){
+                        storage.getReference(cocktail.image.get(i)).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                slideModels.add(new SlideModel(task.getResult().toString(),ScaleTypes.CENTER_CROP));
+                                if(slideModels.size()==cocktail.image.size()){
+                                    binding.imageSlider.setImageList(slideModels,ScaleTypes.CENTER_CROP);
+                                }
+                            }
+                        });
+                    }
+
+                    TagAdapter tagAdapter = new TagAdapter(cocktail.tags);
+                    binding.tagsRecyclerView.setAdapter(tagAdapter);
+                    binding.tagsRecyclerView.setVisibility(View.VISIBLE);
+
                     binding.cocktailName.setText(cocktail.name);/*
+
+                    binding.cocktailAuthor.setText("Added by: "+cocktail.creator);
+
                     storage.getReference(cocktail.image).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                         @Override
                         public void onComplete(@NonNull Task<Uri> task) {

@@ -69,13 +69,15 @@
             android:layout_marginVertical="@dimen/_10sdp"
             android:layout_height="wrap_content"/>
 
-        <ImageView
+        <com.denzcoskun.imageslider.ImageSlider
             android:id="@+id/cocktailImage"
             android:maxWidth="@dimen/_300sdp"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp"
             android:scaleType="centerCrop"
-            style="@style/ImageView.Circle.Rectangle"
+            app:iss_auto_cycle="false"
+            app:iss_period="1000"
+            app:iss_title_background="@drawable/gradient"
             android:layout_marginBottom="@dimen/_15sdp"/>
 
         <TextView

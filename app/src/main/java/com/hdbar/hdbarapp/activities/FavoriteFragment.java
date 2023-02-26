@@ -33,6 +33,7 @@ import com.hdbar.hdbarapp.utilities.Constants;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -130,9 +131,10 @@ public class FavoriteFragment extends Fragment {
                                             String creator = document.getString(Constants.KEY_COCKTAIL_CREATOR_NAME);
                                             String recipe = document.get(Constants.KEY_COCKTAIL_RECIPE).toString();
                                             String rating_count = document.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
-                                            String image = document.get(Constants.KEY_COCKTAIL_IMAGE).toString();
+                                            ArrayList<String> image = (ArrayList<String>) document.get(Constants.KEY_COCKTAIL_IMAGE);
+                                            ArrayList<String> tags = (ArrayList<String>) document.get(Constants.KEY_COCKTAIL_TAGS);
                                             String rating = document.get(Constants.KEY_COCKTAIL_RATING).toString();
-                                            Cocktail a = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator,rating_count);
+                                            Cocktail a = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator,rating_count,tags);
                                             cocktails.add(a);
                                         }
                                     });
