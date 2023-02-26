@@ -60,7 +60,6 @@ public class TopTenOfWeekAdapter extends RecyclerView.Adapter<TopTenOfWeekAdapte
             binding.topOfWeekName.setText(cocktail.name);
             binding.topOfWeekAuthor.setText(cocktail.creator);
             FirebaseStorage storage = FirebaseStorage.getInstance();
-
         storage.getReference(cocktail.image.get(0)).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
