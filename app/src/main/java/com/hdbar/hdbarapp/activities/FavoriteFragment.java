@@ -9,6 +9,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +32,7 @@ import com.hdbar.hdbarapp.databinding.FragmentFavoriteBinding;
 import com.hdbar.hdbarapp.listeners.CocktailListener;
 import com.hdbar.hdbarapp.models.Cocktail;
 import com.hdbar.hdbarapp.utilities.Constants;
+import com.hdbar.hdbarapp.utilities.SearchHelper;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -110,6 +113,20 @@ public class FavoriteFragment extends Fragment {
             binding.progressBar.setVisibility(View.VISIBLE);
             changeAdapter(1);
         });
+        binding.search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                List<Cocktail> searchResult = SearchHelper.searchInCocktails(charSequence.toString(), cocktails);
+                CocktailsAdapter adapter = new CocktailsAdapter(searchResult,cocktailListener);
+                binding.cocktailsRecyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
     }
 
     private void changeAdapter(Integer k){
@@ -162,43 +179,5 @@ public class FavoriteFragment extends Fragment {
                         },500);
                     }
                 });
-//        database.collection(Constants.KEY_COLLECTION_COCKTAILS).whereEqualTo(Constants.KEY_STATUS,Constants.KEY_COCKTAIL_STATUS_APPROVED)
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            cocktails = new LinkedList<>();
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                String cocktailName = document.getString(Constants.KEY_COCKTAIL_NAME);
-//                                String creator = document.getString(Constants.KEY_COCKTAIL_CREATOR_NAME);
-//                                String recipe = document.get(Constants.KEY_COCKTAIL_RECIPE).toString();
-//                                String rating_count = document.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
-//                                String image = document.get(Constants.KEY_COCKTAIL_IMAGE).toString();
-//                                String rating = document.get(Constants.KEY_COCKTAIL_RATING).toString();
-//                                Cocktail a = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator,rating_count);
-//                                cocktails.add(a);
-//                            }
-//                            if(cocktails.size()==0){
-//                                binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
-//                                binding.progressBar.setVisibility(View.INVISIBLE);
-//                                binding.textErrorMessage.setVisibility(View.VISIBLE);
-//                            }else {
-//                                if(k==0){
-//                                    CocktailsAdapter adapter = new CocktailsAdapter(cocktails,cocktailListener);
-//                                    binding.cocktailsRecyclerView.setAdapter(adapter);
-//                                }else{
-//                                    CocktailsSingleAdapter adapter = new CocktailsSingleAdapter(cocktails,cocktailListener);
-//                                    binding.cocktailsRecyclerView.setAdapter(adapter);
-//                                }
-//                                binding.cocktailsRecyclerView.setVisibility(View.VISIBLE);
-//                                binding.progressBar.setVisibility(View.INVISIBLE);
-//                                binding.textErrorMessage.setVisibility(View.INVISIBLE);
-//                            }
-//                        } else {
-//                            Log.d("FCM", "Error getting documents: ", task.getException());
-//                        }
-//                    }
-//                });
     }
 }
