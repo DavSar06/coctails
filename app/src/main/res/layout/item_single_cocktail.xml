@@ -4,7 +4,7 @@
     android:maxWidth="@dimen/_200sdp"
     android:padding="@dimen/_10sdp"
     android:layout_height="match_parent"
-    android:background="@color/background_color_dark"
+    android:background="@color/background_color_light"
     android:orientation="vertical"
     android:maxHeight="@dimen/_300sdp"
     android:layout_marginVertical="@dimen/_10sdp">
@@ -30,14 +30,6 @@
         android:id="@+id/cocktailCreator"
         android:maxLines="1"
         android:maxWidth="@dimen/_180sdp"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:textColor="@color/background_color_light"
-        android:textSize="@dimen/_14ssp"
-        android:layout_height="0dp"
-        android:layout_weight="1.5"/>
-    <TextView
-        android:id="@+id/cocktailRating"
         android:layout_width="match_parent"
         android:gravity="center"
         android:textColor="@color/grey_white"

@@ -3,9 +3,9 @@
     android:layout_width="@dimen/_130sdp"
     android:padding="@dimen/_8sdp"
     android:orientation="vertical"
-    android:background="@color/background_color_dark"
-    android:layout_marginRight="@dimen/_10sdp"
-    android:layout_height="@dimen/_200sdp">
+    android:background="@color/background_color_light"
+    android:layout_marginEnd="@dimen/_10sdp"
+    android:layout_height="@dimen/_180sdp">
     <ImageView
         android:id="@+id/cocktailImage"
         android:layout_width="match_parent"
@@ -25,13 +25,6 @@
         android:id="@+id/cocktailCreator"
         android:maxLines="1"
         android:maxWidth="@dimen/_110sdp"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:textColor="@color/background_color_light"
-        android:textSize="@dimen/_12ssp"
-        android:layout_height="@dimen/_15sdp"/>
-    <TextView
-        android:id="@+id/cocktailRating"
         android:layout_width="match_parent"
         android:gravity="center"
         android:textColor="@color/grey_white"
