@@ -5,20 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:clickable="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:background="@color/background_color"
     tools:context=".activities.CocktailPageActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+
+        <TextView
+            android:id="@+id/add_review_btn"
+            android:layout_width="@dimen/_225sdp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginBottom="19dp"
+            android:background="@drawable/circle_rate"
+            android:backgroundTint="@color/orange"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_15sdp"
+            android:text="+ Add Review"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold"
+            android:translationZ="@dimen/_30sdp" />
+
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -41,7 +72,8 @@
                         android:background="@color/background_color"
                         app:iss_auto_cycle="false"
                         app:iss_period="1000"
-                        app:iss_title_background="@drawable/gradient" />
+                        app:iss_title_background="@drawable/gradient" >
+                    </com.denzcoskun.imageslider.ImageSlider>
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/imageBack"
@@ -116,6 +148,7 @@
                     android:id="@+id/rating_with_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:autoSizeTextType="uniform"
                     android:fontFamily="@font/garutemedium"
                     android:gravity="center"
@@ -128,11 +161,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_centerVertical="true"
                     android:gravity="center_vertical"
                     android:layout_toRightOf="@+id/rating_with_number">
 
                     <RatingBar
-
                         android:id="@+id/rating_bar"
                         style="@style/Widget.AppCompat.RatingBar.Indicator"
                         android:layout_width="wrap_content"
@@ -159,10 +192,11 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/favourite_star"
-                    android:layout_width="@dimen/_65sdp"
-                    android:layout_height="@dimen/_65sdp"
-                    android:padding="@dimen/_5sdp"
-                    android:src="@drawable/ic_favourite_star"
+                    android:layout_width="@dimen/_40sdp"
+                    android:foregroundGravity="center"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:src="@drawable/custom_bookmark"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:tint="@color/grey_dark" />
@@ -198,6 +232,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_100sdp"/>-->
 
+            <LinearLayout
+                android:id="@+id/comments_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -209,49 +250,49 @@
                 android:textSize="@dimen/_20ssp"
                 android:textColor="@color/white"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/_5sdp"
-                android:gravity="end"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp">
-
-                <EditText
-                    android:id="@+id/inputComment"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Input comment"
-                    android:paddingHorizontal="@dimen/_10sdp"
-                    android:paddingVertical="@dimen/_5sdp"
-                    android:backgroundTint="@color/background_color_light"
-                    android:background="@drawable/button_background"
-                    android:gravity="top"
-                    android:textSize="@dimen/_17ssp"
-                    android:fontFamily="@font/metropolisbold"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/grey_white"
-                    android:minHeight="@dimen/_100sdp"
-                    android:inputType="textMultiLine"/>
-                
-                <TextView
-                    android:id="@+id/addCommentBtn"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_16ssp"
-                    android:paddingHorizontal="@dimen/_15sdp"
-                    android:paddingVertical="@dimen/_10sdp"
-                    android:textColor="@color/white"
-                    android:fontFamily="@font/metropolisbold"
-                    android:background="@drawable/button_background"
-                    android:backgroundTint="@color/background_color_light"
-                    android:text="Publish Comment"/>
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:gravity="end"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_5sdp">
 
-            </LinearLayout>
-            
-            <FrameLayout
+                    <EditText
+                        android:id="@+id/inputComment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_background"
+                        android:backgroundTint="@color/background_color_light"
+                        android:fontFamily="@font/metropolisbold"
+                        android:gravity="top"
+                        android:hint="Input comment"
+                        android:inputType="textMultiLine"
+                        android:minHeight="@dimen/_100sdp"
+                        android:paddingHorizontal="@dimen/_10sdp"
+                        android:paddingVertical="@dimen/_5sdp"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/grey_white"
+                        android:textSize="@dimen/_17ssp" />
+
+                    <TextView
+                        android:id="@+id/addCommentBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@drawable/button_background"
+                        android:backgroundTint="@color/background_color_light"
+                        android:fontFamily="@font/metropolisbold"
+                        android:paddingHorizontal="@dimen/_15sdp"
+                        android:paddingVertical="@dimen/_10sdp"
+                        android:text="Publish Comment"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_16ssp" />
+
+                </LinearLayout>
+
+                <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/_200sdp"
@@ -277,149 +318,12 @@
                     android:layout_height="@dimen/_25sdp"
                     android:layout_gravity="center" />
 
-                <TextView
-                    android:id="@+id/textErrorMessage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/_24sdp"
-                    android:layout_marginEnd="@dimen/_24sdp"
-                    android:gravity="center"
-                    android:text="There is no comments yet!"
-                    android:textColor="@color/error"
-                    android:textSize="@dimen/_12ssp"
-                    android:visibility="gone" />
             </FrameLayout>
-
-        </LinearLayout>
-
-    </ScrollView>
+            </LinearLayout>
 
 
-
-    <!--
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageBack"
-        android:layout_width="@dimen/_30sdp"
-        android:layout_height="@dimen/_30sdp"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginLeft="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_12sdp"
-        android:padding="@dimen/_5sdp"
-        android:src="@drawable/ic_back"
-        android:tint="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <TextView
-        android:id="@+id/cocktailName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/imageBack"
-        app:layout_constraintTop_toTopOf="@id/imageBack"
-        android:text="CocktailName"
-        android:textAlignment="center"
-        android:textSize="@dimen/_20ssp"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@id/imageBack"
-        app:layout_constraintRight_toLeftOf="@id/favorite"
-        />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/favorite"
-        android:layout_width="@dimen/_30sdp"
-        android:layout_height="@dimen/_30sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:layout_marginRight="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_12sdp"
-        android:src="@drawable/ic_favorite"
-        android:tint="@color/background_color_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <LinearLayout
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="@dimen/_20sdp"
-        app:layout_constraintTop_toBottomOf="@id/cocktailName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/cocktailAuthor"
-            android:layout_width="match_parent"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_14ssp"
-            android:layout_marginVertical="@dimen/_10sdp"
-            android:layout_height="wrap_content"/>
-
-        <ImageView
-            android:id="@+id/cocktailImage"
-            android:maxWidth="@dimen/_300sdp"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_200sdp"
-            android:scaleType="centerCrop"
-            style="@style/ImageView.Circle.Rectangle"
-            android:layout_marginBottom="@dimen/_15sdp"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/_15sdp"
-            android:id="@+id/rating_system_settings">
-
-            <RatingBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/rating_bar"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:stepSize="1"
-                android:rating="2"
-                android:numStars="5"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_below="@id/rating_bar"
-                android:text="alahakbar"
-
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_centerHorizontal="true"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/_14ssp"
-                android:textColor="@color/white"/>
-
-            &lt;!&ndash;change animation of end slideing&ndash;&gt;
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Recipe"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_17ssp"
-            android:layout_marginVertical="@dimen/_5sdp"/>
-
-        <TextView
-            android:id="@+id/cocktailRecipe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:breakStrategy="high_quality"
-            android:textSize="@dimen/_14ssp"
-            android:textColor="@color/white" />
-
-
-
-    </LinearLayout>
--->
+                </LinearLayout>
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
 </LinearLayout>

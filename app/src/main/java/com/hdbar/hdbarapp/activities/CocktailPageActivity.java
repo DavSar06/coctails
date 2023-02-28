@@ -40,6 +40,7 @@ import com.hdbar.hdbarapp.databinding.ActivityCocktailPageBinding;
 import com.hdbar.hdbarapp.listeners.CommentImageListener;
 import com.hdbar.hdbarapp.models.Cocktail;
 import com.hdbar.hdbarapp.models.Comment;
+import com.hdbar.hdbarapp.settings.PrivacyPolicyActivity;
 import com.hdbar.hdbarapp.utilities.Constants;
 
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class CocktailPageActivity extends AppCompatActivity {
 
     //rating
     public RatingBar simple_rating;
-    public TextView local_rate,hm_rates;
+    public TextView local_rate,hm_rates,rate_btn;
     private Integer rate_i = 0;
     private ArrayList<Float> arrayListRatings;
     private boolean rating_bool = false;
@@ -94,7 +95,11 @@ public class CocktailPageActivity extends AppCompatActivity {
 
         init();
         listeners();
+        AlwaysOnRun.AlwaysRun(this);
+
     }
+
+
 
     private void setRating(){
         database.collection(Constants.KEY_COLLECTION_RATINGS)
@@ -186,6 +191,7 @@ public class CocktailPageActivity extends AppCompatActivity {
         local_rate = binding.ratingWithNumber;
         hm_rates = binding.howManyRates;
         rate_i = 0;
+        rate_btn = binding.addReviewBtn;
         arrayListRatings = new ArrayList<>();
         setRating();
         if (!rating_bool){
@@ -282,6 +288,14 @@ public class CocktailPageActivity extends AppCompatActivity {
         binding.imageBack.setOnClickListener(v->finish());
         binding.favouriteStar.setOnClickListener(v->changeFavoriteStatus());
         binding.addCommentBtn.setOnClickListener(v->addComment());
+        rate_btn.setOnClickListener(view -> addReview());
+    }
+
+    private void addReview(){
+        Intent intent = new Intent(this, AddReview.class);
+        intent.putExtra(Constants.KEY_COCKTAIL_ID,cocktailId);
+        startActivity(intent);
+        //getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
     }
 
     private void addComment(){
@@ -302,6 +316,8 @@ public class CocktailPageActivity extends AppCompatActivity {
             binding.inputComment.setText("");
         }
     }
+
+
 
     private void showComments(){
         commentsModels = new ArrayList<>();

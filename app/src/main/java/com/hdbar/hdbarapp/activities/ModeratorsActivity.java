@@ -55,7 +55,7 @@ public class ModeratorsActivity extends AppCompatActivity {
                 i.putExtra(Constants.KEY_USER_UID,id);
                 startActivity(i);
             }else {
-                AlertDialog a = new AlertDialog.Builder(binding.moderatorsRecyclerView.getContext(),R.style.alertDialogModerators)
+                AlertDialog a = new AlertDialog.Builder(binding.moderatorsRecyclerView.getContext(),R.style.DialogeTheme)
                         .setTitle("Removing Moderator")
                         .setMessage("Are you sure you want to set this moderator as user?")
                         .setIcon(R.drawable.ic_alert)
@@ -153,7 +153,7 @@ public class ModeratorsActivity extends AppCompatActivity {
         binding.addModeratorBtn.setOnClickListener(v->{
             String s = binding.atv.getText().toString();
             if(!s.isEmpty() && allUsers.contains(s)){
-                AlertDialog a = new AlertDialog.Builder(this,R.style.alertDialogModerators)
+                AlertDialog a = new AlertDialog.Builder(this,R.style.DialogeTheme)
                         .setTitle("Adding Moderator")
                         .setMessage("Are you sure you want to set this user as moderator?")
                         .setIcon(R.drawable.ic_alert)
