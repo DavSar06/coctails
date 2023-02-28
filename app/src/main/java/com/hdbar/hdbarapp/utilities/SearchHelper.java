@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SearchHelper {
-    ArrayList<Cocktail> searchInCocktails(String s, ArrayList<Cocktail> cocktails){
+    public static List<Cocktail> searchInCocktails(String s, List<Cocktail> cocktails){
         String a[] = s.split(" ");
         List<String> chars = Arrays.asList(a);
-        ArrayList<Cocktail> finalList = new ArrayList<>();
+        List<Cocktail> finalList = new ArrayList<>();
         for(int i=0;i<cocktails.size();i++){
             Cocktail temp = cocktails.get(i);
             if(temp.recipe.contains(s)){
@@ -19,7 +19,7 @@ public class SearchHelper {
                 finalList.add(temp);
             }else {
                 for(int j = 0;j<chars.size();j++){
-                    if(temp.tags.contains(chars.get(i))){
+                    if(temp.tags.contains(chars.get(j))){
                         finalList.add(temp);
                         break;
                     }

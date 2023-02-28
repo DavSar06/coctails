@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -241,13 +242,15 @@ public class ModeratorsActivity extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     users.clear();
                                     for(DocumentSnapshot document: task.getResult()){
-                                        User a = new User();
-                                        a.uid = document.getId();
-                                        a.name = document.getString(Constants.KEY_USERNAME);
-                                        a.email = document.getString(Constants.KEY_EMAIL);
-                                        a.status = document.getString(Constants.KEY_STATUS);
-                                        a.image = document.getString(Constants.KEY_USER_IMAGE);
-                                        users.add(a);
+                                        if(!document.getId().equals(FirebaseAuth.getInstance().getUid())){
+                                            User a = new User();
+                                            a.uid = document.getId();
+                                            a.name = document.getString(Constants.KEY_USERNAME);
+                                            a.email = document.getString(Constants.KEY_EMAIL);
+                                            a.status = document.getString(Constants.KEY_STATUS);
+                                            a.image = document.getString(Constants.KEY_USER_IMAGE);
+                                            users.add(a);
+                                        }
                                     }
                                 }else {
                                     Log.d("FCM",task.getException().getMessage());

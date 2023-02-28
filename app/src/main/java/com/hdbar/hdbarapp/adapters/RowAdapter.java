@@ -60,7 +60,6 @@ public class RowAdapter extends RecyclerView.Adapter<RowAdapter.CocktailViewHold
         void setCocktailData(Cocktail cocktail){
             binding.cocktailName.setText(cocktail.name);
             binding.cocktailCreator.setText(cocktail.creator);
-            binding.cocktailRating.setText(cocktail.rating+"");
             FirebaseStorage storage = FirebaseStorage.getInstance();
 
             storage.getReference(cocktail.image.get(0)).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
