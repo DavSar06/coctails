@@ -33,6 +33,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -130,9 +131,59 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Log.d("FCM","exav "+ task.getResult().getUser().getDisplayName());
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    String name = task.getResult().getUser().getDisplayName();
+                                    String email = task.getResult().getUser().getEmail();
+                                    String uid = task.getResult().getUser().getUid();
+                                    String userBio = "";
+
+
+                                    database.collection(Constants.KEY_COLLECTION_USERS)
+                                            .document(uid)
+                                            .get()
+                                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                    if(task.isSuccessful()){
+                                                        if(!task.getResult().exists()){
+                                                            Resources resources = getResources();
+                                                            imageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                                                                    .authority(resources.getResourcePackageName(R.drawable.profile_icon_type))
+                                                                    .appendPath(resources.getResourceTypeName(R.drawable.profile_icon_type))
+                                                                    .appendPath(resources.getResourceEntryName(R.drawable.profile_icon_type))
+                                                                    .build();
+                                                            StorageReference reference = storage.child(System.currentTimeMillis()+"."+getFileExtension(imageUri));
+                                                            reference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                                @Override
+                                                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                                    HashMap<String,Object> user = new HashMap<>();
+                                                                    user.put(Constants.KEY_USERNAME,name);
+                                                                    user.put(Constants.KEY_EMAIL,email);
+                                                                    user.put(Constants.KEY_USER_BIO,userBio);
+                                                                    user.put(Constants.KEY_USER_IMAGE,taskSnapshot.getMetadata().getPath());
+                                                                    user.put(Constants.KEY_STATUS,Constants.KEY_STATUS_USER);
+
+                                                                    database.collection(Constants.KEY_COLLECTION_USERS).document(uid).set(user);
+                                                                }
+                                                            });
+                                                        }
+                                                    }else {
+                                                        Log.d("FCM",task.getException().getMessage());
+                                                    }
+                                                }
+                                            });
+
+
+                                }
+                            }).start();
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
                         } else {
-                            Log.e("Facebook", "signInWithCredential:failure", task.getException());
+                            FirebaseAuth.getInstance().signOut();
+                            LoginManager.getInstance().logOut();
+                            Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -144,6 +195,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser user = mAuth.getCurrentUser();
         //mAuth.addAuthStateListener(authStateListener);
+
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+
         if(user != null){
             startActivity(new Intent(LoginActivity.this,MainActivity.class));
         }
@@ -369,7 +424,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onError(FacebookException error) {
-
+                Log.e("FCM", "onError: "+error.getMessage());
             }
         });
 

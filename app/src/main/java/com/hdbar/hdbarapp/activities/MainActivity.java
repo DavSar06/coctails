@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         init();
         listeners();
         bottomNavigationBar();
-
         AlwaysOnRun.AlwaysRun(MainActivity.this);
     }
 
