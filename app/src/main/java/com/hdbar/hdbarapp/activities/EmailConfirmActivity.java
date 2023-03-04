@@ -25,7 +25,7 @@ public class EmailConfirmActivity extends AppCompatActivity {
 
     private ActivityEmailConfirmBinding binding;
     private FirebaseAuth mAuth;
-    private FirebaseUser fUser;
+    private FirebaseUser mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class EmailConfirmActivity extends AppCompatActivity {
         init();
         listeners();
 
-        if(mAuth.getCurrentUser().isEmailVerified()){
+        if(mUser.isEmailVerified()){
             nextActivity();
         }
 
@@ -44,24 +44,22 @@ public class EmailConfirmActivity extends AppCompatActivity {
     }
 
     public void resendEmail(){
-        Toast.makeText(EmailConfirmActivity.this, "click", Toast.LENGTH_SHORT).show();
-
-        fUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+        mUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Toast.makeText(EmailConfirmActivity.this, "Verification Email Has been Sent" + fUser, Toast.LENGTH_SHORT).show();
+                Toast.makeText(EmailConfirmActivity.this, "Verification Email Has been Sent To" + mUser.getEmail(), Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d("Tag", "onFailure: Email not sent " + e.getMessage());
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     public void init(){
         mAuth=FirebaseAuth.getInstance();
-        fUser = mAuth.getCurrentUser();
+        mUser = mAuth.getCurrentUser();
     }
 
     private void listeners(){
@@ -76,8 +74,8 @@ public class EmailConfirmActivity extends AppCompatActivity {
         binding.checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAuth.getCurrentUser().reload();
-                if (mAuth.getCurrentUser().isEmailVerified()){
+                mUser.reload();
+                if (mUser.isEmailVerified()){
                     Toast.makeText(EmailConfirmActivity.this, "Verified", Toast.LENGTH_SHORT).show();
                     nextActivity();
                 }else{
