@@ -278,7 +278,8 @@ public class CocktailPageActivity extends AppCompatActivity {
                         }
                     });*//*
                     binding.cocktailImage.setImageBitmap(getCocktailImage(cocktail.image));
-                    binding.cocktailRecipe.setText(cocktail.recipe);*/
+                    */
+                    binding.recipe.setText(cocktail.recipe);
                     binding.ratingBar.setRating(Float.valueOf(cocktail.rating));
                 });
 

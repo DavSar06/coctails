@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.View;
 import android.widget.ArrayAdapter;
 
 import com.bumptech.glide.Glide;
@@ -23,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.hdbar.hdbarapp.R;
+import com.hdbar.hdbarapp.adapters.TagAdapter;
 import com.hdbar.hdbarapp.databinding.ActivityModerateBinding;
 import com.hdbar.hdbarapp.models.Cocktail;
 import com.hdbar.hdbarapp.utilities.Constants;
@@ -74,7 +76,6 @@ public class ModerateActivity extends AppCompatActivity {
                         String rating = documentSnapshot.get(Constants.KEY_COCKTAIL_RATING).toString();
                         String rating_count = documentSnapshot.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
                         cocktail = new Cocktail(documentSnapshot.getId(),cocktailName,recipe,image,rating,creator,rating_count,tags);
-                        binding.cocktailAuthor.setText("Added by: "+cocktail.creator);
                         binding.cocktailName.setText(cocktail.name);
                         FirebaseStorage storage = FirebaseStorage.getInstance();
 
@@ -84,13 +85,17 @@ public class ModerateActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Uri> task) {
                                     slideModels.add(new SlideModel(task.getResult().toString(), ScaleTypes.CENTER_CROP));
                                     if(slideModels.size()==cocktail.image.size()){
-                                        binding.cocktailImage.setImageList(slideModels,ScaleTypes.CENTER_CROP);
+                                        binding.imageSlider.setImageList(slideModels,ScaleTypes.CENTER_CROP);
                                     }
                                 }
                             });
                         }
 
-                        binding.cocktailRecipe.setText(cocktail.recipe);
+                        binding.recipe.setText(cocktail.recipe);
+
+                        TagAdapter tagAdapter = new TagAdapter(cocktail.tags);
+                        binding.tagsRecyclerView.setAdapter(tagAdapter);
+                        binding.tagsRecyclerView.setVisibility(View.VISIBLE);
                     }
                 });
     }

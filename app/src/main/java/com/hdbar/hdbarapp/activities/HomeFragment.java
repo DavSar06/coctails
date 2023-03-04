@@ -123,6 +123,11 @@ public class HomeFragment extends Fragment {
             InputMethodManager inm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             inm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
         });
+        binding.notificationButton.setOnClickListener(v->{
+            Intent intent = new Intent(getActivity(),NotificationsActivity.class);
+            startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+        });
     }
 
 }

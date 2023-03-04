@@ -38,18 +38,38 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_20ssp" />
 
-
-            <TextView
-                android:id="@+id/home_interesting_info"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_centerVertical="true"
-                android:layout_marginBottom="@dimen/_15sdp"
+            <RelativeLayout
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/_15sdp"
-                android:background="@drawable/ic_baseline_list_alt_24" />
+                android:layout_centerVertical="true"
+                android:layout_marginBottom="@dimen/_15sdp">
 
-
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/notification_button"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:scaleType="centerCrop"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="@dimen/_15sdp"
+                    android:background="@drawable/notifications" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_9ssp"
+                    android:layout_marginTop="1dp"
+                    android:translationY="5dp"
+                    android:translationX="5dp"
+                    android:layout_alignBottom="@id/notification_button"
+                    android:layout_alignRight="@id/notification_button"
+                    android:textColor="@color/white"
+                    android:paddingVertical="1dp"
+                    android:paddingHorizontal="2dp"
+                    android:visibility="invisible"
+                    android:background="@drawable/button_background"
+                    android:backgroundTint="@color/mainRed"/>
+            </RelativeLayout>
 
         </RelativeLayout>
 

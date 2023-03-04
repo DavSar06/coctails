@@ -493,7 +493,7 @@ public class LoginActivity extends AppCompatActivity {
                 manager.createNotificationChannel(channel);
             }
         }
-        Intent notificationIntent = new Intent(this,NotificationActivity.class);
+        Intent notificationIntent = new Intent(this,NotificationsActivity.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,id)
