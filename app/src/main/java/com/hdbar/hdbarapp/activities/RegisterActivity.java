@@ -224,20 +224,13 @@ public class RegisterActivity extends AppCompatActivity {
 
                             }
                         }).start();
-/*
-
-                        if (fUser.isEmailVerified()){
-                            progressDialog.dismiss();
-                            sendUserToNextActivity();
-                        }
-*/
 
                         sendUserToNextActivity();
 
                     }
                     else {
                         progressDialog.dismiss();
-                        Toast.makeText(RegisterActivity.this,""+task.getException(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
 
                     }
                 }
@@ -255,7 +248,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void listeners(){
-        // texapoxel settings binding.registerIconChooseIconToChange.setOnClickListener(v->startActivity(new Intent(getApplicationContext(),ChooseImageActivity.class)));
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

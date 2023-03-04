@@ -9,12 +9,15 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
@@ -23,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.NotificationCompat;
@@ -200,7 +204,7 @@ public class LoginActivity extends AppCompatActivity {
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
 
         if(user != null){
-            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+            sendUserToNextActivity();
         }
     }
 
@@ -276,7 +280,8 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }).start();
 
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -372,7 +377,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void sendUserToNextActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, EmailConfirmActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 
@@ -426,6 +431,43 @@ public class LoginActivity extends AppCompatActivity {
             public void onError(FacebookException error) {
                 Log.e("FCM", "onError: "+error.getMessage());
             }
+        });
+
+        binding.ForgotPassword.setOnClickListener(v->{
+            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+            View dialogView = getLayoutInflater().inflate(R.layout.dialog_forget, null);
+            EditText emailBox = dialogView.findViewById(R.id.email_box);
+            builder.setView(dialogView);
+            AlertDialog dialog = builder.create();
+            dialogView.findViewById(R.id.btn_reset).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String userEmail = emailBox.getText().toString();
+                    if (TextUtils.isEmpty(userEmail) && !Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()){
+                        Toast.makeText(LoginActivity.this, "Enter your registered email id", Toast.LENGTH_SHORT).show();                    return;
+                    }
+                    mAuth.sendPasswordResetEmail(userEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()){
+                                Toast.makeText(LoginActivity.this, "Check your email", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Unable to send, failed", Toast.LENGTH_SHORT).show();                        }
+                        }
+                    });
+                }
+            });
+            dialogView.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
+            if (dialog.getWindow() != null){
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+            }
+            dialog.show();
         });
 
         requestGoogleSignIn();
