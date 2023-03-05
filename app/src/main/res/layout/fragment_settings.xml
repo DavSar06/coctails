@@ -124,7 +124,7 @@
                         android:layout_height="@dimen/_30sdp"
                         android:layout_centerVertical="true"
                         android:background="@drawable/accout_settings"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle" />
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -162,7 +162,7 @@
                         android:layout_height="@dimen/_30sdp"
                         android:layout_centerVertical="true"
                         android:background="@drawable/accout_settings"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle.Rectangle" />
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -186,6 +186,12 @@
 
 
                 </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:background="@color/white_transparency" />
 
                 <RelativeLayout
                     android:id="@+id/notifications_settings_btn"

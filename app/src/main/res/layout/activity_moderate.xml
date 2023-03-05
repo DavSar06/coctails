@@ -105,6 +105,15 @@
                                 android:background="@drawable/ic_baseline_close_16"
                                 app:shapeAppearanceOverlay="@style/ImageView.Circle" />
 
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/creatorImage"
+                                android:layout_margin="@dimen/_5sdp"
+                                android:layout_width="@dimen/_50sdp"
+                                android:layout_height="@dimen/_50sdp"
+                                android:layout_gravity="right"
+                                app:srcCompat="@mipmap/ic_launcher"
+                                app:shapeAppearanceOverlay="@style/ImageView.Circle.LowRoll"/>
+
                         </androidx.cardview.widget.CardView>
 
 

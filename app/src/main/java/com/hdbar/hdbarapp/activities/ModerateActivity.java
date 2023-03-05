@@ -70,6 +70,7 @@ public class ModerateActivity extends AppCompatActivity {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         String cocktailName = documentSnapshot.getString(Constants.KEY_COCKTAIL_NAME);
                         String creator = documentSnapshot.getString(Constants.KEY_COCKTAIL_CREATOR_NAME);
+                        String creatorId = documentSnapshot.getString(Constants.KEY_COCKTAIL_CREATOR_ID);
                         String recipe = documentSnapshot.get(Constants.KEY_COCKTAIL_RECIPE).toString();
                         ArrayList<String> image = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_IMAGE);
                         ArrayList<String> tags = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_TAGS);
@@ -90,6 +91,22 @@ public class ModerateActivity extends AppCompatActivity {
                                 }
                             });
                         }
+
+                        database.collection(Constants.KEY_COLLECTION_USERS)
+                                .document(creatorId)
+                                .get()
+                                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                        FirebaseStorage storage = FirebaseStorage.getInstance();
+                                        storage.getReference(documentSnapshot.getString(Constants.KEY_USER_IMAGE)).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Uri> task) {
+                                                Glide.with(binding.creatorImage).load(task.getResult()).into(binding.creatorImage);
+                                            }
+                                        });
+                                    }
+                                });
 
                         binding.recipe.setText(cocktail.recipe);
 
