@@ -16,6 +16,7 @@ import android.widget.Space;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -122,6 +123,11 @@ public class HomeFragment extends Fragment {
         binding.getRoot().setOnClickListener(v->{
             InputMethodManager inm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             inm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
+        });
+        binding.notificationButton.setOnClickListener(v->{
+            Intent intent = new Intent(getActivity(),NotificationsActivity.class);
+            startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         });
     }
 

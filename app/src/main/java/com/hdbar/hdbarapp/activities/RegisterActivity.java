@@ -28,6 +28,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -206,7 +207,6 @@ public class RegisterActivity extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                         String uid = task.getResult().getUser().getUid();
-                                        String name = task.getResult().getUser().getEmail();
                                         String userBio = "";
                                         String userImageLink = taskSnapshot.getMetadata().getPath();
 
@@ -224,20 +224,13 @@ public class RegisterActivity extends AppCompatActivity {
 
                             }
                         }).start();
-/*
-
-                        if (fUser.isEmailVerified()){
-                            progressDialog.dismiss();
-                            sendUserToNextActivity();
-                        }
-*/
 
                         sendUserToNextActivity();
 
                     }
                     else {
                         progressDialog.dismiss();
-                        Toast.makeText(RegisterActivity.this,""+task.getException(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
 
                     }
                 }
@@ -255,7 +248,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void listeners(){
-        // texapoxel settings binding.registerIconChooseIconToChange.setOnClickListener(v->startActivity(new Intent(getApplicationContext(),ChooseImageActivity.class)));
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

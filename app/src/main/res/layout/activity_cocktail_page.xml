@@ -205,7 +205,6 @@
 
             </RelativeLayout>
 
-
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
@@ -227,6 +226,34 @@
                     android:orientation="horizontal"/>
 
             </HorizontalScrollView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxWidth="@dimen/_250sdp"
+                    android:maxHeight="@dimen/_80sdp"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:layout_gravity="bottom"
+                    android:autoSizeTextType="uniform"
+                    android:fontFamily="@font/argesta"
+                    android:gravity="left"
+                    android:text="Recipe"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_30sdp"/>
+
+                <TextView
+                    android:id="@+id/recipe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_50sdp"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:layout_gravity="bottom"
+                    android:autoSizeTextType="uniform"
+                    android:fontFamily="@font/metropolisbold"
+                    android:gravity="left"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_18sdp"/>
 <!--
             <VideoView
                 android:layout_width="match_parent"

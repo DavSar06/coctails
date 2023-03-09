@@ -192,13 +192,6 @@ public class ModeratorsActivity extends AppCompatActivity {
                                 },500);
                             }})
                         .setNegativeButton("Cancel", null).create();
-                a.setOnShowListener(new DialogInterface.OnShowListener() {
-                    @Override
-                    public void onShow(DialogInterface dialogInterface) {
-                        a.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(Color.BLACK);
-                        a.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
-                    }
-                });
                 a.show();
             }else{
                 Toast.makeText(getApplicationContext(), "There is no such user", Toast.LENGTH_SHORT).show();

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,65 +24,46 @@ import com.hdbar.hdbarapp.models.User;
 public class EmailConfirmActivity extends AppCompatActivity {
 
     private ActivityEmailConfirmBinding binding;
-
-    private TextView resendCode,confirm_btn,change_email;
     private FirebaseAuth mAuth;
-    private FirebaseFirestore database;
-    private FirebaseUser fUser;
+    private FirebaseUser mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityEmailConfirmBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         init();
         listeners();
+
+        if(mUser.isEmailVerified()){
+            nextActivity();
+        }
+
         AlwaysOnRun.AlwaysRun(this);
 
     }
 
     public void resendEmail(){
-        Toast.makeText(EmailConfirmActivity.this, "click", Toast.LENGTH_SHORT).show();
-
-        fUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+        mUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Toast.makeText(EmailConfirmActivity.this, "Verification Email Has been Sent" + fUser, Toast.LENGTH_SHORT).show();
+                Toast.makeText(EmailConfirmActivity.this, "Verification Email Has been Sent To" + mUser.getEmail(), Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d("Tag", "onFailure: Email not sent " + e.getMessage());
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    public void confirmBtn(){
-        Toast.makeText(EmailConfirmActivity.this, "click", Toast.LENGTH_SHORT).show();
-        if (mAuth.getCurrentUser().isEmailVerified()){
-            Toast.makeText(EmailConfirmActivity.this, "verifid", Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(EmailConfirmActivity.this, "unverifid", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void goBack(){
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
-
-    }
-
     public void init(){
-        resendCode = binding.resendCodeConfirm;
-        confirm_btn = binding.donateBtn;
-        change_email =binding.changeEmailConfirm;
         mAuth=FirebaseAuth.getInstance();
-        fUser = mAuth.getCurrentUser();
+        mUser = mAuth.getCurrentUser();
     }
 
     private void listeners(){
-        resendCode.setOnClickListener(new View.OnClickListener() {
+        binding.resendCodeConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //set cool down
@@ -89,19 +71,33 @@ public class EmailConfirmActivity extends AppCompatActivity {
             }
         });
 
-        confirm_btn.setOnClickListener(new View.OnClickListener() {
+        binding.checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                confirmBtn();
+                mUser.reload();
+                if (mUser.isEmailVerified()){
+                    Toast.makeText(EmailConfirmActivity.this, "Verified", Toast.LENGTH_SHORT).show();
+                    nextActivity();
+                }else{
+                    Toast.makeText(EmailConfirmActivity.this, "Not Verified", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
-        change_email.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goBack();
-            }
+        binding.signOut.setOnClickListener(v->{
+            FirebaseAuth.getInstance().signOut();
+            LoginManager.getInstance().logOut();
+            Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+            startActivity(i);
+            finish();
+            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         });
 
+    }
+
+    private void nextActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }

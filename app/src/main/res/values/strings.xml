@@ -2,5 +2,8 @@
     <string name="app_name">HDBar Application</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="facebook_app_id">731008968599167</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">a7b733f8e877aa2dd44926b7cb7e045a</string>
 
 </resources>

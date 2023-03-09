@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.View;
 import android.widget.ArrayAdapter;
 
 import com.bumptech.glide.Glide;
@@ -23,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.hdbar.hdbarapp.R;
+import com.hdbar.hdbarapp.adapters.TagAdapter;
 import com.hdbar.hdbarapp.databinding.ActivityModerateBinding;
 import com.hdbar.hdbarapp.models.Cocktail;
 import com.hdbar.hdbarapp.utilities.Constants;
@@ -68,13 +70,13 @@ public class ModerateActivity extends AppCompatActivity {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         String cocktailName = documentSnapshot.getString(Constants.KEY_COCKTAIL_NAME);
                         String creator = documentSnapshot.getString(Constants.KEY_COCKTAIL_CREATOR_NAME);
+                        String creatorId = documentSnapshot.getString(Constants.KEY_COCKTAIL_CREATOR_ID);
                         String recipe = documentSnapshot.get(Constants.KEY_COCKTAIL_RECIPE).toString();
                         ArrayList<String> image = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_IMAGE);
                         ArrayList<String> tags = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_TAGS);
                         String rating = documentSnapshot.get(Constants.KEY_COCKTAIL_RATING).toString();
                         String rating_count = documentSnapshot.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
                         cocktail = new Cocktail(documentSnapshot.getId(),cocktailName,recipe,image,rating,creator,rating_count,tags);
-                        binding.cocktailAuthor.setText("Added by: "+cocktail.creator);
                         binding.cocktailName.setText(cocktail.name);
                         FirebaseStorage storage = FirebaseStorage.getInstance();
 
@@ -84,13 +86,33 @@ public class ModerateActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Uri> task) {
                                     slideModels.add(new SlideModel(task.getResult().toString(), ScaleTypes.CENTER_CROP));
                                     if(slideModels.size()==cocktail.image.size()){
-                                        binding.cocktailImage.setImageList(slideModels,ScaleTypes.CENTER_CROP);
+                                        binding.imageSlider.setImageList(slideModels,ScaleTypes.CENTER_CROP);
                                     }
                                 }
                             });
                         }
 
-                        binding.cocktailRecipe.setText(cocktail.recipe);
+                        database.collection(Constants.KEY_COLLECTION_USERS)
+                                .document(creatorId)
+                                .get()
+                                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                        FirebaseStorage storage = FirebaseStorage.getInstance();
+                                        storage.getReference(documentSnapshot.getString(Constants.KEY_USER_IMAGE)).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Uri> task) {
+                                                Glide.with(binding.creatorImage).load(task.getResult()).into(binding.creatorImage);
+                                            }
+                                        });
+                                    }
+                                });
+
+                        binding.recipe.setText(cocktail.recipe);
+
+                        TagAdapter tagAdapter = new TagAdapter(cocktail.tags);
+                        binding.tagsRecyclerView.setAdapter(tagAdapter);
+                        binding.tagsRecyclerView.setVisibility(View.VISIBLE);
                     }
                 });
     }

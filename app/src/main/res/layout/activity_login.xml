@@ -119,29 +119,29 @@
             android:src="@drawable/google"
             android:layout_marginHorizontal="@dimen/_5sdp"/>
 
-        <ImageView
-            android:id="@+id/phone_login"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
-            android:padding="@dimen/_5sdp"
-            android:src="@drawable/phonecallicon"
-            android:layout_marginHorizontal="@dimen/_5sdp"/>
 
-        <ImageView
-            android:id="@+id/facebook"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
-            android:padding="@dimen/_5sdp"
-            android:src="@drawable/facebooklogo"
-            android:layout_marginHorizontal="@dimen/_5sdp" />
 
-<!--        <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_button"
+        <FrameLayout
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
-            android:gravity="center"
-            android:src="@drawable/facebooklogo"
-            android:layout_marginHorizontal="@dimen/_5sdp"/>-->
+            android:layout_gravity="center">
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/facebook"
+                android:layout_gravity="center"
+                android:alpha="0"
+                android:visibility="visible"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"/>
+
+            <ImageView
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:padding="@dimen/_5sdp"
+                android:src="@drawable/facebooklogo"
+                android:layout_marginHorizontal="@dimen/_5sdp" />
+
+        </FrameLayout>
 
     </LinearLayout>
 

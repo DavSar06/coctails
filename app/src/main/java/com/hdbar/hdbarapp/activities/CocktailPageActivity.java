@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
@@ -243,6 +244,7 @@ public class CocktailPageActivity extends AppCompatActivity {
                 .addOnSuccessListener(documentSnapshot -> {
                     String cocktailName = documentSnapshot.getString(Constants.KEY_COCKTAIL_NAME);
                     String creator = documentSnapshot.getString(Constants.KEY_COCKTAIL_CREATOR_NAME);
+                    String creatorId = documentSnapshot.getString(Constants.KEY_COCKTAIL_CREATOR_ID);
                     ArrayList<String> image = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_IMAGE);
                     ArrayList<String> tags = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_TAGS);
                     String rating_count = documentSnapshot.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
@@ -250,6 +252,21 @@ public class CocktailPageActivity extends AppCompatActivity {
                     String rating = documentSnapshot.get(Constants.KEY_COCKTAIL_RATING).toString();
                     cocktail = new Cocktail(documentSnapshot.getId(),cocktailName,recipe,image,rating,creator,rating_count,tags);
 
+                    database.collection(Constants.KEY_COLLECTION_USERS)
+                            .document(creatorId)
+                            .get()
+                            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                    FirebaseStorage storage = FirebaseStorage.getInstance();
+                                    storage.getReference(documentSnapshot.getString(Constants.KEY_USER_IMAGE)).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Uri> task) {
+                                            Glide.with(binding.creatorImage).load(task.getResult()).into(binding.creatorImage);
+                                        }
+                                    });
+                                }
+                            });
 
                     for(int i=0;i<cocktail.image.size();i++){
                         storage.getReference(cocktail.image.get(i)).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -278,7 +295,8 @@ public class CocktailPageActivity extends AppCompatActivity {
                         }
                     });*//*
                     binding.cocktailImage.setImageBitmap(getCocktailImage(cocktail.image));
-                    binding.cocktailRecipe.setText(cocktail.recipe);*/
+                    */
+                    binding.recipe.setText(cocktail.recipe);
                     binding.ratingBar.setRating(Float.valueOf(cocktail.rating));
                 });
 

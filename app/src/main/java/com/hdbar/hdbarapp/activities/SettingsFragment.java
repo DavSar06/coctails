@@ -1,36 +1,25 @@
 package com.hdbar.hdbarapp.activities;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.facebook.login.LoginManager;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -43,21 +32,9 @@ import com.hdbar.hdbarapp.settings.AccountActivity;
 import com.hdbar.hdbarapp.settings.HelpAndSupportActivity;
 import com.hdbar.hdbarapp.settings.LanguagesActivity;
 import com.hdbar.hdbarapp.utilities.Constants;
-import com.hdbar.hdbarapp.utilities.PreferenceManager;
 import com.hdbar.hdbarapp.settings.PaymentActivity;
 import com.hdbar.hdbarapp.settings.PrivacyPolicyActivity;
-import com.hdbar.hdbarapp.utilities.Constants;
 
-
-import org.w3c.dom.Text;
-
-import java.util.HashMap;
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SettingsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class SettingsFragment extends Fragment {
 
 
@@ -150,7 +127,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void run() {
                 database.collection(Constants.KEY_COLLECTION_USERS)
-                        .document(FirebaseAuth.getInstance().getUid())
+                        .document(userId)
                         .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -251,6 +228,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
+                LoginManager.getInstance().logOut();
                 Intent i = new Intent(getActivity(),LoginActivity.class);
                 startActivity(i);
                 getActivity().finish();
@@ -268,20 +246,12 @@ public class SettingsFragment extends Fragment {
         notifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-
                 if (isNormal)
                     Log.d("In", "true");
                 else
                     Log.d("In", "false");
-
-
                 isNormal = !isNormal;
             }
         });
-
     }
-
-
-
 }
