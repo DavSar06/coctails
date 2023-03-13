@@ -91,19 +91,15 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()){
                 case R.id.home:
                     replaceFragment(new HomeFragment());
-                    Log.d("In","1");
                     break;
                 case R.id.custom:
                     replaceFragment(new CreateCocktailFragment());
-                    Log.d("In","2");
                     break;
                 case R.id.favorite:
                     replaceFragment(new FavoriteFragment());
-                    Log.d("In","3");
                     break;
-                case  R.id.settings:
+                case R.id.settings:
                     replaceFragment(new SettingsFragment());
-                    Log.d("In","4");
                     break;
             }
 
