@@ -47,6 +47,8 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
@@ -73,11 +75,12 @@ public class LoginActivity extends AppCompatActivity {
     TextView registerTextView;
 
 
-    private EditText inputEmail,inputPassword;
     private ImageView btnGoogle,btnPhone,btnGithub,btnFacebook;
     private TextView buttonLogin;
     private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private ProgressDialog progressDialog;
+    private TextInputLayout inputEmailLayout,inputPasswordLayout;
+    private TextInputEditText inputEmail, inputPassword;
 
 
     public static final int RC_SIGN_IN = 123;
@@ -114,6 +117,9 @@ public class LoginActivity extends AppCompatActivity {
         database = FirebaseFirestore.getInstance();
         inputEmail=binding.Login;
         inputPassword=binding.Password;
+        inputEmailLayout=binding.LoginLayout;
+        inputPasswordLayout=binding.PasswordLayout;
+
         buttonLogin=binding.Loginbtn;
         btnGoogle=binding.google;
         registerTextView = binding.registerMain;
@@ -328,12 +334,18 @@ public class LoginActivity extends AppCompatActivity {
 
         if(!email.matches(emailPattern) || password.trim().isEmpty() || password.length()<8){
             if(!email.matches(emailPattern)){
-                inputEmail.setError("Enter Existing Email");
+                inputEmailLayout.setErrorEnabled(true);
+                inputEmailLayout.setErrorIconDrawable(0);
+                inputEmailLayout.setError("Enter Existing Email");
             }
             if(password.trim().isEmpty()){
-                inputPassword.setError("Password field is empty");
+                inputPasswordLayout.setErrorEnabled(true);
+                inputPasswordLayout.setErrorIconDrawable(0);
+                inputPasswordLayout.setError("Password field is empty");
             }else if(password.length()<8){
-                inputPassword.setError("Password is short (need more than 8 characters)");
+                inputPasswordLayout.setErrorEnabled(true);
+                inputPasswordLayout.setErrorIconDrawable(0);
+                inputPasswordLayout.setError("Password is short (need more than 8 characters)");
             }
         }else{
             //can be a problem with progress dialog
@@ -346,6 +358,8 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
+                        inputPasswordLayout.setErrorEnabled(false);
+                        inputEmailLayout.setErrorEnabled(false);
                         progressDialog.dismiss();
                         sendUserToNextActivity();
                         Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
@@ -355,9 +369,13 @@ public class LoginActivity extends AppCompatActivity {
                         progressDialog.dismiss();
 
                         if(task.getException().getMessage().contains("password")){
-                            inputPassword.setError("Wrong password");
+                            inputPasswordLayout.setErrorEnabled(true);
+                            inputPasswordLayout.setErrorIconDrawable(0);
+                            inputPasswordLayout.setError("Wrong password");
                         }else {
-                            inputEmail.setError("Wrong Email");
+                            inputEmailLayout.setErrorEnabled(true);
+                            inputEmailLayout.setErrorIconDrawable(0);
+                            inputEmailLayout.setError("Wrong Email");
                         }
                     }
                 }
@@ -439,6 +457,7 @@ public class LoginActivity extends AppCompatActivity {
             EditText emailBox = dialogView.findViewById(R.id.email_box);
             builder.setView(dialogView);
             AlertDialog dialog = builder.create();
+
             dialogView.findViewById(R.id.btn_reset).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

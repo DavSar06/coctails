@@ -15,9 +15,9 @@ import com.hdbar.hdbarapp.R;
 public class AlwaysOnRun {
 
     public static void AlwaysRun(Activity myActivityReference) {
-        View decorView = myActivityReference.getWindow().getDecorView();
+        View decorView = myActivityReference.getWindow().getDecorView();/*
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-        decorView.setSystemUiVisibility(uiOptions);
+        decorView.setSystemUiVisibility(uiOptions);*/
 
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -31,6 +31,7 @@ public class AlwaysOnRun {
 
         ConnectivityManager cm = (ConnectivityManager) myActivityReference.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = cm.getActiveNetworkInfo();
+
         if (info == null || !info.isConnected())
             Log.d("Ine", "NoConnection");
         else {

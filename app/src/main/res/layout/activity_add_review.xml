@@ -56,7 +56,7 @@
 
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/profile_picture_settings"
+                android:id="@+id/review_image_cocktail"
                 android:layout_width="@dimen/_60sdp"
                 android:layout_height="@dimen/_60sdp"
                 android:layout_marginRight="@dimen/_15sdp"

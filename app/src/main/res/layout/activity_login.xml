@@ -26,7 +26,7 @@
         android:fontFamily="@font/metropolislight"
         android:textSize="@dimen/_40ssp"/>
 
-
+<!--
     <EditText
         android:id="@+id/Login"
         android:layout_width="match_parent"
@@ -48,7 +48,45 @@
         android:drawablePadding="@dimen/_6sdp"
         android:drawableStart="@drawable/user_icon"
         android:textColorHint="@color/white"
-        android:maxLength="30"/>
+        android:maxLength="30"/>-->
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/Login_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_70sdp"
+        app:hintTextColor="@color/white"
+        app:errorTextColor="@color/red_light"
+        app:boxStrokeColor="@color/grey_dark"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:hint="Username"
+        android:textColorHint="@color/white"
+        app:endIconMode="clear_text"
+        app:helperTextEnabled="true"
+        app:helperText=""
+        app:helperTextTextColor="@color/white"
+        app:boxStrokeErrorColor="@color/red_light"
+        app:errorEnabled="true"
+        app:boxBackgroundColor="@color/background_color_light"
+        app:errorIconDrawable="@drawable/ic_baseline_error_24"
+        app:endIconTint="@color/white"
+        app:counterTextColor="@color/white"
+        app:startIconDrawable="@drawable/user_icon"
+        app:startIconTint="@color/white"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/Login"
+            android:layout_width="match_parent"
+            android:textColor="@color/white"
+            android:layout_weight="25"
+            android:inputType="textUri"
+            android:textSize="@dimen/_14sdp"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+<!--
 
     <EditText
         android:id="@+id/Password"
@@ -72,6 +110,45 @@
         android:background="@drawable/borders_for_edittext"
         android:textSize="@dimen/_14ssp"
         android:maxLength="30"/>
+-->
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/Password_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_70sdp"
+        app:hintTextColor="@color/white"
+        android:hint="Password"
+        android:textColorHint="@color/white"
+        app:errorTextColor="@color/red_light"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        app:boxStrokeColor="@color/grey_dark"
+        android:layout_marginBottom="@dimen/_20sdp"
+        app:endIconMode="password_toggle"
+        app:helperTextTextColor="@color/white"
+        app:helperTextEnabled="true"
+        app:helperText=" "
+        app:errorEnabled="true"
+        app:boxStrokeErrorColor="@color/red_light"
+        app:boxBackgroundColor="@color/background_color_light"
+        app:errorIconDrawable="@drawable/ic_baseline_error_24"
+        app:endIconTint="@color/white"
+        app:counterTextColor="@color/white"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24"
+        app:startIconTint="@color/white"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/Password"
+            android:layout_width="match_parent"
+            android:textColor="@color/white"
+            android:layout_weight="25"
+            android:inputType="textPassword"
+            android:textSize="@dimen/_14sdp"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
 
     <TextView
         android:id="@+id/Loginbtn"
@@ -80,7 +157,7 @@
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_25sdp"
-        android:layout_weight="20"
+        android:layout_weight="15"
         android:background="@drawable/circle"
         android:gravity="center"
         android:text="Login"

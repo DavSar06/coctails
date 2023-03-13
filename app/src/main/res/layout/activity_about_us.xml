@@ -25,15 +25,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:fontFamily="@font/garute"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
             android:text="About Us"
             android:textColor="@color/white"
-            android:textSize="@dimen/_30ssp"
-            android:layout_margin="@dimen/_15sdp" />
+            android:textSize="@dimen/_20ssp" />
+
+
     </RelativeLayout>
 
 
@@ -41,10 +40,10 @@
         android:layout_marginTop="@dimen/_15sdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:gravity="left"
         android:textColor="@color/white"
-        android:layout_gravity="center"
-        android:textSize="@dimen/_19ssp"
+        android:layout_gravity="right"
+        android:textSize="@dimen/_16ssp"
         android:layout_marginHorizontal="@dimen/_15sdp"
         android:fontFamily="@font/garute"
         android:text="Axper shat ban aselu chunem bayc karanq grenq vor UWC ii snorhivenq sarqinq u mer anunner@ @dhanur testavorelu hamara esi sarqac chmoranas pull anes ha tuyn mitq unem hetev@ pxpjakner linen animaciayouv"/>

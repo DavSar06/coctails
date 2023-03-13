@@ -22,6 +22,7 @@ import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -45,6 +46,7 @@ public class AddReview extends AppCompatActivity {
     private EditText inputComment;
     private FirebaseFirestore database;
     private SwitchCompat isPrivate;
+    private ShapeableImageView imageView;
     private Cocktail cocktail;
     private String cocktailId;
     private String uid;
@@ -95,6 +97,7 @@ public class AddReview extends AppCompatActivity {
         database = FirebaseFirestore.getInstance();
         userId = FirebaseAuth.getInstance().getUid();
         publisherName = binding.ratePublisherName;
+        imageView = binding.reviewImageCocktail;
         cocktailName =  binding.rateCocktailName;
         cocktailId = getIntent().getStringExtra(Constants.KEY_COCKTAIL_ID);
 
