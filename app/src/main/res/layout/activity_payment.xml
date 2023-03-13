@@ -109,7 +109,7 @@
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:gravity="center"
-                    android:text="It will motivate us to fork more harder"
+                    android:text="It will motivate us to for work more harder"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14ssp"
                     android:textStyle="bold" />
