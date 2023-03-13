@@ -24,7 +24,7 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_centerHorizontal="true"
             android:layout_marginEnd="@dimen/_15sdp"
-            android:layout_marginBottom="19dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/circle_rate"
             android:backgroundTint="@color/orange"
             android:gravity="center"
