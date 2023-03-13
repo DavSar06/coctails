@@ -135,6 +135,11 @@ public class HomeFragment extends Fragment {
             startActivity(intent);
             getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
         });
+        binding.homeSearch.setOnClickListener(v->{
+            Intent intent = new Intent(getActivity(),SearchActivity.class);
+            startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+        });
     }
 
 }
