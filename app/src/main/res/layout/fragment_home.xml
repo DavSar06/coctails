@@ -3,13 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background_color"
     tools:context=".activities.HomeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -358,8 +360,8 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:text="Other"
             android:textColor="@color/white"
-            android:layout_marginBottom="@dimen/_5sdp"
             android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:fontFamily="@font/metropolisbold"
             android:textSize="@dimen/_16ssp"/>
 
@@ -367,9 +369,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_others"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/_10sdp"
+            android:layout_height="fill_parent"
             android:orientation="vertical"
+            android:paddingHorizontal="@dimen/_10sdp"
             android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 

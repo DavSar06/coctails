@@ -52,7 +52,7 @@
 
                     android:id="@+id/register_username_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_65sdp"
+                    android:layout_height="@dimen/_70sdp"
                     app:hintTextColor="@color/white"
                     app:errorTextColor="@color/red_light"
                     app:boxStrokeColor="@color/grey_dark"
@@ -89,7 +89,7 @@
 
                 android:id="@+id/register_email_layout"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_65sdp"
+                android:layout_height="@dimen/_70sdp"
                 app:hintTextColor="@color/white"
                 android:hint="Email"
                 android:textColorHint="@color/white"
@@ -123,7 +123,7 @@
 
                 android:id="@+id/register_password_layout"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_65sdp"
+                android:layout_height="@dimen/_70sdp"
                 app:hintTextColor="@color/white"
                 android:hint="Password"
                 android:textColorHint="@color/white"
@@ -157,7 +157,7 @@
 
                 android:id="@+id/register_password_confirm_layout"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_65sdp"
+                android:layout_height="@dimen/_70sdp"
                 app:hintTextColor="@color/white"
                 android:hint="Confirm Password"
                 android:textColorHint="@color/white"
@@ -191,7 +191,8 @@
                 android:id="@+id/are_you_older_18"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_45sdp"
-                android:background="@color/background_color_light"
+                android:background="@drawable/edittext_bg_error"
+                android:backgroundTint="@color/background_color_light"
                 android:textSize="@dimen/_14ssp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:buttonTint="@color/white"

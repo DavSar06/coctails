@@ -31,6 +31,7 @@
             android:text="Payment"
             android:textColor="@color/white"
             android:textSize="@dimen/_20ssp" />
+
     </RelativeLayout>
 
     <LinearLayout
@@ -106,22 +107,20 @@
             android:text="It will help us to bla balbal"/>
 
 
-
         <TextView
             android:id="@+id/donate_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingVertical="@dimen/_10sdp"
             android:layout_marginHorizontal="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_40sdp"
             android:background="@drawable/circle"
             android:backgroundTint="@color/orange"
             android:gravity="center"
+            android:paddingVertical="@dimen/_10sdp"
             android:text="Donate"
             android:textColor="@color/white"
             android:textSize="@dimen/_20ssp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
 
     </LinearLayout>

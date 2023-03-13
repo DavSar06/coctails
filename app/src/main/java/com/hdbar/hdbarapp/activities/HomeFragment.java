@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -44,6 +45,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerViewOthers;
     private TopTenOfWeekAdapter adapter;
     private OthersAdapter othersAdapter;
+    private RecyclerView unScroll;
 
 
     private final CocktailListener cocktailListener = new CocktailListener() {
@@ -66,11 +68,14 @@ public class HomeFragment extends Fragment {
         init();
         listeners();
 
+        unScroll.setNestedScrollingEnabled(false);
+
         super.onCreate(savedInstanceState);
     }
     public HomeFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,6 +89,7 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(getLayoutInflater());
         database = FirebaseFirestore.getInstance();
         cocktails = new LinkedList<>();
+        unScroll = binding.recyclerviewOthers;
 
 
         database.collection(Constants.KEY_COLLECTION_COCKTAILS).whereEqualTo(Constants.KEY_STATUS,Constants.KEY_COCKTAIL_STATUS_APPROVED)
