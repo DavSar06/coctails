@@ -257,7 +257,7 @@
         android:paddingVertical="@dimen/_15sdp"
         android:text="Post"
         android:textColor="@color/white"
-        android:textSize="@dimen/_16ssp"
+        android:textSize="@dimen/_20ssp"
         android:textStyle="bold"
         android:translationZ="@dimen/_40sdp" />
 </RelativeLayout>
