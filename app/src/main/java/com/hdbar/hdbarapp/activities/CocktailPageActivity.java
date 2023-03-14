@@ -65,6 +65,7 @@ public class CocktailPageActivity extends AppCompatActivity {
     private float getRatingsFB;
     //-------
 
+    public static boolean refresh = false;
 
     private boolean isFavorite;
     private String uid;
@@ -94,8 +95,6 @@ public class CocktailPageActivity extends AppCompatActivity {
         AlwaysOnRun.AlwaysRun(this);
 
     }
-
-
 
     private void setRating(){
         database.collection(Constants.KEY_COLLECTION_RATINGS)
@@ -277,7 +276,7 @@ public class CocktailPageActivity extends AppCompatActivity {
     private void addReview(){
         Intent intent = new Intent(this, AddReview.class);
         intent.putExtra(Constants.KEY_COCKTAIL_ID,cocktailId);
-        startActivity(intent);
+        startActivityForResult(intent,0);
         //getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
     }
 
@@ -365,6 +364,14 @@ public class CocktailPageActivity extends AppCompatActivity {
                             }
                         }
                     });
+        }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(refresh){
+            showComments();
+            ratingsSize();
         }
     }
 

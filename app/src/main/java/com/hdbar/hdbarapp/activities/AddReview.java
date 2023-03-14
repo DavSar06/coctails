@@ -110,6 +110,8 @@ public class AddReview extends AppCompatActivity {
         addComment();
         setRating();
 
+        CocktailPageActivity.refresh = true;
+
         //finishing
         finish();
         overridePendingTransition(R.anim.fade_out,R.anim.fade_in);
@@ -176,8 +178,6 @@ public class AddReview extends AppCompatActivity {
 
 
     private void setRating(){
-
-        Log.d("NO","mtav");
                 database.collection(Constants.KEY_COLLECTION_RATINGS)
                         .whereEqualTo(Constants.KEY_USER_UID,userId)
                         .whereEqualTo(Constants.KEY_COCKTAIL_ID,cocktailId)
@@ -193,7 +193,6 @@ public class AddReview extends AppCompatActivity {
                                         database.collection(Constants.KEY_COLLECTION_RATINGS)
                                                 .document(task.getResult().getDocuments().get(0).getId())
                                                 .update(Constants.KEY_COCKTAIL_RATING,numOfStarts);
-                                        Log.d("NO","mtav poxelu");
                                     }else {
 
                                         HashMap<String,Object> rating_hm = new HashMap<>();
@@ -201,15 +200,10 @@ public class AddReview extends AppCompatActivity {
                                         rating_hm.put(Constants.KEY_COCKTAIL_ID,cocktailId);
                                         rating_hm.put(Constants.KEY_COCKTAIL_RATING,numOfStarts);
                                         database.collection(Constants.KEY_COLLECTION_RATINGS).add(rating_hm);
-                                        Log.d("NO","ha");
                                     }
-                                }else{
-                                    Log.d("NO","che");
                                 }
                             }
                         });
-
-
     }
 /*
 
