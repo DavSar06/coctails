@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginVertical="@dimen/_5sdp"
+    tools:context=".activities.CocktailPageActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/step"
+        android:backgroundTint="@color/background_color_light"
+        android:background="@drawable/edittext_bg_error"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/aileronlight"
+        android:textSize="@dimen/_20ssp"
+        android:paddingVertical="@dimen/_5sdp"
+        android:textColor="@color/white"
+        android:text="Recipe Step"/>
+
+</LinearLayout>

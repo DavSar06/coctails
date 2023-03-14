@@ -24,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.hdbar.hdbarapp.R;
+import com.hdbar.hdbarapp.adapters.RecipeAdapter;
 import com.hdbar.hdbarapp.adapters.TagAdapter;
 import com.hdbar.hdbarapp.databinding.ActivityModerateBinding;
 import com.hdbar.hdbarapp.models.Cocktail;
@@ -71,7 +72,7 @@ public class ModerateActivity extends AppCompatActivity {
                         String cocktailName = documentSnapshot.getString(Constants.KEY_COCKTAIL_NAME);
                         String creator = documentSnapshot.getString(Constants.KEY_COCKTAIL_CREATOR_NAME);
                         String creatorId = documentSnapshot.getString(Constants.KEY_COCKTAIL_CREATOR_ID);
-                        String recipe = documentSnapshot.get(Constants.KEY_COCKTAIL_RECIPE).toString();
+                        ArrayList<String> recipe = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_RECIPE);
                         ArrayList<String> image = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_IMAGE);
                         ArrayList<String> tags = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_TAGS);
                         String rating = documentSnapshot.get(Constants.KEY_COCKTAIL_RATING).toString();
@@ -108,8 +109,8 @@ public class ModerateActivity extends AppCompatActivity {
                                     }
                                 });
 
-                        binding.recipe.setText(cocktail.recipe);
-
+                        binding.recipeRecyclerView.setAdapter(new RecipeAdapter(recipe));
+                        
                         TagAdapter tagAdapter = new TagAdapter(cocktail.tags);
                         binding.tagsRecyclerView.setAdapter(tagAdapter);
                         binding.tagsRecyclerView.setVisibility(View.VISIBLE);

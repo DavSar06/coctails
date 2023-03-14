@@ -21,10 +21,12 @@ public class SearchHelper {
             Cocktail temp = cocktails.get(i);
             boolean added = false;
             for(int j=0;j<chars.size();j++){
-                if(temp.recipe.toLowerCase().contains(chars.get(j))){
-                    finalList.add(temp);
-                    added = true;
-                    break;
+                for(int z = 0;z<temp.recipe.size();z++){
+                    if(temp.recipe.get(z).toLowerCase().contains(chars.get(j))){
+                        finalList.add(temp);
+                        added = true;
+                        break;
+                    }
                 }
                 if(temp.name.toLowerCase().contains(chars.get(j))){
                     finalList.add(temp);

@@ -64,7 +64,7 @@ public class ModeratePageActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document: task.getResult()){
                                 String cocktailName = document.getString(Constants.KEY_COCKTAIL_NAME);
                                 String creator = document.getString(Constants.KEY_COCKTAIL_CREATOR_NAME);
-                                String recipe = document.get(Constants.KEY_COCKTAIL_RECIPE).toString();
+                                ArrayList<String> recipe = (ArrayList<String>) document.get(Constants.KEY_COCKTAIL_RECIPE);
                                 ArrayList<String> image = (ArrayList<String>) document.get(Constants.KEY_COCKTAIL_IMAGE);
                                 ArrayList<String> tags = (ArrayList<String>) document.get(Constants.KEY_COCKTAIL_TAGS);
                                 String rating = document.get(Constants.KEY_COCKTAIL_RATING).toString();

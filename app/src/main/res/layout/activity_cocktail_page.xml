@@ -240,18 +240,17 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/_30sdp"/>
 
-                <TextView
-                    android:id="@+id/recipe"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recipe_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/_50sdp"
-                    android:paddingHorizontal="@dimen/_15sdp"
-                    android:layout_gravity="bottom"
-                    android:autoSizeTextType="uniform"
-                    android:fontFamily="@font/metropolisbold"
-                    android:gravity="left"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_18sdp"/>
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:overScrollMode="always"
+                    android:clipToPadding="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:paddingHorizontal="@dimen/_15sdp"/>
 <!--
             <VideoView
                 android:layout_width="match_parent"

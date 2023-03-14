@@ -57,17 +57,18 @@
                     android:layout_marginBottom="@dimen/_10sdp">
 
                     <FrameLayout
+                        android:id="@+id/slider_container"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="@dimen/_200sdp">
 
-                        <com.denzcoskun.imageslider.ImageSlider
-                            android:id="@+id/imageSlider"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_200sdp"
-                            android:background="@color/background_color_light"
-                            app:iss_auto_cycle="false"
-                            app:iss_period="1000"
-                            app:iss_title_background="@drawable/gradient" />
+<!--                        <com.denzcoskun.imageslider.ImageSlider-->
+<!--                            android:id="@+id/imageSlider"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:background="@color/background_color_light"-->
+<!--                            app:iss_auto_cycle="false"-->
+<!--                            app:iss_indicator_align="@string/app_name"-->
+<!--                            app:iss_title_background="@drawable/gradient" />-->
 
                         <TextView
                             android:id="@+id/imageChooseText"
@@ -81,6 +82,18 @@
 
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/remove_images"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Remove Images"
+                    android:background="@drawable/button_background"
+                    android:textSize="@dimen/_15sdp"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:paddingHorizontal="@dimen/_10sdp"/>
 
                 <EditText
                     android:id="@+id/cocktailName"

@@ -22,6 +22,7 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.AttributeSet;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -85,6 +86,8 @@ public class CreateCocktailFragment extends Fragment {
     private List<EditText> recipeList = new ArrayList<>();
     private List<String> recipeSteps = new ArrayList<>();
 
+    ImageSlider slider;
+
     public CreateCocktailFragment() {
         // Required empty public constructor
     }
@@ -120,8 +123,23 @@ public class CreateCocktailFragment extends Fragment {
             InputMethodManager inm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             inm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
         });
-        binding.imageSlider.setOnClickListener(v->{
+        slider.setOnClickListener(v->{
             chooseImage();
+        });
+        binding.removeImages.setOnClickListener(v->{
+            if(slideModels.size()>0){
+                slideModels.clear();
+                imageUri.clear();
+                binding.sliderContainer.removeView(slider);
+                slider = new ImageSlider(getActivity());
+                slider.setBackgroundColor(getResources().getColor(R.color.background_color_light));
+                binding.sliderContainer.addView(slider);
+                binding.imageChooseText.bringToFront();
+                binding.imageChooseText.setVisibility(View.VISIBLE);
+                slider.setOnClickListener(t->{
+                    chooseImage();
+                });
+            }
         });
         binding.addStep.setOnClickListener(v->{
             addStep();
@@ -143,6 +161,12 @@ public class CreateCocktailFragment extends Fragment {
     private void init(){
         preferenceManager = new PreferenceManager(getActivity());
         cocktailName = binding.cocktailName;
+
+        slider = new ImageSlider(getActivity());
+        slider.setBackgroundColor(getResources().getColor(R.color.background_color_light));
+        binding.sliderContainer.addView(slider);
+        binding.imageChooseText.bringToFront();
+
         storage = FirebaseStorage.getInstance().getReference("cocktails");
         database = FirebaseFirestore.getInstance();
         recipeList.add(binding.recipeFirstStep);
@@ -262,6 +286,7 @@ public class CreateCocktailFragment extends Fragment {
 
     private final ActivityResultLauncher<Intent> pickImage = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
         if(result.getResultCode() == RESULT_OK){
+            slideModels.clear();
             if(result.getData().getClipData() != null){
                 imageUri.clear();
                 ClipData mClipData = result.getData().getClipData();
@@ -271,14 +296,14 @@ public class CreateCocktailFragment extends Fragment {
                     imageUri.add(uri);
                     slideModels.add(new SlideModel(uri.toString(), ScaleTypes.CENTER_CROP));
                 }
-                binding.imageSlider.setImageList(slideModels);
+                slider.setImageList(slideModels);
                 binding.imageChooseText.setVisibility(View.INVISIBLE);
             }else if(result.getData() != null){
                 imageUri.clear();
                 Uri uri = result.getData().getData();
                 imageUri.add(uri);
                 slideModels.add(new SlideModel(uri.toString(), ScaleTypes.CENTER_CROP));
-                binding.imageSlider.setImageList(slideModels);
+                slider.setImageList(slideModels);
                 binding.imageChooseText.setVisibility(View.INVISIBLE);
             }
         }
