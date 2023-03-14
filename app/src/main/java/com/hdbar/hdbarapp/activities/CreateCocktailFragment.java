@@ -73,6 +73,7 @@ public class CreateCocktailFragment extends Fragment {
     private FirebaseFirestore database;
 
     private List<String> cocktailTags;
+    private List<String> cocktailTagsFinal;
     private ArrayList<String> tags = new ArrayList<>();
 
     private ArrayList<Uri> imageUri = new ArrayList<>();
@@ -160,6 +161,19 @@ public class CreateCocktailFragment extends Fragment {
                         if(finalImages.size()==imageUri.size()){
                             String tags = binding.tagsACTV.getText().toString();
                             cocktailTags = Arrays.asList(tags.split(","));
+                            int changes = -1;
+                            while(changes != 0){
+                                changes = 0;
+                                cocktailTagsFinal = new ArrayList<>();
+                                for (int i = 0; i < cocktailTags.size(); i++) {
+                                    if (cocktailTags.get(i).startsWith(" ")) {
+                                        String a = cocktailTags.get(i).replaceFirst(" ", "");
+                                        cocktailTagsFinal.add(a);
+                                        changes++;
+                                    }
+                                }
+                                cocktailTags = cocktailTagsFinal;
+                            }
                             HashMap<String,Object> cocktail = new HashMap<>();
                             cocktail.put(Constants.KEY_COCKTAIL_NAME,cocktailName.getText().toString());
                             cocktail.put(Constants.KEY_COCKTAIL_RECIPE,cocktailRecipe.getText().toString());
