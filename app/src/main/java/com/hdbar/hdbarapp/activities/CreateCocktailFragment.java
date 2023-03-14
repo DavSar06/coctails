@@ -209,10 +209,12 @@ public class CreateCocktailFragment extends Fragment {
                                 changes = 0;
                                 cocktailTagsFinal = new ArrayList<>();
                                 for (int i = 0; i < cocktailTags.size(); i++) {
-                                    if (cocktailTags.get(i).startsWith(" ")) {
+                                    if (cocktailTags.get(i).startsWith(" ") || cocktailTags.get(i).equals("")) {
+                                        changes++;
+                                    }
+                                    if(!cocktailTags.get(i).equals("")){
                                         String a = cocktailTags.get(i).replaceFirst(" ", "");
                                         cocktailTagsFinal.add(a);
-                                        changes++;
                                     }
                                 }
                                 cocktailTags = cocktailTagsFinal;
