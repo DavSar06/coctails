@@ -61,13 +61,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".lists.setp_by_step_recipte"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".activities.UserPageActivity"
             android:exported="false">
             <meta-data

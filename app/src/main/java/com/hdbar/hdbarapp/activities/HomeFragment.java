@@ -102,7 +102,7 @@ public class HomeFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String cocktailName = document.getString(Constants.KEY_COCKTAIL_NAME);
                                 String creator = document.getString(Constants.KEY_COCKTAIL_CREATOR_NAME);
-                                String recipe = document.get(Constants.KEY_COCKTAIL_RECIPE).toString();
+                                ArrayList<String> recipe = (ArrayList<String>) document.get(Constants.KEY_COCKTAIL_RECIPE);
                                 String rating_count = document.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
                                 ArrayList<String> image = (ArrayList<String>) document.get(Constants.KEY_COCKTAIL_IMAGE);
                                 ArrayList<String> tags = (ArrayList<String>) document.get(Constants.KEY_COCKTAIL_TAGS);

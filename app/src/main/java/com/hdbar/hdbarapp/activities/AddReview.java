@@ -119,7 +119,7 @@ public class AddReview extends AppCompatActivity {
                         ArrayList<String> image = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_IMAGE);
                         ArrayList<String> tags = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_TAGS);
                         String rating_count = documentSnapshot.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
-                        String recipe = documentSnapshot.get(Constants.KEY_COCKTAIL_RECIPE).toString();
+                        ArrayList<String> recipe = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_RECIPE);
                         String rating = documentSnapshot.get(Constants.KEY_COCKTAIL_RATING).toString();
                         cocktail = new Cocktail(documentSnapshot.getId(),coctailName,recipe,image,rating,creator,rating_count,tags);
 
