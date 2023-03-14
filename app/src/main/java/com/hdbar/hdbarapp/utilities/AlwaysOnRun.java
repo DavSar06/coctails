@@ -1,4 +1,4 @@
-package com.hdbar.hdbarapp.activities;
+package com.hdbar.hdbarapp.utilities;
 
 import android.app.Activity;
 import android.content.Context;

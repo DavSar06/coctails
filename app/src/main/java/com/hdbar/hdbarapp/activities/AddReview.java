@@ -6,11 +6,9 @@ import androidx.appcompat.widget.SwitchCompat;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -29,27 +27,28 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.hdbar.hdbarapp.R;
-import com.hdbar.hdbarapp.adapters.TagAdapter;
 import com.hdbar.hdbarapp.databinding.ActivityAddReviewBinding;
 import com.hdbar.hdbarapp.models.Cocktail;
-import com.hdbar.hdbarapp.settings.PrivacyPolicyActivity;
+import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 import com.hdbar.hdbarapp.utilities.Constants;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 public class AddReview extends AppCompatActivity {
 
 
     private ActivityAddReviewBinding binding;
-    private TextView back,cocktailName,publisherName;
+    private TextView back,cocktailName,publisherName,ratingBarTV,postBtn;
     private RatingBar ratingBar;
     private EditText inputComment;
     private FirebaseFirestore database;
     private SwitchCompat isPrivate;
     private ShapeableImageView imageView;
     private Cocktail cocktail;
+    private boolean isprivate = false;
     private String cocktailId;
-    private String uid;
     private String userId;
     private boolean isAnyThingChanged = false;
 
@@ -62,8 +61,185 @@ public class AddReview extends AppCompatActivity {
         init();
         listener();
         AlwaysOnRun.AlwaysRun(this);
+        ratingChange();
+    }
+
+
+    private void ratingChange() {
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                ratingBarTV.setText(ratingBar.getRating() + "");
+            }
+        });
+
 
     }
+
+    private void posting() {
+        addComment();
+        setRating();
+
+
+        //finishing
+        finish();
+        overridePendingTransition(R.anim.fade_out,R.anim.fade_in);
+    }
+
+
+    private void init(){
+        back = binding.backAboutUs;
+        inputComment = binding.inputComment;
+        isPrivate = binding.privateSwitch;
+        database = FirebaseFirestore.getInstance();
+        userId = FirebaseAuth.getInstance().getUid();
+        publisherName = binding.ratePublisherName;
+        imageView = binding.reviewImageCocktail;
+        cocktailName =  binding.rateCocktailName;
+        cocktailId = getIntent().getStringExtra(Constants.KEY_COCKTAIL_ID);
+
+        postBtn = binding.donateBtn;
+
+        //rating-----------------------------------
+        ratingBar=binding.ratingBarRate;
+        ratingBarTV=binding.ratingWithNumber;
+        //-----------------------------------------
+
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+
+        database.collection(Constants.KEY_COLLECTION_COCKTAILS)
+                .document(cocktailId)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        String coctailName = documentSnapshot.getString(Constants.KEY_COCKTAIL_NAME);
+                        String creator = documentSnapshot.getString(Constants.KEY_COCKTAIL_CREATOR_NAME);
+                        ArrayList<String> image = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_IMAGE);
+                        ArrayList<String> tags = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_TAGS);
+                        String rating_count = documentSnapshot.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
+                        String recipe = documentSnapshot.get(Constants.KEY_COCKTAIL_RECIPE).toString();
+                        String rating = documentSnapshot.get(Constants.KEY_COCKTAIL_RATING).toString();
+                        cocktail = new Cocktail(documentSnapshot.getId(),coctailName,recipe,image,rating,creator,rating_count,tags);
+
+
+                        //------------------------------------------
+
+
+
+
+                        Glide.with(binding.reviewImageCocktail).load(storage.getReference(cocktail.image.get(0)).getDownloadUrl()).into(binding.reviewImageCocktail);
+
+                        //--------------------------------------------
+
+                        publisherName.setText(creator);
+                        cocktailName.setText(coctailName);
+                    }
+                });
+
+
+    }
+
+
+    private void setRating(){
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingbar, float rating, boolean fromUser) {
+
+                float numberOfStars = ratingBar.getRating();
+                database.collection(Constants.KEY_COLLECTION_RATINGS)
+                        .whereEqualTo(Constants.KEY_USER_UID,userId)
+                        .whereEqualTo(Constants.KEY_COCKTAIL_ID,cocktailId)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()){
+                                    if (task.getResult().isEmpty()){
+                                        HashMap<String,Object> rating_hm = new HashMap<>();
+                                        rating_hm.put(Constants.KEY_USER_UID,userId);
+                                        rating_hm.put(Constants.KEY_COCKTAIL_ID,cocktailId);
+                                        rating_hm.put(Constants.KEY_COCKTAIL_RATING,numberOfStars);
+                                        database.collection(Constants.KEY_COLLECTION_RATINGS).add(rating_hm);
+                                    }
+                                }
+                            }
+                        });
+            }
+        });
+    }
+
+
+    private void setRatingToCocktail(){
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingbar, float rating, boolean fromUser) {
+
+                float numberOfStars = ratingBar.getRating();
+                database.collection(Constants.KEY_COLLECTION_COCKTAILS)
+                        .whereEqualTo(Constants.KEY_COCKTAIL_ID,cocktailId)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()){
+                                    if (!task.getResult().isEmpty()){
+                                        HashMap<String,Object> rating_hm = new HashMap<>();
+                                        rating_hm.put(Constants.KEY_USER_UID,userId);
+                                        rating_hm.put(Constants.KEY_COCKTAIL_ID,cocktailId);
+                                        rating_hm.put(Constants.KEY_COCKTAIL_RATING,numberOfStars);
+                                        database.collection(Constants.KEY_COLLECTION_RATINGS).add(rating_hm);
+                                    }
+                                }
+                            }
+                        });
+            }
+        });
+    }
+
+    private void addComment(){
+        if(binding.inputComment.getText().length()>0) {
+            HashMap<String, Object> comment = new HashMap<>();
+            comment.put(Constants.KEY_COMMENT_BODY, binding.inputComment.getText().toString());
+            comment.put(Constants.KEY_DATE,new Date());
+            comment.put(Constants.KEY_COCKTAIL_ID,cocktailId);
+            if (isprivate){
+                comment.put(Constants.KEY_COMMENTER_ID,"EDwdFoxrDAUHAKJgmUqvW7YgMEM2");
+            }else{
+                comment.put(Constants.KEY_COMMENTER_ID,userId);
+            }
+            database.collection(Constants.KEY_COLLECTION_COMMENTS)
+                    .add(comment);
+            binding.inputComment.setText("");
+        }
+    }
+
+
+
+    private void listener() {
+        back.setOnClickListener(view -> discardDialogBox());
+        switchIsChanged();
+        setInputComment();
+        ratingChanged();
+        postBtn.setOnClickListener(view -> posting());
+
+    }
+
+    private void switchIsChanged(){
+        isPrivate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isAnyThingChanged)
+                    isprivate = false;
+                else
+                    isprivate = true;
+
+                isAnyThingChanged = !isAnyThingChanged;
+            }
+        });
+    }
+
 
     private void discardDialogBox(){
         new AlertDialog.Builder(this, R.style.DialogeTheme)
@@ -87,67 +263,6 @@ public class AddReview extends AppCompatActivity {
 
     }
 
-
-
-    private void init(){
-        back = binding.backAboutUs;
-        ratingBar = binding.ratingBarRate;
-        inputComment = binding.inputComment;
-        isPrivate = binding.privateSwitch;
-        database = FirebaseFirestore.getInstance();
-        userId = FirebaseAuth.getInstance().getUid();
-        publisherName = binding.ratePublisherName;
-        imageView = binding.reviewImageCocktail;
-        cocktailName =  binding.rateCocktailName;
-        cocktailId = getIntent().getStringExtra(Constants.KEY_COCKTAIL_ID);
-
-        database.collection(Constants.KEY_COLLECTION_COCKTAILS)
-                .document(cocktailId)
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        String coctailName = documentSnapshot.getString(Constants.KEY_COCKTAIL_NAME);
-                        String creator = documentSnapshot.getString(Constants.KEY_COCKTAIL_CREATOR_NAME);
-                        ArrayList<String> image = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_IMAGE);
-                        ArrayList<String> tags = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_TAGS);
-                        String rating_count = documentSnapshot.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
-                        String recipe = documentSnapshot.get(Constants.KEY_COCKTAIL_RECIPE).toString();
-                        String rating = documentSnapshot.get(Constants.KEY_COCKTAIL_RATING).toString();
-                        cocktail = new Cocktail(documentSnapshot.getId(),coctailName,recipe,image,rating,creator,rating_count,tags);
-
-                        publisherName.setText(creator);
-                        cocktailName.setText(coctailName);
-                    }
-                });
-
-
-    }
-
-
-    private void listener() {
-        back.setOnClickListener(view -> discardDialogBox());
-        switchIsChanged();
-        setInputComment();
-        ratingChanged();
-
-
-
-    }
-
-    private void switchIsChanged(){
-        isPrivate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isAnyThingChanged)
-                    Log.d("In", "false");
-                else
-                    Log.d("In", "true");
-
-                isAnyThingChanged = !isAnyThingChanged;
-            }
-        });
-    }
 
 
 

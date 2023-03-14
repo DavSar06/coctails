@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
@@ -15,11 +13,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.ActivityEmailConfirmBinding;
-import com.hdbar.hdbarapp.databinding.ActivityRegisterBinding;
-import com.hdbar.hdbarapp.models.User;
+import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 
 public class EmailConfirmActivity extends AppCompatActivity {
 
