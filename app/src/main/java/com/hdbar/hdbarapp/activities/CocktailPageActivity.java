@@ -118,43 +118,6 @@ public class CocktailPageActivity extends AppCompatActivity {
                 });
     }
 
-    private void simpleRating(){
-        simple_rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                rate_i++;
-
-                if (rate_i == 2){
-                    numberOfStars = simple_rating.getRating();
-                    database.collection(Constants.KEY_COLLECTION_RATINGS)
-                            .whereEqualTo(Constants.KEY_USER_UID,uid)
-                            .whereEqualTo(Constants.KEY_COCKTAIL_ID,cocktailId)
-                            .get()
-                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                    if(task.isSuccessful()){
-                                        if (task.getResult().isEmpty()){
-                                            HashMap<String,Object> rating_hm = new HashMap<>();
-                                            rating_hm.put(Constants.KEY_USER_UID,uid);
-                                            rating_hm.put(Constants.KEY_COCKTAIL_ID,cocktailId);
-                                            rating_hm.put(Constants.KEY_COCKTAIL_RATING,numberOfStars);
-                                            database.collection(Constants.KEY_COLLECTION_RATINGS).add(rating_hm);
-                                            simple_rating.setIsIndicator(false);
-                                        }
-                                        else {
-                                            simple_rating.setIsIndicator(true);
-                                            rate_i--;
-                                        }
-                                    }
-                                }
-                            });
-
-                }
-            }
-        });
-    }
-
     private void ratingsSize(){
 
         database.collection(Constants.KEY_COLLECTION_RATINGS)
@@ -171,6 +134,7 @@ public class CocktailPageActivity extends AppCompatActivity {
                                     arrayListRatings.add(getRatingsFB);
                                     sum += getRatingsFB;
                                 }
+                                Log.d("FCM", sum + " ");
                                 local_rate.setText(String.format("%.01f",sum/arrayListRatings.size() )+ "");
                                 hm_rates.setText(arrayListRatings.size() + "");
                                 simple_rating.setRating(sum/arrayListRatings.size());
@@ -194,10 +158,6 @@ public class CocktailPageActivity extends AppCompatActivity {
         rate_btn = binding.addReviewBtn;
         arrayListRatings = new ArrayList<>();
         setRating();
-        ratingsSize();/*
-        if (!rating_bool){
-            simpleRating();
-        }*/
         ratingsSize();
 
 

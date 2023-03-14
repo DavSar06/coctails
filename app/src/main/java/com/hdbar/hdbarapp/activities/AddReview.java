@@ -4,11 +4,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -51,6 +59,7 @@ public class AddReview extends AppCompatActivity {
     private String cocktailId;
     private String userId;
     private boolean isAnyThingChanged = false;
+    private float numOfStarts = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +69,8 @@ public class AddReview extends AppCompatActivity {
 
         init();
         listener();
-        AlwaysOnRun.AlwaysRun(this);
-        ratingChange();
-    }
+        AlwaysRun(this);
 
-
-    private void ratingChange() {
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
@@ -73,13 +78,37 @@ public class AddReview extends AppCompatActivity {
             }
         });
 
-
     }
+
+    public static void AlwaysRun(Activity myActivityReference) {
+        View decorView = myActivityReference.getWindow().getDecorView();
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            myActivityReference.getWindow().setNavigationBarColor(myActivityReference.getResources().getColor(R.color.background_color_light));
+            Window window = myActivityReference.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(myActivityReference.getResources().getColor(R.color.background_color_dark));
+        }
+
+
+        ConnectivityManager cm = (ConnectivityManager) myActivityReference.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = cm.getActiveNetworkInfo();
+
+        if (info == null || !info.isConnected())
+            Log.d("Ine", "NoConnection");
+        else {
+            Log.e("Ine", "Connected");    }
+
+
+
+        Log.d("TAG","AlwaysOnRun");
+    }
+
 
     private void posting() {
         addComment();
         setRating();
-
 
         //finishing
         finish();
@@ -128,8 +157,12 @@ public class AddReview extends AppCompatActivity {
 
 
 
-
-                        Glide.with(binding.reviewImageCocktail).load(storage.getReference(cocktail.image.get(0)).getDownloadUrl()).into(binding.reviewImageCocktail);
+                        storage.getReference(cocktail.image.get(0)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Glide.with(binding.reviewImageCocktail).load(uri).into(binding.reviewImageCocktail);
+                            }
+                        });
 
                         //--------------------------------------------
 
@@ -143,11 +176,8 @@ public class AddReview extends AppCompatActivity {
 
 
     private void setRating(){
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingbar, float rating, boolean fromUser) {
 
-                float numberOfStars = ratingBar.getRating();
+        Log.d("NO","mtav");
                 database.collection(Constants.KEY_COLLECTION_RATINGS)
                         .whereEqualTo(Constants.KEY_USER_UID,userId)
                         .whereEqualTo(Constants.KEY_COCKTAIL_ID,cocktailId)
@@ -155,21 +185,33 @@ public class AddReview extends AppCompatActivity {
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if(task.isSuccessful()){
-                                    if (task.getResult().isEmpty()){
+                                numOfStarts = ratingBar.getRating();
+
+                                if (task.isSuccessful()){
+                                    if (!task.getResult().getDocuments().isEmpty()){
+                                        task.getResult().getDocuments().get(0);
+                                        database.collection(Constants.KEY_COLLECTION_RATINGS)
+                                                .document(task.getResult().getDocuments().get(0).getId())
+                                                .update(Constants.KEY_COCKTAIL_RATING,numOfStarts);
+                                        Log.d("NO","mtav poxelu");
+                                    }else {
+
                                         HashMap<String,Object> rating_hm = new HashMap<>();
                                         rating_hm.put(Constants.KEY_USER_UID,userId);
                                         rating_hm.put(Constants.KEY_COCKTAIL_ID,cocktailId);
-                                        rating_hm.put(Constants.KEY_COCKTAIL_RATING,numberOfStars);
+                                        rating_hm.put(Constants.KEY_COCKTAIL_RATING,numOfStarts);
                                         database.collection(Constants.KEY_COLLECTION_RATINGS).add(rating_hm);
+                                        Log.d("NO","ha");
                                     }
+                                }else{
+                                    Log.d("NO","che");
                                 }
                             }
                         });
-            }
-        });
-    }
 
+
+    }
+/*
 
     private void setRatingToCocktail(){
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -196,7 +238,7 @@ public class AddReview extends AppCompatActivity {
                         });
             }
         });
-    }
+    }*/
 
     private void addComment(){
         if(binding.inputComment.getText().length()>0) {
@@ -224,6 +266,12 @@ public class AddReview extends AppCompatActivity {
         ratingChanged();
         postBtn.setOnClickListener(view -> posting());
 
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                setRating();
+            }
+        });
     }
 
     private void switchIsChanged(){

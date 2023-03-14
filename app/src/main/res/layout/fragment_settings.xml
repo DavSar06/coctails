@@ -294,7 +294,7 @@
                         android:gravity="left"
                         android:fontFamily="@font/montserratmedium"
                         android:layout_toRightOf="@+id/settings_images4"
-                        android:text="Privacy and Security"
+                        android:text="Privacy and Policy"
                         android:layout_centerVertical="true"
                         android:textSize="@dimen/_14sdp"
                         android:textColor="@color/white"/>
