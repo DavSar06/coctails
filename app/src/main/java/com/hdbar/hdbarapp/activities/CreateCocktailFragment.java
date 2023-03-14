@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -31,6 +32,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,9 +65,7 @@ import java.util.List;
 public class CreateCocktailFragment extends Fragment {
 
     private FragmentCreateCocktailBinding binding;
-
     private PreferenceManager preferenceManager;
-
     private EditText cocktailName;
     private EditText cocktailRecipe;
     private Integer PICK_IMAGE_MULTIPLE = 1;
@@ -81,13 +81,14 @@ public class CreateCocktailFragment extends Fragment {
     private ArrayList<SlideModel> slideModels = new ArrayList<>();
     private StorageReference storage;
 
+    Integer numberOfLines = 1;
+    private List<EditText> recipeList = new ArrayList<>();
+    private List<String> recipeSteps = new ArrayList<>();
 
     public CreateCocktailFragment() {
         // Required empty public constructor
     }
 
-
-    // TODO: Rename and change types and number of parameters
     public static CreateCocktailFragment newInstance() {
         CreateCocktailFragment fragment = new CreateCocktailFragment();
         return fragment;
@@ -104,8 +105,7 @@ public class CreateCocktailFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         return binding.getRoot();
     }
@@ -123,16 +123,29 @@ public class CreateCocktailFragment extends Fragment {
         binding.imageSlider.setOnClickListener(v->{
             chooseImage();
         });
+        binding.addStep.setOnClickListener(v->{
+            addStep();
+        });
+        binding.removeStep.setOnClickListener(v->{
+            if(recipeList.size()>1){
+                binding.cocktailRecipe.removeViewInLayout(recipeList.get(--numberOfLines));
+                recipeList.remove(recipeList.get(numberOfLines));
+                binding.cocktailRecipe.setVisibility(View.GONE);
+                binding.cocktailRecipe.setVisibility(View.VISIBLE);
+            }
+            else{
+                Toast.makeText(getActivity(), "You cannot remove the only step", Toast.LENGTH_SHORT).show();
+            }
+        });
         binding.publishRecipe.setOnClickListener(v->publish());
     }
 
     private void init(){
         preferenceManager = new PreferenceManager(getActivity());
         cocktailName = binding.cocktailName;
-        cocktailRecipe = binding.cocktailRecipe;
         storage = FirebaseStorage.getInstance().getReference("cocktails");
         database = FirebaseFirestore.getInstance();
-
+        recipeList.add(binding.recipeFirstStep);
         database.collection(Constants.KEY_COLLECTION_TAGS)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -148,8 +161,38 @@ public class CreateCocktailFragment extends Fragment {
                 });
     }
 
+    private void addStep(){
+        EditText et = new EditText(getActivity());
+        EditText mainEditText = recipeList.get(0);
+        ViewGroup.LayoutParams p = mainEditText.getLayoutParams();
+        et.setLayoutParams(p);
+        et.setHint("Step "+(++numberOfLines));
+        et.setHintTextColor(getResources().getColor(R.color.grey));
+        et.setTextColor(Color.WHITE);
+        et.setPadding(mainEditText.getPaddingLeft(),mainEditText.getPaddingTop(),mainEditText.getPaddingRight(),mainEditText.getPaddingBottom());
+        et.setBackground(mainEditText.getBackground());
+        et.setTextSize(20);
+        et.setInputType(mainEditText.getInputType());
+        et.setSingleLine(true);
+        et.setId(numberOfLines);
+        binding.cocktailRecipe.addView(et);
+        recipeList.add(et);
+    }
+
     private void publish(){
-        if(!cocktailName.getText().toString().isEmpty() && !cocktailRecipe.getText().toString().isEmpty() && imageUri != null && !binding.tagsACTV.getText().toString().isEmpty()){
+        boolean isValid = true;
+        if(!cocktailName.getText().toString().isEmpty() && imageUri != null && !binding.tagsACTV.getText().toString().isEmpty()){
+            recipeSteps = new ArrayList<>();
+            for(EditText editText:recipeList){
+                recipeSteps.add(editText.getText().toString());
+                if(editText.getText().toString().isEmpty()){
+                    isValid = false;
+                    break;
+                }
+            }
+            if(!isValid){
+                return;
+            }
             binding.publishRecipe.setEnabled(false);
             binding.progressBar.setVisibility(View.VISIBLE);
             for(int i=0;i<imageUri.size();i++){
@@ -166,17 +209,19 @@ public class CreateCocktailFragment extends Fragment {
                                 changes = 0;
                                 cocktailTagsFinal = new ArrayList<>();
                                 for (int i = 0; i < cocktailTags.size(); i++) {
-                                    if (cocktailTags.get(i).startsWith(" ")) {
+                                    if (cocktailTags.get(i).startsWith(" ") || cocktailTags.get(i).equals("")) {
+                                        changes++;
+                                    }
+                                    if(!cocktailTags.get(i).equals("")){
                                         String a = cocktailTags.get(i).replaceFirst(" ", "");
                                         cocktailTagsFinal.add(a);
-                                        changes++;
                                     }
                                 }
                                 cocktailTags = cocktailTagsFinal;
                             }
                             HashMap<String,Object> cocktail = new HashMap<>();
                             cocktail.put(Constants.KEY_COCKTAIL_NAME,cocktailName.getText().toString());
-                            cocktail.put(Constants.KEY_COCKTAIL_RECIPE,cocktailRecipe.getText().toString());
+                            cocktail.put(Constants.KEY_COCKTAIL_RECIPE,recipeSteps);
                             cocktail.put(Constants.KEY_COCKTAIL_IMAGE,finalImages);
                             cocktail.put(Constants.KEY_COCKTAIL_VIDEO,null);
                             cocktail.put(Constants.KEY_COCKTAIL_TAGS,cocktailTags);
@@ -190,6 +235,10 @@ public class CreateCocktailFragment extends Fragment {
                                     .addOnSuccessListener(documentReference -> {
                                         binding.progressBar.setVisibility(View.INVISIBLE);
                                         Toast.makeText(getActivity(), "Cocktail is waiting to be approved!", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getActivity(),MainActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                        getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                                     }).addOnFailureListener(exception -> {
                                         Log.d("FCM",exception.getMessage());
                                     });
