@@ -51,6 +51,8 @@ public class FavoriteFragment extends Fragment {
     private List<Cocktail> cocktails;
     private FirebaseFirestore database;
     private String uid;
+    Integer adapterStatus = 0;
+    Integer i;
 
     private final CocktailListener cocktailListener = new CocktailListener() {
         @Override
@@ -77,14 +79,14 @@ public class FavoriteFragment extends Fragment {
         init();
         listeners();
 
-        changeAdapter(0);
+        changeAdapter(adapterStatus,cocktails);
     }
 
     private void init(){
         uid = FirebaseAuth.getInstance().getUid();
         database = FirebaseFirestore.getInstance();
         binding = FragmentFavoriteBinding.inflate(getLayoutInflater());
-        cocktails = new LinkedList<>();
+        getCocktails();
     }
 
     @Override
@@ -92,44 +94,11 @@ public class FavoriteFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void listeners(){
-        binding.getRoot().setOnClickListener(v->{
-            InputMethodManager inm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            inm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
-        });
-        binding.rowDouble.setOnClickListener(v->{
-            binding.rowSingle.setColorFilter(ContextCompat.getColor(getActivity(), R.color.background_color_light), android.graphics.PorterDuff.Mode.SRC_IN);
-            binding.rowDouble.setColorFilter(ContextCompat.getColor(getActivity(), R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
-            binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
-            binding.textErrorMessage.setVisibility(View.INVISIBLE);
-            binding.progressBar.setVisibility(View.VISIBLE);
-            changeAdapter(0);
-        });
-        binding.rowSingle.setOnClickListener(v->{
-            binding.rowSingle.setColorFilter(ContextCompat.getColor(getActivity(), R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
-            binding.rowDouble.setColorFilter(ContextCompat.getColor(getActivity(), R.color.background_color_light), android.graphics.PorterDuff.Mode.SRC_IN);
-            binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
-            binding.textErrorMessage.setVisibility(View.INVISIBLE);
-            binding.progressBar.setVisibility(View.VISIBLE);
-            changeAdapter(1);
-        });
-        binding.search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                List<Cocktail> searchResult = SearchHelper.searchInCocktails(charSequence.toString(), cocktails);
-                CocktailsAdapter adapter = new CocktailsAdapter(searchResult,cocktailListener);
-                binding.cocktailsRecyclerView.setAdapter(adapter);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {}
-        });
-    }
-
-    private void changeAdapter(Integer k){
+    private void getCocktails(){
+        cocktails = new LinkedList<>();
+        binding.progressBar.setVisibility(View.VISIBLE);
+        binding.textErrorMessage.setVisibility(View.INVISIBLE);
+        binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
         database.collection(Constants.KEY_COLLECTION_FAVORITES)
                 .whereEqualTo(Constants.KEY_USER_UID,uid)
                 .get()
@@ -137,7 +106,9 @@ public class FavoriteFragment extends Fragment {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         cocktails = new LinkedList<>();
+                        i = 0;
                         for(DocumentSnapshot snapshot: queryDocumentSnapshots){
+                            i++;
                             database.collection(Constants.KEY_COLLECTION_COCKTAILS)
                                     .document(snapshot.get(Constants.KEY_COCKTAIL_ID).toString())
                                     .get()
@@ -153,31 +124,75 @@ public class FavoriteFragment extends Fragment {
                                             String rating = document.get(Constants.KEY_COCKTAIL_RATING).toString();
                                             Cocktail a = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator,rating_count,tags);
                                             cocktails.add(a);
+                                            if(i==queryDocumentSnapshots.size()){
+                                                changeAdapter(adapterStatus,cocktails);
+                                            }
                                         }
                                     });
+
                         }
-                        (new Handler()).postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                if(cocktails.size()==0){
-                                    binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
-                                    binding.progressBar.setVisibility(View.INVISIBLE);
-                                    binding.textErrorMessage.setVisibility(View.VISIBLE);
-                                }else {
-                                    if(k==0){
-                                        CocktailsAdapter adapter = new CocktailsAdapter(cocktails,cocktailListener);
-                                        binding.cocktailsRecyclerView.setAdapter(adapter);
-                                    }else{
-                                        CocktailsSingleAdapter adapter = new CocktailsSingleAdapter(cocktails,cocktailListener);
-                                        binding.cocktailsRecyclerView.setAdapter(adapter);
-                                    }
-                                    binding.cocktailsRecyclerView.setVisibility(View.VISIBLE);
-                                    binding.progressBar.setVisibility(View.INVISIBLE);
-                                    binding.textErrorMessage.setVisibility(View.INVISIBLE);
-                                }
-                            }
-                        },500);
                     }
                 });
+    }
+
+    private void listeners(){
+        binding.getRoot().setOnClickListener(v->{
+            InputMethodManager inm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),0);
+        });
+        binding.rowDouble.setOnClickListener(v->{
+            if(adapterStatus!=0){
+                binding.rowSingle.setColorFilter(ContextCompat.getColor(getActivity(), R.color.background_color_light), android.graphics.PorterDuff.Mode.SRC_IN);
+                binding.rowDouble.setColorFilter(ContextCompat.getColor(getActivity(), R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
+                binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
+                binding.textErrorMessage.setVisibility(View.INVISIBLE);
+                binding.progressBar.setVisibility(View.VISIBLE);
+                adapterStatus = 0;
+                changeAdapter(adapterStatus,cocktails);
+            }
+        });
+        binding.rowSingle.setOnClickListener(v->{
+            if(adapterStatus!=1){
+                binding.rowSingle.setColorFilter(ContextCompat.getColor(getActivity(), R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
+                binding.rowDouble.setColorFilter(ContextCompat.getColor(getActivity(), R.color.background_color_light), android.graphics.PorterDuff.Mode.SRC_IN);
+                binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
+                binding.textErrorMessage.setVisibility(View.INVISIBLE);
+                binding.progressBar.setVisibility(View.VISIBLE);
+                adapterStatus = 1;
+                changeAdapter(adapterStatus,cocktails);
+            }
+        });
+        binding.search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                List<Cocktail> searchResult = SearchHelper.searchInCocktails(charSequence.toString(), cocktails);
+                changeAdapter(adapterStatus,searchResult);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+    }
+
+    private void changeAdapter(Integer k,List<Cocktail> cocktails){
+        if(cocktails.isEmpty()){
+            binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
+            binding.progressBar.setVisibility(View.INVISIBLE);
+            binding.textErrorMessage.setVisibility(View.VISIBLE);
+        }else {
+            if(k==0){
+                CocktailsAdapter adapter = new CocktailsAdapter(cocktails,cocktailListener);
+                binding.cocktailsRecyclerView.setAdapter(adapter);
+            }else{
+                CocktailsSingleAdapter adapter = new CocktailsSingleAdapter(cocktails,cocktailListener);
+                binding.cocktailsRecyclerView.setAdapter(adapter);
+            }
+            binding.cocktailsRecyclerView.setVisibility(View.VISIBLE);
+            binding.progressBar.setVisibility(View.INVISIBLE);
+            binding.textErrorMessage.setVisibility(View.INVISIBLE);
+        }
     }
 }
