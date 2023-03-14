@@ -6,10 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.hdbar.hdbarapp.R;
-import com.hdbar.hdbarapp.activities.AlwaysOnRun;
-import com.hdbar.hdbarapp.activities.MainActivity;
-import com.hdbar.hdbarapp.databinding.ActivityHelpAndSupportBinding;
+import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 import com.hdbar.hdbarapp.databinding.ActivityLanguagesBinding;
 
 public class LanguagesActivity extends AppCompatActivity {

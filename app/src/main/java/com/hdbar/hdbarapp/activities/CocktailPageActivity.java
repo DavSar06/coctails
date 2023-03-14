@@ -3,17 +3,11 @@ package com.hdbar.hdbarapp.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.RatingBar;
@@ -41,7 +35,7 @@ import com.hdbar.hdbarapp.databinding.ActivityCocktailPageBinding;
 import com.hdbar.hdbarapp.listeners.CommentImageListener;
 import com.hdbar.hdbarapp.models.Cocktail;
 import com.hdbar.hdbarapp.models.Comment;
-import com.hdbar.hdbarapp.settings.PrivacyPolicyActivity;
+import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 import com.hdbar.hdbarapp.utilities.Constants;
 
 import java.util.ArrayList;
@@ -113,8 +107,11 @@ public class CocktailPageActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             if (!task.getResult().isEmpty()){
                                 simple_rating.setRating(Float.parseFloat(task.getResult().getDocuments().get(0).get(Constants.KEY_COCKTAIL_RATING).toString()));
-                                simple_rating.setIsIndicator(false);
                                 rating_bool = true;
+                                Log.d("FCM","rating has been set");
+                            }
+                            else{
+                               Log.d("FCM", "exeption");
                             }
                         }
                     }
@@ -144,7 +141,6 @@ public class CocktailPageActivity extends AppCompatActivity {
                                             rating_hm.put(Constants.KEY_COCKTAIL_RATING,numberOfStars);
                                             database.collection(Constants.KEY_COLLECTION_RATINGS).add(rating_hm);
                                             simple_rating.setIsIndicator(false);
-                                            ratingsSize();
                                         }
                                         else {
                                             simple_rating.setIsIndicator(true);
@@ -177,6 +173,9 @@ public class CocktailPageActivity extends AppCompatActivity {
                                 }
                                 local_rate.setText(String.format("%.01f",sum/arrayListRatings.size() )+ "");
                                 hm_rates.setText(arrayListRatings.size() + "");
+                                simple_rating.setRating(sum/arrayListRatings.size());
+
+                                Log.d("RAT", getRatingsFB  + " " + hm_rates + " " + simple_rating + " " + sum);
                             }
 
                         }
@@ -195,12 +194,16 @@ public class CocktailPageActivity extends AppCompatActivity {
         rate_btn = binding.addReviewBtn;
         arrayListRatings = new ArrayList<>();
         setRating();
+        ratingsSize();/*
         if (!rating_bool){
             simpleRating();
-        }
+        }*/
         ratingsSize();
+
+
         binding.commentsRecyclerView.setAdapter(commentAdapter);
         showComments();
+
         uid = FirebaseAuth.getInstance().getUid();
         database.collection(Constants.KEY_COLLECTION_FAVORITES)
                 .whereEqualTo(Constants.KEY_COCKTAIL_ID,cocktailId)
@@ -305,7 +308,6 @@ public class CocktailPageActivity extends AppCompatActivity {
     private void listeners(){
         binding.imageBack.setOnClickListener(v->finish());
         binding.favouriteStar.setOnClickListener(v->changeFavoriteStatus());
-        binding.addCommentBtn.setOnClickListener(v->addComment());
         rate_btn.setOnClickListener(view -> addReview());
     }
 
@@ -314,25 +316,6 @@ public class CocktailPageActivity extends AppCompatActivity {
         intent.putExtra(Constants.KEY_COCKTAIL_ID,cocktailId);
         startActivity(intent);
         //getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
-    }
-
-    private void addComment(){
-        if(binding.inputComment.getText().length()>0) {
-            HashMap<String, Object> comment = new HashMap<>();
-            comment.put(Constants.KEY_COMMENT_BODY, binding.inputComment.getText().toString());
-            comment.put(Constants.KEY_DATE,new Date());
-            comment.put(Constants.KEY_COCKTAIL_ID,cocktailId);
-            comment.put(Constants.KEY_COMMENTER_ID,uid);
-            database.collection(Constants.KEY_COLLECTION_COMMENTS)
-                    .add(comment)
-                    .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentReference> task) {
-                            showComments();
-                        }
-                    });
-            binding.inputComment.setText("");
-        }
     }
 
 
