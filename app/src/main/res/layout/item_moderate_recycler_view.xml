@@ -56,7 +56,7 @@
             android:maxLines="1"
             android:textColor="@color/grey"
             android:textSize="@dimen/_10ssp"
-            android:text="Added in 01.01.2023"
+            android:text="@string/added_in_01_01_2023"
             android:fontFamily="@font/metropolisbold"
             android:textStyle="bold" android:layout_marginBottom="@dimen/_3sdp"/>
 

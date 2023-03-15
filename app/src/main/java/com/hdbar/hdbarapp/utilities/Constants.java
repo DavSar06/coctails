@@ -40,4 +40,6 @@ public class Constants {
 
     public static final String KEY_COLLECTION_TAGS = "tags";
     public static final String KEY_TAG_NAME = "tagName";
+
+    public static final String KEY_LANGUAGE = "language";
 }

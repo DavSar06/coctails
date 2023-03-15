@@ -29,19 +29,19 @@
 
         <TextView
             android:id="@+id/commenter"
-            android:text="Commenter Name"
+            android:text="@string/commenter_name"
             android:textSize="@dimen/_15ssp"
             android:textColor="@color/white"
-            android:fontFamily="@font/metropolisbold"
+            android:fontFamily="@font/garute"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/comment"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin malesuada eros tellus, eu tincidunt leo placerat ut. Aenean vel mauris pellent"
+            android:text=""
             android:textSize="@dimen/_15ssp"
             android:textColor="@color/white"
-            android:fontFamily="@font/metropolisbold"
+            android:fontFamily="@font/garute"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"/>

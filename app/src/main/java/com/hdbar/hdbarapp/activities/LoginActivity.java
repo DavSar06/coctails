@@ -65,6 +65,7 @@ import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.ActivityLoginBinding;
 import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 import com.hdbar.hdbarapp.utilities.Constants;
+import com.hdbar.hdbarapp.utilities.LanguageController;
 import com.hdbar.hdbarapp.utilities.PreferenceManager;
 
 import java.util.HashMap;
@@ -101,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
+        LanguageController.loadLocale(getBaseContext());
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);

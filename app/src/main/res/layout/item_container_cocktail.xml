@@ -39,7 +39,7 @@
                     android:id="@+id/cocktailName"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_20sdp"
-                    android:text="Cocktail name"
+                    android:text="@string/cocktail_name"
                     android:textStyle="bold"
                     android:gravity="center"
                     android:textColor="@color/white"
@@ -49,7 +49,7 @@
                     android:id="@+id/cocktailCreator"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_20sdp"
-                    android:text="Hayk Karamyan"
+                    android:text="@string/creator_name"
                     android:gravity="center|top"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_10ssp" />

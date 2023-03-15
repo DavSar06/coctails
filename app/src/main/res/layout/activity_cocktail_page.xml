@@ -29,7 +29,7 @@
             android:backgroundTint="@color/orange"
             android:gravity="center"
             android:paddingVertical="@dimen/_15sdp"
-            android:text="+ Add Review"
+            android:text="@string/add_review"
             android:textColor="@color/white"
             android:textSize="@dimen/_16ssp"
             android:textStyle="bold"
@@ -119,7 +119,7 @@
                     android:autoSizeTextType="uniform"
                     android:fontFamily="@font/argesta"
                     android:gravity="left"
-                    android:text="Cocktail"
+                    android:text="@string/cocktail"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_35sdp"/>
 
@@ -236,7 +236,7 @@
                     android:autoSizeTextType="uniform"
                     android:fontFamily="@font/argesta"
                     android:gravity="left"
-                    android:text="Recipe"
+                    android:text="@string/recipe"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_30sdp"/>
 
@@ -266,7 +266,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Comments"
+                android:text="@string/comments"
                 android:fontFamily="@font/metropolisbold"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_10sdp"

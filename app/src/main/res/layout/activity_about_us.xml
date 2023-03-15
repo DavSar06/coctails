@@ -28,7 +28,7 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:fontFamily="@font/garute"
-            android:text="About Us"
+            android:text="@string/about_us"
             android:textColor="@color/white"
             android:textSize="@dimen/_20ssp" />
 
@@ -46,6 +46,6 @@
         android:textSize="@dimen/_16ssp"
         android:layout_marginHorizontal="@dimen/_15sdp"
         android:fontFamily="@font/garute"
-        android:text="Axper shat ban aselu chunem bayc karanq grenq vor UWC ii snorhivenq sarqinq u mer anunner@ @dhanur testavorelu hamara esi sarqac chmoranas pull anes ha tuyn mitq unem hetev@ pxpjakner linen animaciayouv"/>
+        android:text="@string/about_us_text"/>
 
 </LinearLayout>

@@ -28,7 +28,7 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:fontFamily="@font/garute"
-            android:text="Help and Support"
+            android:text="@string/help_and_support"
             android:textColor="@color/white"
             android:textSize="@dimen/_20ssp" />
     </RelativeLayout>
@@ -51,7 +51,7 @@
         android:textSize="@dimen/_16ssp"
         android:layout_marginHorizontal="@dimen/_18sdp"
         android:fontFamily="@font/metropolisbold"
-        android:text="How can we help you ?"/>
+        android:text="@string/how_can_we_help_you"/>
 
     <TextView
         android:layout_width="wrap_content"

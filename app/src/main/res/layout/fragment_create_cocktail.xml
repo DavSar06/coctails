@@ -8,8 +8,7 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:background="@drawable/background_color"
-    tools:context=".activities.MainActivity"
-    tools:ignore="HardcodedText">
+    tools:context=".activities.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -43,7 +42,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Image"
+                    android:text="@string/image"
                     android:textSize="@dimen/_15sdp"
                     android:textColor="@color/white"
                     android:padding="@dimen/_5sdp"
@@ -76,7 +75,7 @@
                             android:layout_height="match_parent"
                             android:textColor="@color/grey_white"
                             android:gravity="center"
-                            android:text="Click to choose image"/>
+                            android:text="@string/click_to_choose_image"/>
 
                     </FrameLayout>
 
@@ -86,9 +85,9 @@
                     android:id="@+id/remove_images"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Remove Images"
+                    android:text="@string/remove_images"
                     android:background="@drawable/button_background"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/_13ssp"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:layout_marginBottom="@dimen/_10sdp"
@@ -101,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_15sdp"
                     android:padding="@dimen/_5sdp"
-                    android:hint="Cocktail name"
+                    android:hint="@string/cocktail_name"
                     android:backgroundTint="@color/background_color_light"
                     android:textColorHint="@color/grey"
                     android:inputType="text"
@@ -112,7 +111,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Cocktail Recipe (Step-by-step)"
+                    android:text="@string/cocktail_recipe_step_by_step"
                     android:textSize="@dimen/_15sdp"
                     android:textColor="@color/white"
                     android:padding="@dimen/_5sdp"
@@ -131,7 +130,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
                         android:padding="@dimen/_5sdp"
-                        android:hint="Step 1"
+                        android:hint="@string/step_1"
                         android:textColorHint="@color/grey"
                         android:backgroundTint="@color/background_color_light"
                         android:inputType="text"
@@ -151,9 +150,9 @@
                         android:id="@+id/add_step"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Add Step"
+                        android:text="@string/add_step"
                         android:background="@drawable/button_background"
-                        android:textSize="@dimen/_15sdp"
+                        android:textSize="@dimen/_13ssp"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:layout_marginBottom="@dimen/_10sdp"
@@ -164,9 +163,9 @@
                         android:id="@+id/remove_step"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Remove Last Step"
+                        android:text="@string/remove_last_step"
                         android:background="@drawable/button_background"
-                        android:textSize="@dimen/_15sdp"
+                        android:textSize="@dimen/_13ssp"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:layout_marginBottom="@dimen/_10sdp"
@@ -182,7 +181,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_15sdp"
                     android:padding="@dimen/_5sdp"
-                    android:hint="Enter tags(break with commas)"
+                    android:hint="@string/enter_tags_break_with_commas"
                     android:ems="10"
                     android:backgroundTint="@color/background_color_light"
                     android:textColorHint="@color/grey"
@@ -211,7 +210,7 @@
                     android:background="@drawable/button_background"
                     android:gravity="center"
                     android:paddingHorizontal="@dimen/_20sdp"
-                    android:text="Publish"
+                    android:text="@string/publish"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_15sdp" />
 

@@ -30,7 +30,7 @@
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:layout_marginVertical="@dimen/_10sdp"
-                android:text="Settings"
+                android:text="@string/settings"
                 android:gravity="left|center_vertical"
                 android:fontFamily="@font/standard_bold"
                 android:textSize="@dimen/_26ssp"
@@ -133,7 +133,7 @@
                         android:layout_marginLeft="@dimen/_12sdp"
                         android:layout_toRightOf="@+id/settings_images0"
                         android:fontFamily="@font/montserratmedium"
-                        android:text="Moderators"
+                        android:text="@string/moderators"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_14sdp" />
 
@@ -171,7 +171,7 @@
                         android:layout_marginLeft="@dimen/_12sdp"
                         android:layout_toRightOf="@+id/settings_images00"
                         android:fontFamily="@font/montserratmedium"
-                        android:text="Moderate"
+                        android:text="@string/moderate"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_14sdp" />
 
@@ -215,7 +215,7 @@
                         android:gravity="left"
                         android:fontFamily="@font/montserratmedium"
                         android:layout_toRightOf="@+id/settings_images2"
-                        android:text="Notifications"
+                        android:text="@string/notifications"
                         android:layout_centerVertical="true"
                         android:textSize="@dimen/_14sdp"
                         android:textColor="@color/white"/>
@@ -255,7 +255,7 @@
                         android:gravity="left"
                         android:fontFamily="@font/montserratmedium"
                         android:layout_toRightOf="@+id/settings_images3"
-                        android:text="Languages"
+                        android:text="@string/languages"
                         android:layout_centerVertical="true"
                         android:textSize="@dimen/_14sdp"
                         android:textColor="@color/white"/>
@@ -294,7 +294,7 @@
                         android:gravity="left"
                         android:fontFamily="@font/montserratmedium"
                         android:layout_toRightOf="@+id/settings_images4"
-                        android:text="Privacy and Policy"
+                        android:text="@string/privacy_policy"
                         android:layout_centerVertical="true"
                         android:textSize="@dimen/_14sdp"
                         android:textColor="@color/white"/>
@@ -338,7 +338,7 @@
                         android:gravity="left"
                         android:fontFamily="@font/montserratmedium"
                         android:layout_toRightOf="@+id/settings_images5"
-                        android:text="Help and Support"
+                        android:text="@string/help_and_support"
                         android:layout_centerVertical="true"
                         android:textSize="@dimen/_14sdp"
                         android:textColor="@color/white"/>
@@ -418,7 +418,7 @@
                         android:layout_toRightOf="@+id/settings_images7"
                         android:fontFamily="@font/montserratmedium"
                         android:gravity="left"
-                        android:text="About Us"
+                        android:text="@string/about_us"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_14sdp" />
 
@@ -463,7 +463,7 @@
                         android:fontFamily="@font/montserratmedium"
                         android:gravity="left"
                         android:layout_centerVertical="true"
-                        android:text="Logout"
+                        android:text="@string/logout"
                         android:textColor="@color/red"
                         android:textSize="@dimen/_14sdp" />
 

@@ -59,7 +59,7 @@
             android:layout_marginStart="@dimen/_24sdp"
             android:layout_marginEnd="@dimen/_24sdp"
             android:gravity="center"
-            android:text="There is no notifications!"
+            android:text="@string/there_are_no_notifications"
             android:textColor="@color/error"
             android:textSize="@dimen/_12ssp"
             android:visibility="gone" />
