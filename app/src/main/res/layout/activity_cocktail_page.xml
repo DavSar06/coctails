@@ -264,14 +264,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-<<<<<<< HEAD
                 android:text="Comments"
                 android:autoSizeTextType="uniform"
                 android:fontFamily="@font/argesta"
-=======
-                android:text="@string/comments"
-                android:fontFamily="@font/metropolisbold"
->>>>>>> bcf98d6a34cfff8250e939570aae1cc65e6886c4
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:paddingLeft="@dimen/_15sdp"

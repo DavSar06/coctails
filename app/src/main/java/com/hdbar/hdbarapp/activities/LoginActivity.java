@@ -101,7 +101,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        preferenceManager = new PreferenceManager(getApplicationContext());
         FacebookSdk.sdkInitialize(getApplicationContext());
+        if(preferenceManager.getString(Constants.KEY_LANGUAGE) == null){
+            preferenceManager.putString(Constants.KEY_LANGUAGE,"");
+        }
         LanguageController.loadLocale(getBaseContext());
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -116,7 +120,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void init(){
         storage = FirebaseStorage.getInstance().getReference("cocktails");
-        preferenceManager = new PreferenceManager(getApplicationContext());
         database = FirebaseFirestore.getInstance();
         inputEmail=binding.Login;
         inputPassword=binding.Password;
