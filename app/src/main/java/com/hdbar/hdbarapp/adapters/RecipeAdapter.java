@@ -1,10 +1,14 @@
 package com.hdbar.hdbarapp.adapters;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.BackgroundColorSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
+import android.text.style.TextAppearanceSpan;
 import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -37,7 +41,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.StepViewHo
 
     @Override
     public void onBindViewHolder(@NonNull StepViewHolder holder, int position) {
-        holder.setStep(steps.get(position));
+        holder.setStep(steps.get(position),position);
     }
 
     @Override
@@ -55,9 +59,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.StepViewHo
             binding = itemStepByStepBinding;
         }
 
-        void setStep(String step){
-
-
+        void setStep(String step,Integer position){
+            String stepNum = (position+1)+"";
+            step = stepNum+" "+step;
             SpannableString finalString = new SpannableString(step);
 
             String a[] = step.split(" ");
@@ -77,7 +81,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.StepViewHo
                     }
                 }
                 if(contains){
-                    finalString.setSpan(new BackgroundColorSpan(Color.argb(50 ,0, 13, 255)),length,length+chars.get(i).length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    finalString.setSpan(new BackgroundColorSpan(Color.argb(50,0,150,255)),length,length+chars.get(i).length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//                    finalString.setSpan(new StyleSpan(Typeface.ITALIC),length,length+chars.get(i).length(),Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
 
                 length+=chars.get(i).length()+1;
