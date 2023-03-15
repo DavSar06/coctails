@@ -122,7 +122,7 @@
                 android:layout_marginStart="@dimen/_24sdp"
                 android:layout_marginEnd="@dimen/_24sdp"
                 android:gravity="center"
-                android:text="The list of favourites is empty!"
+                android:text="There are no cocktails available!"
                 android:textColor="@color/error"
                 android:textSize="@dimen/_12ssp"
                 android:visibility="gone" />
