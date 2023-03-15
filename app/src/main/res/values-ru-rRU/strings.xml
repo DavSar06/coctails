@@ -60,8 +60,9 @@
     <string name="cocktail_name">Название Коктейля</string>
     <string name="cocktail_recipe_step_by_step">Рецепт (Пошаговый)</string>
     <string name="step_1">Шаг 1</string>
+    <string name="step">Шаг</string>
     <string name="add_step">Добавить шаг</string>
-    <string name="remove_last_step">Удалить последний шаг</string>
+    <string name="remove_last_step">Удалить шаг</string>
     <string name="enter_tags_break_with_commas">Введите теги (отделять запятыми)</string>
     <string name="publish">Публиковать</string>
     <string name="the_list_of_favourites_is_empty">Список Избранного Пуст!</string>

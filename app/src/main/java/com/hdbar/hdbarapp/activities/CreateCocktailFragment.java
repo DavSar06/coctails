@@ -190,7 +190,7 @@ public class CreateCocktailFragment extends Fragment {
         EditText mainEditText = recipeList.get(0);
         ViewGroup.LayoutParams p = mainEditText.getLayoutParams();
         et.setLayoutParams(p);
-        et.setHint("Step "+(++numberOfLines));
+        et.setHint(getResources().getString(R.string.step) + " " + (++numberOfLines));
         et.setHintTextColor(getResources().getColor(R.color.grey));
         et.setTextColor(Color.WHITE);
         et.setPadding(mainEditText.getPaddingLeft(),mainEditText.getPaddingTop(),mainEditText.getPaddingRight(),mainEditText.getPaddingBottom());

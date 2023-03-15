@@ -64,6 +64,7 @@
     <string name="cocktail_name">Cocktail name</string>
     <string name="cocktail_recipe_step_by_step">Cocktail Recipe (Step-by-step)</string>
     <string name="step_1">Step 1</string>
+    <string name="step">Step</string>
     <string name="add_step">Add Step</string>
     <string name="remove_last_step">Remove Last Step</string>
     <string name="enter_tags_break_with_commas">Enter tags(break with commas)</string>
