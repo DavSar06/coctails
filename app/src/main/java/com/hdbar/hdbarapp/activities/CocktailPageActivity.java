@@ -3,6 +3,7 @@ package com.hdbar.hdbarapp.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -93,7 +94,6 @@ public class CocktailPageActivity extends AppCompatActivity {
         init();
         listeners();
         AlwaysOnRun.AlwaysRun(this);
-
     }
 
     private void ratingsSize(){
@@ -155,6 +155,7 @@ public class CocktailPageActivity extends AppCompatActivity {
         ratingsSize();
 
 
+        binding.commentsRecyclerView.setNestedScrollingEnabled(false);
         binding.commentsRecyclerView.setAdapter(commentAdapter);
         showComments();
 

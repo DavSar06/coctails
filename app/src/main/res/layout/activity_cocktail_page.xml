@@ -39,7 +39,8 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:overScrollMode="never">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -245,7 +246,8 @@
                     android:layout_marginBottom="@dimen/_50sdp"
                     android:orientation="vertical"
                     android:layout_gravity="center"
-                    android:overScrollMode="always"
+                    android:overScrollMode="never"
+                    android:nestedScrollingEnabled="false"
                     android:clipToPadding="false"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:paddingHorizontal="@dimen/_15sdp"/>
@@ -322,7 +324,9 @@
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/_200sdp"
                 android:layout_marginHorizontal="@dimen/_15sdp"
+                android:fillViewport="true"
                 android:layout_gravity="center"
+                android:overScrollMode="never"
                 android:padding="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_10sdp">
 
@@ -333,15 +337,22 @@
                     android:layout_gravity="center_horizontal"
                     android:clipToPadding="false"
                     android:orientation="vertical"
-                    android:overScrollMode="always"
+                    android:fillViewport="true"
+                    android:overScrollMode="never"
                     android:visibility="gone"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
-                    android:layout_gravity="center" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:backgroundTint="@color/white"
+                        android:indeterminateDrawable="@drawable/custom_progress_dialog"
+                        android:indeterminate="true"
+                        android:layout_gravity="center" />
+
+
 
             </FrameLayout>
             </LinearLayout>

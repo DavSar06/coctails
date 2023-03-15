@@ -2,6 +2,7 @@ package com.hdbar.hdbarapp.settings;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -16,20 +17,35 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.activities.ChooseImageActivity;
 import com.hdbar.hdbarapp.activities.MainActivity;
+import com.hdbar.hdbarapp.adapters.OthersAdapter;
+import com.hdbar.hdbarapp.adapters.TopTenOfWeekAdapter;
 import com.hdbar.hdbarapp.databinding.ActivityAccountBinding;
 import com.hdbar.hdbarapp.databinding.ActivityHelpAndSupportBinding;
 import com.hdbar.hdbarapp.databinding.ActivityLanguagesBinding;
+import com.hdbar.hdbarapp.databinding.FragmentHomeBinding;
+import com.hdbar.hdbarapp.models.Cocktail;
 import com.hdbar.hdbarapp.utilities.Constants;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class AccountActivity extends AppCompatActivity {
 
     private ActivityAccountBinding binding;
     private TextView back;
     private FirebaseFirestore database;
+    private List<Cocktail> cocktails;
+    private RecyclerView recyclerViewOthers;
+    private TopTenOfWeekAdapter adapter;
+    private OthersAdapter othersAdapter;
+    private RecyclerView unScroll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +61,42 @@ public class AccountActivity extends AppCompatActivity {
         listeners();
     }
 
-    public void init(){
+
+    private void init(){
         database = FirebaseFirestore.getInstance();
         back = binding.backAboutUs;
+        cocktails = new LinkedList<>();
         setUserData();
+
+
+        database.collection(Constants.KEY_COLLECTION_COCKTAILS).whereEqualTo(Constants.KEY_STATUS,Constants.KEY_COCKTAIL_STATUS_APPROVED)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@org.checkerframework.checker.nullness.qual.NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            cocktails = new LinkedList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String cocktailName = document.getString(Constants.KEY_COCKTAIL_NAME);
+                                String creator = document.getString(Constants.KEY_COCKTAIL_CREATOR_NAME);
+                                ArrayList<String> recipe = (ArrayList<String>) document.get(Constants.KEY_COCKTAIL_RECIPE);
+                                String rating_count = document.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
+                                ArrayList<String> image = (ArrayList<String>) document.get(Constants.KEY_COCKTAIL_IMAGE);
+                                ArrayList<String> tags = (ArrayList<String>) document.get(Constants.KEY_COCKTAIL_TAGS);
+                                String rating = document.get(Constants.KEY_COCKTAIL_RATING).toString();
+                                Cocktail a = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator,rating_count,tags);
+                                cocktails.add(a);
+                            }/*
+                            binding.topTenOfWeekRecyclerView.setAdapter(adapter);
+                            binding.recyclerviewOthers.setAdapter(othersAdapter);*/
+                            Log.d("GG", cocktails.size() / 10 + "");
+                        } else {
+                            Log.d("FCM", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
     }
+
 
     private void setUserData(){
         database.collection(Constants.KEY_COLLECTION_USERS)
