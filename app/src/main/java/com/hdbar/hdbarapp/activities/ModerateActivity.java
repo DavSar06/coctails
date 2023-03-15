@@ -109,7 +109,7 @@ public class ModerateActivity extends AppCompatActivity {
                                     }
                                 });
 
-                        binding.recipeRecyclerView.setAdapter(new RecipeAdapter(recipe));
+                        binding.recipeRecyclerView.setAdapter(new RecipeAdapter(recipe,tags));
                         
                         TagAdapter tagAdapter = new TagAdapter(cocktail.tags);
                         binding.tagsRecyclerView.setAdapter(tagAdapter);

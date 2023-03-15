@@ -5,21 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:backgroundTint="@color/background_color_light"
+    android:background="@drawable/edittext_bg_error"
     android:layout_marginVertical="@dimen/_5sdp"
     tools:context=".activities.CocktailPageActivity">
 
-    <TextView
+    <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/step"
-        android:backgroundTint="@color/background_color_light"
-        android:background="@drawable/edittext_bg_error"
-        android:paddingHorizontal="@dimen/_10sdp"
-        android:layout_gravity="center"
-        android:fontFamily="@font/aileronlight"
-        android:textSize="@dimen/_20ssp"
-        android:paddingVertical="@dimen/_5sdp"
-        android:textColor="@color/white"
-        android:text="Recipe Step"/>
+        android:scrollbars="none"
+        android:overScrollMode="ifContentScrolls"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/step"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:fontFamily="@font/aileronlight"
+            android:textSize="@dimen/_20ssp"
+            android:paddingVertical="@dimen/_5sdp"
+            android:textColor="@color/white"
+            android:text="Recipe Step"/>
+
+    </HorizontalScrollView>
 
 </LinearLayout>

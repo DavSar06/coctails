@@ -247,20 +247,9 @@ public class CocktailPageActivity extends AppCompatActivity {
                     binding.tagsRecyclerView.setAdapter(tagAdapter);
                     binding.tagsRecyclerView.setVisibility(View.VISIBLE);
 
-                    binding.cocktailName.setText(cocktail.name);/*
+                    binding.cocktailName.setText(cocktail.name);
 
-                    binding.cocktailAuthor.setText("Added by: "+cocktail.creator);
-
-                    storage.getReference(cocktail.image).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Uri> task) {
-                            Glide.with(binding.cocktailImage).load(task.getResult()).into(binding.cocktailImage);
-                        }
-                    });*//*
-                    binding.cocktailImage.setImageBitmap(getCocktailImage(cocktail.image));
-                    */
-
-                    binding.recipeRecyclerView.setAdapter(new RecipeAdapter(recipe));
+                    binding.recipeRecyclerView.setAdapter(new RecipeAdapter(recipe,tags));
 
                     binding.ratingBar.setRating(Float.valueOf(cocktail.rating));
                 });
