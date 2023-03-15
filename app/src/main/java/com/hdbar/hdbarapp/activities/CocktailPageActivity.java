@@ -51,7 +51,7 @@ public class CocktailPageActivity extends AppCompatActivity {
     public int how_many_rates;
     private RelativeLayout rating_relative;
     private FirebaseFirestore database;
-    private float numberOfStars;
+    private float numberOfStars,sum;
     private ImageSlider imageSlider;
     private ArrayList<SlideModel> slideModels = new ArrayList<>();
 
@@ -96,28 +96,6 @@ public class CocktailPageActivity extends AppCompatActivity {
 
     }
 
-    private void setRating(){
-        database.collection(Constants.KEY_COLLECTION_RATINGS)
-                .whereEqualTo(Constants.KEY_USER_UID,uid)
-                .whereEqualTo(Constants.KEY_COCKTAIL_ID,cocktailId)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            if (!task.getResult().isEmpty()){
-                                simple_rating.setRating(Float.parseFloat(task.getResult().getDocuments().get(0).get(Constants.KEY_COCKTAIL_RATING).toString()));
-                                rating_bool = true;
-                                Log.d("FCM","rating has been set");
-                            }
-                            else{
-                               Log.d("FCM", "exeption");
-                            }
-                        }
-                    }
-                });
-    }
-
     private void ratingsSize(){
 
         database.collection(Constants.KEY_COLLECTION_RATINGS)
@@ -128,25 +106,42 @@ public class CocktailPageActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
                             if (!task.getResult().isEmpty()){
-                                float sum = 0;
+                                sum = 0;
+
                                 for (DocumentSnapshot snapshot:task.getResult()){
                                     getRatingsFB = Float.parseFloat(snapshot.get(Constants.KEY_COCKTAIL_RATING).toString());
                                     arrayListRatings.add(getRatingsFB);
                                     sum += getRatingsFB;
                                 }
-                                Log.d("FCM", sum + " ");
-                                local_rate.setText(String.format("%.01f",sum/arrayListRatings.size() )+ "");
-                                hm_rates.setText(arrayListRatings.size() + "");
-                                simple_rating.setRating(sum/arrayListRatings.size());
 
-                                Log.d("RAT", getRatingsFB  + " " + hm_rates + " " + simple_rating + " " + sum);
+                                how_many_rates = arrayListRatings.size();
+
+                                uiTread();
+
+                                Log.d("RAT", "sum is " + sum + " ");
+
+                                Log.d("RAT", "rates is " + simple_rating.getRating() + " ");
+
+                                Log.d("RAT", "how many rates is " + arrayListRatings.size() + " ");
                             }
 
                         }
                     }
                 });
-
     }
+
+    private void uiTread(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                local_rate.setText(String.format("%.01f",sum/how_many_rates )+ "");
+                hm_rates.setText(how_many_rates + "");
+                simple_rating.setRating(sum/how_many_rates );
+            }
+        });
+    }
+
+
 
     private void init(){
         cocktailId = getIntent().getStringExtra(Constants.KEY_COCKTAIL_ID);
@@ -157,7 +152,6 @@ public class CocktailPageActivity extends AppCompatActivity {
         rate_i = 0;
         rate_btn = binding.addReviewBtn;
         arrayListRatings = new ArrayList<>();
-        setRating();
         ratingsSize();
 
 
