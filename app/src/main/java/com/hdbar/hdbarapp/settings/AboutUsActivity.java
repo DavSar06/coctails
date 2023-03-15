@@ -16,6 +16,7 @@ import com.hdbar.hdbarapp.activities.MainActivity;
 import com.hdbar.hdbarapp.activities.SettingsFragment;
 import com.hdbar.hdbarapp.databinding.ActivityAboutUsBinding;
 import com.hdbar.hdbarapp.databinding.ActivityMainBinding;
+import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 
 public class AboutUsActivity extends AppCompatActivity {
 
@@ -30,6 +31,7 @@ public class AboutUsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         back = binding.backAboutUs;
+        AlwaysOnRun.AlwaysRun(this);
 
 
 

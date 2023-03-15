@@ -21,6 +21,7 @@ import com.hdbar.hdbarapp.adapters.ModeratePageAdapter;
 import com.hdbar.hdbarapp.databinding.ActivityModeratePageBinding;
 import com.hdbar.hdbarapp.listeners.CocktailListener;
 import com.hdbar.hdbarapp.models.Cocktail;
+import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 import com.hdbar.hdbarapp.utilities.Constants;
 
 import java.util.ArrayList;
@@ -114,5 +115,6 @@ public class ModeratePageActivity extends AppCompatActivity {
 
         init();
         listeners();
+        AlwaysOnRun.AlwaysRun(this);
     }
 }

@@ -22,14 +22,18 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.activities.ChooseImageActivity;
+import com.hdbar.hdbarapp.activities.CocktailPageActivity;
 import com.hdbar.hdbarapp.activities.MainActivity;
+import com.hdbar.hdbarapp.adapters.CocktailsAdapter;
 import com.hdbar.hdbarapp.adapters.OthersAdapter;
 import com.hdbar.hdbarapp.adapters.TopTenOfWeekAdapter;
 import com.hdbar.hdbarapp.databinding.ActivityAccountBinding;
 import com.hdbar.hdbarapp.databinding.ActivityHelpAndSupportBinding;
 import com.hdbar.hdbarapp.databinding.ActivityLanguagesBinding;
 import com.hdbar.hdbarapp.databinding.FragmentHomeBinding;
+import com.hdbar.hdbarapp.listeners.CocktailListener;
 import com.hdbar.hdbarapp.models.Cocktail;
+import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 import com.hdbar.hdbarapp.utilities.Constants;
 
 import java.util.ArrayList;
@@ -42,10 +46,21 @@ public class AccountActivity extends AppCompatActivity {
     private TextView back;
     private FirebaseFirestore database;
     private List<Cocktail> cocktails;
+    private String uid;
     private RecyclerView recyclerViewOthers;
     private TopTenOfWeekAdapter adapter;
     private OthersAdapter othersAdapter;
     private RecyclerView unScroll;
+
+    private final CocktailListener cocktailListener = new CocktailListener() {
+        @Override
+        public void onCocktailClicked(Cocktail cocktail) {
+            Intent intent = new Intent(binding.getRoot().getContext(), CocktailPageActivity.class);
+            intent.putExtra(Constants.KEY_COCKTAIL_ID, cocktail.id);
+            startActivity(intent);
+            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +74,7 @@ public class AccountActivity extends AppCompatActivity {
 
         init();
         listeners();
+        AlwaysOnRun.AlwaysRun(this);
     }
 
 
@@ -66,10 +82,12 @@ public class AccountActivity extends AppCompatActivity {
         database = FirebaseFirestore.getInstance();
         back = binding.backAboutUs;
         cocktails = new LinkedList<>();
+        uid = FirebaseAuth.getInstance().getUid();
         setUserData();
 
-
-        database.collection(Constants.KEY_COLLECTION_COCKTAILS).whereEqualTo(Constants.KEY_STATUS,Constants.KEY_COCKTAIL_STATUS_APPROVED)
+        database.collection(Constants.KEY_COLLECTION_COCKTAILS)
+                .whereEqualTo(Constants.KEY_STATUS,Constants.KEY_COCKTAIL_STATUS_APPROVED)
+                .whereEqualTo(Constants.KEY_COCKTAIL_CREATOR_ID,uid)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -86,15 +104,18 @@ public class AccountActivity extends AppCompatActivity {
                                 String rating = document.get(Constants.KEY_COCKTAIL_RATING).toString();
                                 Cocktail a = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator,rating_count,tags);
                                 cocktails.add(a);
-                            }/*
-                            binding.topTenOfWeekRecyclerView.setAdapter(adapter);
-                            binding.recyclerviewOthers.setAdapter(othersAdapter);*/
-                            Log.d("GG", cocktails.size() / 10 + "");
+                                Log.d("GG", "ok");
+                            }
+                            binding.recyclerviewYourCocktails.setAdapter(new CocktailsAdapter(cocktails,cocktailListener));
+                            Log.d("GG", cocktails.size()  + "");
                         } else {
                             Log.d("FCM", "Error getting documents: ", task.getException());
                         }
                     }
                 });
+
+
+
     }
 
 

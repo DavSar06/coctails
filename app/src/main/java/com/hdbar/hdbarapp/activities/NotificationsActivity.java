@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.hdbar.hdbarapp.databinding.ActivityNotificationsBinding;
+import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 
 public class NotificationsActivity extends AppCompatActivity {
 
@@ -18,6 +19,7 @@ public class NotificationsActivity extends AppCompatActivity {
 
         init();
         listeners();
+        AlwaysOnRun.AlwaysRun(this);
     }
 
     private void init(){

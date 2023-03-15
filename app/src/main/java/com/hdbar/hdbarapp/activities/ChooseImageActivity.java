@@ -25,6 +25,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.hdbar.hdbarapp.databinding.ActivityChooseImageBinding;
+import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 import com.hdbar.hdbarapp.utilities.Constants;
 
 
@@ -46,6 +47,7 @@ public class ChooseImageActivity extends AppCompatActivity {
 
         init();
         setListeners();
+        AlwaysOnRun.AlwaysRun(this);
     }
 
     private void init(){

@@ -21,7 +21,7 @@ public class AlwaysOnRun {
 
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            myActivityReference.getWindow().setNavigationBarColor(myActivityReference.getResources().getColor(R.color.background_color_light));
+            myActivityReference.getWindow().setNavigationBarColor(myActivityReference.getResources().getColor(R.color.background_color));
             Window window = myActivityReference.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);

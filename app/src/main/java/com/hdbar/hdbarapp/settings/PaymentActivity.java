@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.ActivityLanguagesBinding;
 import com.hdbar.hdbarapp.databinding.ActivityPaymentBinding;
+import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 
 public class PaymentActivity extends AppCompatActivity {
 
@@ -25,6 +26,7 @@ public class PaymentActivity extends AppCompatActivity {
 
         back = binding.backPayment;
         donatebtn=binding.donateBtn;
+        AlwaysOnRun.AlwaysRun(this);
 
 
 

@@ -14,6 +14,7 @@ import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.activities.MainActivity;
 import com.hdbar.hdbarapp.databinding.ActivityAboutUsBinding;
 import com.hdbar.hdbarapp.databinding.ActivityHelpAndSupportBinding;
+import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 
 public class HelpAndSupportActivity extends AppCompatActivity {
 
@@ -27,6 +28,7 @@ public class HelpAndSupportActivity extends AppCompatActivity {
         binding = ActivityHelpAndSupportBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        AlwaysOnRun.AlwaysRun(this);
         back = binding.backAboutUs;
         email = binding.emailHelpAndSupport;
         chat_to_us = binding.chatToUsHelpAndSupport;

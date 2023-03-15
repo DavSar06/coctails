@@ -21,6 +21,7 @@ import com.hdbar.hdbarapp.databinding.ActivitySearchBinding;
 import com.hdbar.hdbarapp.databinding.FragmentFavoriteBinding;
 import com.hdbar.hdbarapp.listeners.CocktailListener;
 import com.hdbar.hdbarapp.models.Cocktail;
+import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 import com.hdbar.hdbarapp.utilities.Constants;
 import com.hdbar.hdbarapp.utilities.SearchHelper;
 
@@ -55,6 +56,7 @@ public class SearchActivity extends AppCompatActivity {
 
         init();
         listeners();
+        AlwaysOnRun.AlwaysRun(this);
     }
 
     private void init(){

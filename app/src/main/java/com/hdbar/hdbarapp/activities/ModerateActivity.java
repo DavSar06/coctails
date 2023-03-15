@@ -28,6 +28,7 @@ import com.hdbar.hdbarapp.adapters.RecipeAdapter;
 import com.hdbar.hdbarapp.adapters.TagAdapter;
 import com.hdbar.hdbarapp.databinding.ActivityModerateBinding;
 import com.hdbar.hdbarapp.models.Cocktail;
+import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 import com.hdbar.hdbarapp.utilities.Constants;
 
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public class ModerateActivity extends AppCompatActivity {
 
         init();
         listeners();
+        AlwaysOnRun.AlwaysRun(this);
     }
 
     private void init(){
