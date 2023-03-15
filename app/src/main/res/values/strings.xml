@@ -1,9 +1,85 @@
 <resources>
-    <string name="app_name">HDBar Application</string>
+    <string name="app_name" translatable="false">HDBar Application</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="facebook_app_id">731008968599167</string>
-    <string name="fb_login_protocol_scheme">fb1234</string>
-    <string name="facebook_client_token">a7b733f8e877aa2dd44926b7cb7e045a</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="facebook_app_id" translatable="false">731008968599167</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb1234</string>
+    <string name="facebook_client_token" translatable="false">a7b733f8e877aa2dd44926b7cb7e045a</string>
+    <string name="about_us">About Us</string>
+    <string name="about_us_text">About Us Text</string>
+    <string name="account">Account</string>
+    <string name="nickname">Nickname</string>
+    <string name="user_type">User Type</string>
+    <string name="your_cocktails">Your Cocktails</string>
+    <string name="new_review">New Review</string>
+    <string name="whiskey_and_cola">Whiskey and Cola</string>
+    <string name="creator">Creator</string>
+    <string name="rating">Rating</string>
+    <string name="input_comment">Input comment</string>
+    <string name="private_text">Private</string>
+    <string name="post">Post</string>
+    <string name="choose_image">Choose Image</string>
+    <string name="choose_from_library">Choose from library</string>
+    <string name="add_review">+ Add Review</string>
+    <string name="cocktail">Cocktail</string>
+    <string name="recipe">Recipe</string>
+    <string name="comments">Comments</string>
+    <string name="verify_email">Verify Email</string>
+    <string name="resend_code">Resend Code</string>
+    <string name="check">Check</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="help_and_support">Help and Support</string>
+    <string name="how_can_we_help_you">How can we help you ?</string>
+    <string name="russian">Russian</string>
+    <string name="english">English</string>
+    <string name="languages">Languages</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="don_t_have_account">Don\'t Have Account ?</string>
+    <string name="register">Register</string>
+    <string name="forgot_password">Forgot Password ?</string>
+    <string name="search">Search</string>
+    <string name="approve">Approve</string>
+    <string name="deny">Deny</string>
+    <string name="the_list_of_suggests_is_empty">The list of suggests is empty!</string>
+    <string name="list_of_moderators">List of moderators</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="there_are_no_moderators">There are no moderators!</string>
+    <string name="add_new_moderator">Add New Moderator</string>
+    <string name="insert_email">Insert Email</string>
+    <string name="add">Add</string>
+    <string name="there_are_no_notifications">There are no notifications!</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="are_you_older_18">Are you older 18</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="there_are_no_cocktails_available">There are no cocktails available!</string>
+    <string name="reset">Reset</string>
+    <string name="image">Image</string>
+    <string name="click_to_choose_image">Click to choose image</string>
+    <string name="remove_images">Remove Images</string>
+    <string name="cocktail_name">Cocktail name</string>
+    <string name="cocktail_recipe_step_by_step">Cocktail Recipe (Step-by-step)</string>
+    <string name="step_1">Step 1</string>
+    <string name="add_step">Add Step</string>
+    <string name="remove_last_step">Remove Last Step</string>
+    <string name="enter_tags_break_with_commas">Enter tags(break with commas)</string>
+    <string name="publish">Publish</string>
+    <string name="the_list_of_favourites_is_empty">The list of favourites is empty!</string>
+    <string name="cocktails">Cocktails</string>
+    <string name="other">Other</string>
+    <string name="settings">Settings</string>
+    <string name="moderators">Moderators</string>
+    <string name="moderate">Moderate</string>
+    <string name="notifications">Notifications</string>
+    <string name="logout">Logout</string>
+    <string name="commenter_name">Commenter Name</string>
+    <string name="creator_name">Creator name</string>
+    <string name="added_in_01_01_2023">Added in 01.01.2023</string>
+    <string name="recipe_step">Recipe Step</string>
+    <string name="changing_language">Changing Language</string>
 
 </resources>

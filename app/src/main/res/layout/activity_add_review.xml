@@ -37,7 +37,7 @@
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:fontFamily="@font/garute"
-                android:text="New Rate"
+                android:text="@string/new_review"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_20ssp" />
         </RelativeLayout>
@@ -74,7 +74,7 @@
                     android:id="@+id/rate_cocktail_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Whiskey and cola"
+                    android:text="@string/whiskey_and_cola"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="@dimen/_16ssp"/>
@@ -83,7 +83,7 @@
                     android:id="@+id/rate_publisher_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hke"
+                    android:text="@string/creator"
                     android:textColor="@color/grey_white"
                     android:textStyle="normal"
                     android:textSize="@dimen/_14ssp"/>
@@ -109,7 +109,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rating"
+                android:text="@string/rating"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="@dimen/_16ssp"
@@ -179,7 +179,7 @@
                 android:backgroundTint="@color/background_color_light"
                 android:fontFamily="@font/metropolisbold"
                 android:gravity="top"
-                android:hint="Input comment"
+                android:hint="@string/input_comment"
                 android:inputType="textMultiLine"
                 android:minHeight="@dimen/_100sdp"
                 android:paddingHorizontal="@dimen/_10sdp"
@@ -206,7 +206,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Private"
+                android:text="@string/private_text"
                 android:textColor="@color/white"
                 android:layout_centerVertical="true"
                 android:textStyle="bold"
@@ -255,7 +255,7 @@
         android:gravity="center"
         android:layout_gravity="center_horizontal"
         android:paddingVertical="@dimen/_15sdp"
-        android:text="Post"
+        android:text="@string/post"
         android:textColor="@color/white"
         android:textSize="@dimen/_20ssp"
         android:textStyle="bold"

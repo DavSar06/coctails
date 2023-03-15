@@ -39,7 +39,7 @@
                 android:drawableStart="@drawable/ic_baseline_search_24"
                 android:drawablePadding="@dimen/_6sdp"
                 android:fontFamily="@font/metropolislight"
-                android:hint="Search"
+                android:hint="@string/search"
                 android:inputType="textUri"
                 android:maxLength="30"
                 android:maxLines="1"

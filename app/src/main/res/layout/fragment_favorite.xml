@@ -31,7 +31,7 @@
             android:drawableStart="@drawable/ic_baseline_search_24"
             android:drawablePadding="@dimen/_6sdp"
             android:fontFamily="@font/metropolislight"
-            android:hint="Search"
+            android:hint="@string/search"
             android:inputType="textUri"
             android:maxLength="30"
             android:maxLines="1"
@@ -109,7 +109,7 @@
                 android:layout_marginStart="@dimen/_24sdp"
                 android:layout_marginEnd="@dimen/_24sdp"
                 android:gravity="center"
-                android:text="The list of favourites is empty!"
+                android:text="@string/the_list_of_favourites_is_empty"
                 android:textColor="@color/error"
                 android:textSize="@dimen/_12ssp"
                 android:visibility="gone" />

@@ -29,7 +29,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Approve"
+                android:text="@string/approve"
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
@@ -45,7 +45,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Deny"
+                android:text="@string/deny"
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
@@ -138,7 +138,7 @@
                             android:autoSizeTextType="uniform"
                             android:fontFamily="@font/argesta"
                             android:gravity="left"
-                            android:text="Cocktail"
+                            android:text="@string/cocktail"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_35sdp"/>
 
@@ -185,7 +185,7 @@
                         android:autoSizeTextType="uniform"
                         android:fontFamily="@font/argesta"
                         android:gravity="left"
-                        android:text="Recipe"
+                        android:text="@string/recipe"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_30sdp"/>
 

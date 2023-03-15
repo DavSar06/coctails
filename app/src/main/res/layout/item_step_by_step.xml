@@ -25,7 +25,7 @@
             android:textSize="@dimen/_20ssp"
             android:paddingVertical="@dimen/_5sdp"
             android:textColor="@color/white"
-            android:text="Recipe Step"/>
+            android:text="@string/recipe_step"/>
 
     </HorizontalScrollView>
 

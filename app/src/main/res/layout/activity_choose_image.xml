@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:text="Choose Image"
+        android:text="@string/choose_image"
         android:gravity="center"
         android:textColor="@color/white"
         android:fontFamily="@font/metropolisbold"
@@ -63,7 +63,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Choose from library"
+                    android:text="@string/choose_from_library"
                     android:textColor="@color/white"
                     android:fontFamily="@font/metropolisbold"
                     android:textSize="@dimen/_15ssp"/>

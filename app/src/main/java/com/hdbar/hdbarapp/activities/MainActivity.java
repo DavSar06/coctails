@@ -16,6 +16,7 @@ import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.ActivityMainBinding;
 import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 import com.hdbar.hdbarapp.utilities.Constants;
+import com.hdbar.hdbarapp.utilities.LanguageController;
 import com.hdbar.hdbarapp.utilities.PreferenceManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LanguageController.loadLocale(getBaseContext());
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
