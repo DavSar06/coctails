@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     android:background="@color/background_color"
+    android:fillViewport="true"
     tools:context=".activities.AddReview">
 
-
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="fill_parent"
+        android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -197,6 +199,7 @@
             android:background="@color/white_transparency" />
 
         <RelativeLayout
+            android:id="@+id/private_add_review"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="@dimen/_15sdp"
@@ -236,28 +239,35 @@
 
     </LinearLayout>
 
-
-
-    </ScrollView>
-
-    <TextView
-        android:id="@+id/donate_btn"
-        android:layout_width="@dimen/_225sdp"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="@dimen/_15sdp"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginEnd="@dimen/_15sdp"
-        android:layout_marginBottom="19dp"
-        android:background="@drawable/circle_rate"
-        android:backgroundTint="@color/orange"
-        android:gravity="center"
-        android:layout_gravity="center_horizontal"
-        android:paddingVertical="@dimen/_15sdp"
-        android:text="@string/post"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_20ssp"
-        android:textStyle="bold"
-        android:translationZ="@dimen/_40sdp" />
-</RelativeLayout>
+        android:layout_marginBottom="@dimen/_10sdp">
+
+
+        <TextView
+            android:id="@+id/donate_btn"
+            android:layout_width="@dimen/_225sdp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:background="@drawable/circle_rate"
+            android:backgroundTint="@color/orange"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:paddingVertical="@dimen/_15sdp"
+            android:text="@string/post"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20ssp"
+            android:textStyle="bold"
+            android:translationZ="@dimen/_30sdp" />
+
+    </RelativeLayout>
+
+
+    </RelativeLayout>
+</ScrollView>

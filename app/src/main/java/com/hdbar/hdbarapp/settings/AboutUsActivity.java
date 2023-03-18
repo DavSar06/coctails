@@ -39,6 +39,7 @@ public class AboutUsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                overridePendingTransition(R.anim.left_to_right_in,R.anim.left_to_right_out);
             }
         });
 

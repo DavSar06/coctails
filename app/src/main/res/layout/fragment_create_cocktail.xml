@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
+    android:scrollbars="none"
+    android:overScrollMode="never"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:background="@drawable/background_color"

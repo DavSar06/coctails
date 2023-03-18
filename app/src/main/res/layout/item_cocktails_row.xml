@@ -8,9 +8,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rowRecyclerView"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:overScrollMode="never"
         android:clipToPadding="true"
+        android:foregroundGravity="center_horizontal"
         android:orientation="horizontal"
         android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>

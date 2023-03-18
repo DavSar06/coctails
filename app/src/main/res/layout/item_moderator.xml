@@ -15,6 +15,7 @@
             android:layout_weight="3"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:overScrollMode="never"
             android:scrollbars="none"
             android:paddingHorizontal="@dimen/_3sdp">
 
@@ -42,6 +43,7 @@
             android:layout_weight="3"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:overScrollMode="always"
             android:scrollbars="none"
             android:paddingHorizontal="@dimen/_3sdp">
 

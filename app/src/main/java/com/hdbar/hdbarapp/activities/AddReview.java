@@ -69,7 +69,7 @@ public class AddReview extends AppCompatActivity {
 
         init();
         listener();
-        AlwaysRun(this);
+        AlwaysOnRun.AlwaysRun(this);
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -80,30 +80,6 @@ public class AddReview extends AppCompatActivity {
 
     }
 
-    public static void AlwaysRun(Activity myActivityReference) {
-        View decorView = myActivityReference.getWindow().getDecorView();
-
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            myActivityReference.getWindow().setNavigationBarColor(myActivityReference.getResources().getColor(R.color.background_color_light));
-            Window window = myActivityReference.getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.setStatusBarColor(myActivityReference.getResources().getColor(R.color.background_color_dark));
-        }
-
-
-        ConnectivityManager cm = (ConnectivityManager) myActivityReference.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo info = cm.getActiveNetworkInfo();
-
-        if (info == null || !info.isConnected())
-            Log.d("Ine", "NoConnection");
-        else {
-            Log.e("Ine", "Connected");    }
-
-
-
-        Log.d("TAG","AlwaysOnRun");
-    }
 
 
     private void posting() {
@@ -114,7 +90,7 @@ public class AddReview extends AppCompatActivity {
 
         //finishing
         finish();
-        overridePendingTransition(R.anim.fade_out,R.anim.fade_in);
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
     }
 
 
@@ -205,34 +181,6 @@ public class AddReview extends AppCompatActivity {
                             }
                         });
     }
-/*
-
-    private void setRatingToCocktail(){
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingbar, float rating, boolean fromUser) {
-
-                float numberOfStars = ratingBar.getRating();
-                database.collection(Constants.KEY_COLLECTION_COCKTAILS)
-                        .whereEqualTo(Constants.KEY_COCKTAIL_ID,cocktailId)
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if(task.isSuccessful()){
-                                    if (!task.getResult().isEmpty()){
-                                        HashMap<String,Object> rating_hm = new HashMap<>();
-                                        rating_hm.put(Constants.KEY_USER_UID,userId);
-                                        rating_hm.put(Constants.KEY_COCKTAIL_ID,cocktailId);
-                                        rating_hm.put(Constants.KEY_COCKTAIL_RATING,numberOfStars);
-                                        database.collection(Constants.KEY_COLLECTION_RATINGS).add(rating_hm);
-                                    }
-                                }
-                            }
-                        });
-            }
-        });
-    }*/
 
     private void addComment(){
         if(binding.inputComment.getText().length()>0) {

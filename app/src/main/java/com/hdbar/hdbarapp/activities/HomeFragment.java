@@ -25,6 +25,7 @@ import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.adapters.OthersAdapter;
 import com.hdbar.hdbarapp.adapters.TopTenOfWeekAdapter;
 import com.hdbar.hdbarapp.databinding.FragmentHomeBinding;
+import com.hdbar.hdbarapp.glasses_types.HighballActivity;
 import com.hdbar.hdbarapp.listeners.CocktailListener;
 import com.hdbar.hdbarapp.models.Cocktail;
 import com.hdbar.hdbarapp.utilities.Constants;
@@ -84,12 +85,20 @@ public class HomeFragment extends Fragment {
         return binding.getRoot();
     }
 
+    private void glassesTypes(){
+        binding.highballImage.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), HighballActivity.class);
+            startActivity(intent);
+            //getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
+        });
+    }
 
     private void init(){
         binding = FragmentHomeBinding.inflate(getLayoutInflater());
         database = FirebaseFirestore.getInstance();
         cocktails = new LinkedList<>();
         unScroll = binding.recyclerviewOthers;
+        glassesTypes();
 
 
         database.collection(Constants.KEY_COLLECTION_COCKTAILS).whereEqualTo(Constants.KEY_STATUS,Constants.KEY_COCKTAIL_STATUS_APPROVED)

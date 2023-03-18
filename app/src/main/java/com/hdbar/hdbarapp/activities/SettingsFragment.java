@@ -156,7 +156,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(),AccountActivity.class);
                 startActivity(intent);
-                //getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
+                getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
             }
         });
 
@@ -165,7 +165,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),ModeratorsActivity.class);
                 startActivity(intent);
-                //getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
+                getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
             }
         });
 
@@ -174,7 +174,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),ModeratePageActivity.class);
                 startActivity(intent);
-                //getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
+                getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
             }
         });
 
@@ -184,7 +184,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), LanguagesActivity.class);
                 startActivity(intent);
-//                getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
+                getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
             }
         });
 
@@ -193,7 +193,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://publuu.com/flip-book/98200/268888"));
                 startActivity(intent);
-                //getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
+                getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
             }
         });
 
@@ -202,7 +202,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), HelpAndSupportActivity.class);
                 startActivity(intent);
-                //getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
+                getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
             }
         });
 
@@ -211,7 +211,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), PaymentActivity.class);
                 startActivity(intent);
-                //getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
+                getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
             }
         });
 
@@ -220,7 +220,7 @@ public class SettingsFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AboutUsActivity.class);
                 startActivity(intent);
-                //getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
+                getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
             }
         });
 

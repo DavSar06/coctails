@@ -1,12 +1,14 @@
-package com.hdbar.hdbarapp.activities;
+package com.hdbar.hdbarapp.glasses_types;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -15,10 +17,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.hdbar.hdbarapp.R;
+import com.hdbar.hdbarapp.activities.CocktailPageActivity;
 import com.hdbar.hdbarapp.adapters.CocktailsAdapter;
 import com.hdbar.hdbarapp.adapters.CocktailsSingleAdapter;
+import com.hdbar.hdbarapp.databinding.ActivityHighballBinding;
 import com.hdbar.hdbarapp.databinding.ActivitySearchBinding;
-import com.hdbar.hdbarapp.databinding.FragmentFavoriteBinding;
 import com.hdbar.hdbarapp.listeners.CocktailListener;
 import com.hdbar.hdbarapp.models.Cocktail;
 import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
@@ -29,9 +32,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SearchActivity extends AppCompatActivity {
+public class HighballActivity extends AppCompatActivity {
 
-    private ActivitySearchBinding binding;
+    private ActivityHighballBinding binding;
     private List<Cocktail> cocktails;
     private FirebaseFirestore database;
     private String uid;
@@ -51,13 +54,16 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivitySearchBinding.inflate(getLayoutInflater());
+        binding = ActivityHighballBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         init();
         listeners();
         AlwaysOnRun.AlwaysRun(this);
+        //changeAdapter(adapterStatus,s);
+
     }
+
 
     private void init(){
         uid = FirebaseAuth.getInstance().getUid();
@@ -65,51 +71,17 @@ public class SearchActivity extends AppCompatActivity {
         getCocktails();
     }
 
+    private void listeners(){
+        binding.backHighball.setOnClickListener(v->{
+            finish();});
+    }
 
-        private void listeners(){
-            binding.icBack.setOnClickListener(v->finish());
-            binding.rowDouble.setOnClickListener(v->{
-                if(adapterStatus!=0){
-                    binding.rowSingle.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.background_color_light), android.graphics.PorterDuff.Mode.SRC_IN);
-                    binding.rowDouble.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
-                    binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
-                    binding.textErrorMessage.setVisibility(View.INVISIBLE);
-                    binding.progressBar.setVisibility(View.VISIBLE);
-                    adapterStatus = 0;
-                    changeAdapter(adapterStatus,cocktails);
-                }
-            });
-            binding.rowSingle.setOnClickListener(v->{
-                if(adapterStatus!=1){
-                    binding.rowSingle.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
-                    binding.rowDouble.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.background_color_light), android.graphics.PorterDuff.Mode.SRC_IN);
-                    binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
-                    binding.textErrorMessage.setVisibility(View.INVISIBLE);
-                    binding.progressBar.setVisibility(View.VISIBLE);
-                    adapterStatus = 1;
-                    changeAdapter(adapterStatus,cocktails);
-                }
-            });
-            binding.search.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    List<Cocktail> searchResult = SearchHelper.searchInCocktails(charSequence.toString(), cocktails);
-                    changeAdapter(adapterStatus,searchResult);
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {}
-            });
-        }
 
     private void getCocktails(){
         cocktails = new LinkedList<>();
         binding.progressBar.setVisibility(View.VISIBLE);
         binding.textErrorMessage.setVisibility(View.INVISIBLE);
-        binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
+        binding.cocktailsRecyclerViewHighBall.setVisibility(View.INVISIBLE);
         cocktails = new LinkedList<>();
         i = 0;
         database.collection(Constants.KEY_COLLECTION_COCKTAILS)
@@ -131,25 +103,27 @@ public class SearchActivity extends AppCompatActivity {
                             if(i==queryDocumentSnapshots.size()){
                                 changeAdapter(0,cocktails);
                             }
+                            Log.d("GG",cocktails.size() + " ");
                         }
                     }
                 });
     }
 
+
     private void changeAdapter(Integer k,List<Cocktail> cocktails){
         if(cocktails.isEmpty()){
-            binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
+            binding.cocktailsRecyclerViewHighBall.setVisibility(View.INVISIBLE);
             binding.progressBar.setVisibility(View.INVISIBLE);
             binding.textErrorMessage.setVisibility(View.VISIBLE);
         }else {
             if(k==0){
                 CocktailsAdapter adapter = new CocktailsAdapter(cocktails,cocktailListener);
-                binding.cocktailsRecyclerView.setAdapter(adapter);
+                binding.cocktailsRecyclerViewHighBall.setAdapter(adapter);
             }else{
                 CocktailsSingleAdapter adapter = new CocktailsSingleAdapter(cocktails,cocktailListener);
-                binding.cocktailsRecyclerView.setAdapter(adapter);
+                binding.cocktailsRecyclerViewHighBall.setAdapter(adapter);
             }
-            binding.cocktailsRecyclerView.setVisibility(View.VISIBLE);
+            binding.cocktailsRecyclerViewHighBall.setVisibility(View.VISIBLE);
             binding.progressBar.setVisibility(View.INVISIBLE);
             binding.textErrorMessage.setVisibility(View.INVISIBLE);
         }

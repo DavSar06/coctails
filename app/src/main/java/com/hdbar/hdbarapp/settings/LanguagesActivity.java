@@ -57,7 +57,10 @@ public class LanguagesActivity extends AppCompatActivity {
     }
 
     private void listeners(){
-        binding.backAboutUs.setOnClickListener(v->finish());
+        binding.backAboutUs.setOnClickListener(v->{
+            finish();
+            overridePendingTransition(R.anim.left_to_right_in,R.anim.left_to_right_out);
+        });
         binding.english.setOnClickListener(v->{
             binding.englishTick.setVisibility(View.VISIBLE);
             binding.russianTick.setVisibility(View.INVISIBLE);
