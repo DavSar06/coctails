@@ -41,6 +41,7 @@ import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 import com.hdbar.hdbarapp.utilities.Constants;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -78,6 +79,13 @@ public class CocktailPageActivity extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(),UserPageActivity.class);
             i.putExtra(Constants.KEY_USER_UID,userId);
             startActivity(i);
+        }
+    };
+
+    private Comparator<Comment> comparator = new Comparator<Comment>() {
+        @Override
+        public int compare(Comment comment, Comment t1) {
+            return t1.date.compareTo(comment.date);
         }
     };
 
@@ -296,6 +304,7 @@ public class CocktailPageActivity extends AppCompatActivity {
                         (new Handler()).postDelayed(new Runnable() {
                             @Override
                             public void run() {
+                                commentsModels.sort(comparator);
                                 if(commentsModels.size()!=0){
                                     commentAdapter = new CommentAdapter(commentsModels,listener);
                                     binding.commentsRecyclerView.setAdapter(commentAdapter);

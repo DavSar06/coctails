@@ -28,6 +28,9 @@ public class SearchHelper {
                         break;
                     }
                 }
+                if(added){
+                    break;
+                }
                 if(temp.name.toLowerCase().contains(chars.get(j))){
                     finalList.add(temp);
                     added = true;

@@ -82,5 +82,8 @@
     <string name="added_in_01_01_2023">Added in 01.01.2023</string>
     <string name="recipe_step">Recipe Step</string>
     <string name="changing_language">Changing Language</string>
+    <string name="home">Home</string>
+    <string name="favorite">Favorite</string>
+    <string name="custom">Custom</string>
 
 </resources>

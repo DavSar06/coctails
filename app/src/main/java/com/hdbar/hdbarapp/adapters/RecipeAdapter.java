@@ -61,7 +61,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.StepViewHo
 
         void setStep(String step,Integer position){
             String stepNum = (position+1)+"";
-            step = stepNum+" "+step;
+            step = stepNum+") "+step;
             SpannableString finalString = new SpannableString(step);
 
             String a[] = step.split(" ");

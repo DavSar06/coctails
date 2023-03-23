@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -96,8 +97,22 @@ public class SearchActivity extends AppCompatActivity {
 
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
+                    binding.progressBar.setVisibility(View.VISIBLE);
+                    binding.textErrorMessage.setVisibility(View.INVISIBLE);
                     List<Cocktail> searchResult = SearchHelper.searchInCocktails(charSequence.toString(), cocktails);
-                    changeAdapter(adapterStatus,searchResult);
+                    (new Handler()).postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            changeAdapter(adapterStatus,searchResult);
+                            binding.progressBar.setVisibility(View.INVISIBLE);
+                            if(searchResult.isEmpty()){
+                                binding.textErrorMessage.setVisibility(View.VISIBLE);
+                            }else{
+                                binding.cocktailsRecyclerView.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    },500);
                 }
 
                 @Override

@@ -78,4 +78,7 @@
     <string name="added_in_01_01_2023">Добавлен в 01.01.2023</string>
     <string name="recipe_step">Шаг рецепта</string>
     <string name="changing_language">Язык изменяется</string>
+    <string name="home">Домой</string>
+    <string name="favorite">Сохранённые</string>
+    <string name="custom">Добавить</string>
 </resources>
