@@ -4,9 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
     android:scrollbars="none"
     android:overScrollMode="never"
+    android:fillViewport="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:background="@drawable/background_color"
@@ -14,7 +14,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -37,86 +44,142 @@
                 android:layout_gravity="center"
                 android:layout_weight="300"
                 android:orientation="vertical"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_20sdp"
                 android:foregroundGravity="bottom">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/image"
-                    android:textSize="@dimen/_15sdp"
-                    android:textColor="@color/white"
-                    android:padding="@dimen/_5sdp"
-                    />
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_horizontal"
-                    android:layout_marginBottom="@dimen/_10sdp">
+                    android:layout_height="@dimen/_325sdp"
+                    android:gravity="center_horizontal">
+
+
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/remove_images"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:backgroundTintMode="screen"
+                        android:layout_alignParentRight="true"
+                        android:translationZ="@dimen/_50sdp"
+                        android:backgroundTint="@color/black"
+                        android:background="@drawable/ic_baseline_close_16"
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle" />
+
 
                     <FrameLayout
                         android:id="@+id/slider_container"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_200sdp">
+                        android:layout_height="@dimen/_325sdp">
 
 <!--                        <com.denzcoskun.imageslider.ImageSlider-->
 <!--                            android:id="@+id/imageSlider"-->
 <!--                            android:layout_width="match_parent"-->
 <!--                            android:layout_height="match_parent"-->
-<!--                            android:background="@color/background_color_light"-->
+<!--                            android:background="@color/background_color"-->
 <!--                            app:iss_auto_cycle="false"-->
 <!--                            app:iss_indicator_align="@string/app_name"-->
 <!--                            app:iss_title_background="@drawable/gradient" />-->
 
-                        <TextView
+                        <ImageView
                             android:id="@+id/imageChooseText"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:textColor="@color/grey_white"
-                            android:gravity="center"
-                            android:text="@string/click_to_choose_image"/>
+                            android:layout_width="@dimen/_125sdp"
+                            android:layout_height="@dimen/_125sdp"
+                            android:background="@drawable/ic_plus"
+                            android:backgroundTint="@color/white"
+                            android:layout_gravity="center"/>
 
                     </FrameLayout>
 
-                </LinearLayout>
+                </RelativeLayout>
+
 
                 <TextView
-                    android:id="@+id/remove_images"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/remove_images"
-                    android:background="@drawable/button_background"
-                    android:textSize="@dimen/_13ssp"
-                    android:textAlignment="center"
+                    android:maxWidth="@dimen/_250sdp"
+                    android:maxHeight="@dimen/_80sdp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:autoSizeTextType="uniform"
+                    android:textStyle="bold"
+                    android:gravity="left"
+                    android:text="Cocktail Name"
+                    android:layout_marginLeft="@dimen/_10sdp"
                     android:textColor="@color/white"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:paddingVertical="@dimen/_5sdp"
-                    android:paddingHorizontal="@dimen/_10sdp"/>
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:textSize="@dimen/_22sdp"/>
 
                 <EditText
                     android:id="@+id/cocktailName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_15sdp"
-                    android:padding="@dimen/_5sdp"
-                    android:hint="@string/cocktail_name"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:textSize="@dimen/_16sdp"
+                    android:hint="Type cocktail name here"
                     android:backgroundTint="@color/background_color_light"
-                    android:textColorHint="@color/grey"
+                    android:textColorHint="@color/edit_text_color"
                     android:inputType="text"
+                    android:paddingLeft="@dimen/_12sdp"
+                    android:paddingVertical="@dimen/_7sdp"
                     android:textColor="@color/white"
-                    android:background="@drawable/borders_for_edittext"
-                    android:layout_marginBottom="@dimen/_10sdp"/>
+                    android:background="@drawable/borders_for_search_bar"
+                    android:layout_marginBottom="@dimen/_20sdp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/white_transparency"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxWidth="@dimen/_250sdp"
+                    android:maxHeight="@dimen/_80sdp"
+                    android:layout_gravity="bottom"
+                    android:autoSizeTextType="uniform"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:gravity="left"
+                    android:text="Cocktail Tags"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:textSize="@dimen/_20sdp"/>
+
+                <MultiAutoCompleteTextView
+                    android:id="@+id/tagsACTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:textSize="@dimen/_16sdp"
+                    android:hint="Type tags here"
+                    android:backgroundTint="@color/background_color_light"
+                    android:textColorHint="@color/edit_text_color"
+                    android:inputType="text"
+                    android:paddingLeft="@dimen/_12sdp"
+                    android:paddingVertical="@dimen/_7sdp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/borders_for_search_bar"
+                    android:layout_marginBottom="@dimen/_20sdp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/white_transparency" />
+
+
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/cocktail_recipe_step_by_step"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/_20sdp"
                     android:textColor="@color/white"
-                    android:padding="@dimen/_5sdp"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_15sdp"
                     />
 
                 <LinearLayout
@@ -130,16 +193,17 @@
                         android:id="@+id/recipe_first_step"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:padding="@dimen/_5sdp"
-                        android:hint="@string/step_1"
-                        android:textColorHint="@color/grey"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        android:textSize="@dimen/_16sdp"
+                        android:hint="Type recipe here"
                         android:backgroundTint="@color/background_color_light"
+                        android:textColorHint="@color/edit_text_color"
                         android:inputType="text"
-                        android:singleLine="true"
+                        android:paddingLeft="@dimen/_12sdp"
+                        android:paddingVertical="@dimen/_7sdp"
                         android:textColor="@color/white"
-                        android:background="@drawable/borders_for_edittext"
-                        android:layout_marginBottom="@dimen/_10sdp"/>
+                        android:background="@drawable/borders_for_search_bar"
+                        android:layout_marginBottom="@dimen/_15sdp"/>
 
                 </LinearLayout>
 
@@ -154,8 +218,10 @@
                         android:layout_height="wrap_content"
                         android:text="@string/add_step"
                         android:background="@drawable/button_background"
+                        android:backgroundTint="@color/grey_dark"
                         android:textSize="@dimen/_13ssp"
                         android:textAlignment="center"
+                        android:layout_marginLeft="@dimen/_10sdp"
                         android:textColor="@color/white"
                         android:layout_marginBottom="@dimen/_10sdp"
                         android:paddingVertical="@dimen/_5sdp"
@@ -167,6 +233,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/remove_last_step"
                         android:background="@drawable/button_background"
+                        android:backgroundTint="@color/grey_dark"
                         android:textSize="@dimen/_13ssp"
                         android:textAlignment="center"
                         android:textColor="@color/white"
@@ -177,49 +244,33 @@
 
                 </LinearLayout>
 
-                <MultiAutoCompleteTextView
-                    android:id="@+id/tagsACTV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_15sdp"
-                    android:padding="@dimen/_5sdp"
-                    android:hint="@string/enter_tags_break_with_commas"
-                    android:ems="10"
-                    android:backgroundTint="@color/background_color_light"
-                    android:textColorHint="@color/grey"
-                    android:inputType="text"
-                    android:textColor="@color/white"
-                    android:background="@drawable/borders_for_edittext"
-                    android:layout_marginBottom="@dimen/_10sdp"/>
 
 
-            </LinearLayout>
-
-            <FrameLayout
-                android:id="@+id/midleBar"
-                android:layout_width="match_parent"
-                android:layout_weight="3"
-                android:layout_gravity="center"
-                android:layout_height="@dimen/_60sdp">
 
                 <TextView
-                    android:id="@+id/publishRecipe"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginVertical="@dimen/_12sdp"
-                    android:layout_marginHorizontal="@dimen/_30sdp"
-                    android:background="@drawable/button_background"
+                    android:id="@+id/publish_recipe"
+                    android:layout_width="@dimen/_225sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:background="@drawable/circle_rate"
+                    android:backgroundTint="@color/orange"
                     android:gravity="center"
-                    android:paddingHorizontal="@dimen/_20sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingVertical="@dimen/_15sdp"
                     android:text="@string/publish"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_15sdp" />
+                    android:textSize="@dimen/_16ssp"
+                    android:textStyle="bold"
+                    android:translationZ="@dimen/_30sdp" />
 
-            </FrameLayout>
-
+            </LinearLayout>
         </LinearLayout>
 
+        </LinearLayout>
     </RelativeLayout>
-
 </ScrollView>

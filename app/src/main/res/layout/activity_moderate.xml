@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:focusable="true"
+    android:overScrollMode="never"
     android:focusableInTouchMode="true"
     android:background="@color/background_color"
     tools:context=".activities.ModerateActivity">
@@ -33,12 +34,12 @@
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
-                android:layout_marginHorizontal="@dimen/_2sdp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
                 android:paddingVertical="@dimen/_6sdp"
                 android:paddingHorizontal="@dimen/_10sdp"
                 android:textAlignment="center"
                 android:background="@drawable/moderate_button_background"
-                android:backgroundTint="@color/approve"/>
+                android:backgroundTint="@color/green_light"/>
 
             <TextView
                 android:id="@+id/denyBtn"
@@ -49,12 +50,12 @@
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
-                android:layout_marginHorizontal="@dimen/_2sdp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
                 android:paddingVertical="@dimen/_6sdp"
                 android:paddingHorizontal="@dimen/_10sdp"
                 android:textAlignment="center"
                 android:background="@drawable/moderate_button_background"
-                android:backgroundTint="@color/deny"/>
+                android:backgroundTint="@color/red_light"/>
 
         </LinearLayout>
 
@@ -75,20 +76,20 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_300sdp"
+                        android:layout_height="@dimen/_325sdp"
                         android:layout_gravity="top"
                         android:gravity="top">
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_300sdp"
+                            android:layout_height="@dimen/_325sdp"
                             android:backgroundTint="@color/background_color"
                             app:cardElevation="@dimen/_20sdp">
 
                             <com.denzcoskun.imageslider.ImageSlider
                                 android:id="@+id/imageSlider"
                                 android:layout_width="match_parent"
-                                android:layout_height="@dimen/_300sdp"
+                                android:layout_height="@dimen/_325sdp"
                                 android:background="@color/background_color"
                                 app:iss_auto_cycle="false"
                                 app:iss_period="1000"
@@ -167,7 +168,7 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center_horizontal"
                             android:clipToPadding="false"
-                            android:overScrollMode="always"
+                            android:overScrollMode="never"
                             android:visibility="gone"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             android:orientation="horizontal"/>
@@ -196,7 +197,7 @@
                         android:layout_marginBottom="@dimen/_50sdp"
                         android:orientation="vertical"
                         android:layout_gravity="center"
-                        android:overScrollMode="always"
+                        android:overScrollMode="never"
                         android:clipToPadding="false"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         android:paddingHorizontal="@dimen/_15sdp"/>

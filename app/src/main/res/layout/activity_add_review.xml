@@ -188,7 +188,7 @@
                 android:paddingVertical="@dimen/_5sdp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/grey_white"
-                android:textSize="@dimen/_17ssp" />
+                android:textSize="@dimen/_16ssp" />
 
         </LinearLayout>
 
@@ -243,7 +243,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/_10sdp">
+        android:layout_marginBottom="@dimen/_15sdp">
 
 
         <TextView

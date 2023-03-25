@@ -163,7 +163,7 @@ public class CreateCocktailFragment extends Fragment {
         cocktailName = binding.cocktailName;
 
         slider = new ImageSlider(getActivity());
-        slider.setBackgroundColor(getResources().getColor(R.color.background_color_light));
+        slider.setBackgroundColor(getResources().getColor(R.color.background_color));
         binding.sliderContainer.addView(slider);
         binding.imageChooseText.bringToFront();
 
