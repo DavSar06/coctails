@@ -1,5 +1,6 @@
 package com.hdbar.hdbarapp.activities;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -15,6 +16,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -63,6 +65,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.ActivityLoginBinding;
+import com.hdbar.hdbarapp.databinding.MessageDialogBinding;
 import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 import com.hdbar.hdbarapp.utilities.Constants;
 import com.hdbar.hdbarapp.utilities.LanguageController;
@@ -367,9 +370,12 @@ public class LoginActivity extends AppCompatActivity {
                         inputPasswordLayout.setErrorEnabled(false);
                         inputEmailLayout.setErrorEnabled(false);
                         progressDialog.dismiss();
-                        sendUserToNextActivity();
-                        Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_SHORT).show();
-
+                        if(mAuth.getCurrentUser().isEmailVerified()){
+                            sendUserToNextActivity();
+                        }else {
+                            mAuth.signOut();
+                            showMessageDialog();
+                        }
                     }
                     else {
                         progressDialog.dismiss();
@@ -389,6 +395,24 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    private void showMessageDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+        View dialogView = getLayoutInflater().inflate(R.layout.message_dialog, null);
+        builder.setView(dialogView);
+        AlertDialog dialog = builder.create();
+        TextView text = (TextView) dialogView.findViewById(R.id.message);
+        text.setText(getResources().getString(R.string.verify_email));
+        dialogView.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        if (dialog.getWindow() != null){
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        dialog.show();
+    }
 
     public static String getNetworkClass(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -401,7 +425,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void sendUserToNextActivity() {
-        Intent intent = new Intent(this, EmailConfirmActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in,R.anim.fade_out);

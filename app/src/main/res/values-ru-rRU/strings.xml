@@ -81,4 +81,6 @@
     <string name="home">Домой</string>
     <string name="favorite">Сохранённые</string>
     <string name="custom">Добавить</string>
+    <string name="okay">Хорошо</string>
+    <string name="verification_sent">Письмо с подтверждением отправлено</string>
 </resources>

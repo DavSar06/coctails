@@ -1,6 +1,7 @@
 package com.hdbar.hdbarapp.activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -9,12 +10,16 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,6 +38,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.ActivityRegisterBinding;
+import com.hdbar.hdbarapp.databinding.MessageDialogBinding;
 import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 import com.hdbar.hdbarapp.utilities.Constants;
 import com.hdbar.hdbarapp.utilities.PreferenceManager;
@@ -179,52 +185,37 @@ public class RegisterActivity extends AppCompatActivity {
                         // send verification link
 
                         fUser = mAuth.getCurrentUser();
-                        fUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        fUser.sendEmailVerification();
+
+
+                        Resources resources = getResources();
+                        imageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                                .authority(resources.getResourcePackageName(R.drawable.profile_icon_type))
+                                .appendPath(resources.getResourceTypeName(R.drawable.profile_icon_type))
+                                .appendPath(resources.getResourceEntryName(R.drawable.profile_icon_type))
+                                .build();
+                        StorageReference reference = storage.child(System.currentTimeMillis()+"."+getFileExtension(imageUri));
+                        reference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(RegisterActivity.this, "Verification Email Has been Sent", Toast.LENGTH_SHORT).show();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.d("Tag", "onFailure: Email not sent " + e.getMessage());
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                String uid = task.getResult().getUser().getUid();
+                                String userBio = "";
+                                String userImageLink = taskSnapshot.getMetadata().getPath();
+
+                                HashMap<String,Object> user = new HashMap<>();
+                                user.put(Constants.KEY_USERNAME,username);
+                                user.put(Constants.KEY_EMAIL,email);
+                                user.put(Constants.KEY_USER_BIO,userBio);
+                                user.put(Constants.KEY_USER_IMAGE,userImageLink);
+                                user.put(Constants.KEY_STATUS,Constants.KEY_STATUS_USER);
+
+                                database.collection(Constants.KEY_COLLECTION_USERS).document(uid).set(user);
                             }
                         });
 
-
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Resources resources = getResources();
-                                imageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
-                                        .authority(resources.getResourcePackageName(R.drawable.profile_icon_type))
-                                        .appendPath(resources.getResourceTypeName(R.drawable.profile_icon_type))
-                                        .appendPath(resources.getResourceEntryName(R.drawable.profile_icon_type))
-                                        .build();
-                                StorageReference reference = storage.child(System.currentTimeMillis()+"."+getFileExtension(imageUri));
-                                reference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                    @Override
-                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                        String uid = task.getResult().getUser().getUid();
-                                        String userBio = "";
-                                        String userImageLink = taskSnapshot.getMetadata().getPath();
-
-                                        HashMap<String,Object> user = new HashMap<>();
-                                        user.put(Constants.KEY_USERNAME,username);
-                                        user.put(Constants.KEY_EMAIL,email);
-                                        user.put(Constants.KEY_USER_BIO,userBio);
-                                        user.put(Constants.KEY_USER_IMAGE,userImageLink);
-                                        user.put(Constants.KEY_STATUS,Constants.KEY_STATUS_USER);
-
-                                        database.collection(Constants.KEY_COLLECTION_USERS).document(uid).set(user);
-                                    }
-                                });
-
-
-                            }
-                        }).start();
-
-                        sendUserToNextActivity();
+                        progressDialog.dismiss();
+                        showMessageDialog();
+                        mAuth.signOut();
 
                     }
                     else {
@@ -238,9 +229,28 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    private void showMessageDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+        View dialogView = getLayoutInflater().inflate(R.layout.message_dialog, null);
+        builder.setView(dialogView);
+        AlertDialog dialog = builder.create();
+        TextView text = (TextView) dialogView.findViewById(R.id.message);
+        text.setText(getResources().getString(R.string.verification_sent));
+        dialogView.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                finish();
+            }
+        });
+        if (dialog.getWindow() != null){
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        dialog.show();
+    }
 
     private void sendUserToNextActivity() {
-        Intent intent = new Intent(this, EmailConfirmActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 

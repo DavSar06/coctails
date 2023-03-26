@@ -85,5 +85,7 @@
     <string name="home">Home</string>
     <string name="favorite">Favorite</string>
     <string name="custom">Custom</string>
+    <string name="okay">Okay</string>
+    <string name="verification_sent">Verification Email Sent</string>
 
 </resources>
