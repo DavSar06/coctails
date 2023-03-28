@@ -119,6 +119,8 @@ public class LoginActivity extends AppCompatActivity {
         getNetworkClass(LoginActivity.this);
 
         AlwaysOnRun.AlwaysRun(this);
+
+        Log.d("GG","Mtav activity");
     }
 
     private void init(){
@@ -198,6 +200,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }).start();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                         } else {
                             FirebaseAuth.getInstance().signOut();
@@ -292,11 +295,11 @@ public class LoginActivity extends AppCompatActivity {
 
 
                                 }
-                            }).start();/*
+                            }).start();
 
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);*/
+                            startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(LoginActivity.this,"Authentication Failed", Toast.LENGTH_SHORT).show();
@@ -432,6 +435,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void switchActivities(){
         Intent intent = new Intent(this, RegisterActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         overridePendingTransition(R.anim.right_to_left_in, R.anim.right_to_left_out);
     }

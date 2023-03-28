@@ -12,7 +12,6 @@ public class UserPageActivity extends AppCompatActivity {
 
     private ActivityUserPageBinding binding;
     private String uid;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

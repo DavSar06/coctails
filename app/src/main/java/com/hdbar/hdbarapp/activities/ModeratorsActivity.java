@@ -30,6 +30,7 @@ import com.hdbar.hdbarapp.databinding.ActivityModeratorsBinding;
 import com.hdbar.hdbarapp.databinding.ListItemBinding;
 import com.hdbar.hdbarapp.listeners.DropdownListener;
 import com.hdbar.hdbarapp.models.User;
+import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 import com.hdbar.hdbarapp.utilities.Constants;
 
 import org.checkerframework.checker.units.qual.A;
@@ -114,6 +115,7 @@ public class ModeratorsActivity extends AppCompatActivity {
 
         init();
         listeners();
+        AlwaysOnRun.AlwaysRun(this);
     }
 
     private void init(){
@@ -146,7 +148,7 @@ public class ModeratorsActivity extends AppCompatActivity {
         });
         binding.imageBack.setOnClickListener(v->{
             finish();
-            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+            overridePendingTransition(R.anim.left_to_right_in,R.anim.left_to_right_out);
         });
         binding.reload.setOnClickListener(v->{
             updateRecyclerView();

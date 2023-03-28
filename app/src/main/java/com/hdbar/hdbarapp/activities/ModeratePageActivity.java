@@ -104,6 +104,7 @@ public class ModeratePageActivity extends AppCompatActivity {
         });
         binding.icBack.setOnClickListener(v->{
             finish();
+            overridePendingTransition(R.anim.left_to_right_in,R.anim.left_to_right_out);
         });
     }
 

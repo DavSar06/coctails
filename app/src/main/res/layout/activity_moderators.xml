@@ -65,14 +65,38 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/reload"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:padding="@dimen/_5sdp"
-                android:src="@drawable/ic_reload"
-                android:tint="@color/white"
-                android:layout_gravity="end"/>
+
+            <TextView
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="@string/add_new_moderator"
+                android:textSize="@dimen/_16ssp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/metropolisbold"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_height="wrap_content"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/atv"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/grey_white"
+                android:fontFamily="@font/metropolisbold"
+                android:singleLine="true"
+                android:background="@drawable/borders_for_search_bar"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_10sdp"
+                android:textSize="@dimen/_14ssp"
+                android:drawableStart="@drawable/ic_baseline_alternate_email_24"
+                android:drawableTint="@color/grey_white"
+                android:drawablePadding="@dimen/_6sdp"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:backgroundTint="@color/background_color_light"
+                android:layout_height="wrap_content"
+                android:hint="@string/insert_email"
+                />
+
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -129,10 +153,17 @@
                                 android:layout_width="4dp"
                                 android:layout_height="match_parent"/>
 
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="match_parent"/>
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/reload"
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_weight=".1"
+                                android:layout_height="match_parent"
+                                android:padding="@dimen/_5sdp"
+                                android:src="@drawable/ic_reload"
+                                android:tint="@color/white"
+                                android:layout_gravity="end"/>
+
 
                         </LinearLayout>
 
@@ -148,7 +179,7 @@
                             android:layout_gravity="center_horizontal"
                             android:clipToPadding="false"
                             android:orientation="vertical"
-                            android:overScrollMode="always"
+                            android:overScrollMode="never"
                             android:visibility="gone"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
@@ -156,10 +187,13 @@
 
                     <ProgressBar
                         android:id="@+id/progressBar"
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_gravity="center"
-                        />
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:backgroundTint="@color/white"
+                        android:indeterminateDrawable="@drawable/custom_progress_dialog"
+                        android:indeterminate="true"
+                        android:layout_gravity="center" />
+
 
                     <TextView
                         android:id="@+id/textErrorMessage"
@@ -178,30 +212,6 @@
 
             </ScrollView>
 
-            <TextView
-                android:layout_marginTop="@dimen/_20sdp"
-                android:text="@string/add_new_moderator"
-                android:textSize="@dimen/_16ssp"
-                android:textColor="@color/white"
-                android:fontFamily="@font/metropolisbold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <AutoCompleteTextView
-                android:id="@+id/atv"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/grey_white"
-                android:fontFamily="@font/metropolisbold"
-                android:singleLine="true"
-                android:background="@drawable/borders_for_search_bar"
-                android:paddingHorizontal="@dimen/_10sdp"
-                android:paddingVertical="@dimen/_10sdp"
-                android:textSize="@dimen/_14ssp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/insert_email"
-                />
 
             <TextView
                 android:id="@+id/addModeratorBtn"
@@ -210,12 +220,13 @@
                 android:text="@string/add"
                 android:imeOptions="actionDone"
                 android:fontFamily="@font/metropolisbold"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:textSize="@dimen/_14ssp"
                 android:textColor="@color/white"
                 android:textAlignment="center"
                 android:paddingHorizontal="@dimen/_8sdp"
                 android:paddingVertical="@dimen/_10sdp"
+                android:backgroundTint="@color/orange"
                 android:background="@drawable/button_background"/>
 
         </LinearLayout>

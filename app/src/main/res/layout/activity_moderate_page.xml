@@ -26,6 +26,15 @@
             android:gravity="top|left"
             android:layout_margin="@dimen/_15sdp"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:fontFamily="@font/garute"
+                android:text="Moderate"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_20ssp" />
 
     </RelativeLayout>
     <FrameLayout
@@ -47,8 +56,11 @@
 
         <ProgressBar
             android:id="@+id/progressBar"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:backgroundTint="@color/white"
+            android:indeterminateDrawable="@drawable/custom_progress_dialog"
+            android:indeterminate="true"
             android:layout_gravity="center" />
 
         <TextView
