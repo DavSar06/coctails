@@ -33,18 +33,18 @@
             android:layout_gravity="center"
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginVertical="@dimen/_7sdp"
-            android:layout_weight="25"
             android:background="@drawable/borders_for_search_bar"
             android:drawableStart="@drawable/ic_baseline_search_24"
             android:drawablePadding="@dimen/_6sdp"
-            android:fontFamily="@font/metropolislight"
+            android:fontFamily="@font/metropolisbold"
             android:hint="@string/search"
             android:inputType="textUri"
             android:maxLength="30"
             android:maxLines="1"
             android:paddingHorizontal="@dimen/_10sdp"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:backgroundTint="@color/background_color_light"
+            android:textColorHint="@color/grey_white"
             android:textSize="16sp" />
 
     </FrameLayout>

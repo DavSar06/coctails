@@ -218,7 +218,7 @@ public class SettingsFragment extends Fragment {
         aboutUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AboutUsActivity.class);
+                Intent intent = new Intent(getActivity(), AnimationActivity.class);
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
             }

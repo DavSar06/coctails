@@ -217,7 +217,6 @@ public class LoginActivity extends AppCompatActivity {
 
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
-
         if(user != null){
             sendUserToNextActivity();
         }
@@ -293,11 +292,11 @@ public class LoginActivity extends AppCompatActivity {
 
 
                                 }
-                            }).start();
+                            }).start();/*
 
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
+                            startActivity(intent);*/
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(LoginActivity.this,"Authentication Failed", Toast.LENGTH_SHORT).show();
