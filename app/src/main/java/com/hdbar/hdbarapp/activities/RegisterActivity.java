@@ -13,7 +13,9 @@ import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -78,6 +80,12 @@ public class RegisterActivity extends AppCompatActivity {
         listeners();
         AlwaysOnRun.AlwaysRun(this);
 
+        String checkBoxText = "I agree to all the <a href='https://publuu.com/flip-book/106724/287195' > Privacy and Policy</a>";
+
+        areYouOlder18.setText(Html.fromHtml(checkBoxText));
+        areYouOlder18.setMovementMethod(LinkMovementMethod.getInstance());
+
+
     }
 
     private void init(){
@@ -88,7 +96,7 @@ public class RegisterActivity extends AppCompatActivity {
         inputPassword=binding.registerPassword;
         inputConformPassword=binding.registerPasswordConfirm;
         confirmButton=binding.registerConfirm;
-        areYouOlder18=binding.areYouOlder18;
+        areYouOlder18=binding.privacyCheck;
         inputUsername=binding.registerUsername;
         inputPasswordLayout = binding.registerPasswordLayout;
         inputEmailLayout = binding.registerEmailLayout;

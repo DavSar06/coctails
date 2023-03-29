@@ -191,7 +191,7 @@ public class SettingsFragment extends Fragment {
         privacyAndSecurity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://publuu.com/flip-book/98200/268888"));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://publuu.com/flip-book/106724/287195"));
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
             }

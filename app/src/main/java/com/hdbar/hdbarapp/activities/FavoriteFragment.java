@@ -78,6 +78,7 @@ public class FavoriteFragment extends Fragment {
         super.onCreate(savedInstanceState);
         init();
         listeners();
+        getCocktails();
 
         changeAdapter(adapterStatus,cocktails);
     }
@@ -86,7 +87,6 @@ public class FavoriteFragment extends Fragment {
         uid = FirebaseAuth.getInstance().getUid();
         database = FirebaseFirestore.getInstance();
         binding = FragmentFavoriteBinding.inflate(getLayoutInflater());
-        getCocktails();
     }
 
     @Override
