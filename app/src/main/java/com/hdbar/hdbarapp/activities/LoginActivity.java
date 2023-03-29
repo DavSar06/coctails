@@ -401,7 +401,9 @@ public class LoginActivity extends AppCompatActivity {
         builder.setView(dialogView);
         AlertDialog dialog = builder.create();
         TextView text = (TextView) dialogView.findViewById(R.id.message);
-        text.setText(getResources().getString(R.string.verify_email));
+        text.setText(getResources().getString(R.string.verification_sent));
+        TextView title = (TextView) dialogView.findViewById(R.id.message_title);
+        title.setText(getResources().getString(R.string.verify_email));
         dialogView.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

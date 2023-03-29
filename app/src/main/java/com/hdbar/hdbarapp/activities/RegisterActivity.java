@@ -244,6 +244,8 @@ public class RegisterActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         TextView text = (TextView) dialogView.findViewById(R.id.message);
         text.setText(getResources().getString(R.string.verification_sent));
+        TextView title = (TextView) dialogView.findViewById(R.id.message_title);
+        title.setText(getResources().getString(R.string.verify_email));
         dialogView.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -255,13 +257,6 @@ public class RegisterActivity extends AppCompatActivity {
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
         dialog.show();
-    }
-
-    private void sendUserToNextActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-
     }
 
     private void listeners(){
