@@ -119,37 +119,42 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:background="@drawable/image1"
+                            android:src="@drawable/cocktail_icon1"
+                            android:scaleType="centerCrop"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_100sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"/>
+                        <ImageView
+                            android:src="@drawable/cocktail_icon13"
+                            style="@style/ImageView.Circle.Rectangle"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_100sdp"
+                            android:scaleType="centerCrop"
+                            android:layout_marginEnd="@dimen/_10sdp"/>
+                        <ImageView
+                            android:src="@drawable/cocktail_icon4"
+                            android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
-                            android:background="@drawable/image1"
+                            android:src="@drawable/cocktail_icon6"
+                            android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
-                            android:background="@drawable/image1"
+                            android:src="@drawable/cocktail_icon7"
+                            android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
-                            android:background="@drawable/image1"
-                            style="@style/ImageView.Circle.Rectangle"
-                            android:layout_width="@dimen/_100sdp"
-                            android:layout_height="@dimen/_100sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"/>
-                        <ImageView
-                            android:background="@drawable/image1"
-                            style="@style/ImageView.Circle.Rectangle"
-                            android:layout_width="@dimen/_100sdp"
-                            android:layout_height="@dimen/_100sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"/>
-                        <ImageView
-                            android:background="@drawable/image1"
+                            android:src="@drawable/cocktail_icon17"
+                            android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="@dimen/_100sdp"
@@ -182,37 +187,43 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:background="@drawable/image1"
+                            android:src="@drawable/cocktail_icon9"
+                            android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
-                            android:background="@drawable/image1"
+                            android:src="@drawable/cocktail_icon15"
+                            android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
-                            android:background="@drawable/image1"
+                            android:src="@drawable/cocktail_icon25"
+                            android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
-                            android:background="@drawable/image1"
+                            android:src="@drawable/cocktail_icon23"
+                            android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
-                            android:background="@drawable/image1"
+                            android:src="@drawable/cocktail_icon29"
+                            android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
-                            android:background="@drawable/image1"
+                            android:src="@drawable/cocktail_icon28"
+                            android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="@dimen/_100sdp"
@@ -245,37 +256,43 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:background="@drawable/image1"
+                            android:src="@drawable/cocktail_icon8"
+                            android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
-                            android:background="@drawable/image1"
+                            android:src="@drawable/cocktail_icon14"
+                            android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
-                            android:background="@drawable/image1"
+                            android:src="@drawable/cocktail_icon5"
+                            android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
-                            android:background="@drawable/image1"
+                            android:src="@drawable/cocktail_icon24"
+                            android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
-                            android:background="@drawable/image1"
+                            android:src="@drawable/cocktail_icon19"
+                            android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
-                            android:background="@drawable/image1"
+                            android:src="@drawable/cocktail_icon22"
+                            android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="@dimen/_100sdp"
