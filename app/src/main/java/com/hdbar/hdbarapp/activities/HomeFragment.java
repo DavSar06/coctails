@@ -70,8 +70,6 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         init();
         listeners();
-
-
         super.onCreate(savedInstanceState);
     }
     public HomeFragment() {
