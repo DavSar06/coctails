@@ -1,14 +1,10 @@
-package com.hdbar.hdbarapp.glasses_types;
+package com.hdbar.hdbarapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -17,28 +13,27 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.hdbar.hdbarapp.R;
-import com.hdbar.hdbarapp.activities.CocktailPageActivity;
 import com.hdbar.hdbarapp.adapters.CocktailsAdapter;
 import com.hdbar.hdbarapp.adapters.CocktailsSingleAdapter;
-import com.hdbar.hdbarapp.databinding.ActivityHighballBinding;
-import com.hdbar.hdbarapp.databinding.ActivitySearchBinding;
+import com.hdbar.hdbarapp.databinding.ActivityGlassTypeBinding;
 import com.hdbar.hdbarapp.listeners.CocktailListener;
 import com.hdbar.hdbarapp.models.Cocktail;
 import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 import com.hdbar.hdbarapp.utilities.Constants;
-import com.hdbar.hdbarapp.utilities.SearchHelper;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class HighballActivity extends AppCompatActivity {
+public class GlassTypeActivity extends AppCompatActivity {
 
-    private ActivityHighballBinding binding;
+    private ActivityGlassTypeBinding binding;
     private List<Cocktail> cocktails;
     private FirebaseFirestore database;
     private String uid;
+
+    private String glassType;
     Integer i;
     Integer adapterStatus = 0;
 
@@ -55,26 +50,51 @@ public class HighballActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityHighballBinding.inflate(getLayoutInflater());
+        binding = ActivityGlassTypeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        
         init();
         listeners();
         AlwaysOnRun.AlwaysRun(this);
-        //changeAdapter(adapterStatus,s);
 
     }
 
 
     private void init(){
+        glassType = getIntent().getStringExtra(Constants.KEY_GLASS_TYPE);
         uid = FirebaseAuth.getInstance().getUid();
         database = FirebaseFirestore.getInstance();
+        binding.type.setText(glassType.substring(0, 1).toUpperCase() + glassType.substring(1));
         getCocktails();
     }
 
     private void listeners(){
         binding.backHighball.setOnClickListener(v->{
-            finish();});
+            finish();
+            overridePendingTransition(R.anim.left_to_right_in,R.anim.left_to_right_out);
+        });
+        binding.rowDouble.setOnClickListener(v->{
+            if(adapterStatus!=0){
+                binding.rowSingle.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.background_color_light), android.graphics.PorterDuff.Mode.SRC_IN);
+                binding.rowDouble.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
+                binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
+                binding.textErrorMessage.setVisibility(View.INVISIBLE);
+                binding.progressBar.setVisibility(View.VISIBLE);
+                adapterStatus = 0;
+                changeAdapter(adapterStatus,cocktails);
+            }
+        });
+        binding.rowSingle.setOnClickListener(v->{
+            if(adapterStatus!=1){
+                binding.rowSingle.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.white), android.graphics.PorterDuff.Mode.SRC_IN);
+                binding.rowDouble.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.background_color_light), android.graphics.PorterDuff.Mode.SRC_IN);
+                binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
+                binding.textErrorMessage.setVisibility(View.INVISIBLE);
+                binding.progressBar.setVisibility(View.VISIBLE);
+                adapterStatus = 1;
+                changeAdapter(adapterStatus,cocktails);
+            }
+        });
     }
 
 
@@ -82,10 +102,11 @@ public class HighballActivity extends AppCompatActivity {
         cocktails = new LinkedList<>();
         binding.progressBar.setVisibility(View.VISIBLE);
         binding.textErrorMessage.setVisibility(View.INVISIBLE);
-        binding.cocktailsRecyclerViewHighBall.setVisibility(View.INVISIBLE);
+        binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
         cocktails = new LinkedList<>();
         i = 0;
         database.collection(Constants.KEY_COLLECTION_COCKTAILS)
+                .whereArrayContains(Constants.KEY_COCKTAIL_TAGS,glassType)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -105,7 +126,11 @@ public class HighballActivity extends AppCompatActivity {
                             if(i==queryDocumentSnapshots.size()){
                                 changeAdapter(0,cocktails);
                             }
-                            Log.d("GG",cocktails.size() + " ");
+                        }
+                        if(queryDocumentSnapshots.size()==0){
+                            binding.progressBar.setVisibility(View.INVISIBLE);
+                            binding.textErrorMessage.setVisibility(View.VISIBLE);
+                            binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
                         }
                     }
                 });
@@ -114,18 +139,18 @@ public class HighballActivity extends AppCompatActivity {
 
     private void changeAdapter(Integer k,List<Cocktail> cocktails){
         if(cocktails.isEmpty()){
-            binding.cocktailsRecyclerViewHighBall.setVisibility(View.INVISIBLE);
+            binding.cocktailsRecyclerView.setVisibility(View.INVISIBLE);
             binding.progressBar.setVisibility(View.INVISIBLE);
             binding.textErrorMessage.setVisibility(View.VISIBLE);
         }else {
             if(k==0){
                 CocktailsAdapter adapter = new CocktailsAdapter(cocktails,cocktailListener);
-                binding.cocktailsRecyclerViewHighBall.setAdapter(adapter);
+                binding.cocktailsRecyclerView.setAdapter(adapter);
             }else{
                 CocktailsSingleAdapter adapter = new CocktailsSingleAdapter(cocktails,cocktailListener);
-                binding.cocktailsRecyclerViewHighBall.setAdapter(adapter);
+                binding.cocktailsRecyclerView.setAdapter(adapter);
             }
-            binding.cocktailsRecyclerViewHighBall.setVisibility(View.VISIBLE);
+            binding.cocktailsRecyclerView.setVisibility(View.VISIBLE);
             binding.progressBar.setVisibility(View.INVISIBLE);
             binding.textErrorMessage.setVisibility(View.INVISIBLE);
         }

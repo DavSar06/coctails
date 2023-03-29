@@ -42,4 +42,5 @@ public class Constants {
     public static final String KEY_TAG_NAME = "tagName";
 
     public static final String KEY_LANGUAGE = "language";
+    public static final String KEY_GLASS_TYPE = "glassType";
 }

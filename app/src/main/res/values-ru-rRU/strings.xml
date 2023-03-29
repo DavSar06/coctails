@@ -103,4 +103,5 @@
     <string name="or">или</string>
     <string name="glasses_types">Типы Бокалов</string>
     <string name="top_10_cocktails">Топ 10 Лучших Коктейлей</string>
+    <string name="there_are_no_cocktails_of_such_type">Нет коктейлей такого типа</string>
 </resources>

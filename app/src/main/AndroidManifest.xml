@@ -40,7 +40,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".glasses_types.HighballActivity"
+            android:name=".activities.GlassTypeActivity"
             android:exported="false"
             android:screenOrientation="portrait">
             <meta-data
