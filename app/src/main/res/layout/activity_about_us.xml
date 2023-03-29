@@ -43,8 +43,9 @@
         android:textColor="@color/white"
         android:layout_gravity="center_horizontal"
         android:textSize="@dimen/_16ssp"
-        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_marginHorizontal="@dimen/_25sdp"
         android:fontFamily="@font/garute"
-        android:text="Drini мобильное приложение для создания, оценивания и просмотра коктейлей"/>
+        android:text="Introducing our company, a leader in the mobile app industry that specializes in cocktail recipes. Our app provides users with access to hundreds of unique and creative cocktail recipes that can be made right at home. With step-by-step instructions and ingredient lists, our app is perfect for both beginners and seasoned mixologists. Whether you're looking for a classic cocktail or something more adventurous, our app has something for everyone. Download it today and start crafting delicious cocktails in the comfort of your own home!
+"/>
 
 </LinearLayout>
