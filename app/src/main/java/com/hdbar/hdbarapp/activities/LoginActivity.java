@@ -25,6 +25,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -33,6 +34,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -79,8 +81,8 @@ public class LoginActivity extends AppCompatActivity {
     private PreferenceManager preferenceManager;
     TextView registerTextView;
 
-
-    private ImageView btnGoogle,btnPhone,btnGithub,btnFacebook;
+    private RelativeLayout btnGoogle;
+    private ImageView btnPhone,btnGithub,btnFacebook;
     private TextView buttonLogin;
     private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private ProgressDialog progressDialog;
@@ -138,7 +140,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
         mCallbackManager = CallbackManager.Factory.create();
-        binding.facebook.setReadPermissions("email","public_profile");
     }
 
     private void handleFacebookAccessToken(AccessToken token) {
@@ -463,22 +464,6 @@ public class LoginActivity extends AppCompatActivity {
             inm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
         });
 
-        binding.facebook.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                handleFacebookAccessToken(loginResult.getAccessToken());
-            }
-
-            @Override
-            public void onCancel() {
-
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                Log.e("FCM", "onError: "+error.getMessage());
-            }
-        });
 
         binding.ForgotPassword.setOnClickListener(v->{
             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);

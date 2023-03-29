@@ -387,11 +387,11 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_others"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_height="1000dp"
             android:fillViewport="true"
-            android:overScrollMode="never"
             android:nestedScrollingEnabled="false"
+            android:orientation="vertical"
+            android:overScrollMode="never"
             android:paddingHorizontal="@dimen/_10sdp"
             android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

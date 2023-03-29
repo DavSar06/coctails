@@ -92,9 +92,10 @@
                     android:layout_gravity="center_horizontal"
                     android:clipToPadding="false"
                     android:orientation="vertical"
+                    android:nestedScrollingEnabled="false"
                     android:overScrollMode="never"
                     android:padding="@dimen/_10sdp"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 <ProgressBar

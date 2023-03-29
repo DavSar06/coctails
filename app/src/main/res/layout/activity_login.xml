@@ -149,23 +149,19 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-
     <TextView
         android:id="@+id/Loginbtn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_50sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_25sdp"
-        android:layout_weight="15"
         android:background="@drawable/circle"
         android:gravity="center"
         android:text="@string/login"
         android:textColor="@color/white"
         android:textSize="@dimen/_20ssp"
-        android:textStyle="bold"
-        />
-
+        android:textStyle="bold" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -220,37 +216,36 @@
         android:layout_marginVertical="@dimen/_5sdp"
         android:gravity="center">
 
-        <ImageView
+        <RelativeLayout
             android:id="@+id/google"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_width="@dimen/_225sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:background="@drawable/circle"
             android:padding="@dimen/_5sdp"
-            android:src="@drawable/google"
-            android:layout_marginHorizontal="@dimen/_5sdp"/>
-
-
-
-        <FrameLayout
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_gravity="center">
-
-            <com.facebook.login.widget.LoginButton
-                android:id="@+id/facebook"
-                android:layout_gravity="center"
-                android:alpha="0"
-                android:visibility="visible"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"/>
+            android:backgroundTint="@color/white">
 
             <ImageView
+                android:id="@+id/google_image"
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_40sdp"
-                android:padding="@dimen/_5sdp"
-                android:src="@drawable/facebooklogo"
-                android:layout_marginHorizontal="@dimen/_5sdp" />
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/google" />
 
-        </FrameLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Continue with Google"
+                android:layout_toRightOf="@+id/google_image"
+                android:textColor="@color/black"
+                android:fontFamily="@font/metropolisbold"
+                android:textSize="@dimen/_14ssp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_10sdp"/>
+
+
+
+        </RelativeLayout>
 
     </LinearLayout>
 
