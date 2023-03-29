@@ -33,7 +33,7 @@
     <string name="username">Имя Пользователя</string>
     <string name="password">Пароль</string>
     <string name="don_t_have_account">Нет Аккаунта ?</string>
-    <string name="register">Регистрироваться</string>
+    <string name="register">Регистрация</string>
     <string name="forgot_password">Забыл Пароль ?</string>
     <string name="search">Поиск</string>
     <string name="approve">Одобрить</string>

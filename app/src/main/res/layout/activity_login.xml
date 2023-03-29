@@ -60,7 +60,7 @@
         app:boxStrokeColor="@color/grey_dark"
         android:layout_marginBottom="@dimen/_10sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
-        android:hint="@string/username"
+        android:hint="@string/email"
         android:textColorHint="@color/white"
         app:endIconMode="clear_text"
         app:helperTextEnabled="true"
