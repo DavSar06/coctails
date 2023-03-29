@@ -100,7 +100,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Mi ayl tipi category"
+                    android:text="Drawn"
                     android:textColor="@color/white"
                     android:fontFamily="@font/metropolisbold"
                     android:textSize="@dimen/_15ssp"/>
@@ -119,12 +119,14 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/icon1"
                             android:src="@drawable/cocktail_icon1"
                             android:scaleType="centerCrop"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
+                            android:id="@+id/icon2"
                             android:src="@drawable/cocktail_icon13"
                             style="@style/ImageView.Circle.Rectangle"
                             android:layout_width="@dimen/_100sdp"
@@ -132,6 +134,7 @@
                             android:scaleType="centerCrop"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
+                            android:id="@+id/icon3"
                             android:src="@drawable/cocktail_icon4"
                             android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
@@ -139,6 +142,7 @@
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
+                            android:id="@+id/icon4"
                             android:src="@drawable/cocktail_icon6"
                             android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
@@ -146,6 +150,7 @@
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
+                            android:id="@+id/icon5"
                             android:src="@drawable/cocktail_icon7"
                             android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
@@ -153,6 +158,7 @@
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
+                            android:id="@+id/icon6"
                             android:src="@drawable/cocktail_icon17"
                             android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
@@ -168,7 +174,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Barman"
+                    android:text="Vector"
                     android:textColor="@color/white"
                     android:fontFamily="@font/metropolisbold"
                     android:textSize="@dimen/_15ssp"/>
@@ -187,6 +193,7 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/icon7"
                             android:src="@drawable/cocktail_icon9"
                             android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
@@ -194,6 +201,7 @@
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
+                            android:id="@+id/icon8"
                             android:src="@drawable/cocktail_icon15"
                             android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
@@ -201,6 +209,7 @@
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
+                            android:id="@+id/icon9"
                             android:src="@drawable/cocktail_icon25"
                             android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
@@ -208,6 +217,7 @@
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
+                            android:id="@+id/icon10"
                             android:src="@drawable/cocktail_icon23"
                             android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
@@ -215,6 +225,7 @@
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
+                            android:id="@+id/icon11"
                             android:src="@drawable/cocktail_icon29"
                             android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
@@ -222,6 +233,7 @@
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
+                            android:id="@+id/icon12"
                             android:src="@drawable/cocktail_icon28"
                             android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
@@ -237,7 +249,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Cocktails"
+                    android:text="2D"
                     android:textColor="@color/white"
                     android:fontFamily="@font/metropolisbold"
                     android:textSize="@dimen/_15ssp"/>
@@ -256,6 +268,7 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/icon13"
                             android:src="@drawable/cocktail_icon8"
                             android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
@@ -263,6 +276,7 @@
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
+                            android:id="@+id/icon14"
                             android:src="@drawable/cocktail_icon14"
                             android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
@@ -270,6 +284,7 @@
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
+                            android:id="@+id/icon15"
                             android:src="@drawable/cocktail_icon5"
                             android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
@@ -277,6 +292,7 @@
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
+                            android:id="@+id/icon16"
                             android:src="@drawable/cocktail_icon24"
                             android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
@@ -284,6 +300,7 @@
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
+                            android:id="@+id/icon17"
                             android:src="@drawable/cocktail_icon19"
                             android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"
@@ -291,6 +308,7 @@
                             android:layout_height="@dimen/_100sdp"
                             android:layout_marginEnd="@dimen/_10sdp"/>
                         <ImageView
+                            android:id="@+id/icon18"
                             android:src="@drawable/cocktail_icon22"
                             android:scaleType="centerCrop"
                             style="@style/ImageView.Circle.Rectangle"

@@ -7,11 +7,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -24,9 +26,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.ActivityChooseImageBinding;
 import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 import com.hdbar.hdbarapp.utilities.Constants;
+
+import java.util.ArrayList;
 
 
 public class ChooseImageActivity extends AppCompatActivity {
@@ -36,6 +41,8 @@ public class ChooseImageActivity extends AppCompatActivity {
     private Uri imageUri;
     private StorageReference storage;
     private FirebaseFirestore database;
+    private ArrayList<ImageView> imageViews;
+    private ArrayList<Uri> images;
     private String uid;
 
     @Override
@@ -51,10 +58,131 @@ public class ChooseImageActivity extends AppCompatActivity {
     }
 
     private void init(){
+        imageViews = new ArrayList<>();
+        images = new ArrayList<>();
         database = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance().getReference("users");
         uid = FirebaseAuth.getInstance().getUid();
         setCurrentImage();
+        getImagesContainers();
+        for (int i=0;i<18;i++){
+            int finalI = i;
+            imageViews.get(i).setOnClickListener(v->{
+                uploadImage(images.get(finalI));
+            });
+        }
+    }
+
+    private void getImagesContainers(){
+        Resources resources = getResources();
+        imageViews.add(binding.icon1);
+        images.add(new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(resources.getResourcePackageName(R.drawable.cocktail_icon1))
+                .appendPath(resources.getResourceTypeName(R.drawable.cocktail_icon1))
+                .appendPath(resources.getResourceEntryName(R.drawable.cocktail_icon1))
+                .build());
+        imageViews.add(binding.icon2);
+        images.add(new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(resources.getResourcePackageName(R.drawable.cocktail_icon13))
+                .appendPath(resources.getResourceTypeName(R.drawable.cocktail_icon13))
+                .appendPath(resources.getResourceEntryName(R.drawable.cocktail_icon13))
+                .build());
+        imageViews.add(binding.icon3);
+        images.add(new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(resources.getResourcePackageName(R.drawable.cocktail_icon4))
+                .appendPath(resources.getResourceTypeName(R.drawable.cocktail_icon4))
+                .appendPath(resources.getResourceEntryName(R.drawable.cocktail_icon4))
+                .build());
+        imageViews.add(binding.icon4);
+        images.add(new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(resources.getResourcePackageName(R.drawable.cocktail_icon6))
+                .appendPath(resources.getResourceTypeName(R.drawable.cocktail_icon6))
+                .appendPath(resources.getResourceEntryName(R.drawable.cocktail_icon6))
+                .build());
+        imageViews.add(binding.icon5);
+        images.add(new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(resources.getResourcePackageName(R.drawable.cocktail_icon7))
+                .appendPath(resources.getResourceTypeName(R.drawable.cocktail_icon7))
+                .appendPath(resources.getResourceEntryName(R.drawable.cocktail_icon7))
+                .build());
+        imageViews.add(binding.icon6);
+        images.add(new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(resources.getResourcePackageName(R.drawable.cocktail_icon17))
+                .appendPath(resources.getResourceTypeName(R.drawable.cocktail_icon17))
+                .appendPath(resources.getResourceEntryName(R.drawable.cocktail_icon17))
+                .build());
+        imageViews.add(binding.icon7);
+        images.add(new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(resources.getResourcePackageName(R.drawable.cocktail_icon9))
+                .appendPath(resources.getResourceTypeName(R.drawable.cocktail_icon9))
+                .appendPath(resources.getResourceEntryName(R.drawable.cocktail_icon9))
+                .build());
+        imageViews.add(binding.icon8);
+        images.add(new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(resources.getResourcePackageName(R.drawable.cocktail_icon15))
+                .appendPath(resources.getResourceTypeName(R.drawable.cocktail_icon15))
+                .appendPath(resources.getResourceEntryName(R.drawable.cocktail_icon15))
+                .build());
+        imageViews.add(binding.icon9);
+        images.add(new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(resources.getResourcePackageName(R.drawable.cocktail_icon25))
+                .appendPath(resources.getResourceTypeName(R.drawable.cocktail_icon25))
+                .appendPath(resources.getResourceEntryName(R.drawable.cocktail_icon25))
+                .build());
+        imageViews.add(binding.icon10);
+        images.add(new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(resources.getResourcePackageName(R.drawable.cocktail_icon23))
+                .appendPath(resources.getResourceTypeName(R.drawable.cocktail_icon23))
+                .appendPath(resources.getResourceEntryName(R.drawable.cocktail_icon23))
+                .build());
+        imageViews.add(binding.icon11);
+        images.add(new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(resources.getResourcePackageName(R.drawable.cocktail_icon29))
+                .appendPath(resources.getResourceTypeName(R.drawable.cocktail_icon29))
+                .appendPath(resources.getResourceEntryName(R.drawable.cocktail_icon29))
+                .build());
+        imageViews.add(binding.icon12);
+        images.add(new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(resources.getResourcePackageName(R.drawable.cocktail_icon28))
+                .appendPath(resources.getResourceTypeName(R.drawable.cocktail_icon28))
+                .appendPath(resources.getResourceEntryName(R.drawable.cocktail_icon28))
+                .build());
+        imageViews.add(binding.icon13);
+        images.add(new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(resources.getResourcePackageName(R.drawable.cocktail_icon8))
+                .appendPath(resources.getResourceTypeName(R.drawable.cocktail_icon8))
+                .appendPath(resources.getResourceEntryName(R.drawable.cocktail_icon8))
+                .build());
+        imageViews.add(binding.icon14);
+        images.add(new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(resources.getResourcePackageName(R.drawable.cocktail_icon14))
+                .appendPath(resources.getResourceTypeName(R.drawable.cocktail_icon14))
+                .appendPath(resources.getResourceEntryName(R.drawable.cocktail_icon14))
+                .build());
+        imageViews.add(binding.icon15);
+        images.add(new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(resources.getResourcePackageName(R.drawable.cocktail_icon5))
+                .appendPath(resources.getResourceTypeName(R.drawable.cocktail_icon5))
+                .appendPath(resources.getResourceEntryName(R.drawable.cocktail_icon5))
+                .build());
+        imageViews.add(binding.icon16);
+        images.add(new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(resources.getResourcePackageName(R.drawable.cocktail_icon24))
+                .appendPath(resources.getResourceTypeName(R.drawable.cocktail_icon24))
+                .appendPath(resources.getResourceEntryName(R.drawable.cocktail_icon24))
+                .build());
+        imageViews.add(binding.icon17);
+        images.add(new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(resources.getResourcePackageName(R.drawable.cocktail_icon19))
+                .appendPath(resources.getResourceTypeName(R.drawable.cocktail_icon19))
+                .appendPath(resources.getResourceEntryName(R.drawable.cocktail_icon19))
+                .build());
+        imageViews.add(binding.icon18);
+        images.add(new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(resources.getResourcePackageName(R.drawable.cocktail_icon22))
+                .appendPath(resources.getResourceTypeName(R.drawable.cocktail_icon22))
+                .appendPath(resources.getResourceEntryName(R.drawable.cocktail_icon22))
+                .build());
     }
 
     public void setListeners(){
@@ -100,26 +228,33 @@ public class ChooseImageActivity extends AppCompatActivity {
         if(result.getResultCode() == RESULT_OK){
             if(result.getData() != null){
                 imageUri = result.getData().getData();
-                StorageReference reference = storage.child(System.currentTimeMillis()+"."+getFileExtension(imageUri));
-                reference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        database.collection(Constants.KEY_COLLECTION_USERS).document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
-                                    storage.child(task.getResult().get(Constants.KEY_USER_IMAGE).toString().replace("users/","")).delete();
-                                    database.collection(Constants.KEY_COLLECTION_USERS).document(uid).update(Constants.KEY_USER_IMAGE,taskSnapshot.getMetadata().getPath());
-                                    finish();
-                                }else {
-                                    Toast.makeText(ChooseImageActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-
-                    }
-                });
+                uploadImage(imageUri);
             }
         }
     });
+
+    private void uploadImage(Uri imageUri){
+        StorageReference reference = storage.child(System.currentTimeMillis()+"."+getFileExtension(imageUri));
+        reference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                database.collection(Constants.KEY_COLLECTION_USERS).document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            storage.child(task.getResult().get(Constants.KEY_USER_IMAGE).toString().replace("users/","")).delete();
+                            database.collection(Constants.KEY_COLLECTION_USERS).document(uid).update(Constants.KEY_USER_IMAGE,taskSnapshot.getMetadata().getPath());
+                            MainActivity.openSettings = true;
+                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }else {
+                            Toast.makeText(ChooseImageActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+            }
+        });
+    }
 }
