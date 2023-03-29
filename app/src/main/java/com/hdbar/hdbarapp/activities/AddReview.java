@@ -181,6 +181,37 @@ public class AddReview extends AppCompatActivity {
                                         database.collection(Constants.KEY_COLLECTION_RATINGS).add(rating_hm);
                                     }
                                 }
+
+
+                                database.collection(Constants.KEY_COLLECTION_RATINGS)
+                                        .whereEqualTo(Constants.KEY_COCKTAIL_ID,cocktailId)
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if(task.isSuccessful()){
+                                                    if (!task.getResult().isEmpty()){
+                                                        Float sum = 0f;
+                                                        Integer ratingCount = 0;
+                                                        ArrayList<Float> arrayListRatings = new ArrayList<>();
+
+
+                                                        for (DocumentSnapshot snapshot:task.getResult()){
+                                                            Float getRatingsFB = Float.parseFloat(snapshot.get(Constants.KEY_COCKTAIL_RATING).toString());
+                                                            arrayListRatings.add(getRatingsFB);
+                                                            sum += getRatingsFB;
+                                                        }
+
+                                                        ratingCount = arrayListRatings.size();
+
+                                                        database.collection(Constants.KEY_COLLECTION_COCKTAILS)
+                                                                .document(cocktailId)
+                                                                .update(Constants.KEY_COCKTAIL_RATING,sum/ratingCount);
+                                                    }
+
+                                                }
+                                            }
+                                        });
                             }
                         });
     }
