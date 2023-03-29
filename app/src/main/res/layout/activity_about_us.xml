@@ -40,12 +40,11 @@
         android:layout_marginTop="@dimen/_15sdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="left"
         android:textColor="@color/white"
-        android:layout_gravity="right"
+        android:layout_gravity="center_horizontal"
         android:textSize="@dimen/_16ssp"
         android:layout_marginHorizontal="@dimen/_15sdp"
         android:fontFamily="@font/garute"
-        android:text="@string/about_us_text"/>
+        android:text="Drini мобильное приложение для создания, оценивания и просмотра коктейлей"/>
 
 </LinearLayout>

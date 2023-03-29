@@ -161,6 +161,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
                 android:orientation="vertical"
+                android:nestedScrollingEnabled="true"
                 android:overScrollMode="never"
                 android:paddingHorizontal="@dimen/_10sdp"
                 android:visibility="visible"

@@ -22,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.hdbar.hdbarapp.R;
+import com.hdbar.hdbarapp.adapters.CocktailsAdapter;
 import com.hdbar.hdbarapp.adapters.OthersAdapter;
 import com.hdbar.hdbarapp.adapters.TopTenOfWeekAdapter;
 import com.hdbar.hdbarapp.databinding.FragmentHomeBinding;
@@ -70,7 +71,6 @@ public class HomeFragment extends Fragment {
         init();
         listeners();
 
-        unScroll.setNestedScrollingEnabled(false);
 
         super.onCreate(savedInstanceState);
     }
@@ -124,7 +124,7 @@ public class HomeFragment extends Fragment {
                             adapter = new TopTenOfWeekAdapter(cocktails,cocktailListener);
                             othersAdapter = new OthersAdapter(cocktails,cocktailListener);
                             binding.topTenOfWeekRecyclerView.setAdapter(adapter);
-                            binding.recyclerviewOthers.setAdapter(othersAdapter);
+                            binding.recyclerviewOthers.setAdapter(new CocktailsAdapter(cocktails,cocktailListener));
                             Log.d("GG", cocktails.size() / 10 + "");
                         } else {
                             Log.d("FCM", "Error getting documents: ", task.getException());
