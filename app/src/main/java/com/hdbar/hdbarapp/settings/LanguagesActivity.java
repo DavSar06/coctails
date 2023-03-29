@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.hdbar.hdbarapp.R;
+import com.hdbar.hdbarapp.activities.AnimationActivity;
 import com.hdbar.hdbarapp.activities.LoginActivity;
 import com.hdbar.hdbarapp.activities.MainActivity;
 import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
@@ -80,8 +81,8 @@ public class LanguagesActivity extends AppCompatActivity {
             @Override
             public void run() {
                 progressDialog.dismiss();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                Intent intent = new Intent(getApplicationContext(), AnimationActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }

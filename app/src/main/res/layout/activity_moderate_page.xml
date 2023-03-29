@@ -32,7 +32,7 @@
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:fontFamily="@font/garute"
-                android:text="Moderate"
+                android:text="@string/moderate"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_20ssp" />
 

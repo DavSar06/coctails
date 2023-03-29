@@ -61,13 +61,13 @@
     <string name="image">Image</string>
     <string name="click_to_choose_image">Click to choose image</string>
     <string name="remove_images">Remove Images</string>
-    <string name="cocktail_name">Cocktail name</string>
+    <string name="cocktail_name">Cocktail Name</string>
     <string name="cocktail_recipe_step_by_step">Cocktail Recipe (Step-by-step)</string>
     <string name="step_1">Step 1</string>
     <string name="step">Step</string>
     <string name="add_step">Add Step</string>
     <string name="remove_last_step">Remove Last Step</string>
-    <string name="enter_tags_break_with_commas">Enter tags(break with commas)</string>
+    <string name="enter_tags_break_with_commas">Tags(break with commas)</string>
     <string name="publish">Publish</string>
     <string name="the_list_of_favourites_is_empty">The list of favourites is empty!</string>
     <string name="cocktails">Cocktails</string>
@@ -87,5 +87,23 @@
     <string name="custom">Custom</string>
     <string name="okay">Okay</string>
     <string name="verification_sent">Verification Email Sent</string>
+    <string name="added">Added</string>
+    <string name="type_cocktail_name_here">Type cocktail name here</string>
+    <string name="type_tags_here">Type tags here</string>
+    <string name="manage_moderators">Manage Moderators</string>
+    <string name="donate">Donate</string>
+    <string name="please_wait">Pleas Wait…</string>
+    <string name="enter_existing_email">Enter Existing Email</string>
+    <string name="password_empty">Password field is empty</string>
+    <string name="password_short">Password is short (need more than 8 characters)</string>
+    <string name="wrong_password">Wrong password</string>
+    <string name="wrong_email">Wrong Email</string>
+    <string name="enter_registered_email">Enter your registered email</string>
+    <string name="check_email">Check your email</string>
+    <string name="unable_to_send_email">Unable to send, failed</string>
+    <string name="username_short">Username is too short</string>
+    <string name="type_email">Type your Email</string>
+    <string name="password_confirm_doesnt_match">Password Confirm Doesn\'t Match</string>
+    <string name="or">or</string>
 
 </resources>

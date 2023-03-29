@@ -9,8 +9,6 @@
     android:layout_gravity="center"
     tools:context=".activities.SettingsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-<!--if you have time change animation https://stackoverflow.com/questions/40758635/ios-like-over-scroll-effect-on-android-->
 
     <ScrollView
         android:layout_width="match_parent"
@@ -22,10 +20,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:orientation="vertical">
-
-
 
             <TextView
                 android:layout_width="match_parent"
@@ -88,7 +84,12 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/_12sdp"
+                        android:fontFamily="@font/montserratmedium"
+                        android:text="@string/manage_moderators"
+                        android:textColor="@color/white"
                         android:layout_toRightOf="@id/profile_picture_settings">
+
 
                         <TextView
                             android:id="@+id/profile_name_settings"
@@ -498,8 +499,7 @@
                             android:textSize="@dimen/_14sdp" />
 
 
-    <!--change animation of end slideing-->
-                    </RelativeLayout>
+                </RelativeLayout>
 
                 </LinearLayout>
             </LinearLayout>

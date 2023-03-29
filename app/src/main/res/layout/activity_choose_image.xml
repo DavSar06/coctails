@@ -23,7 +23,7 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:fontFamily="@font/metropolisbold"
-        android:textSize="@dimen/_20ssp"
+        android:textSize="@dimen/_18ssp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/imageBack"

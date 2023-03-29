@@ -23,8 +23,10 @@ import com.hdbar.hdbarapp.listeners.CocktailListener;
 import com.hdbar.hdbarapp.models.Cocktail;
 import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 import com.hdbar.hdbarapp.utilities.Constants;
+import com.hdbar.hdbarapp.utilities.LanguageController;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ModeratePageActivity extends AppCompatActivity {
@@ -48,7 +50,7 @@ public class ModeratePageActivity extends AppCompatActivity {
     private void init(){
         database = FirebaseFirestore.getInstance();
         cocktails = new ArrayList<>();
-        adapter = new ModeratePageAdapter(cocktails,cocktailListener);
+        adapter = new ModeratePageAdapter(cocktails,cocktailListener, getApplicationContext());
         binding.cocktailsRecyclerView.setAdapter(adapter);
         updateRecyclerView();
     }
@@ -70,9 +72,10 @@ public class ModeratePageActivity extends AppCompatActivity {
                                 ArrayList<String> tags = (ArrayList<String>) document.get(Constants.KEY_COCKTAIL_TAGS);
                                 String rating = document.get(Constants.KEY_COCKTAIL_RATING).toString();
                                 String rating_count = document.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
-                                Cocktail temp = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator,rating_count,tags);
+                                Date date = document.getDate(Constants.KEY_DATE);
+                                Cocktail temp = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator,rating_count,tags,date);
                                 cocktails.add(temp);
-                                adapter = new ModeratePageAdapter(cocktails,cocktailListener);
+                                adapter = new ModeratePageAdapter(cocktails,cocktailListener, getApplicationContext());
                                 binding.cocktailsRecyclerView.setAdapter(adapter);
                             }
                         }else {
