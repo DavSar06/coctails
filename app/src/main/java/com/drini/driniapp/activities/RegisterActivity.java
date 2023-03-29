@@ -202,12 +202,11 @@ public class RegisterActivity extends AppCompatActivity {
                                 user.put(Constants.KEY_STATUS,Constants.KEY_STATUS_USER);
 
                                 database.collection(Constants.KEY_COLLECTION_USERS).document(uid).set(user);
+
+                                showMessageDialog();
+                                mAuth.signOut();
                             }
                         });
-
-                        showMessageDialog();
-                        mAuth.signOut();
-
                     }
                     else {
                         Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
