@@ -53,7 +53,7 @@
     <string name="confirm">Подтвердить</string>
     <string name="cancel">Отменить</string>
     <string name="there_are_no_cocktails_available">Нет доступных коктейлей!</string>
-    <string name="reset">Перезагрузить</string>
+    <string name="reset">Восстановить</string>
     <string name="image">Изображение</string>
     <string name="click_to_choose_image">Кликните для выбора изображения</string>
     <string name="remove_images">Удалить изображения</string>

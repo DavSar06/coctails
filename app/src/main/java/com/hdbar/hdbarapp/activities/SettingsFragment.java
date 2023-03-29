@@ -48,10 +48,6 @@ public class SettingsFragment extends Fragment {
     private String userId;
     private String useremail;
 
-
-
-
-
     public SettingsFragment() {
         // Required empty public constructor
     }
@@ -65,14 +61,9 @@ public class SettingsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = FragmentSettingsBinding.inflate(getLayoutInflater());
-
         init();
         onClick();
-;
-
-
         setUserInfo();
-
         getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
@@ -94,9 +85,6 @@ public class SettingsFragment extends Fragment {
                                 }
                             });
                         }
-                        else {
-                            Log.e("Exception", task.getException().getMessage());
-                        }
                     }
                 });
     }
@@ -104,7 +92,6 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return binding.getRoot();
     }
 
@@ -141,6 +128,8 @@ public class SettingsFragment extends Fragment {
                                         binding.moderateSettingsBtn.setVisibility(View.VISIBLE);
                                         binding.viewModeratorTop.setVisibility(View.VISIBLE);
                                     }
+                                    binding.relativeProgressBar.setVisibility(View.INVISIBLE);
+                                    binding.settingProgressBar.setVisibility(View.VISIBLE);
                                 }
                             }
                         });
@@ -191,7 +180,7 @@ public class SettingsFragment extends Fragment {
         privacyAndSecurity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://publuu.com/flip-book/98200/268888"));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://publuu.com/flip-book/106724/287195"));
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
             }

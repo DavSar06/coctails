@@ -9,22 +9,19 @@
     android:layout_gravity="center"
     tools:context=".activities.SettingsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-<!--if you have time change animation https://stackoverflow.com/questions/40758635/ios-like-over-scroll-effect-on-android-->
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:overScrollMode="never"
+        android:fillViewport="true"
         android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:orientation="vertical">
-
-
 
             <TextView
                 android:layout_width="match_parent"
@@ -39,107 +36,84 @@
                 android:textColor="@color/white"/>
 
             <RelativeLayout
-                android:id="@+id/account_settings"
+                android:id="@+id/relative_progressBar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/_5sdp"
-                android:layout_marginHorizontal="@dimen/_15sdp">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/profile_picture_settings"
-                    android:layout_width="@dimen/_60sdp"
-                    android:layout_height="@dimen/_60sdp"
-                    app:srcCompat="@mipmap/ic_launcher"
-                    android:scaleType="centerCrop"
-                    android:layout_marginRight="@dimen/_15sdp"
-                    app:shapeAppearanceOverlay="@style/ImageView.Circle.LowRoll"/>
+                android:layout_height="match_parent"
+                android:visibility="visible">
 
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_gravity="center"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/profile_picture_settings">
-
-                    <TextView
-                        android:id="@+id/profile_name_settings"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/standard_book"
-                        android:text=""
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_16sdp" />
-
-                    <TextView
-                        android:id="@+id/profile_email_settings"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/standard_book"
-                        android:layout_marginTop="@dimen/_3sdp"
-                        android:text=""
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_11sdp" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/settings_languages_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="6dp"
-                    android:layout_marginRight="@dimen/_5sdp"
-                    android:background="@drawable/ic_baseline_arrow_forward" />
+                    android:layout_centerHorizontal="true"
+                    android:backgroundTint="@color/white"
+                    android:indeterminate="true"
+                    android:indeterminateDrawable="@drawable/custom_progress_dialog" />
 
             </RelativeLayout>
-
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/setting_progress_bar"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:paddingVertical="@dimen/_10sdp"
-                android:layout_marginHorizontal="@dimen/_15sdp"
                 android:orientation="vertical"
-                android:backgroundTint="@color/background_color_light">
-
-
-                <View
-                    android:id="@+id/viewModeratorTop"
-                    android:visibility="gone"
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/white_transparency" />
+                android:gravity="top"
+                android:visibility="gone">
 
                 <RelativeLayout
-                    android:id="@+id/moderators_settings_btn"
+                    android:id="@+id/account_settings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:layout_marginBottom="@dimen/_15sdp">
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:layout_marginHorizontal="@dimen/_15sdp">
 
                     <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/settings_images0"
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/change_moderat_settings"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle" />
+                        android:id="@+id/profile_picture_settings"
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        app:srcCompat="@mipmap/ic_launcher"
+                        android:scaleType="centerCrop"
+                        android:layout_marginRight="@dimen/_15sdp"
+                        app:shapeAppearanceOverlay="@style/ImageView.Circle.LowRoll"/>
 
-                    <TextView
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:orientation="vertical"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="@dimen/_12sdp"
-                        android:layout_toRightOf="@+id/settings_images0"
                         android:fontFamily="@font/montserratmedium"
                         android:text="@string/manage_moderators"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_14sdp" />
+                        android:layout_toRightOf="@id/profile_picture_settings">
+
+
+                        <TextView
+                            android:id="@+id/profile_name_settings"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/standard_book"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_16sdp" />
+
+                        <TextView
+                            android:id="@+id/profile_email_settings"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/standard_book"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp" />
+
+                    </LinearLayout>
 
                     <TextView
+                        android:id="@+id/settings_languages_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -148,331 +122,386 @@
                         android:layout_marginRight="@dimen/_5sdp"
                         android:background="@drawable/ic_baseline_arrow_forward" />
 
-
                 </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/moderate_settings_btn"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:paddingVertical="@dimen/_10sdp"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
                     android:visibility="visible"
-                    android:layout_marginBottom="@dimen/_25sdp">
+                    android:orientation="vertical"
+                    android:backgroundTint="@color/background_color_light">
 
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/settings_images00"
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/accout_settings"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <View
+                        android:id="@+id/viewModeratorTop"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:background="@color/white_transparency" />
+
+                    <RelativeLayout
+                        android:id="@+id/moderators_settings_btn"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/_12sdp"
-                        android:layout_toRightOf="@+id/settings_images00"
-                        android:fontFamily="@font/montserratmedium"
-                        android:text="@string/moderate"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_14sdp" />
+                        android:visibility="gone"
+                        android:layout_marginBottom="@dimen/_15sdp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/settings_images0"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/change_moderat_settings"
+                            app:shapeAppearanceOverlay="@style/ImageView.Circle" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/_12sdp"
+                            android:layout_toRightOf="@+id/settings_images0"
+                            android:fontFamily="@font/montserratmedium"
+                            android:text="Change Moderator"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_14sdp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="6dp"
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:background="@drawable/ic_baseline_arrow_forward" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/moderate_settings_btn"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="6dp"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:background="@drawable/ic_baseline_arrow_forward" />
+                        android:visibility="gone"
+                        android:layout_marginBottom="@dimen/_15sdp">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/settings_images00"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/accout_settings"
+                            app:shapeAppearanceOverlay="@style/ImageView.Circle" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/_12sdp"
+                            android:layout_toRightOf="@+id/settings_images00"
+                            android:fontFamily="@font/montserratmedium"
+                            android:text="@string/moderate"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_14sdp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="6dp"
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:background="@drawable/ic_baseline_arrow_forward" />
+
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:background="@color/white_transparency" />
+
+                    <RelativeLayout
+                        android:id="@+id/notifications_settings_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_15sdp">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/settings_images2"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:background="@drawable/notificatoin_settings"
+                            android:layout_centerVertical="true"
+                            app:shapeAppearanceOverlay="@style/ImageView.Circle"/>
+
+                        <TextView
+                            android:id="@+id/settings_text2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_12sdp"
+                            android:gravity="left"
+                            android:fontFamily="@font/montserratmedium"
+                            android:layout_toRightOf="@+id/settings_images2"
+                            android:text="@string/notifications"
+                            android:layout_centerVertical="true"
+                            android:textSize="@dimen/_14sdp"
+                            android:textColor="@color/white"/>
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/settings_notifications_switch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            app:track="@drawable/track"
+                            android:thumb="@drawable/thumb"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/languages_settings_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_15sdp">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/settings_images3"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:background="@drawable/langueges_settings"
+                            app:shapeAppearanceOverlay="@style/ImageView.Circle" />
+
+                        <TextView
+                            android:id="@+id/settings_text3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_12sdp"
+                            android:gravity="left"
+                            android:fontFamily="@font/montserratmedium"
+                            android:layout_toRightOf="@+id/settings_images3"
+                            android:text="@string/languages"
+                            android:layout_centerVertical="true"
+                            android:textSize="@dimen/_14sdp"
+                            android:textColor="@color/white"/>
+
+                        <TextView
+                            android:id="@+id/settings_languages_btn3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:background="@drawable/ic_baseline_arrow_forward" />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/privacy_settings_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_15sdp">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/settings_images4"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:background="@drawable/secutity_settings"
+                            android:layout_centerVertical="true"
+                            app:shapeAppearanceOverlay="@style/ImageView.Circle"/>
+
+                        <TextView
+                            android:id="@+id/settings_text4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_12sdp"
+                            android:gravity="left"
+                            android:fontFamily="@font/montserratmedium"
+                            android:layout_toRightOf="@+id/settings_images4"
+                            android:text="@string/privacy_policy"
+                            android:layout_centerVertical="true"
+                            android:textSize="@dimen/_14sdp"
+                            android:textColor="@color/white"/>
+
+                        <TextView
+                            android:id="@+id/settings_languages_btn4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:background="@drawable/ic_baseline_arrow_forward" />
+
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/white_transparency" />
+                    <RelativeLayout
+                        android:id="@+id/help_and_support_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginBottom="@dimen/_15sdp">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/settings_images5"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/helpandquestions_settings"
+                            app:shapeAppearanceOverlay="@style/ImageView.Circle" />
+
+                        <TextView
+                            android:id="@+id/settings_text5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_12sdp"
+                            android:gravity="left"
+                            android:fontFamily="@font/montserratmedium"
+                            android:layout_toRightOf="@+id/settings_images5"
+                            android:text="@string/help_and_support"
+                            android:layout_centerVertical="true"
+                            android:textSize="@dimen/_14sdp"
+                            android:textColor="@color/white"/>
+
+                        <TextView
+                            android:id="@+id/settings_languages_btn5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:background="@drawable/ic_baseline_arrow_forward" />
+
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/payment_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_15sdp">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/settings_images6"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:background="@drawable/payment_icon_settings"
+                            app:shapeAppearanceOverlay="@style/ImageView.Circle" />
+
+                        <TextView
+                            android:id="@+id/settings_text6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_12sdp"
+                            android:gravity="left"
+                            android:fontFamily="@font/montserratmedium"
+                            android:layout_toRightOf="@+id/settings_images6"
+                            android:text="Donate"
+                            android:layout_centerVertical="true"
+                            android:textSize="@dimen/_14sdp"
+                            android:textColor="@color/white"/>
+
+                        <TextView
+                            android:id="@+id/settings_languages_btn6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:background="@drawable/ic_baseline_arrow_forward" />
+
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/aboutus_settings_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_15sdp">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/settings_images7"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/aboutus_settings"
+                            app:shapeAppearanceOverlay="@style/ImageView.Circle" />
+
+                        <TextView
+                            android:id="@+id/settings_text7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/_12sdp"
+                            android:layout_toRightOf="@+id/settings_images7"
+                            android:fontFamily="@font/montserratmedium"
+                            android:gravity="left"
+                            android:text="@string/about_us"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_14sdp" />
+
+                        <TextView
+                            android:id="@+id/settings_languages_btn7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:background="@drawable/ic_baseline_arrow_forward" />
+
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/white_transparency" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginBottom="@dimen/_40sdp"
+                        android:id="@+id/logout_btn">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/settings_images8"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/logout_settings"
+                            app:shapeAppearanceOverlay="@style/ImageView.Circle" />
+
+                        <TextView
+                            android:id="@+id/settings_text8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_12sdp"
+                            android:layout_toRightOf="@+id/settings_images8"
+                            android:fontFamily="@font/montserratmedium"
+                            android:gravity="left"
+                            android:layout_centerVertical="true"
+                            android:text="@string/logout"
+                            android:textColor="@color/red"
+                            android:textSize="@dimen/_14sdp" />
 
 
                 </RelativeLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginBottom="@dimen/_15sdp"
-                    android:background="@color/white_transparency" />
-
-                <RelativeLayout
-                    android:id="@+id/notifications_settings_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_15sdp">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/settings_images2"
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:background="@drawable/notificatoin_settings"
-                        android:layout_centerVertical="true"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle"/>
-
-                    <TextView
-                        android:id="@+id/settings_text2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_12sdp"
-                        android:gravity="left"
-                        android:fontFamily="@font/montserratmedium"
-                        android:layout_toRightOf="@+id/settings_images2"
-                        android:text="@string/notifications"
-                        android:layout_centerVertical="true"
-                        android:textSize="@dimen/_14sdp"
-                        android:textColor="@color/white"/>
-
-                    <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/settings_notifications_switch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="false"
-                        app:track="@drawable/track"
-                        android:thumb="@drawable/thumb"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/languages_settings_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_15sdp">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/settings_images3"
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:background="@drawable/langueges_settings"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle" />
-
-                    <TextView
-                        android:id="@+id/settings_text3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_12sdp"
-                        android:gravity="left"
-                        android:fontFamily="@font/montserratmedium"
-                        android:layout_toRightOf="@+id/settings_images3"
-                        android:text="@string/languages"
-                        android:layout_centerVertical="true"
-                        android:textSize="@dimen/_14sdp"
-                        android:textColor="@color/white"/>
-
-                    <TextView
-                        android:id="@+id/settings_languages_btn3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:background="@drawable/ic_baseline_arrow_forward" />
-
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/privacy_settings_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_15sdp">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/settings_images4"
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:background="@drawable/secutity_settings"
-                        android:layout_centerVertical="true"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle"/>
-
-                    <TextView
-                        android:id="@+id/settings_text4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_12sdp"
-                        android:gravity="left"
-                        android:fontFamily="@font/montserratmedium"
-                        android:layout_toRightOf="@+id/settings_images4"
-                        android:text="@string/privacy_policy"
-                        android:layout_centerVertical="true"
-                        android:textSize="@dimen/_14sdp"
-                        android:textColor="@color/white"/>
-
-                    <TextView
-                        android:id="@+id/settings_languages_btn4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:background="@drawable/ic_baseline_arrow_forward" />
-
-
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/white_transparency" />
-                <RelativeLayout
-                    android:id="@+id/help_and_support_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:layout_marginBottom="@dimen/_15sdp">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/settings_images5"
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/helpandquestions_settings"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle" />
-
-                    <TextView
-                        android:id="@+id/settings_text5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_12sdp"
-                        android:gravity="left"
-                        android:fontFamily="@font/montserratmedium"
-                        android:layout_toRightOf="@+id/settings_images5"
-                        android:text="@string/help_and_support"
-                        android:layout_centerVertical="true"
-                        android:textSize="@dimen/_14sdp"
-                        android:textColor="@color/white"/>
-
-                    <TextView
-                        android:id="@+id/settings_languages_btn5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:background="@drawable/ic_baseline_arrow_forward" />
-
-
-                </RelativeLayout>
-
-
-                <RelativeLayout
-                    android:id="@+id/payment_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_15sdp">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/settings_images6"
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:background="@drawable/payment_icon_settings"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle" />
-
-                    <TextView
-                        android:id="@+id/settings_text6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_12sdp"
-                        android:gravity="left"
-                        android:fontFamily="@font/montserratmedium"
-                        android:layout_toRightOf="@+id/settings_images6"
-                        android:text="@string/donate"
-                        android:layout_centerVertical="true"
-                        android:textSize="@dimen/_14sdp"
-                        android:textColor="@color/white"/>
-
-                    <TextView
-                        android:id="@+id/settings_languages_btn6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:background="@drawable/ic_baseline_arrow_forward" />
-
-
-                </RelativeLayout>
-
-
-                <RelativeLayout
-                    android:id="@+id/aboutus_settings_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_15sdp">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/settings_images7"
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/aboutus_settings"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle" />
-
-                    <TextView
-                        android:id="@+id/settings_text7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="@dimen/_12sdp"
-                        android:layout_toRightOf="@+id/settings_images7"
-                        android:fontFamily="@font/montserratmedium"
-                        android:gravity="left"
-                        android:text="@string/about_us"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_14sdp" />
-
-                    <TextView
-                        android:id="@+id/settings_languages_btn7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:background="@drawable/ic_baseline_arrow_forward" />
-
-
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/white_transparency" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:layout_marginBottom="@dimen/_40sdp"
-                    android:id="@+id/logout_btn">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/settings_images8"
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/logout_settings"
-                        app:shapeAppearanceOverlay="@style/ImageView.Circle" />
-
-                    <TextView
-                        android:id="@+id/settings_text8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_12sdp"
-                        android:layout_toRightOf="@+id/settings_images8"
-                        android:fontFamily="@font/montserratmedium"
-                        android:gravity="left"
-                        android:layout_centerVertical="true"
-                        android:text="@string/logout"
-                        android:textColor="@color/red"
-                        android:textSize="@dimen/_14sdp" />
-
-
-<!--change animation of end slideing-->
-                </RelativeLayout>
-
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>

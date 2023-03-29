@@ -188,16 +188,16 @@
 
 
             <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/are_you_older_18"
+                android:id="@+id/privacy_check"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_45sdp"
                 android:background="@drawable/edittext_bg_error"
                 android:backgroundTint="@color/background_color_light"
-                android:textSize="@dimen/_14ssp"
+                android:textSize="@dimen/_12ssp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:buttonTint="@color/white"
                 android:textColor="@color/white"
-                android:paddingStart="@dimen/_5sdp"
+                android:paddingStart="@dimen/_10sdp"
                 app:errorShown="false"
                 android:text="@string/are_you_older_18" />
 

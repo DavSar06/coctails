@@ -41,11 +41,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FavoriteFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FavoriteFragment extends Fragment {
 
     private FragmentFavoriteBinding binding;
@@ -79,6 +74,7 @@ public class FavoriteFragment extends Fragment {
         super.onCreate(savedInstanceState);
         init();
         listeners();
+        getCocktails();
 
         changeAdapter(adapterStatus,cocktails);
     }
@@ -87,7 +83,6 @@ public class FavoriteFragment extends Fragment {
         uid = FirebaseAuth.getInstance().getUid();
         database = FirebaseFirestore.getInstance();
         binding = FragmentFavoriteBinding.inflate(getLayoutInflater());
-        getCocktails();
     }
 
     @Override
