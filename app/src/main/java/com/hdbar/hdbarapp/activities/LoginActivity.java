@@ -319,9 +319,6 @@ public class LoginActivity extends AppCompatActivity {
                 preferenceManager.putString(Constants.KEY_USERNAME,account.getDisplayName());
                 preferenceManager.putString(Constants.KEY_EMAIL,account.getEmail());
                 preferenceManager.putString(Constants.KEY_USER_IMAGE,account.getPhotoUrl().toString());
-
-
-                Toast.makeText(LoginActivity.this,"Sign in Complete", Toast.LENGTH_SHORT).show();
             }catch (ApiException e){
                 Toast.makeText(LoginActivity.this,"Authentication Failed Problems with "  + e.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.d("FCM",e.getMessage());
@@ -345,21 +342,21 @@ public class LoginActivity extends AppCompatActivity {
             if(!email.matches(emailPattern)){
                 inputEmailLayout.setErrorEnabled(true);
                 inputEmailLayout.setErrorIconDrawable(0);
-                inputEmailLayout.setError("Enter Existing Email");
+                inputEmailLayout.setError(getResources().getString(R.string.enter_existing_email));
             }
             if(password.trim().isEmpty()){
                 inputPasswordLayout.setErrorEnabled(true);
                 inputPasswordLayout.setErrorIconDrawable(0);
-                inputPasswordLayout.setError("Password field is empty");
+                inputPasswordLayout.setError(getResources().getString(R.string.password_empty));
             }else if(password.length()<8){
                 inputPasswordLayout.setErrorEnabled(true);
                 inputPasswordLayout.setErrorIconDrawable(0);
-                inputPasswordLayout.setError("Password is short (need more than 8 characters)");
+                inputPasswordLayout.setError(getResources().getString(R.string.password_short));
             }
         }else{
             //can be a problem with progress dialog
-            progressDialog.setMessage("Pleas Wait For Login...");
-            progressDialog.setTitle("Login");
+            progressDialog.setMessage(getResources().getString(R.string.please_wait));
+            progressDialog.setTitle(getResources().getString(R.string.login));
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
 
@@ -383,11 +380,11 @@ public class LoginActivity extends AppCompatActivity {
                         if(task.getException().getMessage().contains("password")){
                             inputPasswordLayout.setErrorEnabled(true);
                             inputPasswordLayout.setErrorIconDrawable(0);
-                            inputPasswordLayout.setError("Wrong password");
+                            inputPasswordLayout.setError(getResources().getString(R.string.wrong_password));
                         }else {
                             inputEmailLayout.setErrorEnabled(true);
                             inputEmailLayout.setErrorIconDrawable(0);
-                            inputEmailLayout.setError("Wrong Email");
+                            inputEmailLayout.setError(getResources().getString(R.string.wrong_email));
                         }
                     }
                 }
@@ -494,17 +491,17 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     String userEmail = emailBox.getText().toString();
-                    if (TextUtils.isEmpty(userEmail) && !Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()){
-                        Toast.makeText(LoginActivity.this, "Enter your registered email id", Toast.LENGTH_SHORT).show();                    return;
+                    if (TextUtils.isEmpty(userEmail) || !Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()){
+                        Toast.makeText(LoginActivity.this, getResources().getString(R.string.enter_registered_email), Toast.LENGTH_SHORT).show();                    return;
                     }
                     mAuth.sendPasswordResetEmail(userEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()){
-                                Toast.makeText(LoginActivity.this, "Check your email", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, getResources().getString(R.string.check_email), Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                             } else {
-                                Toast.makeText(LoginActivity.this, "Unable to send, failed", Toast.LENGTH_SHORT).show();                        }
+                                Toast.makeText(LoginActivity.this, getResources().getString(R.string.unable_to_send_email), Toast.LENGTH_SHORT).show();                        }
                         }
                     });
                 }

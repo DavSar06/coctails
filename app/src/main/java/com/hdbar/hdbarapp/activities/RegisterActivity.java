@@ -56,7 +56,6 @@ public class RegisterActivity extends AppCompatActivity {
     private MaterialCheckBox areYouOlder18;
     private TextInputLayout inputUsernameLayout,inputEmailLayout,inputPasswordLayout,inputConfirmLayout;
     private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-    private ProgressDialog progressDialog;
     private int canStartInit = 0, confirmCode;
 
 
@@ -102,7 +101,6 @@ public class RegisterActivity extends AppCompatActivity {
         inputEmailLayout = binding.registerEmailLayout;
         inputUsernameLayout = binding.registerUsernameLayout;
         inputConfirmLayout = binding.registerPasswordConfirmLayout;
-        progressDialog = new ProgressDialog(RegisterActivity.this);
         mAuth=FirebaseAuth.getInstance();
         mUser=mAuth.getCurrentUser();
     }
@@ -119,7 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (username.isEmpty() || username.length() < 2){
             inputUsernameLayout.setErrorEnabled(true);
             inputUsernameLayout.setErrorIconDrawable(0);
-            inputUsernameLayout.setError("Too short username");
+            inputUsernameLayout.setError(getResources().getString(R.string.username_short));
             canStartInit ++;
         }else{
             inputUsernameLayout.setErrorEnabled(false);
@@ -131,7 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
         if(!email.matches(emailPattern) || email.isEmpty()){
             inputEmailLayout.setErrorEnabled(true);
             inputEmailLayout.setErrorIconDrawable(0);
-            inputEmailLayout.setError("Write an Email");
+            inputEmailLayout.setError(getResources().getString(R.string.type_email));
             canStartInit ++;
         }else {
             inputEmailLayout.setErrorEnabled(false);
@@ -143,7 +141,7 @@ public class RegisterActivity extends AppCompatActivity {
         if(password.isEmpty() || password.length()<8){
             inputPasswordLayout.setErrorEnabled(true);
             inputPasswordLayout.setErrorIconDrawable(0);
-            inputPasswordLayout.setError("Too short password");
+            inputPasswordLayout.setError(getResources().getString(R.string.password_short));
             canStartInit ++;
         }
         else{
@@ -156,7 +154,7 @@ public class RegisterActivity extends AppCompatActivity {
         if(!password.equals(passwordConfirm) || passwordConfirm.isEmpty() ){
             inputConfirmLayout.setErrorEnabled(true);
             inputConfirmLayout.setErrorIconDrawable(0);
-            inputConfirmLayout.setError("Password Confirm Doesn't Match");
+            inputConfirmLayout.setError(getResources().getString(R.string.password_confirm_doesnt_match));
             canStartInit ++;
         }
         else{
@@ -167,7 +165,6 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         if(!areYouOlder18.isChecked()){
-            Log.d("GG","UnChecked");
             areYouOlder18.setButtonTintList(ContextCompat.getColorStateList(RegisterActivity.this, R.color.red));
             canStartInit ++;
         }
@@ -179,12 +176,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         if(canStartInit == -5)
         {
-            //can be a problem with progress dialog
-            progressDialog.setMessage("Pleas confirm your email...");
-            progressDialog.setTitle("Verification");
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.show();
-
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -221,13 +212,11 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         });
 
-                        progressDialog.dismiss();
                         showMessageDialog();
                         mAuth.signOut();
 
                     }
                     else {
-                        progressDialog.dismiss();
                         Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
 
                     }

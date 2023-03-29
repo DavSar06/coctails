@@ -88,4 +88,17 @@
     <string name="type_tags_here">Вводите теги</string>
     <string name="manage_moderators">Управление Модераторами</string>
     <string name="donate">Донат</string>
+    <string name="please_wait">Пожалуйста подождите…</string>
+    <string name="enter_existing_email">Введите существующий аддресс</string>
+    <string name="password_empty">Поле пароля пустое</string>
+    <string name="password_short">Пароль короткий (нужно больше 8 символов)</string>
+    <string name="wrong_password">Неверный пароль</string>
+    <string name="wrong_email">Неверный аддресс</string>
+    <string name="enter_registered_email">Введите аддресс аккаунта</string>
+    <string name="check_email">Проверьте вашу почту</string>
+    <string name="unable_to_send_email">Невозможно отправить, ошибка</string>
+    <string name="username_short">Имя пользователя слишком короткое</string>
+    <string name="type_email">Введите аддресс почты</string>
+    <string name="password_confirm_doesnt_match">Подтверждение пароля не совпадает</string>
+    <string name="or">или</string>
 </resources>
