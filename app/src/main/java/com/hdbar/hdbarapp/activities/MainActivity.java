@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
     private FrameLayout fragmentContainer;
 
+    public static boolean openSettings = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +53,14 @@ public class MainActivity extends AppCompatActivity {
 
         replaceFragment(new HomeFragment());
 
+        if(openSettings){
+            replaceFragment(new SettingsFragment());
+        }
+
         init();
         listeners();
         bottomNavigationBar();
         AlwaysRu(this);
-        Log.i("date",new Date()+"");
     }
 
     public static void AlwaysRu(Activity myActivityReference) {
@@ -85,36 +90,6 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("TAG","AlwaysOnRun");
     }
-
-//    private void createNotify(){
-//        String id = "my_idd";
-//        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-//            NotificationChannel channel = manager.getNotificationChannel(id);
-//            if (channel == null){
-//                channel = new NotificationChannel(id, "channel Title", NotificationManager.IMPORTANCE_HIGH);
-//                channel.setDescription("inchvor description");
-//                channel.enableVibration(true);
-//                channel.setVibrationPattern(new long[]{100,200,300,340});
-//                channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
-//                manager.createNotificationChannel(channel);
-//            }
-//        }
-//        Intent notificationIntent = new Intent(this,NotificationsActivity.class);
-//        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-//        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-//        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,id)
-//                .setSmallIcon(R.mipmap.ic_launcher)
-//                .setLargeIcon(null)
-//                .setContentTitle("Title")
-//                .setContentText("Your text description")
-//                .setVibrate(new long[]{100,200,300,340})
-//                .setAutoCancel(false)
-//                .setTicker("Notification");
-//        builder.setContentIntent(contentIntent);
-//        NotificationManagerCompat m = NotificationManagerCompat.from(getApplicationContext());
-//        m.notify(1,builder.build());
-//    }
 
     private void bottomNavigationBar(){
 
