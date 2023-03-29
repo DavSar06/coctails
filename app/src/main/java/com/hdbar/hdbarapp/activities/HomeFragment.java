@@ -33,6 +33,7 @@ import com.hdbar.hdbarapp.utilities.Constants;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -116,7 +117,8 @@ public class HomeFragment extends Fragment {
                                 ArrayList<String> image = (ArrayList<String>) document.get(Constants.KEY_COCKTAIL_IMAGE);
                                 ArrayList<String> tags = (ArrayList<String>) document.get(Constants.KEY_COCKTAIL_TAGS);
                                 String rating = document.get(Constants.KEY_COCKTAIL_RATING).toString();
-                                Cocktail a = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator,rating_count,tags);
+                                Date date = document.getDate(Constants.KEY_DATE);
+                                Cocktail a = new Cocktail(document.getId(),cocktailName,recipe,image,rating,creator,rating_count,tags,date);
                                 cocktails.add(a);
                             }
                             adapter = new TopTenOfWeekAdapter(cocktails,cocktailListener);

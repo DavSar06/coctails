@@ -27,6 +27,8 @@ import com.hdbar.hdbarapp.utilities.Constants;
 import com.hdbar.hdbarapp.utilities.LanguageController;
 import com.hdbar.hdbarapp.utilities.PreferenceManager;
 
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         listeners();
         bottomNavigationBar();
         AlwaysRu(this);
+        Log.i("date",new Date()+"");
     }
 
     public static void AlwaysRu(Activity myActivityReference) {

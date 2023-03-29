@@ -128,7 +128,8 @@ public class AddReview extends AppCompatActivity {
                         String rating_count = documentSnapshot.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
                         ArrayList<String> recipe = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_RECIPE);
                         String rating = documentSnapshot.get(Constants.KEY_COCKTAIL_RATING).toString();
-                        cocktail = new Cocktail(documentSnapshot.getId(),coctailName,recipe,image,rating,creator,rating_count,tags);
+                        Date date = documentSnapshot.getDate(Constants.KEY_DATE);
+                        cocktail = new Cocktail(documentSnapshot.getId(),coctailName,recipe,image,rating,creator,rating_count,tags,date);
 
 
                         //------------------------------------------

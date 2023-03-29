@@ -1,10 +1,8 @@
 package com.hdbar.hdbarapp.adapters;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.net.Uri;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -15,20 +13,24 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
+import com.hdbar.hdbarapp.R;
 import com.hdbar.hdbarapp.databinding.ItemModerateRecyclerViewBinding;
 import com.hdbar.hdbarapp.listeners.CocktailListener;
 import com.hdbar.hdbarapp.models.Cocktail;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class ModeratePageAdapter extends RecyclerView.Adapter<ModeratePageAdapter.CocktailViewHolder>{
 
     private final List<Cocktail> cocktails;
     private final CocktailListener listener;
+    private final Context context;
 
-    public ModeratePageAdapter(List<Cocktail> cocktails, CocktailListener listener) {
+    public ModeratePageAdapter(List<Cocktail> cocktails, CocktailListener listener, Context context) {
         this.cocktails = cocktails;
         this.listener = listener;
+        this.context = context;
     }
 
     @NonNull
@@ -59,7 +61,9 @@ public class ModeratePageAdapter extends RecyclerView.Adapter<ModeratePageAdapte
 
         void setCocktailData(Cocktail cocktail){
             binding.cocktailName.setText(cocktail.name);
-            binding.cocktailAuthor.setText("Added by: "+cocktail.creator);
+            binding.cocktailAuthor.setText(cocktail.creator);
+            SimpleDateFormat targetDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            binding.cocktailDate.setText(targetDateFormat.format(cocktail.date));
             FirebaseStorage storage = FirebaseStorage.getInstance();
 
             storage.getReference(cocktail.image.get(0)).getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {

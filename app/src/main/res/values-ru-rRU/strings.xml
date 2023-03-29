@@ -36,7 +36,7 @@
     <string name="register">Регистрироваться</string>
     <string name="forgot_password">Забыл Пароль ?</string>
     <string name="search">Поиск</string>
-    <string name="approve">Одобрять</string>
+    <string name="approve">Одобрить</string>
     <string name="deny">Отказать</string>
     <string name="the_list_of_suggests_is_empty">Список предложений пуст!</string>
     <string name="list_of_moderators">Список Модераторов</string>
@@ -63,7 +63,7 @@
     <string name="step">Шаг</string>
     <string name="add_step">Добавить шаг</string>
     <string name="remove_last_step">Удалить шаг</string>
-    <string name="enter_tags_break_with_commas">Введите теги (отделять запятыми)</string>
+    <string name="enter_tags_break_with_commas">Теги(отделять запятыми)</string>
     <string name="publish">Публиковать</string>
     <string name="the_list_of_favourites_is_empty">Список Избранного Пуст!</string>
     <string name="cocktails">Коктейли</string>
@@ -83,4 +83,9 @@
     <string name="custom">Добавить</string>
     <string name="okay">Хорошо</string>
     <string name="verification_sent">Письмо с подтверждением отправлено</string>
+    <string name="added">Добавил</string>
+    <string name="type_cocktail_name_here">Введите имя коктейля</string>
+    <string name="type_tags_here">Вводите теги</string>
+    <string name="manage_moderators">Управление Модераторами</string>
+    <string name="donate">Донат</string>
 </resources>

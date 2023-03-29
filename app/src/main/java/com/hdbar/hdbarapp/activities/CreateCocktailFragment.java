@@ -60,8 +60,10 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class CreateCocktailFragment extends Fragment {
 
@@ -226,7 +228,7 @@ public class CreateCocktailFragment extends Fragment {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         finalImages.add(taskSnapshot.getMetadata().getPath());
                         if(finalImages.size()==imageUri.size()){
-                            String tags = binding.tagsACTV.getText().toString();
+                            String tags = binding.tagsACTV.getText().toString().toLowerCase(Locale.ROOT);
                             cocktailTags = Arrays.asList(tags.split(","));
                             int changes = -1;
                             while(changes != 0){
@@ -248,6 +250,7 @@ public class CreateCocktailFragment extends Fragment {
                             cocktail.put(Constants.KEY_COCKTAIL_RECIPE,recipeSteps);
                             cocktail.put(Constants.KEY_COCKTAIL_IMAGE,finalImages);
                             cocktail.put(Constants.KEY_COCKTAIL_VIDEO,null);
+                            cocktail.put(Constants.KEY_DATE,new Date());
                             cocktail.put(Constants.KEY_COCKTAIL_TAGS,cocktailTags);
                             cocktail.put(Constants.KEY_COCKTAIL_RATING,new Integer(0));
                             cocktail.put(Constants.KEY_COCKTAIL_HOW_MANY_RATES,new Integer(0));

@@ -32,6 +32,7 @@ import com.hdbar.hdbarapp.utilities.AlwaysOnRun;
 import com.hdbar.hdbarapp.utilities.Constants;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class ModerateActivity extends AppCompatActivity {
@@ -79,7 +80,8 @@ public class ModerateActivity extends AppCompatActivity {
                         ArrayList<String> tags = (ArrayList<String>) documentSnapshot.get(Constants.KEY_COCKTAIL_TAGS);
                         String rating = documentSnapshot.get(Constants.KEY_COCKTAIL_RATING).toString();
                         String rating_count = documentSnapshot.get(Constants.KEY_COCKTAIL_HOW_MANY_RATES).toString();
-                        cocktail = new Cocktail(documentSnapshot.getId(),cocktailName,recipe,image,rating,creator,rating_count,tags);
+                        Date date = documentSnapshot.getDate(Constants.KEY_DATE);
+                        cocktail = new Cocktail(documentSnapshot.getId(),cocktailName,recipe,image,rating,creator,rating_count,tags,date);
                         binding.cocktailName.setText(cocktail.name);
                         FirebaseStorage storage = FirebaseStorage.getInstance();
 

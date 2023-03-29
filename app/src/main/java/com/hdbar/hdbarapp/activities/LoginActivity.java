@@ -119,8 +119,6 @@ public class LoginActivity extends AppCompatActivity {
         getNetworkClass(LoginActivity.this);
 
         AlwaysOnRun.AlwaysRun(this);
-
-        Log.d("GG","Mtav activity");
     }
 
     private void init(){
