@@ -1,7 +1,7 @@
 /**
  * Automatically generated file. DO NOT MODIFY
  */
-package com.hdbar.hdbarapp;
+package com.drini.driniapp;
 
 public final class BuildConfig {
   public static final boolean DEBUG = Boolean.parseBoolean("true");

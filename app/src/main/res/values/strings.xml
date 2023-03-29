@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">HDBar Application</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name" translatable="false">Drini</string>
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="facebook_app_id" translatable="false">731008968599167</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb1234</string>

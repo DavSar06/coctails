@@ -4,11 +4,11 @@
 }
 
 android {
-    namespace 'com.hdbar.hdbarapp'
+    namespace 'com.drini.driniapp'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.hdbar.hdbarapp"
+        applicationId "com.drini.driniapp"
         minSdk 28
         targetSdk 33
         versionCode 1

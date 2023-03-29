@@ -11,11 +11,11 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/iconforproject"
+        android:icon="@drawable/drini_icon_black"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/iconforproject"
+        android:roundIcon="@drawable/drini_icon_black"
         android:supportsRtl="true"
-        android:theme="@style/Theme.HDBarApplication"
+        android:theme="@style/Theme.DriniApplication"
         tools:targetApi="31">
         <activity
             android:name=".activities.AnimationActivity"

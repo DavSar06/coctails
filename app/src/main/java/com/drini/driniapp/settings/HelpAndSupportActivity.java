@@ -1,0 +1,81 @@
+package com.drini.driniapp.settings;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.drini.driniapp.R;
+import com.drini.driniapp.databinding.ActivityAboutUsBinding;
+import com.drini.driniapp.databinding.ActivityHelpAndSupportBinding;
+import com.drini.driniapp.utilities.AlwaysOnRun;
+
+public class HelpAndSupportActivity extends AppCompatActivity {
+
+
+    private ActivityHelpAndSupportBinding binding;
+    private TextView back,email,chat_to_us;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivityHelpAndSupportBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        AlwaysOnRun.AlwaysRun(this);
+        back = binding.backAboutUs;
+        email = binding.emailHelpAndSupport;
+        chat_to_us = binding.chatToUsHelpAndSupport;
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                overridePendingTransition(R.anim.left_to_right_in,R.anim.left_to_right_out);
+            }
+        });
+
+        email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendEmail();
+            }
+        });
+
+        chat_to_us.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/+GjIdcEIbjC43NDcy"));
+                startActivity(intent);
+            }
+        });
+    }
+
+    protected void sendEmail() {
+        Log.i("Send email", "");
+
+        String[] TO = {"hddevelopers0@gmail.com"};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+
+
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "");
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            finish();
+            Log.i("Finished sending email...", "");
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(HelpAndSupportActivity.this,
+                    "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
+    }
+}

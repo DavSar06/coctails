@@ -7,22 +7,22 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:455586685079:android:a7d7e347e9ca4fb36449d2",
+        "mobilesdk_app_id": "1:455586685079:android:12fd59d3cf1076106449d2",
         "android_client_info": {
-          "package_name": "com.hdbar.hdbarapp"
+          "package_name": "com.drini.driniapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "455586685079-suksh11mdslk0t8rkb95fet6eatmho9r.apps.googleusercontent.com",
+          "client_id": "455586685079-0hgkvg048o4rrh1lc4s4rnu21j9qpt44.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.hdbar.hdbarapp",
+            "package_name": "com.drini.driniapp",
             "certificate_hash": "9752bbd0a3ad025fd151fb4ae4f833e8c58f2bbc"
           }
         },
         {
-          "client_id": "455586685079-qfg9gcsr0n55lhuq3t7hbtfrint8et5h.apps.googleusercontent.com",
+          "client_id": "455586685079-pn9043pmqr94at6oc4krdjk85mpqrcr5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -35,7 +35,52 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "455586685079-qfg9gcsr0n55lhuq3t7hbtfrint8et5h.apps.googleusercontent.com",
+              "client_id": "455586685079-pn9043pmqr94at6oc4krdjk85mpqrcr5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:455586685079:android:a7d7e347e9ca4fb36449d2",
+        "android_client_info": {
+          "package_name": "com.hdbar.hdbarapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "455586685079-eh6ufc4prdesnnqvbvcnuchoa5l5jojt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hdbar.hdbarapp",
+            "certificate_hash": "e5fb1028fcb21e166070e219d4376886b75bde38"
+          }
+        },
+        {
+          "client_id": "455586685079-suksh11mdslk0t8rkb95fet6eatmho9r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hdbar.hdbarapp",
+            "certificate_hash": "9752bbd0a3ad025fd151fb4ae4f833e8c58f2bbc"
+          }
+        },
+        {
+          "client_id": "455586685079-pn9043pmqr94at6oc4krdjk85mpqrcr5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyjI_rasQh3Dc0PmZdnrQLvJo9DkbSFpg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "455586685079-pn9043pmqr94at6oc4krdjk85mpqrcr5.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -237,7 +237,7 @@
                 android:text="Continue with Google"
                 android:layout_toRightOf="@+id/google_image"
                 android:textColor="@color/black"
-                android:fontFamily="@font/metropolisbold"
+                android:fontFamily="@font/metropolislight"
                 android:textSize="@dimen/_14ssp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_centerVertical="true"
