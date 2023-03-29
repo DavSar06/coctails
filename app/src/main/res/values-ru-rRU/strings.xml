@@ -101,4 +101,6 @@
     <string name="type_email">Введите аддресс почты</string>
     <string name="password_confirm_doesnt_match">Подтверждение пароля не совпадает</string>
     <string name="or">или</string>
+    <string name="glasses_types">Типы Бокалов</string>
+    <string name="top_10_cocktails">Топ 10 Лучших Коктейлей</string>
 </resources>

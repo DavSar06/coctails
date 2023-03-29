@@ -105,5 +105,7 @@
     <string name="type_email">Type your Email</string>
     <string name="password_confirm_doesnt_match">Password Confirm Doesn\'t Match</string>
     <string name="or">or</string>
+    <string name="glasses_types">Glasses types</string>
+    <string name="top_10_cocktails">Top 10 Cocktails</string>
 
 </resources>
