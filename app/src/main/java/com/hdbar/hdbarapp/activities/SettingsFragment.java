@@ -108,8 +108,8 @@ public class SettingsFragment extends Fragment {
         user_name_settings = binding.profileNameSettings;
         payment = binding.paymentBtn;
         logOut = binding.logoutBtn;
-        notification = binding.notificationsSettingsBtn;
-        notifications = binding.settingsNotificationsSwitch;
+//        notification = binding.notificationsSettingsBtn;
+//        notifications = binding.settingsNotificationsSwitch;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -225,22 +225,22 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        notification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        notifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isNormal)
-                    Log.d("In", "true");
-                else
-                    Log.d("In", "false");
-                isNormal = !isNormal;
-            }
-        });
+//        notification.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+//
+//        notifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isNormal)
+//                    Log.d("In", "true");
+//                else
+//                    Log.d("In", "false");
+//                isNormal = !isNormal;
+//            }
+//        });
     }
 }

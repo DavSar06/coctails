@@ -3,7 +3,7 @@
     android:layout_width="@dimen/_130sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_marginHorizontal="@dimen/_5sdp"
+    android:layout_marginHorizontal="@dimen/_7sdp"
     android:layout_height="@dimen/_180sdp">
 
     <androidx.cardview.widget.CardView

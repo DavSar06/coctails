@@ -7,10 +7,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rowRecyclerView"
-        android:layout_width="@dimen/_280sdp"
+        android:layout_width="@dimen/_288sdp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:overScrollMode="never"
+        android:nestedScrollingEnabled="false"
         android:clipToPadding="true"
         android:foregroundGravity="center_horizontal"
         android:orientation="horizontal"
