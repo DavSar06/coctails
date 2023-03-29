@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/download"/>
+        android:background="@drawable/support_image"/>
 
     <TextView
         android:layout_marginTop="@dimen/_15sdp"
@@ -61,7 +61,7 @@
         android:paddingHorizontal="@dimen/_7sdp"
         android:layout_marginTop="@dimen/_15sdp"
         android:gravity="center"
-        android:text="It looks like you are experiencing problems with our sign up process. We are here to help so please get in touch with us"
+        android:text="@string/it_looks_like_you_are_experiencing_problems_with_app_we_are_here_to_help_so_please_get_in_touch_with_us"
         android:textColor="@color/white"
         android:textSize="@dimen/_14ssp" />
 

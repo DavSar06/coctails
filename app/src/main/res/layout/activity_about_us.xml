@@ -43,9 +43,9 @@
         android:textColor="@color/white"
         android:layout_gravity="center_horizontal"
         android:textSize="@dimen/_16ssp"
+        android:textAlignment="center"
         android:layout_marginHorizontal="@dimen/_25sdp"
         android:fontFamily="@font/garute"
-        android:text="Introducing our company, a leader in the mobile app industry that specializes in cocktail recipes. Our app provides users with access to hundreds of unique and creative cocktail recipes that can be made right at home. With step-by-step instructions and ingredient lists, our app is perfect for both beginners and seasoned mixologists. Whether you're looking for a classic cocktail or something more adventurous, our app has something for everyone. Download it today and start crafting delicious cocktails in the comfort of your own home!
-"/>
+        android:text="@string/introducing_our_company_that_specializes_in_cocktail_recipes_our_app_provides_users_with_access_to_hundreds_of_unique_and_creative_cocktail_recipes_that_can_be_made_right_at_home_with_step_by_step_instructions_and_ingredient_lists_our_app_is_perfect_for_both_beginners_and_seasoned_mixologists_whether_you_re_looking_for_a_classic_cocktail_or_something_more_adventurous_our_app_has_something_for_everyone_download_it_today_and_start_crafting_delicious_cocktails_in_the_comfort_of_your_own_home"/>
 
 </LinearLayout>

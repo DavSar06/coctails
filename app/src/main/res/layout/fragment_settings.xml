@@ -164,7 +164,7 @@
                             android:layout_marginLeft="@dimen/_12sdp"
                             android:layout_toRightOf="@+id/settings_images0"
                             android:fontFamily="@font/montserratmedium"
-                            android:text="Change Moderator"
+                            android:text="@string/manage_moderators"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_14sdp" />
 
