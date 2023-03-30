@@ -149,16 +149,19 @@ public class CreateCocktailFragment extends Fragment {
         slider.setBackgroundColor(getResources().getColor(R.color.background_color));
         binding.sliderContainer.addView(slider);
         binding.imageChooseText.bringToFront();
-
-        database.collection(Constants.KEY_COLLECTION_USERS).document(FirebaseAuth.getInstance().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                creatorName = documentSnapshot.get(Constants.KEY_USER_UID).toString();
-            }
-        });
+        database = FirebaseFirestore.getInstance();
+        database.collection(Constants.KEY_COLLECTION_USERS)
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        creatorName = documentSnapshot.get(Constants.KEY_USERNAME)+"";
+                    }
+                });
 
         storage = FirebaseStorage.getInstance().getReference("cocktails");
-        database = FirebaseFirestore.getInstance();
+
         recipeList.add(binding.recipeFirstStep);
         database.collection(Constants.KEY_COLLECTION_TAGS)
                 .get()
