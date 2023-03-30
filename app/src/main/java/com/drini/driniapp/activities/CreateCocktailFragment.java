@@ -73,6 +73,8 @@ public class CreateCocktailFragment extends Fragment {
 
     ImageSlider slider;
 
+    String creatorName;
+
     public CreateCocktailFragment() {
         // Required empty public constructor
     }
@@ -147,6 +149,13 @@ public class CreateCocktailFragment extends Fragment {
         slider.setBackgroundColor(getResources().getColor(R.color.background_color));
         binding.sliderContainer.addView(slider);
         binding.imageChooseText.bringToFront();
+
+        database.collection(Constants.KEY_COLLECTION_USERS).document(FirebaseAuth.getInstance().getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                creatorName = documentSnapshot.get(Constants.KEY_USER_UID).toString();
+            }
+        });
 
         storage = FirebaseStorage.getInstance().getReference("cocktails");
         database = FirebaseFirestore.getInstance();
@@ -235,7 +244,7 @@ public class CreateCocktailFragment extends Fragment {
                             cocktail.put(Constants.KEY_COCKTAIL_HOW_MANY_RATES,new Integer(0));
                             cocktail.put(Constants.KEY_STATUS,Constants.KEY_COCKTAIL_STATUS_PENDING);
                             cocktail.put(Constants.KEY_COCKTAIL_CREATOR_ID, FirebaseAuth.getInstance().getCurrentUser().getUid());
-                            cocktail.put(Constants.KEY_COCKTAIL_CREATOR_NAME, preferenceManager.getString(Constants.KEY_USERNAME));
+                            cocktail.put(Constants.KEY_COCKTAIL_CREATOR_NAME, creatorName);
                             database.collection(Constants.KEY_COLLECTION_COCKTAILS)
                                     .add(cocktail)
                                     .addOnSuccessListener(documentReference -> {
