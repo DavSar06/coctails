@@ -6,6 +6,7 @@ import androidx.appcompat.widget.SwitchCompat;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -81,7 +82,12 @@ public class AddReview extends AppCompatActivity {
         CocktailPageActivity.refresh = true;
 
         //finishing
+//        Intent intent = new Intent(getApplicationContext(),CocktailPageActivity.class);
+//        intent.putExtra(Constants.KEY_COCKTAIL_ID, cocktail.id);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(intent);
         finish();
+        CocktailPageActivity.refresh = true;
         overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
     }
 
@@ -197,6 +203,9 @@ public class AddReview extends AppCompatActivity {
                                                         database.collection(Constants.KEY_COLLECTION_COCKTAILS)
                                                                 .document(cocktailId)
                                                                 .update(Constants.KEY_COCKTAIL_RATING,sum/ratingCount);
+                                                        database.collection(Constants.KEY_COLLECTION_COCKTAILS)
+                                                                .document(cocktailId)
+                                                                .update(Constants.KEY_COCKTAIL_HOW_MANY_RATES,ratingCount);
                                                     }
 
                                                 }

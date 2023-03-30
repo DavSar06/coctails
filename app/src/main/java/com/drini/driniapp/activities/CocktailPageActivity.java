@@ -103,51 +103,6 @@ public class CocktailPageActivity extends AppCompatActivity {
         AlwaysOnRun.AlwaysRun(this);
     }
 
-    private void ratingsSize(){
-
-        database.collection(Constants.KEY_COLLECTION_RATINGS)
-                .whereEqualTo(Constants.KEY_COCKTAIL_ID,cocktailId)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            if (!task.getResult().isEmpty()){
-                                sum = 0;
-
-                                for (DocumentSnapshot snapshot:task.getResult()){
-                                    getRatingsFB = Float.parseFloat(snapshot.get(Constants.KEY_COCKTAIL_RATING).toString());
-                                    arrayListRatings.add(getRatingsFB);
-                                    sum += getRatingsFB;
-                                }
-
-                                how_many_rates = arrayListRatings.size();
-
-                                uiTread();
-
-                                Log.d("RAT", "sum is " + sum + " ");
-
-                                Log.d("RAT", "rates is " + simple_rating.getRating() + " ");
-
-                                Log.d("RAT", "how many rates is " + arrayListRatings.size() + " ");
-                            }
-
-                        }
-                    }
-                });
-    }
-
-    private void uiTread(){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                local_rate.setText(String.format("%.01f",sum/how_many_rates )+ "");
-                hm_rates.setText(how_many_rates + "");
-                simple_rating.setRating(sum/how_many_rates );
-            }
-        });
-    }
-
 
 
     private void init(){
@@ -159,8 +114,6 @@ public class CocktailPageActivity extends AppCompatActivity {
         rate_i = 0;
         rate_btn = binding.addReviewBtn;
         arrayListRatings = new ArrayList<>();
-        ratingsSize();
-
 
         binding.commentsRecyclerView.setNestedScrollingEnabled(false);
         binding.commentsRecyclerView.setAdapter(commentAdapter);
@@ -254,7 +207,11 @@ public class CocktailPageActivity extends AppCompatActivity {
 
                     binding.recipeRecyclerView.setAdapter(new RecipeAdapter(recipe,tags));
 
+                    String formatted = String.format("%.1f", Float.valueOf(cocktail.rating));
+
                     binding.ratingBar.setRating(Float.valueOf(cocktail.rating));
+                    hm_rates.setText(cocktail.rating_count+"");
+                    local_rate.setText(formatted);
                 });
 
     }
@@ -363,9 +320,14 @@ public class CocktailPageActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(refresh){
-            showComments();
-            ratingsSize();
+            onRestart();
         }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        init();
     }
 
     @Override
