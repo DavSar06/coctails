@@ -19,20 +19,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-    <FrameLayout
-         android:layout_marginTop="@dimen/_10sdp"
-        android:id="@+id/navbar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp">
-
         <EditText
             android:id="@+id/search"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:layout_gravity="center"
             android:layout_marginHorizontal="@dimen/_10sdp"
-            android:layout_marginVertical="@dimen/_7sdp"
             android:background="@drawable/borders_for_search_bar"
             android:drawableStart="@drawable/ic_baseline_search_24"
             android:drawablePadding="@dimen/_6sdp"
@@ -46,9 +40,6 @@
             android:backgroundTint="@color/background_color_light"
             android:textColorHint="@color/grey_white"
             android:textSize="16sp" />
-
-    </FrameLayout>
-
 
     <LinearLayout
         android:layout_marginTop="@dimen/_10sdp"
