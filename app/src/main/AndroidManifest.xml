@@ -201,6 +201,7 @@
         <activity
             android:name=".activities.MainActivity"
             android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
