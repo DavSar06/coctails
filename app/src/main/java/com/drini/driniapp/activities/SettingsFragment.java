@@ -126,8 +126,6 @@ public class SettingsFragment extends Fragment {
                                         binding.viewModeratorTop.setVisibility(View.VISIBLE);
                                     }
                                 }
-                                binding.relativeProgressBar.setVisibility(View.INVISIBLE);
-                                binding.settingProgressBar.setVisibility(View.VISIBLE);
                             }
                         });
             }

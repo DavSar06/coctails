@@ -35,32 +35,13 @@
                 android:textSize="@dimen/_26ssp"
                 android:textColor="@color/white"/>
 
-            <RelativeLayout
-                android:id="@+id/relative_progressBar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="visible">
-
-
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    android:layout_width="@dimen/_40sdp"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_gravity="center"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:backgroundTint="@color/white"
-                    android:indeterminate="true"
-                    android:indeterminateDrawable="@drawable/custom_progress_dialog" />
-
-            </RelativeLayout>
             <LinearLayout
                 android:id="@+id/setting_progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="top"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <RelativeLayout
                     android:id="@+id/account_settings"
@@ -129,7 +110,6 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:paddingVertical="@dimen/_10sdp"
                     android:layout_marginHorizontal="@dimen/_15sdp"
-                    android:visibility="visible"
                     android:orientation="vertical"
                     android:backgroundTint="@color/background_color_light">
 
