@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/support_image"/>
+        android:background="@drawable/drini_icon_black"/>
 
     <TextView
         android:layout_marginTop="@dimen/_15sdp"
