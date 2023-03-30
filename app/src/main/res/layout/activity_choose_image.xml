@@ -39,7 +39,7 @@
         android:layout_marginTop="@dimen/_12sdp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -50,7 +50,7 @@
         android:layout_marginLeft="@dimen/_10sdp"
         android:orientation="vertical">
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:overScrollMode="never"
@@ -322,7 +322,7 @@
 
             </LinearLayout>
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
 
     </LinearLayout>

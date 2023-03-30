@@ -125,7 +125,7 @@ public class ProfileActivity extends AppCompatActivity {
                                                 if(i==task.getResult().size()){
                                                     CocktailsAdapter adapter = new CocktailsAdapter(cocktails,cocktailListener);
                                                     binding.recyclerviewYourCocktails.setAdapter(adapter);
-                                                    binding.profileName.setText(creator);
+                                                    binding.accountNickname.setText(creator);
                                                 }
                                             }
                                         });

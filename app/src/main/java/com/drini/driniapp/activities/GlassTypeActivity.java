@@ -107,6 +107,7 @@ public class GlassTypeActivity extends AppCompatActivity {
         i = 0;
         database.collection(Constants.KEY_COLLECTION_COCKTAILS)
                 .whereArrayContains(Constants.KEY_COCKTAIL_TAGS,glassType)
+                .whereEqualTo(Constants.KEY_STATUS,"approved")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override

@@ -38,7 +38,7 @@
 
 
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:overScrollMode="never">
@@ -206,7 +206,7 @@
 
                 <HorizontalScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingVertical="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_10sdp"
@@ -219,11 +219,11 @@
                         android:id="@+id/tagsRecyclerView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center_horizontal"
+                        android:layout_gravity="left"
                         android:clipToPadding="false"
                         android:orientation="horizontal"
-                        android:overScrollMode="always"
-                        android:visibility="gone"
+                        android:overScrollMode="never"
+                        android:visibility="visible"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 </HorizontalScrollView>
@@ -364,6 +364,6 @@
 
                 </LinearLayout>
             </RelativeLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
     </RelativeLayout>
 </LinearLayout>

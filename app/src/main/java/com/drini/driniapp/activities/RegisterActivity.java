@@ -207,11 +207,11 @@ public class RegisterActivity extends AppCompatActivity {
                                 mAuth.signOut();
                             }
                         });
-                    }
+                    }/*
                     else {
                         Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
 
-                    }
+                    }*/
                 }
             });
         }
@@ -244,34 +244,6 @@ public class RegisterActivity extends AppCompatActivity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                /*Random random = new Random();
-                confirmCode = random.nextInt(8999) + 1000;
-                String url = "";
-                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(RegisterActivity.this,"" + response,Toast.LENGTH_SHORT).show();
-
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(RegisterActivity.this,""  + error,Toast.LENGTH_SHORT).show();
-
-                    }
-                }){
-                    @Nullable
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String,String> params = new HashMap<>();
-                        params.put("email", inputEmail.getText().toString());
-                        params.put("code",String.valueOf(confirmCode));
-                        return super.getParams();
-                    }
-                };*//*
-                requestQueue.add(stringRequest);*/
                 PerformAuth();
             }
         });
