@@ -28,12 +28,13 @@
             android:gravity="top|left" />
 
         <TextView
+            android:id="@+id/profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:fontFamily="@font/garute"
-            android:text="Profile"
+            android:text="@string/profile"
             android:textColor="@color/white"
             android:textSize="@dimen/_20ssp" />
 
@@ -86,7 +87,7 @@
                         android:id="@+id/account_nickname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hayk Karamyan"
+                        android:text=""
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"
                         android:fontFamily="@font/metropolisbold"

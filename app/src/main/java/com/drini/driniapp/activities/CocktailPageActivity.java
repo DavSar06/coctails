@@ -52,6 +52,9 @@ public class CocktailPageActivity extends AppCompatActivity {
     public int how_many_rates;
     private RelativeLayout rating_relative;
     private FirebaseFirestore database;
+
+    private String creatorId;
+
     private float numberOfStars,sum;
     private ImageSlider imageSlider;
     private ArrayList<SlideModel> slideModels = new ArrayList<>();
@@ -171,6 +174,8 @@ public class CocktailPageActivity extends AppCompatActivity {
                     Date date = documentSnapshot.getDate(Constants.KEY_DATE);
                     cocktail = new Cocktail(documentSnapshot.getId(),cocktailName,recipe,image,rating,creator,rating_count,tags,date);
 
+                    this.creatorId = creatorId;
+
                     database.collection(Constants.KEY_COLLECTION_USERS)
                             .document(creatorId)
                             .get()
@@ -220,10 +225,17 @@ public class CocktailPageActivity extends AppCompatActivity {
         binding.imageBack.setOnClickListener(v->finish());
         binding.favouriteStar.setOnClickListener(v->changeFavoriteStatus());
         rate_btn.setOnClickListener(view -> addReview());
+        binding.creatorImage.setOnClickListener(v->goToUserPage());
+    }
+
+    private void goToUserPage(){
+        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+        intent.putExtra(Constants.KEY_COCKTAIL_CREATOR_ID,creatorId);
+        startActivity(intent);
     }
 
     private void addReview(){
-        Intent intent = new Intent(this, AddReview.class);
+        Intent intent = new Intent(getApplicationContext(), AddReview.class);
         intent.putExtra(Constants.KEY_COCKTAIL_ID,cocktailId);
         startActivityForResult(intent,0);
         //getActivity().overridePendingTransition(R.anim.right_to_left_in,R.anim.right_to_left_out);
