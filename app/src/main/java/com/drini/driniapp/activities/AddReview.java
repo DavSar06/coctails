@@ -222,7 +222,7 @@ public class AddReview extends AppCompatActivity {
             comment.put(Constants.KEY_DATE,new Date());
             comment.put(Constants.KEY_COCKTAIL_ID,cocktailId);
             if (isprivate){
-                comment.put(Constants.KEY_COMMENTER_ID,"EDwdFoxrDAUHAKJgmUqvW7YgMEM2");
+                comment.put(Constants.KEY_COMMENTER_ID,"N3JrJipw5yf827mtmMb4vuGbGhN2");
             }else{
                 comment.put(Constants.KEY_COMMENTER_ID,userId);
             }
